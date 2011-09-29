@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<!-- Layout dimensions -->
+	<dimen name="action_bar_height">35dp</dimen>
+  <dimen name="action_bar_item_height">35dp</dimen>
+  <dimen name="action_bar_item_width">35dp</dimen>
+  
+  <dimen name="daily_usage_col_width">60dp</dimen>
+  <dimen name="daily_usage_col_title_text_size">14sp</dimen>
+  
+  <!-- Text Sizes -->
+    <dimen name="text_size_small">14sp</dimen>
+    <dimen name="text_size_medium">18sp</dimen>
+    <dimen name="text_size_large">22sp</dimen>
+</resources>

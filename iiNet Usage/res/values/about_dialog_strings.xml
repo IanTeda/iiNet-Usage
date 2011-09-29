@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+	<!-- About application strings -->
+	<string name="about_title">About iiNet Usage</string>
+	<string name="about_text">\<b>Author:</b> Ian Teda\n<b>Website:</b> <a href="www.teda.id.au/code/iinet-usage/">www.teda.id.au</a>\n<b>License:</b>\n<b>iiNet Usage</b> was developed as a weekend project. With the specific aim to learn about Android programming. I hope it is of some use.
+	</string>
+	
+</resources>

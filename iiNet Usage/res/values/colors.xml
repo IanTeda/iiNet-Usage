@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="action_bar_separator">#8B1A1A</color>
+  <color name="action_bar_title">#FFFFFF</color>
+  <color name="action_bar_bg_start">#ff5800</color>
+  <color name="action_bar_bg_end">#ff8647</color>
+  <color name="action_bar_bg_item_pressed_start">#FF7F00</color>
+  <color name="action_bar_bg_item_pressed_end">#EE7600</color>
+  
+  <color name="foreground1">#ff355689</color>
+  
+  <color name="app_base_color">#000000</color>
+  <color name="main_container_background_color">#201f1f</color>
+  <color name="background_seperator_color">#181717</color>
+  <color name="db_button_text_color">#FF5900</color>
+  
+  <!-- Dashboard color -->
+  <color name="h1_text_color">#FF5900</color>
+  
+  <!-- Summary color -->
+  <color name="h1_text">#FF5900</color>
+  <color name="h1_background">#181717</color>
+  <color name="h2_text_color">#b9b9b9</color>
+  <color name="summary_border">#000000</color>
+  <color name="summary_background">#201f1f</color>
+  
+  
+  <color name="alert_border">#CC3333</color>
+  <color name="alert_text">#CC3333</color>
+  <color name="alert_background">#55b9b9b9</color>
+  
+  <color name="db_data_limit_over">#F62817</color>
+  <color name="db_data_limit_alert">#F75D59</color>
+  
+    <color name="db_footer_line">#000000</color>
+    
+  <!-- Footer button colors -->
+  <color name="footer_inactive_color">#464646</color>
+  <color name="footer_active_color">#ff5800</color>
+  
+  <color name="h1_background_color">#181717</color>
+  
+  <!-- For reference only need to figure out covert into hex -->
+  <color name="graph_peak">#95FF5900</color>
+  <color name="graph_offpeak">#65FF5900</color>
+  
+  <!-- Standard Colors -->
+  <color name="black">#000000</color>
+</resources>

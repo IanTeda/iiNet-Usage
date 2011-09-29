@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <!-- Dashboard strings -->
+  <string name="db_summary_button_button_text">Summary</string>
+  <string name="db_usage_graph_button_text">Usage Graph</string>
+  <string name="db_usage_data_button_text">Usage Data</string>
+  <string name="db_about_button_text">About</string>
+  
+	<!-- DB Alert box strings -->
+  <string name="db_alertbox_default">Alert box</string>
+  <string name="db_alertbox_userpass">No Username or Password Set</string>
+	<string name="db_alertbox_user">No Username Set</string>
+	<string name="db_alertbox_pass">No Password Set</string>
+	<string name="db_alertbox_nodata">No Data Available</string>
+	<string name="db_alertbox_overpeak">Peak Data Over Quota</string>
+	<string name="db_alertbox_overoffpeak">Offpeak Data Over Quota</string>
+	<string name="db_alertbox_overpeak_offpeak">Peak &amp; Offpeak Data Over Quota</string>
+
+	<!-- Not sure what this one is for?? -->
+	<string name="db_no_data">No data available. Click to refresh</string>
+
+</resources>

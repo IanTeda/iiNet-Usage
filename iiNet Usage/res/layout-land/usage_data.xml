@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/raw_data_relative_layout"
+  android:orientation="vertical"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  android:background="@color/app_base_color" >
+  
+  <include android:id="@+id/action_bar" layout="@layout/action_bar" />
+  
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:paddingBottom="1dp"
+  android:orientation="horizontal"
+  android:background="@color/main_container_background_color" >
+	<TextView 
+		style="@style/listview_header"
+		android:layout_width="33dp"
+		android:layout_weight="0"
+		android:text="Date" />
+	<TextView 
+		style="@style/listview_header"
+		android:text="Peak" />
+	<TextView 
+		style="@style/listview_header"
+		android:text="Offpeak" />
+	<TextView 
+		style="@style/listview_header"
+		android:text="Upload" />
+	<TextView 
+		style="@style/listview_header"
+		android:text="Freezone" />
+	<TextView 
+		style="@style/listview_header"
+		android:text="Total" />
+</LinearLayout>
+  
+  <ListView 
+    android:id="@android:id/list"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="0dip"
+    android:layout_weight="1.0"
+    android:background="@color/background_seperator_color" />
+    
+  <TextView 
+    android:id="@android:id/empty"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" 
+    android:text="@string/no_daily_data" />
+  
+</LinearLayout>

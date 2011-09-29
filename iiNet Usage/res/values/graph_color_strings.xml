@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- These need to be strings for graphing library -->
+    <string name="peak_color_string">#95FF5900</string>
+</resources>

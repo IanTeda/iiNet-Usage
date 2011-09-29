@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent">
+  
+  <!-- Start of Action Bar Layout -->
+  <LinearLayout 
+    android:id="@+id/db_action_bar"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    style="@style/action_bar"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/action_bar_height"
+    android:background="@drawable/action_bar_gradient"
+    android:gravity="left|top">
+    
+    <!-- Start of action bar left container for title -->
+    <LinearLayout 
+      android:id="@+id/db_action_bar_left_container"
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      android:orientation="horizontal"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:gravity="left|center_vertical" >
+      <TextView 
+        android:id="@+id/db_action_bar_title_text"
+        style="@style/action_bar_title_text" 
+        android:text="@string/app_name" 
+        android:paddingLeft="8dip"/>
+   	</LinearLayout>
+   	
+   	<!-- Start of Right Container for home and view title -->
+		<LinearLayout 
+		  android:id="@+id/db_action_bar_right_container"
+			xmlns:android="http://schemas.android.com/apk/res/android"
+			android:orientation="horizontal"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:gravity="right|center_vertical"
+			android:layout_gravity="right">
+                     
+        <ImageView 
+          android:layout_width="1px"
+          android:layout_height="fill_parent"
+          android:background="@drawable/separator"
+          android:layout_marginLeft = "5dip"
+          android:layout_marginRight="5dip" />
+
+          <ImageButton 
+            android:id="@+id/db_action_bar_settings_button"
+            android:layout_width="@dimen/action_bar_item_width"
+            android:layout_height="@dimen/action_bar_item_height"
+            android:layout_marginTop="6dip"
+            android:layout_marginBottom="4dip"
+            android:background="@drawable/home_bg"
+            android:layout_marginRight="5dip"
+            android:src="@drawable/ic_settings" />
+      </LinearLayout>
+    
+	</LinearLayout>
+	
+	<!-- Start main container -->
+	<LinearLayout android:id="@+id/dashboard_main_container"
+		android:orientation="vertical"
+  	android:layout_width="fill_parent"
+  	android:layout_height="fill_parent"
+  	android:background="@color/main_container_background_color" >
+  	
+	<LinearLayout
+		android:id="@+id/DB_AlertBox"
+		android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="50dp"
+		android:padding="7dp"
+		android:visibility="invisible" >
+		<Button
+			android:id="@+id/DB_AlertBTN"
+			android:onClick="onClickAlertBTN"
+			android:text="@string/db_alertbox_default"
+			style="@style/AlertBTN.Style"
+			android:background="@drawable/db_alert_box" />
+	</LinearLayout>
+  	
+  	
+	<!-- Dashboard first row -->
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_weight="1" >
+		<Button
+			android:id="@+id/db_summary_activity_button"
+			style="@style/db_button_style"
+			android:text="@string/db_summary_button_button_text"
+			android:src="@drawable/db_ic_summary"
+			android:drawableTop="@drawable/db_summary_button" />
+		<Button
+			android:id="@+id/db_usage_graph_activity_button"
+			style="@style/db_button_style"
+			android:text="@string/db_usage_graph_button_text"
+			android:src="@drawable/db_ic_usage_graph"
+			android:drawableTop="@drawable/db_usage_graph_button" />
+	</LinearLayout>
+
+	<!-- Dashboard second row -->
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_weight="1">
+		<Button 
+			android:id="@+id/db_usage_data_activity_button"
+			style="@style/db_button_style" 
+			android:text="@string/db_usage_data_button_text"
+			android:src="@drawable/db_ic_usage_data"
+			android:drawableTop="@drawable/db_usage_data_button" />
+		<Button
+			android:id="@+id/db_about_button"
+			style="@style/db_button_style" 
+			android:text="@string/db_about_button_text"
+			android:src="@drawable/db_ic_about"
+			android:drawableTop="@drawable/db_about_button" />
+	</LinearLayout>
+	<View
+		android:background="@drawable/db_footer_line"
+		android:layout_width="fill_parent"
+		android:layout_height="2dp" />
+
+	<!-- Footer -->
+	<LinearLayout
+		android:id="@+id/DB_DataLayout"
+		android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="70dp"
+		android:padding="7dp"
+		android:background="@color/background_seperator_color" >
+		<!-- Peak Data -->
+		<LinearLayout
+		android:id="@+id/db_peak_ll"
+			android:orientation="vertical"
+			android:layout_width="0dp"
+			android:layout_weight="0.45"
+			android:layout_height="fill_parent" >
+			<TextView
+				style="@style/db_texview_style"
+				android:text="Peak"
+				android:layout_height="wrap_content"
+				android:textColor="@color/h1_text_color" />
+			<TextView
+				android:id="@+id/db_peak_tv"
+				style="@style/db_texview_style"
+				android:text="--.-GB (--%)" />
+		</LinearLayout>
+		<!-- Offpeak Data -->
+		<LinearLayout
+			android:id="@+id/db_offpeak_ll"
+			android:orientation="vertical"
+			android:layout_width="0dp"
+			android:layout_weight="0.45"
+			android:layout_height="fill_parent" >
+			<TextView
+				style="@style/db_texview_style"
+				android:text="Offpeak"
+				android:layout_height="wrap_content"
+				android:textColor="@color/h1_text_color" />
+			<TextView
+				android:id="@+id/db_offpeak_tv"
+				style="@style/db_texview_style"
+				android:text="--.-GB (--%)" />
+		</LinearLayout>
+	</LinearLayout> 
+</LinearLayout>
+</LinearLayout>

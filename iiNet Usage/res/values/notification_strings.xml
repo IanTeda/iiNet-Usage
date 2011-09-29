@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  
+  <!-- When peak data goes over alert preference value -->
+  <string name="alert_peak_ticker">Peak usage approaching quota</string>
+  <string name="alert_peak_title">iiNet Peak Usage Alert!</string>
+  <string name="alert_peak_text">iiNet peak usage approaching quota</string>
+  
+  <!-- When offpeak data goes over alert preference value -->
+  <string name="alert_offpeak_ticker">Offpeak usage approaching quota</string>
+  <string name="alert_offpeak_title">iiNet Offpeak Usage Alert!</string>
+  <string name="alert_offpeak_text">iiNet offpeak usage approaching quota</string>
+  
+  <!-- When peak data goes over quota-->
+  <string name="over_peak_ticker">Peak usage over quota</string>
+  <string name="over_peak_title">iiNet Peak Quota Alert!</string>
+  <string name="over_peak_text">iiNet peak usage over quota</string>
+  
+  <!-- When offpeak data goes over quota-->
+  <string name="over_offpeak_ticker">Offpeak usage over quota</string>
+  <string name="over_offpeak_title">iiNet Offpeak Quota Alert!</string>
+  <string name="over_offpeak_text">iiNet offpeak usage over quota</string>
+    
+</resources>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">iiNet Usage</string>
+	
+  <!-- Preference screen strings -->
+	<string name="username_password_preferences_category_title">Username &amp; Password</string>
+	<string name="application_preferences_categrory_title">Application Preferences</string>
+	
+	<!-- Username & Password strings -->
+	<string name="iinet_username_title">iiNet Username</string>
+	<string name="iinet_username_sumamry">Enter iiNet broadband username</string>
+	<string name="iinet_password_title">iiNet Password</string>
+	<string name="iinet_password_summary">Enter iiNet broadband password</string>
+	
+	<!-- No list data -->
+	<string name="no_daily_data">No usage data present</string>
+	
+	<!-- Refresh progress dialog -->
+	<string name="refresh_progress_dialog_title">Please wait</string>
+	<string name="refresh_progress_dialog_description">Retrieving &amp; loading data...</string>
+
+</resources>

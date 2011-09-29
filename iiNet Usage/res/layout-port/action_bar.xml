@@ -1,0 +1,66 @@
+  <!-- Start action bar layout -->
+  <LinearLayout android:id="@+id/action_bar"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    style="@style/action_bar"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/action_bar_height"
+    android:background="@drawable/action_bar_gradient"
+    android:gravity="left|top">
+    
+    <!-- Start of Left Container for home and view title -->
+    <LinearLayout android:id="@+id/action_bar_left_container"
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      android:orientation="horizontal"
+      android:layout_width="250dp"
+      android:layout_height="wrap_content"
+      android:gravity="left|center_vertical" >
+      
+      <ImageButton android:id="@+id/action_bar_home_button"
+        android:layout_width="@dimen/action_bar_item_width"
+        android:layout_height="@dimen/action_bar_item_height"
+        android:src="@drawable/ic_home"
+        android:layout_marginTop = "5dip"
+        android:layout_marginRight="5dip"
+        android:layout_marginLeft="4dip"
+        android:layout_marginBottom = "4dip"
+        android:paddingBottom = "3dip"
+        android:background="@drawable/home_bg" />
+        
+        <ImageView
+          android:layout_width="1px"
+          android:layout_height="fill_parent"
+          android:background="@drawable/separator"
+          android:layout_marginRight="5dip"/>
+
+        <TextView android:id="@+id/action_bar_title_text"
+          style="@style/action_bar_title_text" 
+          android:text="@string/ab_default_title" 
+          android:paddingLeft="8dip"/>
+      </LinearLayout>
+      
+      <!-- Start of Right Container for home and view title -->
+      <LinearLayout android:id="@+id/action_bar_right_container"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right|center_vertical"
+        android:layout_gravity="right">
+                     
+        <ImageView android:layout_width="1px"
+          android:layout_height="fill_parent"
+          android:background="@drawable/separator"
+          android:layout_marginLeft = "5dip"
+          android:layout_marginRight="5dip" />
+
+          <ImageButton android:id="@+id/action_bar_refresh_button"
+            android:layout_width="@dimen/action_bar_item_width"
+            android:layout_height="@dimen/action_bar_item_height"
+            android:layout_marginTop="6dip"
+            android:layout_marginBottom="4dip"
+            android:background="@drawable/home_bg"
+            android:layout_marginRight="5dip"
+            android:src="@drawable/ic_refresh" />
+      </LinearLayout>
+  </LinearLayout>

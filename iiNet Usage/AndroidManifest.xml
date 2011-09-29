@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  package="au.id.teda.volumeusage"
+  android:versionCode="100"
+  android:versionName="beta1"
+  android:installLocation="auto">
+  
+  <!-- Set min SDK and target SDK versions -->
+  <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="9" />
+
+  <application android:icon="@drawable/icon"
+  	android:label="@string/app_name"
+  	android:name="MyApp"
+  	android:debuggable="true" > <!-- Application class for global onResumes etc -->
+  	
+  	<!-- Default activity for the application -->
+    <activity android:name=".activity.MainActivity"
+      android:label="@string/app_name"
+      android:configChanges="keyboardHidden|orientation"
+      android:screenOrientation="portrait">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+    
+    <!-- Register background service for collecting xml data -->
+    <!-- android:enable="true"??? -->
+    <service
+      android:name=".service.DataCollectionService"
+      android:process=":remote"><!-- Run our service in a separate process from the rest of the application -->
+      <intent-filter>
+        <action android:name="au.id.teda.volumeusage.service.DataCollectionService" />
+      </intent-filter>
+    </service>
+    
+    <!-- Load service when device boots -->
+    <receiver
+      android:name=".service.BootReceiver">
+      <intent-filter>
+        <action
+          android:name="android.intent.action.BOOT_COMPLETED">
+        </action>
+      </intent-filter>
+    </receiver>
+    
+		<!-- Register splash screen -->
+    <!--  <activity android:name=".activity.SplashScreenActivity"
+    	android:theme="@style/Theme.Transparent" >
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>-->
+    
+    <!-- Register applicationa activities -->    
+    <!-- Summary Activity -->
+    <activity android:name=".activity.SummaryActivity"
+    	android:label="@string/app_name" />
+    
+    <!-- Usage Graph Activity -->
+    <activity android:name=".activity.UsageGraphActivity"
+    	android:label="@string/app_name" />
+    
+    <!-- Raw Data Activity -->
+    <activity android:name=".activity.UsageDataActivity"
+      android:label="@string/app_name" />
+    
+    <!-- About Activity -->
+   <activity android:name=".activity.AboutActivity"
+      android:label="@string/about_title"
+      android:theme="@android:style/Theme.Dialog" />
+		
+		<!-- Preference activity -->
+		<activity android:name=".prefs.Preferences" />
+		
+		<!-- Refresh Activity -->
+    <activity android:name=".service.RefreshUsageData"
+    	android:label="@string/app_name" />
+    	
+  </application>
+  
+  <!-- Application permissions -->
+  <!-- Allow application access to the internet -->
+  <uses-permission android:name="android.permission.INTERNET" />
+  <!-- Allow application to start background service at device boot -->
+  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+</manifest>

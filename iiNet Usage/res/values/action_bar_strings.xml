@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    	
+  <!-- Action bar titles -->
+  <string name="ab_default_title">Action Bar</string>
+	<string name="ab_summary_view_title">Summary</string>
+	<string name="ab_usage_graph_view_title">Usage Graph</string>
+	<string name="ab_usage_data_view_title">Daily Usage (MB)</string>
+	
+</resources>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+	<!-- Summary Activity -->
+	<string name="sum_account_info_h1">Account Information</string>
+	<string name="sum_account_plan_string"><b>Plan:</b> Plan (Product)</string>
+	<string name="sum_account_period_string"><b>Peak Period:</b> --:-- to --:--</string>
+	<string name="sum_account_ip_string"><b>IP Address:</b> ---.---.---.---</string>
+	<string name="sum_account_since_string"><b>On Since:</b> dd MMM yyyy --:-- (--Days)</string>
+	<string name="sum_current_period_h1">Current Period</string>
+	<string name="sum_current_rollover_string"><b>Rollover:</b> dd MMM yyy</string>
+  <string name="sum_current_togo_string"><b>Days To Go:</b> -- Days</string>
+	<string name="sum_current_sofare_string"><b>So Fare:</b> -- Days</string>
+	<string name="sum_usage_stats_h1">Usage Statistics</string>
+	<string name="sum_used_h2">Data Used</string>
+	<string name="sum_usage_peak_string"><b>Peak Usage:</b> --Gb (---%)</string>
+	<string name="sum_usage_offpeak_string"><b>Offpeak Usage:</b> --Gb (---%)</string>
+	<string name="sum_trends_h2">Usage Trends</string>
+	<string name="sum_trend_peak_string"><b>Peak Usage:</b> -,---Mb/day</string>
+	<string name="sum_trend_offpeak_string"><b>Offpeak Usage:</b> -,---Mb/day</string>
+	<string name="sum_suggested_h2">Suggested Use</string>
+	<string name="sum_suggested_peak_string"><b>Peak Usage:</b> -,---Mb/day</string>
+	<string name="sum_suggested_offpeak_string"><b>Offpeak Usage:</b> -,---Mb/day</string>
+
+</resources>

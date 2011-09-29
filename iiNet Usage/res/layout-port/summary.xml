@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  android:id="@+id/summary_layout"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+  android:background="@color/main_container_background_color" >
+  
+  <include android:id="@+id/action_bar" layout="@layout/action_bar" />
+  
+  <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroller"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true" >
+  	<!-- Can only have one child in Scroll View so nesting this linear layout -->
+  	<LinearLayout
+  		android:orientation="vertical"
+  		android:layout_width="fill_parent"
+  		android:layout_height="wrap_content" >
+		  <!-- Account Info Layout -->
+		  <TextView 
+		  	android:id="@+id/sum_account_info_h1"
+		  	style="@style/sum_h1"
+		  	android:text="@string/sum_account_info_h1" />
+		  <LinearLayout 
+		  	android:id="@+id/sum_account_info_ll"
+		  	style="@style/sum_linear_layout"
+		  	android:background="@drawable/summary_border" >
+		      <TextView 
+						android:id="@+id/sum_account_plan_tv"
+		      	style="@style/sum_body_text"
+		      	android:text="@string/sum_account_plan_string" />
+		      <TextView 
+						android:id="@+id/sum_account_period_tv" 
+		      	style="@style/sum_body_text"
+		      	android:text="@string/sum_account_period_string" />
+		      <TextView 
+		      	android:id="@+id/sum_account_ip_tv"
+		      	style="@style/sum_body_text" 
+		      	android:text="@string/sum_account_ip_string" />
+		      <TextView 
+		      	android:id="@+id/sum_account_since_tv"
+		      	style="@style/sum_body_text"
+		      	android:text="@string/sum_account_since_string" />
+		  </LinearLayout>
+		  
+		  <!-- Current Period Layout -->
+		  <TextView 
+		  	android:id="@+id/sum_current_period_h1" 
+		  	style="@style/sum_h1"
+		  	android:text="@string/sum_current_period_h1" />
+		  <LinearLayout 
+		  	android:id="@+id/sum_current_period_ll"
+				style="@style/sum_linear_layout"
+				android:background="@drawable/summary_border" >
+		      <TextView
+		      	android:id="@+id/sum_current_rollover_tv" 
+		      	style="@style/sum_body_text"
+		      	android:text="@string/sum_current_rollover_string" />
+		      <TextView 
+		      	android:id="@+id/sum_togo_tv"
+		      	style="@style/sum_body_text"
+		      	android:text="@string/sum_current_togo_string" />
+		      <TextView 
+		      	android:id="@+id/sum_sofare_tv"
+		      	style="@style/sum_body_text"
+		      	android:text="@string/sum_current_sofare_string" />
+		  </LinearLayout>
+		  
+		  <!-- Usage Stats Layout -->
+		  <TextView
+		    android:id="@+id/sum_usage_stats_h1" 
+		  	style="@style/sum_h1"
+		  	android:text="@string/sum_usage_stats_h1" />
+		  <LinearLayout 
+		  	android:id="@+id/sum_usage_stats_ll"
+		  	style="@style/sum_linear_layout"
+		  	android:background="@drawable/summary_border" >
+		  	<TextView 
+			  	android:id="@+id/sum_data_used_h2" 
+			  	style="@style/sum_h2" 
+			  	android:text="@string/sum_used_h2" />
+				<TextView
+					android:id="@+id/sum_usage_peak_tv" 
+					style="@style/sum_body_text"
+					android:text="@string/sum_usage_peak_string" />
+				<TextView
+					android:id="@+id/sum_usage_offpeak_tv"
+					style="@style/sum_body_text"
+					android:text="@string/sum_usage_offpeak_string" />
+			  <TextView 
+			  	android:id="@+id/sum_usage_trends_h2" 
+			  	style="@style/sum_h2" 
+			  	android:text="@string/sum_trends_h2" />
+				<TextView
+					android:id="@+id/sum_trend_peak_tv" 
+					style="@style/sum_body_text"
+					android:text="@string/sum_trend_peak_string" />
+				<TextView
+					android:id="@+id/sum_trend_offpeak_tv"
+					style="@style/sum_body_text"
+					android:text="@string/sum_trend_offpeak_string" />
+			  <TextView 
+			    android:id="@+id/sum_suggested_h2"
+			    style="@style/sum_h2" 
+			  	android:text="@string/sum_suggested_h2" />
+				<TextView
+					android:id="@+id/sum_suggested_peak_tv" 
+					style="@style/sum_body_text"
+					android:text="@string/sum_suggested_peak_string" />
+				<TextView
+					android:id="@+id/sum_suggested_offpeak_tv"
+					style="@style/sum_body_text"
+					android:text="@string/sum_suggested_offpeak_string" />
+			</LinearLayout>
+			</LinearLayout>
+	</ScrollView>
+</LinearLayout>

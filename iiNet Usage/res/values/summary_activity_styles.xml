@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <!-- Summary Activity styles -->
+  <style name="sum_h1">
+    <item name="android:layout_width">fill_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textSize">20sp</item>
+    <item name="android:paddingLeft">1dip</item>
+    <item name="android:paddingTop">5dip</item>
+    <item name="android:textStyle">bold</item>
+    <item name="android:textColor">@color/h1_text</item>
+    <item name="android:background">@color/h1_background</item>
+    <item name="android:singleLine">true</item>
+  </style>
+    <style name="sum_h2">
+    <item name="android:layout_width">fill_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textSize">16sp</item>
+    <item name="android:paddingLeft">0dip</item>
+    <item name="android:textStyle">bold</item>
+    <item name="android:textColor">#ffffffff</item>
+    <item name="android:singleLine">true</item>
+  </style>
+  <style name="sum_linear_layout">
+    <item name="android:layout_width">fill_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:orientation">vertical</item>
+    <item name="android:padding">3dp</item>
+  </style>
+  <style name="sum_linear_landscape_layout">
+    <item name="android:layout_width">fill_parent</item>
+    <item name="android:layout_weight">1</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:orientation">vertical</item>
+    <item name="android:padding">3dp</item>
+  </style>
+  <style name="sum_body_text">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textSize">14sp </item>
+    <item name="android:paddingLeft">6dip</item>
+    <item name="android:textColor">#ffffffff</item>
+    <item name="android:singleLine">true</item>
+    <item name="android:ellipsize">end</item>
+  </style>
+  
+</resources>

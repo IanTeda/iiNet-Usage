@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:example="http://schemas.android.com/apk/res/au.id.teda.volumeusage"
+	xmlns:intPref="http://schemas.android.com/apk/res/au.id.teda.volumeusage">
+  
+  <!-- Parent Category for username & Password -->
+  <PreferenceCategory
+    android:title="@string/username_password_preferences_category_title">
+    <EditTextPreference 
+      android:key="iinet_username"
+    	android:title="@string/iinet_username_title"
+      android:summary="@string/iinet_username_sumamry"
+      android:defaultValue="" />
+    <EditTextPreference
+      android:key="iinet_password"
+    	android:title="@string/iinet_password_title"
+      android:summary="@string/iinet_password_summary"
+      android:defaultValue=""
+      android:password="true" />
+  </PreferenceCategory>
+  
+  <!-- Parent Category for Application preferences -->
+  <PreferenceCategory
+    android:title="@string/application_preferences_categrory_title">
+    <PreferenceScreen android:title="Set Alerts">
+      <au.id.teda.volumeusage.prefs.SeekBarPreference
+        android:key="peak_usage_alert"
+        android:title="@string/peak_usage_alert_title"
+        android:dialogTitle="@string/peak_usage_alert_dialog_title"
+        android:summary="@string/peak_usage_alert_summary"
+        android:persistent="true"
+        android:defaultValue="75"
+        example:minValue="0"
+        example:maxValue="100" />
+  <au.id.teda.volumeusage.prefs.SeekBarPreference
+        android:key="offpeak_usage_alert"
+        android:title="@string/offpeak_usage_alert_title"
+        android:dialogTitle="@string/offpeak_usage_alert_dialog_title"
+        android:summary="@string/offpeak_usage_alert_summary"
+        android:persistent="true"
+        android:defaultValue="75"
+        example:minValue="0"
+        example:maxValue="100" />
+        
+
+    </PreferenceScreen>
+    <PreferenceScreen android:title="@string/update_preferences_screen_title">
+    	<CheckBoxPreference android:key="updates_onload"
+    		android:title="@string/update_onload_title" 
+      	android:summary="@string/update_onload_summary"
+      	android:defaultValue="false" />
+    	<CheckBoxPreference android:key="background_updates"
+    		android:title="@string/background_update_title"
+      	android:summary="@string/background_update_summary" 
+      	android:defaultValue="false" />
+			<au.id.teda.volumeusage.prefs.IntegerListPreference
+				android:title="@string/update_int_list_prompt"
+				android:key="updateInterval"
+				intPref:valueList="@array/update_int_values"
+				intPref:entryList="@array/update_int_list"
+				android:defaultValue="86400000" />
+    </PreferenceScreen>
+    <PreferenceScreen android:title="Display Options">
+    	<CheckBoxPreference 
+      	android:key="hide_status_bar"
+      	android:summary="Hide Android status bar"
+      	android:title="Hide Status Bar" 
+      	android:defaultValue="false" />
+      <CheckBoxPreference 
+        android:key="hide_refresh_dialog"
+        android:summary="Hide refresh dialog"
+        android:title="Hide Refresh Dialog" 
+        android:defaultValue="false" />
+      <CheckBoxPreference 
+        android:key="show_decimal"
+        android:summary="Show decimal point"
+        android:title="Show Decimal Point" 
+        android:defaultValue="false" />
+      <CheckBoxPreference 
+        android:key="show_future"
+        android:summary="Show future days "
+        android:title="Show Future Days" 
+        android:defaultValue="false" />
+  	</PreferenceScreen>
+  </PreferenceCategory>
+</PreferenceScreen>

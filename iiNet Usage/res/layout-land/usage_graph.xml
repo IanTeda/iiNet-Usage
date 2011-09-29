@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Landscape Layout -->
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/main_container_background_color" >
+  
+  <include android:id="@+id/action_bar" layout="@layout/action_bar" />
+  
+  <LinearLayout
+		android:orientation="vertical"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:background="@color/main_container_background_color" >
+  
+		<TextView 
+			android:id="@+id/sum_account_info_h1"
+			style="@style/sum_h1"
+			android:gravity="center"
+			android:text="September Usage Chart" />
+  
+	  <LinearLayout 
+	  	android:id="@+id/chart" 
+	  	android:orientation="horizontal" 
+	  	android:layout_width="fill_parent" 
+	  	android:layout_height="fill_parent"
+	  	android:background="@color/main_container_background_color"
+	  	android:layout_weight="1" />
+	</LinearLayout>
+    
+</LinearLayout>

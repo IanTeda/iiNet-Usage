@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+ 	<!-- Menu strings -->
+  <string name="menu_settings_label">Settings</string>
+	<string name="menu_settings_title">Settings</string>
+	<string name="menu_settings_shortcut">s</string>
+	<string name="menu_refresh_label">Refresh</string>
+	<string name="menu_refresh_title">Refresh data</string>
+	<string name="menu_refresh_shortcut">r</string>
+	<string name="menu_about_label">About</string>
+	<string name="menu_about_title">About</string>
+	<string name="menu_about_shortcut">a</string>
+	<string name="menu_exit_label">Exit</string>
+	<string name="menu_exit_shortcut">x</string>
+	<string name="menu_exit_title">Exit</string>
+	
+</resources>
