@@ -27,7 +27,7 @@ import au.id.teda.volumeusage.view.DailyDataCursorAdapter;
  *  Purpose: This activity displays a list of daily usage statistics
  * 
  *  @author Ian Teda
- *  @version Alpha
+ *  @version Alpha 1.2
  *  
  */
 public class UsageDataActivity extends ListActivity implements OnClickListener {
