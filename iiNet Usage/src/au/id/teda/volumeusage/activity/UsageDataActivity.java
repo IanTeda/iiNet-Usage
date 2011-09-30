@@ -90,7 +90,7 @@ public class UsageDataActivity extends ListActivity implements OnClickListener {
 		Log.i(INFO_TAG, "setUpActionBar()");
 		// Set action bar title
 		TextView abTitle = (TextView) findViewById(R.id.action_bar_title_text);
-		abTitle.setText(R.string.ab_summary_view_title);
+		abTitle.setText(R.string.ab_usage_data_view_title);
 		
 		// Reference action bar buttons and set onClick
         ImageButton abRefreshButton = (ImageButton) findViewById(R.id.action_bar_refresh_button); // This is the refresh button on the action bar
