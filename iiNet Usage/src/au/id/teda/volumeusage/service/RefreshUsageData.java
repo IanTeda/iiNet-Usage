@@ -40,6 +40,7 @@ public class RefreshUsageData extends AsyncTask<Void, Void, Void> {
     private Context context;
     private Handler handler;
     private boolean showRefreshDialog;
+    private boolean updateRefresh = false;
 	
     /**
      * Constructor for class. Pass activity context and return handler for update
@@ -56,6 +57,24 @@ public class RefreshUsageData extends AsyncTask<Void, Void, Void> {
 	}
 
 	/**
+	 * Second constructor for auto update with dialog set to false
+	 * 
+	 * @param context
+	 * @param myHandler
+	 * @param hideDialog
+	 */
+	public RefreshUsageData(Context context, Handler myHandler,
+			boolean hideDialog) {
+		Log.i(INFO_TAG, "Start constructor");
+		
+		this.context = context;
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
+		showRefreshDialog = settings.getBoolean("hide_refresh_dialog", false);
+		handler = myHandler;
+		updateRefresh = hideDialog;
+	}
+
+	/**
 	 * Before executing background asyntask display refresh dialog
 	 */
 	@Override
@@ -63,7 +82,11 @@ public class RefreshUsageData extends AsyncTask<Void, Void, Void> {
 		super.onPreExecute();
 		Log.i(INFO_TAG, "onPreExecute()");
 		
-		if (showRefreshDialog == false){
+		Log.d(DEBUG_TAG, "RefreshUsageData > Onload update: " + updateRefresh);
+		
+		// Show dialog if preference set true and it isn't an auto update at load
+		if (showRefreshDialog == false && updateRefresh == false){
+			
 			progressDialog = ProgressDialog.show(context,
 					MyApp.getAppContext().getString(R.string.refresh_progress_dialog_title),
 					MyApp.getAppContext().getString(R.string.refresh_progress_dialog_description),
@@ -115,13 +138,15 @@ public class RefreshUsageData extends AsyncTask<Void, Void, Void> {
 	@Override
 	protected void onPostExecute(Void result) {
 		Log.i(INFO_TAG, "onPostExecute()");
-		if (showRefreshDialog == false){
+		if (showRefreshDialog == false && updateRefresh == false){
 			progressDialog.dismiss();
 		}
 		handler.sendEmptyMessage(0);
+		
 		Toast refreshToast=Toast.makeText(context, "Usage Updated", 2000);
 		refreshToast.setGravity(Gravity.CENTER, 0, 250); // TODO: Not sure if this is the right way to center toast at bottom
-		refreshToast.show();
+		refreshToast.show();	
+
 		super.onPostExecute(result);
 	}
 }

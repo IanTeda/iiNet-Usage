@@ -55,8 +55,10 @@ public class MainActivity extends Activity implements OnClickListener {
 	/**
 	 *  Static tag strings for loging information and debug
 	 */
-	//private static final String DEBUG_TAG = "iiNet Usage"; // Debug tag for LogCat
+	private static final String DEBUG_TAG = "iiNet Usage"; // Debug tag for LogCat
 	private static final String INFO_TAG = MainActivity.class.getSimpleName();
+	
+	private static final String UPDATES_ONLOAD = "updates_onload";
 	
 	/**
 	 *  Activity onCreate method.
@@ -72,6 +74,8 @@ public class MainActivity extends Activity implements OnClickListener {
         
         // Reference view buttons and set onClick listener
         loadButtons();
+        
+        onLoadRefresh();
         
 	}
 
@@ -253,6 +257,26 @@ public class MainActivity extends Activity implements OnClickListener {
         DataBaseHelper dbHelper = new DataBaseHelper(this);
         dbHelper.getWritableDatabase();
         dbHelper.close();
+	}
+	
+	/**
+	 *  Check if preference set for auto update.
+	 *  If so request update without the dialog (even if it is set to display)
+	 */
+	public void onLoadRefresh(){
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+		boolean autoUpdateData = settings.getBoolean(UPDATES_ONLOAD, false);
+		
+		if (autoUpdateData){
+			Log.d(DEBUG_TAG, "Onload update: " + autoUpdateData);
+			
+			// Pass boolean true so refresh doesn't display dialog
+			boolean hideDialog = true;
+			
+			// Execute AsyncTask for data refresh
+			new RefreshUsageData(this, handler, hideDialog).execute();
+		}
+		
 	}
 	
 }
