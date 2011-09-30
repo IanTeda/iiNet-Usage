@@ -51,14 +51,9 @@ public class Preferences extends PreferenceActivity implements OnSharedPreferenc
 		// Set status bar visibility on preference change
 		} else if (key.equals(HIDE_STATUS_BAR)){
 
-			SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
-	        boolean hideStatusBar = settings.getBoolean(HIDE_STATUS_BAR, false);
-	        
-	        if (hideStatusBar){
-	        	getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-	        } else {
-	        	getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-	        }
+	        // Set status bar hide or not
+	    	SetStatusBar setStatusBar = new SetStatusBar(this);
+	    	setStatusBar.showHide();
 		}
 		
 	}
