@@ -2,16 +2,20 @@ package au.id.teda.volumeusage.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -24,6 +28,7 @@ import au.id.teda.volumeusage.service.RefreshUsageData;
 import au.id.teda.volumeusage.service.ServiceHelper;
 import au.id.teda.volumeusage.view.DashBoardAlertView;
 import au.id.teda.volumeusage.view.DashboardUsageStats;
+import au.id.teda.volumeusage.view.SetStatusBar;
 
 /**
  *  MainActivity.java
@@ -89,6 +94,10 @@ public class MainActivity extends Activity implements OnClickListener {
     	
     	// Load activity view
     	loadView();
+    	
+        // Set status bar hide or not
+    	SetStatusBar setStatusBar = new SetStatusBar(this);
+    	setStatusBar.showHide();
     }
     
     /**

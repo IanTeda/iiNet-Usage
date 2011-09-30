@@ -21,6 +21,7 @@ import au.id.teda.volumeusage.prefs.Preferences;
 import au.id.teda.volumeusage.service.RefreshUsageData;
 import au.id.teda.volumeusage.service.ServiceHelper;
 import au.id.teda.volumeusage.view.DailyDataCursorAdapter;
+import au.id.teda.volumeusage.view.SetStatusBar;
 
 /**
  *  UsageDataActivity.java
@@ -70,6 +71,10 @@ public class UsageDataActivity extends ListActivity implements OnClickListener {
 		Log.i(INFO_TAG, "onResume()");
 		fillData();
 		//TODO: Add close database call for activity
+		
+        // Set status bar hide or not
+    	SetStatusBar setStatusBar = new SetStatusBar(this);
+    	setStatusBar.showHide();
 	}
 
 	/**
