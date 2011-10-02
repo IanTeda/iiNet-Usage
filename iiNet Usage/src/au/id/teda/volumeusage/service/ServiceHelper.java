@@ -25,9 +25,10 @@ public class ServiceHelper {
 	public ServiceHelper(Context context) {
 		Log.i(INFO_TAG, "Constructor");
 		this.context = context;
+		serviceIntent = new Intent(context, DataCollectionService.class);
 	}
 
-	// Start the data collection service in backgroud
+	// Start the data collection service in background
 	public void startDataCollectionService(){
 		Log.i(INFO_TAG, "startDataCollectionService()");
 		
@@ -38,7 +39,6 @@ public class ServiceHelper {
 		
 		//Log.d(DEBUG_TAG, "buildXMLPath() > buildXMLPath: " + buildXMLPath("current"));
 		if (backgroundUpdates){
-			serviceIntent = new Intent(context, DataCollectionService.class);
 			serviceIntent.putExtra(XML_PATH, buildXMLPath());
 			serviceIntent.putExtra(UPDATE_INTERVAL, updateIntervalMillisec);
 			
