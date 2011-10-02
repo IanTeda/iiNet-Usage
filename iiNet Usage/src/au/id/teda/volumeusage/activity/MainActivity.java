@@ -68,6 +68,9 @@ public class MainActivity extends Activity implements OnClickListener {
         // Reference view buttons and set onClick listener
         loadButtons();
         
+        // Start background service for auto updates
+        startAutoUpdates();
+        
 	}
 
 	/**
@@ -244,6 +247,11 @@ public class MainActivity extends Activity implements OnClickListener {
         DataBaseHelper dbHelper = new DataBaseHelper(this);
         dbHelper.getWritableDatabase();
         dbHelper.close();
+	}
+	
+	public void startAutoUpdates(){
+		ServiceHelper serviceHelper = new ServiceHelper(this);
+		serviceHelper.startDataCollectionService();
 	}
 	
 }

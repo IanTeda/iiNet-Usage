@@ -1,15 +1,10 @@
 package au.id.teda.volumeusage.service;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import au.id.teda.volumeusage.helper.AccountHelper;
-import au.id.teda.volumeusage.notification.DialogHelper;
 
 public class ServiceHelper {
 	
@@ -18,16 +13,18 @@ public class ServiceHelper {
 	
 	private Intent serviceIntent;
 	private Context context;
+	
 	private final static String BACKGROUND_UPDATES = "background_updates";
 	private final static String UPDATE_INTERVAL = "updateInterval";
 	private final static String PASSWORD = "iinet_password";
 	private final static String USERNAME = "iinet_username";
 	
+	private final static String XML_PATH="xmlPath";
+	
 	// ServiceHelper constructor
 	public ServiceHelper(Context context) {
 		Log.i(INFO_TAG, "Constructor");
 		this.context = context;
-		serviceIntent = new Intent(context, DataCollectionService.class);
 	}
 
 	// Start the data collection service in backgroud
@@ -41,8 +38,12 @@ public class ServiceHelper {
 		
 		//Log.d(DEBUG_TAG, "buildXMLPath() > buildXMLPath: " + buildXMLPath("current"));
 		if (backgroundUpdates){
-			serviceIntent.putExtra("xmlPath", buildXMLPath());
-			serviceIntent.putExtra("updateInterval", updateIntervalMillisec);
+			serviceIntent = new Intent(context, DataCollectionService.class);
+			serviceIntent.putExtra(XML_PATH, buildXMLPath());
+			serviceIntent.putExtra(UPDATE_INTERVAL, updateIntervalMillisec);
+			
+			//Log.d(DEBUG_TAG, "startDataCollectionService() > Build XML Path: " + buildXMLPath() 
+					//+ "update interval: " + updateIntervalMillisec);
 			context.startService(serviceIntent);
 		}
 	}
@@ -61,10 +62,9 @@ public class ServiceHelper {
 	}
 	
 	// Build URL to fetch XML
-	public URL buildXMLPath(){
-		Log.i(INFO_TAG, "buildXMLPath()");
+	public String buildXMLPath(){
+		//Log.i(INFO_TAG, "buildXMLPath()");
 		String pathString = null;
-		URL url = null;
 		
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
 		String myUsername = settings.getString(USERNAME, "defaultUsername");
@@ -75,14 +75,8 @@ public class ServiceHelper {
 					"&action=login" +
 					"&password=" + myPassword;
 		
-		try {
-			url = new URL(pathString);
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		//Log.d(DEBUG_TAG, "buildXMLPath() > pathString: " + pathString);
-		return url;
+		return pathString;
 	}
 	
 	

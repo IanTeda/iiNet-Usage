@@ -31,8 +31,6 @@ public class MyApp extends Application {
 		// Get application context for globals
 		MyApp.context=getApplicationContext();
 		
-		ServiceHelper serviceHelper = new ServiceHelper(this);
-		serviceHelper.startDataCollectionService();
 	}
      
 	@Override

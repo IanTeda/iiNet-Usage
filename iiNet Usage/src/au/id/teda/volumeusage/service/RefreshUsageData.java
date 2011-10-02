@@ -84,7 +84,7 @@ public class RefreshUsageData extends AsyncTask<Void, Void, Void> {
 		if (accountHelper.checkUsernamePassword()){
 	        try {
 	        	ServiceHelper serviceHelper = new ServiceHelper(context);
-	        	URL url = serviceHelper.buildXMLPath();
+	        	URL url = new URL(serviceHelper.buildXMLPath());
 	        	Log.d(DEBUG_TAG, "URL: " + url);
 	        	//URL url = new URL("http://www.anddev.org/images/tut/basic/parsingxml/example.xml"); // Create a URL we want to load some xml-data from.
 	        	//InputSource is = new InputSource(MyApp.getAppContext().getResources().openRawResource(R.raw.adsl2  )); // Our developement xml file

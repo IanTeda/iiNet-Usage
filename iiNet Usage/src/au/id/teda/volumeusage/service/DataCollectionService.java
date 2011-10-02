@@ -11,9 +11,6 @@ import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -21,10 +18,10 @@ import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.widget.Toast;
 import au.id.teda.volumeusage.MyApp;
 import au.id.teda.volumeusage.R;
 import au.id.teda.volumeusage.helper.AccountStatusHelper;
-import au.id.teda.volumeusage.notification.DialogHelper;
 import au.id.teda.volumeusage.notification.NotificationHelper;
 import au.id.teda.volumeusage.sax.DailyUsageSAXHandler;
 
@@ -52,37 +49,19 @@ public class DataCollectionService extends Service {
 	private static final String SHOW = "show";
 	private static final String DISMISS = "dismiss";
 	
+	private final static String XML_PATH="xmlPath";
+	private final static String UPDATE_INTERVAL = "updateInterval";
+	private final static String BACKGROUND_UPDATES = "background_updates";
+	
 	private CharSequence tickerText;
 	private CharSequence notificationTitle;
 	private CharSequence notificationText;
 	
 	private Context context;
-	private Timer dataCollectionTimer;
-	private URL xmlPath;
-	long updateInterval;
+	private URL url;
+	private long updateInterval;
 	
-	// Implemented method, do nothing as we are not binding service
-	@Override
-	public IBinder onBind(Intent intent) {
-		return null;
-	}
-	
-	// On creation of the service
-	@Override
-	public void onCreate() {
-		super.onCreate();
-		Log.i(INFO_TAG, "onCreate()");
-		Context context = DataCollectionService.this; //TODO: Do i need this context??
-        dataCollectionTimer = new Timer("DataCollectorTimer");
-        dataCollectionTimer.schedule(dataCollectionTask, 1000L, 60 * 1000L); //TODO: Change 1000L to updateInterval after development
-	}
-	
-	// On start load intent and start ID
-	@Override
-	public void onStart(Intent intent, int startId) {
-		// TODO Auto-generated method stub
-		super.onStart(intent, startId);
-	}
+	private Timer dataCollectionTimer = new Timer();
 	
 	// onStart Command is processed after onCreate but with intents
     @Override
@@ -92,60 +71,110 @@ public class DataCollectionService extends Service {
         
     	//Grab intent values
     	try { //TODO: This may belong somewhere else for prefrence change updates???
-    		xmlPath = new URL(intent.getExtras().getString("xmlPath"));  // TODO: Try / catch really? Why?
+    		url = new URL(intent.getExtras().getString(XML_PATH));  // TODO: Try / catch really? Why?
     	} catch (MalformedURLException e) {
     		Log.e(INFO_TAG, "onStartCommand() > Bad URL", e);
     	}
 
-    	updateInterval = (long) intent.getExtras().getInt("updateInterval");
+    	updateInterval = (long) intent.getExtras().getInt(UPDATE_INTERVAL);
+    	
+    	Log.d(DEBUG_TAG, "onStartCommand() > Update Interval: " + updateInterval + " URL: " + url);
+    	
+        startDataCollectionService();
         
-        // We want this service to continue running until it is explicitly stopped,
+         // We want this service to continue running until it is explicitly stopped,
     	// so return sticky.
 		return START_STICKY;
     }
-	
+    
     // onDestroy shutdown task timer
 	@Override
 	public void onDestroy() {
 		Log.i(INFO_TAG, "onDestroy()");
 		super.onDestroy();
-		if (dataCollectionTimer != null) {
-			dataCollectionTimer.cancel();
-		Log.i(INFO_TAG, "onDestroy() > dataCollectionTimer stopped");
-		}
+		endDataCollectionService();
 	}
+    
+    public void startDataCollectionService(){
+    	Log.d(DEBUG_TAG, "Start timer");
+	    
+    	dataCollectionTimer.scheduleAtFixedRate( new DataCollectionTask(), // Task to run
+    			updateInterval, // Intial delay before starting task
+    			updateInterval); // Delay between running task
+    }
+    
+	public void endDataCollectionService(){
+        if (dataCollectionTimer != null)
+        	dataCollectionTimer.cancel();
+	}
+	
+    class DataCollectionTask extends TimerTask {
 
-	private TimerTask dataCollectionTask = new TimerTask() {
+    	@Override
+    	public void run() {
+    		Log.d(DEBUG_TAG, "startDataCollectionService() > Update Interval: " + updateInterval + " URL: " + url);
+    		
+    	}
+    	
+    }
+
+    
+	/**private TimerTask dataCollectionTask = new TimerTask() {
 		
 		@Override
 		public void run() {
 			Log.i(INFO_TAG, "dataCollectionTask");
+			
+	    	Log.d(DEBUG_TAG, "Timer values: " + updateInterval);
+	    	
+			
+			// Get preference for background updates
 			SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(MyApp.getAppContext());
-			boolean backgroundUpdates = settings.getBoolean("background_updates", false);
+			boolean backgroundUpdates = settings.getBoolean(BACKGROUND_UPDATES, false);
+			
+			// Double check background services enabled
 			if (backgroundUpdates){
-				Log.d(DEBUG_TAG, "dataCollectionTask > xmlPath: " + xmlPath + " & updateInterval: " + updateInterval);
+				
+				// Lets parse our XML file then
+				xmlParse(url);
+				
+				// Check for phone status bar notification cases
+				checkStatus();
+				
 			} else {
 				Log.d(DEBUG_TAG, "dataCollectionTask > cancel timer");
 				dataCollectionTimer.cancel();
 			}
-			//xmlParse(xmlPath);
-			checkStatus();
+			
 		}
-	};
-    
-	public void xmlParse(URL xmlPath) {
+	};**/
+
+
+
+	public void xmlParse(URL url) {
 		Log.i(INFO_TAG, "xmlParse");
 		
 		try {
-			//URL url = new URL("http://www.anddev.org/images/tut/basic/parsingxml/example.xml"); // Create a URL we want to load some xml-data from.
-			InputSource is = new InputSource(MyApp.getAppContext().getResources().openRawResource(R.raw.adsl2  )); // Our developement xml file
-			SAXParserFactory spf = SAXParserFactory.newInstance(); // Create a SAXParserFactory so we can
-			SAXParser sp = spf.newSAXParser(); // Create a SAXParser so we can
-			XMLReader xr = sp.getXMLReader(); // Create a XMLReader
-			DailyUsageSAXHandler myAccountInfoSAXHandler = new DailyUsageSAXHandler(); // Create a new ContentHandler and apply it to the XML-Reader
+			
+			//InputSource is = new InputSource(MyApp.getAppContext().getResources().openRawResource(R.raw.adsl2  )); // Our developement xml file
+			
+			// Create a SAXParserFactory so we can
+			SAXParserFactory spf = SAXParserFactory.newInstance();
+			
+			// Create a SAXParser so we can
+			SAXParser sp = spf.newSAXParser();
+			
+			 // Create a XMLReader
+			XMLReader xr = sp.getXMLReader();
+			
+			// Create a new ContentHandler and apply it to the XML-Reader
+			DailyUsageSAXHandler myAccountInfoSAXHandler = new DailyUsageSAXHandler(); 
 			xr.setContentHandler(myAccountInfoSAXHandler);
-			xr.parse(new InputSource(is.getByteStream())); // Parse the xml-data from our development file
-			//xr.parse(new InputSource(url.openStream())); // Parse the xml-data from our URL.
+			//xr.parse(new InputSource(is.getByteStream())); // Parse the xml-data from our development file
+			
+			 // Parse the xml-data from our URL.
+			xr.parse(new InputSource(url.openStream()));
+			
 		} catch (Exception e) {
 			// Display any Error to catLog
 			Log.d(DEBUG_TAG, "XML Querry error: " + e.getMessage());
@@ -223,6 +252,12 @@ public class DataCollectionService extends Service {
 		
 			
 			
+	}
+
+	// Implemented method, do nothing as we are not binding service
+	@Override
+	public IBinder onBind(Intent intent) {
+		return null;
 	}
 
 }
