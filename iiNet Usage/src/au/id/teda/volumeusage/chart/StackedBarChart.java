@@ -25,8 +25,9 @@ public class StackedBarChart extends ChartBuilder {
 	private static final String DEBUG_TAG = "iiNet Usage"; // Debug tag for LogCat
 	private static final String INFO_TAG = UsageGraphActivity.class.getSimpleName();
 	
-	private static final String PEAK = "peak";
-	private static final String OFFPEAK = "offpeak";
+	private static final String PEAK = "Peak";
+	private static final String OFFPEAK = "Offpeak";
+	private static final String NOT_USED = "Not Used";
 	
     private Context context;
     private double maxDataUsage = 0;
@@ -105,12 +106,12 @@ public class StackedBarChart extends ChartBuilder {
 	
 	private XYMultipleSeriesRenderer getMyRenderer() {
 		// Must have same number of renderer entries as data sets
-		maxDataUsage = maxDataUsage + 500; // Get the max number for data usage and us as max y-axis value + 500
+		maxDataUsage = maxDataUsage + 100; // Get the max number for data usage and us as max y-axis value + 500
 		//Log.d(DEBUG_TAG, "UsageGraphActivity > getMyRenderer() > Set max Y-Axis as: " + maxDataUsage);
 		//Log.d(DEBUG_TAG, "UsageGraphActivity > getMyRenderer() > Set max x-Axis as: " + dayCounter);
 	    int[] colors = new int[] { Color.parseColor("#95FF5900"), Color.parseColor("#65FF5900") };
 	    XYMultipleSeriesRenderer myRenderer = buildBarRenderer(colors);
-	    setChartSettings(myRenderer, "September Data Usage", "Date", "Date Used",0.5,
+	    setChartSettings(myRenderer, NOT_USED, NOT_USED, NOT_USED,0.5,
 	    		dayCounter, 0, maxDataUsage, Color.parseColor("#b9b9b9"), Color.parseColor("#b9b9b9")); 
 	    myRenderer.getSeriesRendererAt(0).setDisplayChartValues(false);
 	    myRenderer.getSeriesRendererAt(1).setDisplayChartValues(false);
