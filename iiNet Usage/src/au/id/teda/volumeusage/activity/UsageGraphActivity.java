@@ -20,6 +20,7 @@ import au.id.teda.volumeusage.chart.StackedBarChart;
 import au.id.teda.volumeusage.prefs.Preferences;
 import au.id.teda.volumeusage.service.RefreshUsageData;
 import au.id.teda.volumeusage.service.ServiceHelper;
+import au.id.teda.volumeusage.view.SetStatusBar;
 
 /**
  *  UsageGraphActivity.java
@@ -66,6 +67,10 @@ public class UsageGraphActivity extends Activity implements OnClickListener {
 		if (mChartView != null) {
 			mChartView.repaint();
 		}
+		
+        // Set status bar hide or not
+    	SetStatusBar setStatusBar = new SetStatusBar(this);
+    	setStatusBar.showHide();
 	}
 
 	/**

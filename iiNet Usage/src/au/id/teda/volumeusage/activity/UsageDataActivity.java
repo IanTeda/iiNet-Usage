@@ -21,13 +21,14 @@ import au.id.teda.volumeusage.prefs.Preferences;
 import au.id.teda.volumeusage.service.RefreshUsageData;
 import au.id.teda.volumeusage.service.ServiceHelper;
 import au.id.teda.volumeusage.view.DailyDataCursorAdapter;
+import au.id.teda.volumeusage.view.SetStatusBar;
 
 /**
  *  UsageDataActivity.java
  *  Purpose: This activity displays a list of daily usage statistics
  * 
  *  @author Ian Teda
- *  @version Alpha
+ *  @version Alpha 1.2
  *  
  */
 public class UsageDataActivity extends ListActivity implements OnClickListener {
@@ -70,6 +71,10 @@ public class UsageDataActivity extends ListActivity implements OnClickListener {
 		Log.i(INFO_TAG, "onResume()");
 		fillData();
 		//TODO: Add close database call for activity
+		
+        // Set status bar hide or not
+    	SetStatusBar setStatusBar = new SetStatusBar(this);
+    	setStatusBar.showHide();
 	}
 
 	/**
@@ -90,7 +95,7 @@ public class UsageDataActivity extends ListActivity implements OnClickListener {
 		Log.i(INFO_TAG, "setUpActionBar()");
 		// Set action bar title
 		TextView abTitle = (TextView) findViewById(R.id.action_bar_title_text);
-		abTitle.setText(R.string.ab_summary_view_title);
+		abTitle.setText(R.string.ab_usage_data_view_title);
 		
 		// Reference action bar buttons and set onClick
         ImageButton abRefreshButton = (ImageButton) findViewById(R.id.action_bar_refresh_button); // This is the refresh button on the action bar

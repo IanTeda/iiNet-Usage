@@ -19,6 +19,7 @@ import au.id.teda.volumeusage.helper.AccountHelper;
 import au.id.teda.volumeusage.prefs.Preferences;
 import au.id.teda.volumeusage.service.RefreshUsageData;
 import au.id.teda.volumeusage.service.ServiceHelper;
+import au.id.teda.volumeusage.view.SetStatusBar;
 
 /**
  *  SummaryActivity.java
@@ -58,7 +59,12 @@ public class SummaryActivity extends Activity implements OnClickListener {
 	public void onResume(){
 		super.onResume();
 		Log.i(INFO_TAG, "onResume()");
+		
 		fillSummaryView();
+		
+        // Set status bar hide or not
+    	SetStatusBar setStatusBar = new SetStatusBar(this);
+    	setStatusBar.showHide();
 	}
 	
 	/**

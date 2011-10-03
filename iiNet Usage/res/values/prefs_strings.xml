@@ -38,4 +38,13 @@
 		<item>Every 24 hours</item>
 	</string-array>
 	
+	<!-- Application Appearance -->
+	<string name="app_apperance">Application Appearance</string>
+	<string name="hide_status_bar_title">Hide Status Bar</string>
+	<string name="hide_status_bar_summary">Hide phone status bar</string>
+	<string name="hide_refresh_dialog_title">Hide Refresh Dialog</string>
+	<string name="hide_refresh_dialog_summary">Hide refresh dialog</string>
+	<string name="show_decimal_title">Show Decimal Point</string>
+	<string name="show_decimal_summary">Show decimal point in daily usage</string>
+	
 </resources>

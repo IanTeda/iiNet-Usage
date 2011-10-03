@@ -2,16 +2,20 @@ package au.id.teda.volumeusage.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -24,6 +28,7 @@ import au.id.teda.volumeusage.service.RefreshUsageData;
 import au.id.teda.volumeusage.service.ServiceHelper;
 import au.id.teda.volumeusage.view.DashBoardAlertView;
 import au.id.teda.volumeusage.view.DashboardUsageStats;
+import au.id.teda.volumeusage.view.SetStatusBar;
 
 /**
  *  MainActivity.java
@@ -50,8 +55,10 @@ public class MainActivity extends Activity implements OnClickListener {
 	/**
 	 *  Static tag strings for loging information and debug
 	 */
-	//private static final String DEBUG_TAG = "iiNet Usage"; // Debug tag for LogCat
+	private static final String DEBUG_TAG = "iiNet Usage"; // Debug tag for LogCat
 	private static final String INFO_TAG = MainActivity.class.getSimpleName();
+	
+	private static final String UPDATES_ONLOAD = "updates_onload";
 	
 	/**
 	 *  Activity onCreate method.
@@ -67,6 +74,8 @@ public class MainActivity extends Activity implements OnClickListener {
         
         // Reference view buttons and set onClick listener
         loadButtons();
+        
+        onLoadRefresh();
         
         // Start background service for auto updates
         startAutoUpdates();
@@ -92,6 +101,10 @@ public class MainActivity extends Activity implements OnClickListener {
     	
     	// Load activity view
     	loadView();
+    	
+        // Set status bar hide or not
+    	SetStatusBar setStatusBar = new SetStatusBar(this);
+    	setStatusBar.showHide();
     }
     
     /**
@@ -252,6 +265,26 @@ public class MainActivity extends Activity implements OnClickListener {
 	public void startAutoUpdates(){
 		ServiceHelper serviceHelper = new ServiceHelper(this);
 		serviceHelper.startDataCollectionService();
+	}
+
+	/**
+	 *  Check if preference set for auto update.
+	 *  If so request update without the dialog (even if it is set to display)
+	 */
+	public void onLoadRefresh(){
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+		boolean autoUpdateData = settings.getBoolean(UPDATES_ONLOAD, false);
+		
+		if (autoUpdateData){
+			//Log.d(DEBUG_TAG, "Onload update: " + autoUpdateData);
+			
+			// Pass boolean true so refresh doesn't display dialog
+			boolean hideDialog = true;
+			
+			// Execute AsyncTask for data refresh
+			new RefreshUsageData(this, handler, hideDialog).execute();
+		}
+
 	}
 	
 }

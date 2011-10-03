@@ -23,6 +23,32 @@
   <!-- Parent Category for Application preferences -->
   <PreferenceCategory
     android:title="@string/application_preferences_categrory_title">
+    
+    <!-- Application Appearance -->
+		<PreferenceScreen android:title="@string/app_apperance">
+    	<CheckBoxPreference 
+      	android:key="hide_status_bar"
+				android:title="@string/hide_status_bar_title" 
+      	android:summary="@string/hide_status_bar_summary"
+      	android:defaultValue="true" />
+      <CheckBoxPreference 
+        android:key="hide_refresh_dialog"
+        android:title="@string/hide_refresh_dialog_title" 
+        android:summary="@string/hide_refresh_dialog_summary"
+        android:defaultValue="false" />
+      <CheckBoxPreference 
+        android:key="show_decimal"
+				android:title="@string/show_decimal_title" 
+        android:summary="@string/show_decimal_summary"
+        android:defaultValue="false" />
+      <CheckBoxPreference 
+        android:key="show_future"
+        android:summary="Show future days "
+        android:title="Show Future Days" 
+        android:defaultValue="false" />
+  	</PreferenceScreen>
+    
+    
     <PreferenceScreen android:title="Set Alerts">
       <au.id.teda.volumeusage.prefs.SeekBarPreference
         android:key="peak_usage_alert"
@@ -42,9 +68,8 @@
         android:defaultValue="75"
         example:minValue="0"
         example:maxValue="100" />
-        
-
     </PreferenceScreen>
+    
     <PreferenceScreen android:title="@string/update_preferences_screen_title">
     	<CheckBoxPreference android:key="updates_onload"
     		android:title="@string/update_onload_title" 
@@ -61,27 +86,5 @@
 				intPref:entryList="@array/update_int_list"
 				android:defaultValue="86400000" />
     </PreferenceScreen>
-    <PreferenceScreen android:title="Display Options">
-    	<CheckBoxPreference 
-      	android:key="hide_status_bar"
-      	android:summary="Hide Android status bar"
-      	android:title="Hide Status Bar" 
-      	android:defaultValue="false" />
-      <CheckBoxPreference 
-        android:key="hide_refresh_dialog"
-        android:summary="Hide refresh dialog"
-        android:title="Hide Refresh Dialog" 
-        android:defaultValue="false" />
-      <CheckBoxPreference 
-        android:key="show_decimal"
-        android:summary="Show decimal point"
-        android:title="Show Decimal Point" 
-        android:defaultValue="false" />
-      <CheckBoxPreference 
-        android:key="show_future"
-        android:summary="Show future days "
-        android:title="Show Future Days" 
-        android:defaultValue="false" />
-  	</PreferenceScreen>
   </PreferenceCategory>
 </PreferenceScreen>
