@@ -31,7 +31,8 @@
 		      <TextView 
 						android:id="@+id/sum_account_plan_tv"
 		      	style="@style/sum_body_text"
-		      	android:text="@string/sum_account_plan_string" />
+		      	android:text="@string/sum_account_plan_string"
+		      	android:color="@color/h1_background_color" />
 		      <TextView 
 						android:id="@+id/sum_account_period_tv" 
 		      	style="@style/sum_body_text"

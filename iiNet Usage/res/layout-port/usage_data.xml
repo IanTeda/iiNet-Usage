@@ -10,10 +10,10 @@
   
   <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
-  android:layout_height="wrap_content"
+  android:layout_height="30dp"
   android:paddingBottom="1dp"
   android:orientation="horizontal"
-  android:background="@color/main_container_background_color" >
+  android:background="@color/summary_background" >
 	<TextView 
 		style="@style/listview_header"
 		android:layout_width="33dp"
