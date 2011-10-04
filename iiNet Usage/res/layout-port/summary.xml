@@ -63,14 +63,14 @@
 		      	android:id="@+id/sum_current_rollover_tv" 
 		      	style="@style/sum_body_text"
 		      	android:text="@string/sum_current_rollover_string" />
+					<TextView 
+		      	android:id="@+id/sum_sofare_tv"
+		      	style="@style/sum_body_text"
+		      	android:text="@string/sum_current_sofare_string" />
 		      <TextView 
 		      	android:id="@+id/sum_togo_tv"
 		      	style="@style/sum_body_text"
 		      	android:text="@string/sum_current_togo_string" />
-		      <TextView 
-		      	android:id="@+id/sum_sofare_tv"
-		      	style="@style/sum_body_text"
-		      	android:text="@string/sum_current_sofare_string" />
 		  </LinearLayout>
 		  
 		  <!-- Usage Stats Layout -->
