@@ -11,11 +11,13 @@
       android:key="iinet_username"
     	android:title="@string/iinet_username_title"
       android:summary="@string/iinet_username_sumamry"
+      android:inputType="textNoSuggestions" 
       android:defaultValue="" />
     <EditTextPreference
       android:key="iinet_password"
     	android:title="@string/iinet_password_title"
       android:summary="@string/iinet_password_summary"
+      android:inputType="textNoSuggestions" 
       android:defaultValue=""
       android:password="true" />
   </PreferenceCategory>
