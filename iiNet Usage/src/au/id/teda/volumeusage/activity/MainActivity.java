@@ -36,7 +36,6 @@ import au.id.teda.volumeusage.view.SetStatusBar;
  *  displays dashboard.xml
  * 
  *  @author Ian Teda
- *  @version Alpha 1.1
  *  
  */
 

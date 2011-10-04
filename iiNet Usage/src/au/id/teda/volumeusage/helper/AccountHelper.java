@@ -308,7 +308,7 @@ public class AccountHelper {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy HH:mm");
             Date resultdate = new Date(upTimeMilli);
             
-            upTime = "<b>Up Time:</b> " + dateFormat.format(resultdate) + " (" + diffDays + "Days)";
+            upTime = "<b>Up Time:</b> " + dateFormat.format(resultdate) + " (" + diffDays + " Days)";
             
         } else {
         	upTime = "<b>On Since:</b> dd MMM yyyy --:-- (--Days)";
