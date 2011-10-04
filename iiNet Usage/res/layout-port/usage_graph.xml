@@ -19,7 +19,7 @@
 			android:id="@+id/sum_account_info_h1"
 			style="@style/sum_h1"
 			android:gravity="center"
-			android:text="September Usage Chart" />
+			android:text="@string/graph_default_title" />
   
 	  <LinearLayout 
 	  	android:id="@+id/chart" 

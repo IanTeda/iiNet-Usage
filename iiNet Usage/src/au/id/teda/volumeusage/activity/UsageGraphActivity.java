@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import au.id.teda.volumeusage.R;
 import au.id.teda.volumeusage.chart.StackedBarChart;
+import au.id.teda.volumeusage.helper.AccountHelper;
 import au.id.teda.volumeusage.prefs.Preferences;
 import au.id.teda.volumeusage.service.RefreshUsageData;
 import au.id.teda.volumeusage.service.ServiceHelper;
@@ -27,7 +29,6 @@ import au.id.teda.volumeusage.view.SetStatusBar;
  *  Purpose: This activity displays the usage graphs
  * 
  *  @author Ian Teda
- *  @version Alpha 1
  *  
  */
 
@@ -54,6 +55,8 @@ public class UsageGraphActivity extends Activity implements OnClickListener {
 		
 		setUpActionBar();
         
+		setChartHeading();
+		
         loadChart();
 
 	}
@@ -103,6 +106,12 @@ public class UsageGraphActivity extends Activity implements OnClickListener {
 			Log.d(DEBUG_TAG, "UsageGraphActivity > loadChart() > Chart view exist > Repaint");
 			mChartView.repaint(); // use this whenever data has changed and you want to redraw
 		}
+	}
+	
+	public void setChartHeading(){
+		AccountHelper accountInfo = new AccountHelper(this);
+		TextView upRollOverTV = (TextView) findViewById(R.id.sum_account_info_h1);
+		upRollOverTV.setText(accountInfo.getPeriodString());
 	}
 	
 	/**

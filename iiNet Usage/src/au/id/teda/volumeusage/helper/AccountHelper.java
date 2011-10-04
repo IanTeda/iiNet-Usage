@@ -505,4 +505,16 @@ public class AccountHelper {
 		return datePeriodString;
 		
 	}
+	
+	// Return Current Data Period
+	public String getPeriodString(){
+		
+		Long datePeriodMillsecToGo = getDaysToGo()*24*60*60*1000; // Convert string value of days to go into millseconds
+		Long datePeriodMillsec = System.currentTimeMillis() + datePeriodMillsecToGo; // Add current time in millseconds to days to go
+		SimpleDateFormat date_format = new SimpleDateFormat("MMMMM yyyy"); // Convert millesconds timestamp into MMM yyyy
+		String datePeriodString = date_format.format(datePeriodMillsec);
+		
+		return datePeriodString;
+		
+	}
 }

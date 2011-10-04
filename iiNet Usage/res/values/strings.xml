@@ -18,5 +18,7 @@
 	<!-- Refresh progress dialog -->
 	<string name="refresh_progress_dialog_title">Please wait</string>
 	<string name="refresh_progress_dialog_description">Retrieving &amp; loading data...</string>
+	
+	<string name="graph_default_title">Data Period</string>
 
 </resources>
