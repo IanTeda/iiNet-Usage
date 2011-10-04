@@ -5,6 +5,7 @@
 	<string name="sum_account_info_h1">Account Information</string>
 	<string name="sum_account_plan_string"><b>Plan:</b> Plan (Product)</string>
 	<string name="sum_account_period_string"><b>Peak Period:</b> --:-- to --:--</string>
+	<string name="sum_account_quota_string"><b>Peak/Offpeak Quota:</b> --Gb / --Gb</string>
 	<string name="sum_account_ip_string"><b>IP Address:</b> ---.---.---.---</string>
 	<string name="sum_account_since_string"><b>On Since:</b> dd MMM yyyy --:-- (--Days)</string>
 	<string name="sum_current_period_h1">Current Period</string>

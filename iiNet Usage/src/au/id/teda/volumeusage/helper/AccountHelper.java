@@ -22,6 +22,9 @@ public class AccountHelper {
 	private static final String DEBUG_TAG = "iiNet Usage"; // Debug tag for LogCat
 	private static final String INFO_TAG = AccountHelper.class.getSimpleName();
 	
+	private static final String PEAK = "peak";
+	private static final String OFFPEAK = "offpeak";
+	
 	/**
 	 *  Object for storing context
 	 */
@@ -252,6 +255,22 @@ public class AccountHelper {
         	offpeakTime = "<b>Offpeak Period:</b> No Time Set";
         }
 		return offpeakTime;
+	}
+	
+	public String getQuotaString(){
+		
+		String quotaString = null;
+		if (infoExists()){
+			String peakQuota = String.valueOf(getAccountQuota(PEAK) / 1000);
+			String offpeakQuota = String.valueOf(getAccountQuota(OFFPEAK) / 1000);
+			quotaString = "<b>Quota:</b> "
+					+ peakQuota + "Gb / " 
+					+ offpeakQuota + "Gb";
+            
+		} else {
+			quotaString = "<b>Peak/Offpeak Quota:</b> --Gb / --Gb";
+		}
+		return quotaString;
 	}
 	
 	// Get ip address of latest status update

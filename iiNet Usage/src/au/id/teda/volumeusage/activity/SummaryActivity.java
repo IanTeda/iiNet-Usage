@@ -106,6 +106,10 @@ public class SummaryActivity extends Activity implements OnClickListener {
 		TextView planOffpeakTimeTV = (TextView) findViewById(R.id.sum_account_period_tv);
 		planOffpeakTimeTV.setText(Html.fromHtml(accountInfo.getPeakPeriod()));
 		
+		// Set quota for plan
+		TextView planQuotaTV = (TextView) findViewById(R.id.sum_account_quota_tv);
+		planQuotaTV.setText(Html.fromHtml(accountInfo.getQuotaString()));
+		
 		// Set IP address
 		TextView ipTV = (TextView) findViewById(R.id.sum_account_ip_tv);
 		ipTV.setText(Html.fromHtml(accountInfo.getIPAddress()));

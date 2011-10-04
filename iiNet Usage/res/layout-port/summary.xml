@@ -36,6 +36,10 @@
 						android:id="@+id/sum_account_period_tv" 
 		      	style="@style/sum_body_text"
 		      	android:text="@string/sum_account_period_string" />
+					<TextView 
+						android:id="@+id/sum_account_quota_tv" 
+		      	style="@style/sum_body_text"
+		      	android:text="@string/sum_account_quota_string" />
 		      <TextView 
 		      	android:id="@+id/sum_account_ip_tv"
 		      	style="@style/sum_body_text" 

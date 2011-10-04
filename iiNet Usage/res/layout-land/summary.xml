@@ -36,15 +36,19 @@
               android:id="@+id/sum_account_period_tv" 
               style="@style/sum_body_text"
               android:text="@string/sum_account_period_string" />
+						<TextView 
+							android:id="@+id/sum_account_quota_tv" 
+		      		style="@style/sum_body_text"
+		      		android:text="@string/sum_account_quota_string" />
             <TextView 
               android:id="@+id/sum_account_ip_tv"
-                        style="@style/sum_body_text" 
-                        android:text="@string/sum_account_ip_string" />
-                      <TextView 
-                        android:id="@+id/sum_account_since_tv"
-                        style="@style/sum_body_text"
-                        android:text="@string/sum_account_since_string" />
-                  </LinearLayout>
+							style="@style/sum_body_text" 
+							android:text="@string/sum_account_ip_string" />
+						<TextView 
+							android:id="@+id/sum_account_since_tv"
+							style="@style/sum_body_text"
+							android:text="@string/sum_account_since_string" />
+					</LinearLayout>
                   <!-- Current Period Layout -->
                   <TextView 
                         android:id="@+id/sum_current_period_h1" 
