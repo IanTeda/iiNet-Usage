@@ -80,7 +80,7 @@
     	android:label="@string/app_name" />
     
     <!-- History Activity -->
-    <activity android:name=".activity.HistoryActivity"
+    <activity android:name=".activity.ArchiveListActivity"
     	android:label="@string/app_name" />
     	
   </application>

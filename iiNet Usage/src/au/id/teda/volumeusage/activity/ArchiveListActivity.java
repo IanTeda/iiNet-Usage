@@ -1,5 +1,6 @@
 package au.id.teda.volumeusage.activity;
 
+import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,38 +12,74 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+import au.id.teda.volumeusage.ListViewCustomAdapter;
 import au.id.teda.volumeusage.R;
 import au.id.teda.volumeusage.prefs.Preferences;
 import au.id.teda.volumeusage.service.RefreshUsageData;
 import au.id.teda.volumeusage.service.ServiceHelper;
 import au.id.teda.volumeusage.view.SetStatusBar;
 
-public class HistoryActivity extends ListActivity implements OnClickListener {
+/**
+ * 
+ * @author Ian
+ *
+ */
+// http://pareshnmayani.wordpress.com/tag/android-listview-example/
+// http://www.vogella.de/articles/AndroidListView/article.html
+
+public class ArchiveListActivity extends ListActivity {
 
 	/**
 	 *  Static tag strings for logging information and debug
 	 */
 	private static final String DEBUG_TAG = "iiNet Usage"; // Debug tag for LogCat
-	private static final String INFO_TAG = HistoryActivity.class.getSimpleName();
+	private static final String INFO_TAG = ArchiveListActivity.class.getSimpleName();
 	
-	// this is the controller that populates the list with data.
-	private ArrayAdapter<String> listAdapter;
+	ListView lview3;
+	ListViewCustomAdapter adapter;
+
+	private static String month[] = {"January","February","March","April","May",
+		"June","July","August","September",
+		"October","November","December"};
+
+	private static String desc[] = {"Month - 1","Month - 2","Month - 3",
+		"Month - 4","Month - 5","Month - 6","Month - 7",
+		"Month - 8","Month - 9","Month - 10","Month - 11","Month - 12"};
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		Log.i(INFO_TAG, "onCreate()");
-		setContentView(R.layout.history);
+		setContentView(R.layout.archive);
 		
 		// Setup action bar title and buttons
 		setupActionBar();
 		
-		// set up the list adapter to be used by the ListView
-		setupListAdapter();
+		// Create an array of Strings, that will be put to our ListActivity
+		String[] names = new String[] { "Linux", "Windows7", "Eclipse", "Suse",
+				"Ubuntu", "Solaris", "Android", "iPhone"};
+		// Create an ArrayAdapter, that will actually make the Strings above
+		// appear in the ListView
+		this.setListAdapter(new ArrayAdapter<String>(this,
+				android.R.layout.simple_list_item_1, names));
+	}
+	
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+		super.onListItemClick(l, v, position, id);
+		// Get the item that was clicked
+		Object o = this.getListAdapter().getItem(position);
+		String keyword = o.toString();
+		Toast.makeText(this, "You selected: " + keyword, Toast.LENGTH_LONG)
+				.show();
 	}
 	
 	@Override
@@ -85,6 +122,7 @@ public class HistoryActivity extends ListActivity implements OnClickListener {
      * Method for handling onClicks in this activity
      * @param: button
      */
+    /**
 	@Override
 	public void onClick(View button) {
 		Log.i(INFO_TAG, "onClick() > Button: " + button.getId());
@@ -99,7 +137,7 @@ public class HistoryActivity extends ListActivity implements OnClickListener {
 		default:
 			Log.i(INFO_TAG, "onClick() > Default switch");
 		}
-	}
+	}**/
 	
 	/**
 	 * onCreate method for options menu
@@ -150,42 +188,12 @@ public class HistoryActivity extends ListActivity implements OnClickListener {
 		// Reference action bar buttons and set onClick
 		// This is the refresh button on the action bar
         ImageButton abRefreshButton = (ImageButton) findViewById(R.id.action_bar_refresh_button);
-        abRefreshButton.setOnClickListener(this);
+        //abRefreshButton.setOnClickListener(this);
         
         // Take me back to the dashboard
         ImageButton abHomeButton = (ImageButton) findViewById(R.id.action_bar_home_button);
-        abHomeButton.setOnClickListener(this);
+        //abHomeButton.setOnClickListener(this);
 	}
 	
-	// this is a hard coded list that we are using as the data 
-	// for the list in this example.
-	private static String[] spirits = new String[]
-	{
-		"Vodka","Gin","Rum","Tequila",
-		"Scotch","Bourbon","Wiskey","Cognac",
-		"Grapa","Cachaca","Rye",
-		"Red Wine","White Wine", "Sake","Port"
-	};
-	
-	/**
-	 * This is where we create and connect the adapter to this activity
-	 * as well as the data.
-	 */
-	private void setupListAdapter()
-	{
-		// "this" is the containing activity.
-		// "android.R.layout.simple_list_item_1" is a predefined item that is
-		//      already set up to work with a list adapter.  It is internal to
-		//      the ListView with the id "@android:id/list".
-		// "spirits" is the data array we are using in this example.
-		listAdapter = new ArrayAdapter<String>
-			( this, android.R.layout.simple_list_item_1, spirits );
- 
-		// connecting the list adapter to this ListActivity
-		setListAdapter(listAdapter);
- 
- 
- 
-	}
 
 }
