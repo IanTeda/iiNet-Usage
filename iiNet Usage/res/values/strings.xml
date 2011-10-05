@@ -14,6 +14,7 @@
 	
 	<!-- No list data -->
 	<string name="no_daily_data">No usage data present</string>
+	<string name="no_history_data">No history list present</string>
 	
 	<!-- Refresh progress dialog -->
 	<string name="refresh_progress_dialog_title">Please wait</string>

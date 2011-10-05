@@ -126,8 +126,8 @@ public class MainActivity extends Activity implements OnClickListener {
         dbGraphButton.setOnClickListener(this);
         Button dbDataButton = (Button) findViewById(R.id.db_usage_data_activity_button);
         dbDataButton.setOnClickListener(this);
-        Button dbAboutButton = (Button) findViewById(R.id.db_about_button);
-        dbAboutButton.setOnClickListener(this);
+        Button dbHistoryButton = (Button) findViewById(R.id.db_history_button);
+        dbHistoryButton.setOnClickListener(this);
         ImageButton dbActionBarSettingsButton = (ImageButton) findViewById(R.id.db_action_bar_settings_button);
         dbActionBarSettingsButton.setOnClickListener(this);
     }
@@ -185,9 +185,9 @@ public class MainActivity extends Activity implements OnClickListener {
 			Intent settingsIntent = new Intent(MainActivity.this, Preferences.class);
 			startActivity(settingsIntent);
 			break;
-		case R.id.db_about_button:
-			Intent aboutIntent1 = new Intent(this, AboutActivity.class);
-			startActivity(aboutIntent1);
+		case R.id.db_history_button:
+			Intent mHistoryIntent = new Intent(this, HistoryActivity.class);
+			startActivity(mHistoryIntent);
 			break;
 		case R.id.db_summary_activity_button:
 			Intent summaryAcitivityIntent = new Intent(MainActivity.this, SummaryActivity.class);

@@ -5,6 +5,7 @@
   <string name="db_summary_button_button_text">Summary</string>
   <string name="db_usage_graph_button_text">Usage Graph</string>
   <string name="db_usage_data_button_text">Usage Data</string>
+  <string name="db_history_button_text">History</string>
   <string name="db_about_button_text">About</string>
   
 	<!-- DB Alert box strings -->
