@@ -20,15 +20,6 @@
   <string name="offpeak_usage_alert_summary">Current offpeak alert: %1$d</string>
 
 	<!-- Usage alert seekbar strings -->
-	<integer-array name="update_int_values">
-		<item>1800000</item>
-    <item>3600000</item>
-    <item>7200000</item>
-    <item>21600000</item>
-    <item>43200000</item>
-    <item>86400000</item>
-	</integer-array>
-
 	<string-array name="update_int_list">
 		<item>Every 30 minutes</item>
 		<item>Every 1 hour</item>
@@ -37,7 +28,16 @@
 		<item>Every 12 hours</item>
 		<item>Every 24 hours</item>
 	</string-array>
-	
+
+	<integer-array name="update_int_values">
+		<item>1800000</item>
+    <item>3600000</item>
+    <item>7200000</item>
+    <item>21600000</item>
+    <item>43200000</item>
+    <item>86400000</item>
+	</integer-array>
+		
 	<!-- Application Appearance -->
 	<string name="app_apperance">Application Appearance</string>
 	<string name="hide_status_bar_title">Hide Status Bar</string>
@@ -46,5 +46,18 @@
 	<string name="hide_refresh_dialog_summary">Hide refresh dialog</string>
 	<string name="show_decimal_title">Show Decimal Point</string>
 	<string name="show_decimal_summary">Show decimal point in daily usage</string>
+	
+	<!-- Dashboard Data Preference -->
+	<string name="dash_data_summary_title">Dashboard Summary</string>
+	<string name="dash_data_summary_summary">Data to date or remaining</string>
+	
+	<string-array name="dash_show_data_array">
+		<item>Show data so fare</item>
+		<item>Show data to go</item>
+	</string-array>
+	<string-array name="dash_show_data_values_array">
+		<item>so_fare</item>
+		<item>to_go</item>
+	</string-array>
 	
 </resources>

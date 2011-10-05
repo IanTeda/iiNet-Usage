@@ -43,11 +43,12 @@
 				android:title="@string/show_decimal_title" 
         android:summary="@string/show_decimal_summary"
         android:defaultValue="false" />
-      <CheckBoxPreference 
-        android:key="show_future"
-        android:summary="Show future days "
-        android:title="Show Future Days" 
-        android:defaultValue="false" />
+      <ListPreference
+        android:key="dashboard_summary_pref"
+        android:summary="@string/dash_data_summary_summary"
+        android:title="@string/dash_data_summary_title"
+        android:entries="@array/dash_show_data_array"
+        android:entryValues="@array/dash_show_data_values_array" />
   	</PreferenceScreen>
     
     

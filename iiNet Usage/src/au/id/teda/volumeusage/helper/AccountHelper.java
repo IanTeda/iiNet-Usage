@@ -111,6 +111,31 @@ public class AccountHelper {
 		return usageString;
 	}
 	
+	// Get quota and used data calc percentage and then build return string
+	public String getdataRemainingString(String period){
+		//Log.d(DEBUG_TAG, "DashboardUsageStats > dataUsageString() > Period: " + period);
+		
+		// Get quota and used data values
+		double quotaLong = getAccountQuota(period);
+		double usedLong = getAccountUsed(period);
+		
+		// Calculate remainingg data
+		double remaingLong = quotaLong - usedLong;
+		
+		// Set Percentage format
+		NumberFormat percentFormat = NumberFormat.getPercentInstance();
+		percentFormat.setMaximumFractionDigits(0);
+		
+		// Set usage format
+		NumberFormat numberFormat = new DecimalFormat("#,###.0");
+		Double remainingDouble = remaingLong/1000;
+		
+		// Build string for return statement
+		String remainingString = numberFormat.format(remainingDouble) + "Gb (" + percentFormat.format(remaingLong/quotaLong) + ")";
+		//Log.d(DEBUG_TAG, "DashboardUsageStats > dataUsageString() > usageString: " + usageString);
+		return remainingString;
+	}
+	
 	// Get account quota from database based on period flag
 	public long getAccountQuota(String period){
         //Log.d(DEBUG_TAG, "MainActivity > getAccountQuota() > Period: " + period);
