@@ -47,10 +47,6 @@ public class ArchiveListActivity extends ListActivity {
 	private static final String DEBUG_TAG = "iiNet Usage"; // Debug tag for LogCat
 	private static final String INFO_TAG = ArchiveListActivity.class.getSimpleName();
 	
-	private List<HashMap<String, String>> fill;
-	private static final String ENC = "UTF-8";
-	private int selected;
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -61,52 +57,6 @@ public class ArchiveListActivity extends ListActivity {
 		// Setup action bar title and buttons
 		setupActionBar();
 		
-		//the rooms parameter passed to this activity contain the result of the web service call.
-        //It contains the following string 
-        //roomid - the unique identifier of a room that will be used in code
-        //name - the actual name of the room
-        //capacity - capacity of of the room
-       // the are formatted as follow: roomid,name,capacity;roomid,name,capacity
-
-
-        //check to see how many room is available 
-        //so that i can declare the size of my List
-		int length= this.getIntent().getExtras().getString("rooms").split(";").length;
-
-		String[] rooms = new String[length];
-		rooms=this.getIntent().getExtras().getString("rooms").split(";");
-
-		fill = new ArrayList<HashMap<String, String>>();
-
-        //I'm using HashMap to store my name-value pair of the available room
-		for(int i=0;i<rooms.length;i++){
-			String[] temp=new String[3];
-			temp=rooms[i].split(",");
-			HashMap<String, String> map = new HashMap<String, String>();
-			map.put("roomid",temp[0]);
-			map.put("name", temp[1]);
-			map.put("capacity", temp[2]);
-			map.put("max", "Capacity: "+ temp[2] + " People");
-		
-			fill.add(map);
-		}
-        //If you don't understand what HashMap does, look it up on google.
-        // at this point all my room information is available in a variable called fill
-        // all I need to do is create an adapter, fill the adapter with the fill variable,
-        // and send the adapter to android to process(to fill the layout with data)
-
-       //use simple adapter		
-       //note that I tell the adapter to use the variable named "name" and "max"
-       //to bing to to text view I specified
-       //the "name" variable will be displayed on android id txtRoom
-       //in item_listing.xml
-       //the "max" variable will be displayed on android id txtCapacity
-      // in item_lising.xml
-		SimpleAdapter adapter = new SimpleAdapter(this, fill, R.drawable.archive_listitem_row, 
-		            new String[] {"name","max"}, new int[]{R.id.txtViewTitle,R.id.txtViewTitle});
-		
-		      //send it off to android ti display on a layout
-		setListAdapter(adapter);
 		}
 	
 	@Override
