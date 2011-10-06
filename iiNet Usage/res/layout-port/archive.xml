@@ -9,7 +9,7 @@
   <include android:id="@+id/action_bar" layout="@layout/action_bar" />
   	
 	<ListView 
-    android:id="@+id/archive_listview"
+    android:id="@+id/android:list"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="0dip"
