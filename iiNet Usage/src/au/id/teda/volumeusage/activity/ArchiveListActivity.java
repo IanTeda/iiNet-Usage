@@ -1,5 +1,9 @@
 package au.id.teda.volumeusage.activity;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 import au.id.teda.volumeusage.R;
@@ -30,6 +35,10 @@ import au.id.teda.volumeusage.view.SetStatusBar;
 // http://pareshnmayani.wordpress.com/tag/android-listview-example/
 // http://www.vogella.de/articles/AndroidListView/article.html
 
+// http://saigeethamn.blogspot.com/2010/04/custom-listview-android-developer.html
+// http://ykyuen.wordpress.com/2010/01/03/android-simple-listview-using-simpleadapter/
+// http://ykyuen.wordpress.com/2010/03/15/android-%E2%80%93-applying-alternate-row-color-in-listview-with-simpleadapter/
+
 public class ArchiveListActivity extends ListActivity {
 	
 	/**
@@ -37,6 +46,7 @@ public class ArchiveListActivity extends ListActivity {
 	 */
 	private static final String DEBUG_TAG = "iiNet Usage"; // Debug tag for LogCat
 	private static final String INFO_TAG = ArchiveListActivity.class.getSimpleName();
+	static final ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,14 +54,39 @@ public class ArchiveListActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		Log.i(INFO_TAG, "onCreate()");
 		setContentView(R.layout.archive);
-		
+
+        // create the grid item mapping
+        String[] from = new String[] {"rowid", "col_1", "col_2", "col_3"};
+        int[] to = new int[] { R.id.item1, R.id.item2, R.id.item3, R.id.item4 };
+
+        // prepare the list of all records
+        List<HashMap<String, String>> fillMaps = new ArrayList<HashMap<String, String>>();
+        for(int i = 0; i < 10; i++){
+        	HashMap<String, String> map = new HashMap<String, String>();
+        	map.put("rowid", "" + i);
+        	map.put("col_1", "col_1_item_" + i);
+        	map.put("col_2", "col_2_item_" + i);
+        	map.put("col_3", "col_3_item_" + i);
+        	fillMaps.add(map);
+        }
+
+        // fill in the grid_item layout
+        SimpleAdapter myAdapter = new SimpleAdapter(this,
+        		fillMaps,
+        		R.drawable.archive_listitem_row,
+        		from,
+        		to);
+
+        populateList();
+
+        setListAdapter(myAdapter);
+        
 		// Setup action bar title and buttons
 		//setupActionBar();
 		
-		ListAdapter adapter = createAdapter();
-        setListAdapter(adapter);
-		
-		}
+	}
+	
+	
 	
     /**
      * Creates and returns a list adapter for the current list activity
@@ -70,16 +105,45 @@ public class ArchiveListActivity extends ListActivity {
  
     	return adapter;
     }
-	
+    
 	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
-		super.onListItemClick(l, v, position, id);
+	protected void onListItemClick(ListView listView, View view, int position, long id) {
+		super.onListItemClick(listView, view, position, id);
+		
 		// Get the item that was clicked
-		Object o = this.getListAdapter().getItem(position);
-		String keyword = o.toString();
+		Object listItem = this.getListAdapter().getItem(position);
+		String keyword = listItem.toString();
 		Toast.makeText(this, "You selected: " + keyword, Toast.LENGTH_LONG)
 				.show();
 	}
+	
+	private void populateList() {
+		HashMap<String,String> temp = new HashMap<String,String>();
+		temp.put("pen","MONT Blanc");
+		temp.put("price", "200.00$");
+		temp.put("color", "Silver, Grey, Black");
+		list.add(temp);
+		HashMap<String,String> temp1 = new HashMap<String,String>();
+		temp1.put("pen","Gucci");
+		temp1.put("price", "300.00$");
+		temp1.put("color", "Gold, Red");
+		list.add(temp1);
+		HashMap<String,String> temp2 = new HashMap<String,String>();
+		temp2.put("pen","Parker");
+		temp2.put("price", "400.00$");
+		temp2.put("color", "Gold, Blue");
+		list.add(temp2);
+		HashMap<String,String> temp3 = new HashMap<String,String>();
+		temp3.put("pen","Sailor");
+		temp3.put("price", "500.00$");
+		temp3.put("color", "Silver");
+		list.add(temp3);
+		HashMap<String,String> temp4 = new HashMap<String,String>();
+		temp4.put("pen","Porsche Design");
+		temp4.put("price", "600.00$");
+		temp4.put("color", "Silver, Grey, Red");
+		list.add(temp4);
+		}
 	
 	@Override
 	protected void onRestart() {

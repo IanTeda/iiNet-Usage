@@ -6,31 +6,29 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:padding="5dip">
   
-  <ImageView
-    android:layout_width="50dip"
-    android:layout_height="50dip"
-    android:id="@+id/imgViewLogo"
-    android:src="@drawable/icon"
-    android:layout_alignParentLeft="true"
-    android:layout_centerInParent="true"
-    android:scaleType="center" />
-      
-  <TextView
-    android:textAppearance="?android:attr/textAppearanceLarge"
-    android:layout_height="wrap_content"
-    android:text="Mouth YEAR"
-    android:layout_width="wrap_content"
-    android:id="@+id/txtViewTitle"
-    android:layout_toRightOf="@+id/imgViewLogo"
-    android:layout_marginLeft="2dip" />
-
-  <TextView
-    android:layout_height="wrap_content"
-    android:text="Not downloaded yet"
-    android:layout_width="wrap_content"
-    android:id="@+id/txtViewDescription"
-    android:layout_toRightOf="@+id/imgViewLogo"
-    android:layout_below="@+id/txtViewTitle"
-    android:layout_marginLeft="2dip" />
+<TextView android:id="@+id/item1"
+          android:text="row_id"
+          android:layout_height="fill_parent"
+          android:layout_width="wrap_content"
+          android:width="20dip"
+        />
+        <TextView android:id="@+id/item2"
+          android:text="col_1"
+          android:layout_height="fill_parent"
+          android:layout_width="wrap_content"
+          android:width="100dip"
+      />
+      <TextView android:id="@+id/item3"
+          android:text="col_2"
+          android:layout_height="fill_parent"
+          android:layout_width="wrap_content"
+          android:width="100dip"
+      />
+      <TextView android:id="@+id/item4"
+          android:text="col_3"
+          android:layout_height="fill_parent"
+          android:layout_width="wrap_content"
+          android:width="100dip"
+      />
   
 </RelativeLayout>
