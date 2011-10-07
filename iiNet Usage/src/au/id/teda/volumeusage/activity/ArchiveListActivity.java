@@ -10,7 +10,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,9 +46,30 @@ public class ArchiveListActivity extends ListActivity {
 		setContentView(R.layout.archive);
 		
 		// Setup action bar title and buttons
-		setupActionBar();
+		//setupActionBar();
+		
+		ListAdapter adapter = createAdapter();
+        setListAdapter(adapter);
 		
 		}
+	
+    /**
+     * Creates and returns a list adapter for the current list activity
+     * @return
+     */
+    protected ListAdapter createAdapter() {
+    	// Create some mock data
+    	String[] testValues = new String[] {
+    			"Test1",
+    			"Test2",
+    			"Test3"
+    	};
+ 
+    	// Create a simple array adapter (of type string) with the test values
+    	ListAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, testValues);
+ 
+    	return adapter;
+    }
 	
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
