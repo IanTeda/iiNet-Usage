@@ -7,6 +7,39 @@
   android:background="@color/summary_background">
   
   <include android:id="@+id/action_bar" layout="@layout/action_bar" />
+  
+  <RelativeLayout
+		android:layout_width="fill_parent"
+		android:layout_height="50dp"
+		android:layout_marginLeft="10dp"
+		android:layout_marginRight="10dp"
+		android:layout_marginTop="10dp"
+		android:layout_marginBottom="20dp"
+		android:background="@drawable/db_alert_box" >
+		
+      <TextView
+      	android:layout_width="wrap_content"
+    		android:layout_height="wrap_content" 
+    		android:text="Archive Analysis"
+    		/>
+
+      <ImageButton
+          android:id="@+id/arc_summary_button"
+          android:layout_alignParentRight="true"
+          android:src="@drawable/arc_ic_summary_button"
+          android:drawableTop="@drawable/arch_summary_button"
+          style="@style/arc_list_button"
+          />
+
+      <ImageButton
+          android:id="@+id/arc_graph_button"
+          android:layout_toLeftOf="@id/arc_summary_button"
+          android:src="@drawable/arc_ic_graph_button"
+          android:drawableTop="@drawable/arch_graph_button"
+          style="@style/arc_list_button"
+          />
+      
+  </RelativeLayout>	
   	
 	<ListView 
     android:id="@id/android:list"
