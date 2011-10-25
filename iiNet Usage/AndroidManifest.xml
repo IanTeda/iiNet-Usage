@@ -54,7 +54,7 @@
       </intent-filter>
     </activity>-->
     
-    <!-- Register applicationa activities -->    
+    <!-- Register application activities -->    
     <!-- Summary Activity -->
     <activity android:name=".activity.SummaryActivity"
     	android:label="@string/app_name" />
@@ -82,12 +82,17 @@
     <!-- History Activity -->
     <activity android:name=".activity.ArchiveListActivity"
     	android:label="@string/app_name" />
+    
+    <!-- Username Password Activity -->
+    <activity android:name=".activity.UserPassActivity"
+    	android:label="@string/app_name" />
     	
   </application>
   
   <!-- Application permissions -->
   <!-- Allow application access to the internet -->
   <uses-permission android:name="android.permission.INTERNET" />
+  
   <!-- Allow application to start background service at device boot -->
   <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 </manifest>
