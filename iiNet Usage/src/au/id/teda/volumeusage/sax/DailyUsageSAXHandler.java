@@ -176,7 +176,7 @@ public class DailyUsageSAXHandler extends DefaultHandler {
 		if (name.trim().equalsIgnoreCase(II_FEED)){
 			inFeed = false;
 		} else if (name.trim().equalsIgnoreCase(ACCOUNT_INFO)){
-			inAccountInfo = true;
+			inAccountInfo = true; // TODO: This could be an error will need to check
 		} else if (name.trim().equalsIgnoreCase(PLAN)){
 			inPlan = false;
 		} else if (name.trim().equalsIgnoreCase(PRODUCT)){

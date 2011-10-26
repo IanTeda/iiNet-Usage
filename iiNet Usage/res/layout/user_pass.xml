@@ -102,11 +102,12 @@
             
             <!-- Login button -->
             <Button
-                android:id="@+id/btnLogin"
+                android:id="@+id/user_pass_btn"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dip"
-                android:text="Check"/>
+                android:text="@string/user_pass_btn_check"
+                android:onClick="onUserPassBtnClick" />
          
         </LinearLayout>
         <!-- Login Form Ends -->

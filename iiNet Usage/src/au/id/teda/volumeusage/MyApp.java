@@ -50,4 +50,17 @@ public class MyApp extends Application {
 		return changedPref;
 	}
 	
+	/**
+	 * Credential status
+	 */
+	private boolean isChecked;
+	
+	public boolean isChecked(){
+	    return isChecked;
+	}
+	
+	public void setIsChecked(boolean b){
+		isChecked = b;
+	}
+	
 }
