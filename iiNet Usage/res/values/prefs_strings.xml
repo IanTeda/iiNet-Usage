@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	
+    <!-- Username Password Strings -->
+    <string name="user_pass_title">Username &amp; Password</string>
+    <string name="user_pass_summary">Set iiNet username &amp; password</string>
+    
 	<!-- Update preference strings -->
 	<string name="update_preferences_screen_title">Update Preferences</string>
 	<string name="update_onload_title">Update on Load</string>
