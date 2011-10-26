@@ -6,8 +6,19 @@
   
   <!-- Parent Category for username & Password -->
   <PreferenceCategory
-    android:title="@string/username_password_preferences_category_title">
-    <EditTextPreference 
+      android:title="@string/username_password_preferences_category_title">
+      
+      <!-- Launch Username / Password Activity -->
+      <Preference
+          android:title="Username &amp; Password"
+          android:summary="Set iiNet username &amp; password" >
+          
+          <intent android:action=".activity.UserPassActivity" />
+          
+      </Preference>    
+          
+      
+    <!-- <EditTextPreference 
       android:key="iinet_username"
     	android:title="@string/iinet_username_title"
       android:summary="@string/iinet_username_sumamry"
@@ -19,7 +30,7 @@
       android:summary="@string/iinet_password_summary"
       android:inputType="textNoSuggestions" 
       android:defaultValue=""
-      android:password="true" />
+      android:password="true" /> -->
   </PreferenceCategory>
   
   <!-- Parent Category for Application preferences -->
