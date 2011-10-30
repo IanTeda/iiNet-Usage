@@ -8,7 +8,9 @@ import org.xml.sax.XMLReader;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,7 +32,7 @@ public class UserPassActivity extends Activity implements OnClickListener {
 	 */
 	private static final String DEBUG_TAG = "iiNet Usage"; // Debug tag for LogCat
 	private static final String INFO_TAG = UserPassActivity.class.getSimpleName();
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -96,8 +98,7 @@ public class UserPassActivity extends Activity implements OnClickListener {
 		}
 	}
 	
-	public boolean checkCredentials(){
-		boolean credentialChk = false;
+	public void checkCredentials(){
 		// Check if there is an error
 		try {
         	//ServiceHelper serviceHelper = new ServiceHelper(this);
@@ -106,7 +107,7 @@ public class UserPassActivity extends Activity implements OnClickListener {
         	//URL url = new URL("http://www.anddev.org/images/tut/basic/parsingxml/example.xml"); // Create a URL we want to load some xml-data from.
         	
 			// Load xml from our developement xml file
-			InputSource is = new InputSource(MyApp.getAppContext().getResources().openRawResource(R.raw.iinet_may));
+			InputSource is = new InputSource(MyApp.getAppContext().getResources().openRawResource(R.raw.auth_fail));
 			
 			// Create a SAXParserFactory so we can
         	SAXParserFactory spf = SAXParserFactory.newInstance();
@@ -130,15 +131,14 @@ public class UserPassActivity extends Activity implements OnClickListener {
         	Log.d("iiNet Usage", "XML Querry error: " + e.getMessage());
         }
 		
-		boolean isChecked = ((MyApp) this.getApplication()).isChecked();
+		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MyApp.getAppContext());
+		Log.d(DEBUG_TAG, "checkCredentials() > Checking username / passworded: " + preferences.getBoolean("isPassedChk", false));
 		
-		Log.d(DEBUG_TAG, "checkCredentials() > Checking username / password: " + isChecked);
-		return credentialChk;
 	}
 		
 	public void goHome(){
 		Intent dashboardActivityIntent = new Intent(this, MainActivity.class);
         startActivity(dashboardActivityIntent);
 	}
-
+	
 }

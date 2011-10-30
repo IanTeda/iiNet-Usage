@@ -22,6 +22,8 @@ import au.id.teda.volumeusage.service.ServiceHelper;
 
 public class MyApp extends Application {
 	
+	// TODO: Prehaps rename to globals
+	
 	private static final String DEBUG_TAG = "iiNet Usage"; // Debug tag for LogCat
 	private static final String INFO_TAG = MyApp.class.getSimpleName();
      

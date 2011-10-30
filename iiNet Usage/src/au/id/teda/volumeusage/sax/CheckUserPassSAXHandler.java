@@ -5,6 +5,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import au.id.teda.volumeusage.MyApp;
 import au.id.teda.volumeusage.activity.UserPassActivity;
@@ -26,6 +27,7 @@ public class CheckUserPassSAXHandler extends DefaultHandler {
     private boolean inFeed = false;
     private boolean inError = false;
     
+    private boolean chkUserPass = true;
     private String errorText = null;
     
 	/**
@@ -35,12 +37,15 @@ public class CheckUserPassSAXHandler extends DefaultHandler {
 	public void startElement(String uri, String myTag, String qName,
 			Attributes myAtt) throws SAXException {
 		super.startElement(uri, myTag, qName, myAtt); //TODO: Do I need this super?
+		//Log.d(DEBUG_TAG, "startElement is: " + myTag.trim());
 		
-		Log.d(DEBUG_TAG, "startElement is: " + myTag.trim());
 		if (myTag.trim().equalsIgnoreCase(II_FEED)){
 			inFeed = true;
 		} else if (myTag.trim().equalsIgnoreCase(ERROR)){
 			inError = true;
+			
+			//If error found then set to username password check to false
+			chkUserPass = false;
 		}
 	}
 
@@ -51,37 +56,22 @@ public class CheckUserPassSAXHandler extends DefaultHandler {
 	public void endElement(String uri, String myTag, String qName)
 			throws SAXException {
 		super.endElement(uri, myTag, qName);
-		
-		Log.d(DEBUG_TAG, "endElement is: " + myTag.trim());
-		if (myTag.trim().equalsIgnoreCase(II_FEED)){
-			inFeed = false;
-		} else if (myTag.trim().equalsIgnoreCase(ERROR)){
-			inError = false;
-		}
-		
-		//UserPassActivity myError = new UserPassActivity();
-		// Check to see if we have all the data required for a dailyDB entry
-		if (errorText != null){
-			Log.d(DEBUG_TAG, "Error is: " + errorText);
-			
-			SharedPreferences settings = getSharedPreferences("au.id.teda.prefs.Preferences", 0);
-			Editor editor = sharedPreferences.edit();
+		//Log.d(DEBUG_TAG, "endElement is: " + myTag.trim());
 
-			editor.putString("your_optionname", "newValue");
-			// Save
+		if (myTag.trim().equalsIgnoreCase(ERROR)){
+			inError = false;
+		} else if (myTag.trim().equalsIgnoreCase(II_FEED)){
+			//Log.d(DEBUG_TAG, "chkUserPass : " + chkUserPass);
+			
+			// Once we reach the end of the feed set shared preferrence to username password boolean value
+			SharedPreferences preferences = PreferenceManager
+                    .getDefaultSharedPreferences(MyApp.getAppContext());
+			
+			SharedPreferences.Editor editor = preferences.edit();
+			editor.putBoolean("isPassedChk", chkUserPass); // 
 			editor.commit();
 			
-			 SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-			
-			//myError.
-			//credentialChk = false;
-			// Clear objects for next pass over xml
-			errorText = null;
-		} else {
-			//myError.credentialChk = true;
-			//Log.d(DEBUG_TAG, "credentialChk is: true");
-			MyApp globalVariables = new MyApp();
-			globalVariables.setIsChecked(true);
+			inFeed = false;
 		}
 	}
 

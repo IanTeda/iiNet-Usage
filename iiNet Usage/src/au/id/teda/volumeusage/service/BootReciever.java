@@ -16,8 +16,9 @@ public class BootReciever extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
-        Intent serviceIntent = new Intent(DataCollectionService.class.getName());
-        context.startService(serviceIntent); 
+		//TODO: Fix service boot
+        //Intent serviceIntent = new Intent(DataCollectionService.class.getName());
+       // context.startService(serviceIntent); 
 
 	}
 
