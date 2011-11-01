@@ -10,6 +10,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
@@ -32,6 +34,7 @@ public class UserPassActivity extends Activity implements OnClickListener {
 	 */
 	private static final String DEBUG_TAG = "iiNet Usage"; // Debug tag for LogCat
 	private static final String INFO_TAG = UserPassActivity.class.getSimpleName();
+	SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MyApp.getAppContext());
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +55,21 @@ public class UserPassActivity extends Activity implements OnClickListener {
     	
 		// Setup action bar title and buttons
 		setUpActionBar();
+		
+		// Load activity view
+		loadView();
 	}
+	
+	/**
+	 *  Handler for passing messages from other classes
+	 */
+    public Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
+        	Log.i(INFO_TAG, "handleMessage( " + msg + " )");
+           //TODO: how do i use this??
+        	//fillData();
+        }
+    };
 	
 	/**
 	 *  Method used to set action bar title, reference buttons and set onClick listener
@@ -91,7 +108,7 @@ public class UserPassActivity extends Activity implements OnClickListener {
 		Button myButton = (Button) findViewById(R.id.user_pass_btn);
 		Log.i(INFO_TAG, "checkCredentials() > Button: " + myButton.getText());
 		
-		if (myButton.getText() == this.getString(R.string.user_pass_btn_ok)){
+		if (myButton.getText() == getString(R.string.user_pass_btn_good)){
 			goHome();
 		} else {
 			checkCredentials();
@@ -131,14 +148,28 @@ public class UserPassActivity extends Activity implements OnClickListener {
         	Log.d("iiNet Usage", "XML Querry error: " + e.getMessage());
         }
 		
-		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MyApp.getAppContext());
 		Log.d(DEBUG_TAG, "checkCredentials() > Checking username / passworded: " + preferences.getBoolean("isPassedChk", false));
-		
+		loadView();
 	}
 		
 	public void goHome(){
 		Intent dashboardActivityIntent = new Intent(this, MainActivity.class);
         startActivity(dashboardActivityIntent);
+	}
+	
+	public void loadView(){
+		
+		// Load button and set depending on status of check
+		Button userPassBTN = (Button) findViewById(R.id.user_pass_btn);
+		// If check is ok then load good to go
+		if (preferences.getBoolean("isPassedChk", false)){
+			Log.d(DEBUG_TAG, "loadView() > Load ok button");
+			userPassBTN.setText(getString(R.string.user_pass_btn_good));	
+		// Else assume check failed and load creditial check
+		} else {
+			Log.d(DEBUG_TAG, "loadView() > Load check button");
+			userPassBTN.setText(this.getString(R.string.user_pass_btn_nogood));
+		}
 	}
 	
 }

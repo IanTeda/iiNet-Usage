@@ -106,7 +106,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dip"
-                android:text="@string/user_pass_btn_check"
+                android:text="@string/user_pass_btn_nogood"
                 android:onClick="onUserPassBtnClick" />
          
         </LinearLayout>
