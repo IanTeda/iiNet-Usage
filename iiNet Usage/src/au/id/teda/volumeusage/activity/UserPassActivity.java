@@ -1,5 +1,9 @@
 package au.id.teda.volumeusage.activity;
 
+import java.net.URL;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
@@ -17,8 +21,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 import au.id.teda.volumeusage.MyApp;
 import au.id.teda.volumeusage.R;
 import au.id.teda.volumeusage.sax.CheckUserPassSAXHandler;
@@ -26,6 +32,8 @@ import au.id.teda.volumeusage.view.SetStatusBar;
 
 
 // http://www.androidhive.info/2011/10/android-login-and-registration-screen-design/
+
+//TODO: Add show password option in preferences / this activity
 
 public class UserPassActivity extends Activity implements OnClickListener {
 	
@@ -36,6 +44,9 @@ public class UserPassActivity extends Activity implements OnClickListener {
 	private static final String INFO_TAG = UserPassActivity.class.getSimpleName();
 	SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MyApp.getAppContext());
 	
+	private String myEmail;
+	private String myPass;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -43,6 +54,7 @@ public class UserPassActivity extends Activity implements OnClickListener {
 		
 		// setting default screen to login.xml
         setContentView(R.layout.user_pass);
+       
 	}
 
 	@Override
@@ -109,15 +121,69 @@ public class UserPassActivity extends Activity implements OnClickListener {
 		Log.i(INFO_TAG, "checkCredentials() > Button: " + myButton.getText());
 		
 		if (myButton.getText() == getString(R.string.user_pass_btn_good)){
-			goHome();
-		} else {
+			//goHome();
 			checkCredentials();
+		} else {
+			if (validateInput()){
+				checkCredentials();
+			}
 		}
+	}
+	
+	public boolean validateInput(){
+		
+		boolean check = true;
+		
+        // Set EditText id's
+        EditText myEmailET = (EditText) findViewById(R.id.user_pass_email);
+        EditText myPassET = (EditText) findViewById(R.id.user_pass_pass);
+		
+		String myEmail = myEmailET.getText().toString();
+		String myPass = myPassET.getText().toString();
+		
+		// Check for no input edit text
+		if (myEmail.length()<1 && myPass.length()<1) {
+			popup(getString(R.string.user_pass_nouserpass));
+			check = false;
+		} else if (myEmail.length()<1){
+			popup(getString(R.string.user_pass_nouser));
+			check = false;
+		} else if (myPass.length()<1){
+			popup(getString(R.string.user_pass_nopass));
+			check = false;
+		}
+		
+		// Validate username is an email address
+		if (!checkEmail(myEmail)){
+			popup(getString(R.string.user_pass_malformemail));
+			check = false;
+		}
+		
+		//Log.d(DEBUG_TAG, "validateInput() > Username: " + myEmail + " validation is: " + checkEmail(myEmail));
+		//Log.d(DEBUG_TAG, "validateInput() > Password: " + myPass);
+		//Log.d(DEBUG_TAG, "validateInput() > Check: " + check);
+		
+		return check;
 	}
 	
 	public void checkCredentials(){
 		// Check if there is an error
 		try {
+			
+	        // Set EditText id's
+	        EditText myEmailET = (EditText) findViewById(R.id.user_pass_email);
+	        EditText myPassET = (EditText) findViewById(R.id.user_pass_pass);
+			
+			String myEmail = myEmailET.getText().toString();
+			String myPass = myPassET.getText().toString();
+			
+			String pathString = "https://toolbox.iinet.net.au/cgi-bin/new/volume_usage_xml.cgi?" +
+					"username=" + myEmail + 
+					"&action=login" +
+					"&password=" + myPass;
+			URL url = new URL(pathString);
+			Log.d(DEBUG_TAG, "checkCredentials() > URL: " + url);
+			
         	//ServiceHelper serviceHelper = new ServiceHelper(this);
         	//URL url = new URL(serviceHelper.buildXMLPath());
         	//Log.d(DEBUG_TAG, "URL: " + url);
@@ -148,7 +214,7 @@ public class UserPassActivity extends Activity implements OnClickListener {
         	Log.d("iiNet Usage", "XML Querry error: " + e.getMessage());
         }
 		
-		Log.d(DEBUG_TAG, "checkCredentials() > Checking username / passworded: " + preferences.getBoolean("isPassedChk", false));
+		//Log.d(DEBUG_TAG, "checkCredentials() > Checking username / passworded: " + preferences.getBoolean("isPassedChk", false));
 		loadView();
 	}
 		
@@ -163,13 +229,24 @@ public class UserPassActivity extends Activity implements OnClickListener {
 		Button userPassBTN = (Button) findViewById(R.id.user_pass_btn);
 		// If check is ok then load good to go
 		if (preferences.getBoolean("isPassedChk", false)){
-			Log.d(DEBUG_TAG, "loadView() > Load ok button");
+			//Log.d(DEBUG_TAG, "loadView() > Load ok button");
 			userPassBTN.setText(getString(R.string.user_pass_btn_good));	
 		// Else assume check failed and load creditial check
 		} else {
-			Log.d(DEBUG_TAG, "loadView() > Load check button");
-			userPassBTN.setText(this.getString(R.string.user_pass_btn_nogood));
+			//Log.d(DEBUG_TAG, "loadView() > Load check button");
+			userPassBTN.setText(getString(R.string.user_pass_btn_nogood));
 		}
+	}
+	
+	public void popup(String msg){
+		Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+	}
+	
+	public boolean checkEmail(String email){
+	    Pattern pattern = Pattern.compile(".+@.+\\.[a-z]+");
+	    Matcher matcher = pattern.matcher(email);
+	    return matcher.matches();
+
 	}
 	
 }

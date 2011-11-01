@@ -80,6 +80,7 @@
                 android:text="@string/user_pass_email" />
 						<!-- Username/Email Edit Text -->
             <EditText
+                android:id="@+id/user_pass_email"
                 style="@style/user_pass_et"
                 android:hint="@string/user_pass_email_hint" />
          
@@ -89,6 +90,7 @@
                 android:text="@string/user_pass_password" />
             <!-- Password Edit Text -->
             <EditText
+                android:id="@+id/user_pass_pass"
                 style="@style/user_pass_et"
                 android:password="true"
                 android:hint="@string/user_pass_password_hint" />
