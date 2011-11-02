@@ -11,6 +11,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -42,10 +43,18 @@ public class UserPassActivity extends Activity implements OnClickListener {
 	 */
 	private static final String DEBUG_TAG = "iiNet Usage"; // Debug tag for LogCat
 	private static final String INFO_TAG = UserPassActivity.class.getSimpleName();
-	SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MyApp.getAppContext());
+	
+	private SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MyApp.getAppContext());
+	private final boolean showRefreshDialog = preferences.getBoolean("hide_refresh_dialog", false);
+	
+    // Set EditText id's
+    private EditText myEmailET;
+    private EditText myPassET;
 	
 	private String myEmail;
 	private String myPass;
+	
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +63,9 @@ public class UserPassActivity extends Activity implements OnClickListener {
 		
 		// setting default screen to login.xml
         setContentView(R.layout.user_pass);
+        
+        myEmailET = (EditText) findViewById(R.id.user_pass_email);
+        myPassET = (EditText) findViewById(R.id.user_pass_pass);
        
 	}
 
@@ -123,20 +135,14 @@ public class UserPassActivity extends Activity implements OnClickListener {
 		if (myButton.getText() == getString(R.string.user_pass_btn_good)){
 			//goHome();
 			checkCredentials();
-		} else {
-			if (validateInput()){
-				checkCredentials();
-			}
+		} else if (validateInput()){
+			checkCredentials();
 		}
 	}
 	
 	public boolean validateInput(){
 		
 		boolean check = true;
-		
-        // Set EditText id's
-        EditText myEmailET = (EditText) findViewById(R.id.user_pass_email);
-        EditText myPassET = (EditText) findViewById(R.id.user_pass_pass);
 		
 		String myEmail = myEmailET.getText().toString();
 		String myPass = myPassET.getText().toString();
@@ -151,10 +157,9 @@ public class UserPassActivity extends Activity implements OnClickListener {
 		} else if (myPass.length()<1){
 			popup(getString(R.string.user_pass_nopass));
 			check = false;
-		}
-		
+			
 		// Validate username is an email address
-		if (!checkEmail(myEmail)){
+		} else if (!checkEmail(myEmail)){
 			popup(getString(R.string.user_pass_malformemail));
 			check = false;
 		}
@@ -170,12 +175,14 @@ public class UserPassActivity extends Activity implements OnClickListener {
 		// Check if there is an error
 		try {
 			
-	        // Set EditText id's
-	        EditText myEmailET = (EditText) findViewById(R.id.user_pass_email);
-	        EditText myPassET = (EditText) findViewById(R.id.user_pass_pass);
+			// Load progress dialog
+			ProgressDialog myProgressDialog = ProgressDialog.show(this,
+					MyApp.getAppContext().getString(R.string.user_pass_checking_title),
+					MyApp.getAppContext().getString(R.string.user_pass_checking_description),
+					true);
 			
-			String myEmail = myEmailET.getText().toString();
-			String myPass = myPassET.getText().toString();
+			myEmail = myEmailET.getText().toString();
+			myPass = myPassET.getText().toString();
 			
 			String pathString = "https://toolbox.iinet.net.au/cgi-bin/new/volume_usage_xml.cgi?" +
 					"username=" + myEmail + 
@@ -209,15 +216,19 @@ public class UserPassActivity extends Activity implements OnClickListener {
         	xr.parse(new InputSource(is.getByteStream())); 
         	//xr.parse(new InputSource(url.openStream())); // Parse the xml-data from our URL.
         	//Log.d(DEBUG_TAG, "checkCredentials() > Checking username / password > try");
+        	
+        	// Dismiss progress dialog
+        	myProgressDialog.dismiss();
         } catch (Exception e) {
         	// Display any Error to catLog
         	Log.d("iiNet Usage", "XML Querry error: " + e.getMessage());
         }
 		
-		//Log.d(DEBUG_TAG, "checkCredentials() > Checking username / passworded: " + preferences.getBoolean("isPassedChk", false));
+		Log.d(DEBUG_TAG, "checkCredentials() > Checking username / passworded: " + preferences.getBoolean("isPassedChk", false));
+		setUserPass();
 		loadView();
 	}
-		
+
 	public void goHome(){
 		Intent dashboardActivityIntent = new Intent(this, MainActivity.class);
         startActivity(dashboardActivityIntent);
@@ -247,6 +258,10 @@ public class UserPassActivity extends Activity implements OnClickListener {
 	    Matcher matcher = pattern.matcher(email);
 	    return matcher.matches();
 
+	}
+	
+	public void setUserPass(){
+		Log.d(DEBUG_TAG, "setUserPass() > Set username / passworded ");
 	}
 	
 }
