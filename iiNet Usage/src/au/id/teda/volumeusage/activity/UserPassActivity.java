@@ -1,5 +1,6 @@
 package au.id.teda.volumeusage.activity;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,6 +30,8 @@ import android.widget.Toast;
 import au.id.teda.volumeusage.MyApp;
 import au.id.teda.volumeusage.R;
 import au.id.teda.volumeusage.sax.CheckUserPassSAXHandler;
+import au.id.teda.volumeusage.service.CheckCredentialsAsync;
+import au.id.teda.volumeusage.service.RefreshUsageData;
 import au.id.teda.volumeusage.view.SetStatusBar;
 
 
@@ -44,8 +47,8 @@ public class UserPassActivity extends Activity implements OnClickListener {
 	private static final String DEBUG_TAG = "iiNet Usage"; // Debug tag for LogCat
 	private static final String INFO_TAG = UserPassActivity.class.getSimpleName();
 	
-	private SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MyApp.getAppContext());
-	private final boolean showRefreshDialog = preferences.getBoolean("hide_refresh_dialog", false);
+	private SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(MyApp.getAppContext());
+	private final boolean showRefreshDialog = settings.getBoolean("hide_refresh_dialog", false);
 	
     // Set EditText id's
     private EditText myEmailET;
@@ -54,7 +57,14 @@ public class UserPassActivity extends Activity implements OnClickListener {
 	private String myEmail;
 	private String myPass;
 	
+	private URL myUrl;
 	
+	private final static String PASSWORD = "iinet_password";
+	private final static String USERNAME = "iinet_username";
+	
+	// String values application setting keys
+	private static final String ERRORTXT = "errorTxt";
+	private static final String ISPASSED = "isPassedChk";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -89,11 +99,11 @@ public class UserPassActivity extends Activity implements OnClickListener {
 	 */
     public Handler handler = new Handler() {
         public void handleMessage(Message msg) {
-        	Log.i(INFO_TAG, "handleMessage( " + msg + " )");
-           //TODO: how do i use this??
-        	//fillData();
+        	loadView();
         }
     };
+	
+	
 	
 	/**
 	 *  Method used to set action bar title, reference buttons and set onClick listener
@@ -134,9 +144,9 @@ public class UserPassActivity extends Activity implements OnClickListener {
 		
 		if (myButton.getText() == getString(R.string.user_pass_btn_good)){
 			//goHome();
-			checkCredentials();
+			new CheckCredentialsAsync(this, handler, buildUrl()).execute();
 		} else if (validateInput()){
-			checkCredentials();
+			new CheckCredentialsAsync(this, handler, buildUrl()).execute();
 		}
 	}
 	
@@ -144,6 +154,7 @@ public class UserPassActivity extends Activity implements OnClickListener {
 		
 		boolean check = true;
 		
+		// Get string values form edit text views
 		String myEmail = myEmailET.getText().toString();
 		String myPass = myPassET.getText().toString();
 		
@@ -172,11 +183,12 @@ public class UserPassActivity extends Activity implements OnClickListener {
 	}
 	
 	public void checkCredentials(){
+		ProgressDialog myProgressDialog = null;
 		// Check if there is an error
 		try {
 			
 			// Load progress dialog
-			ProgressDialog myProgressDialog = ProgressDialog.show(this,
+			myProgressDialog = ProgressDialog.show(this,
 					MyApp.getAppContext().getString(R.string.user_pass_checking_title),
 					MyApp.getAppContext().getString(R.string.user_pass_checking_description),
 					true);
@@ -191,13 +203,8 @@ public class UserPassActivity extends Activity implements OnClickListener {
 			URL url = new URL(pathString);
 			Log.d(DEBUG_TAG, "checkCredentials() > URL: " + url);
 			
-        	//ServiceHelper serviceHelper = new ServiceHelper(this);
-        	//URL url = new URL(serviceHelper.buildXMLPath());
-        	//Log.d(DEBUG_TAG, "URL: " + url);
-        	//URL url = new URL("http://www.anddev.org/images/tut/basic/parsingxml/example.xml"); // Create a URL we want to load some xml-data from.
-        	
 			// Load xml from our developement xml file
-			InputSource is = new InputSource(MyApp.getAppContext().getResources().openRawResource(R.raw.auth_fail));
+			//InputSource is = new InputSource(MyApp.getAppContext().getResources().openRawResource(R.raw.auth_fail));
 			
 			// Create a SAXParserFactory so we can
         	SAXParserFactory spf = SAXParserFactory.newInstance();
@@ -213,23 +220,24 @@ public class UserPassActivity extends Activity implements OnClickListener {
         	xr.setContentHandler(myUserPassSAXHandler);
         	
         	// Parse the xml-data from our development file
-        	xr.parse(new InputSource(is.getByteStream())); 
-        	//xr.parse(new InputSource(url.openStream())); // Parse the xml-data from our URL.
+        	//xr.parse(new InputSource(is.getByteStream())); 
+        	xr.parse(new InputSource(url.openStream())); // Parse the xml-data from our URL.
         	//Log.d(DEBUG_TAG, "checkCredentials() > Checking username / password > try");
         	
         	// Dismiss progress dialog
         	myProgressDialog.dismiss();
         } catch (Exception e) {
         	// Display any Error to catLog
+        	myProgressDialog.dismiss();
         	Log.d("iiNet Usage", "XML Querry error: " + e.getMessage());
         }
 		
-		Log.d(DEBUG_TAG, "checkCredentials() > Checking username / passworded: " + preferences.getBoolean("isPassedChk", false));
+		Log.d(DEBUG_TAG, "checkCredentials() > Checking username / passworded: " + settings.getBoolean("isPassedChk", false));
 		setUserPass();
 		loadView();
 	}
 
-	public void goHome(){
+	private void goHome(){
 		Intent dashboardActivityIntent = new Intent(this, MainActivity.class);
         startActivity(dashboardActivityIntent);
 	}
@@ -239,14 +247,19 @@ public class UserPassActivity extends Activity implements OnClickListener {
 		// Load button and set depending on status of check
 		Button userPassBTN = (Button) findViewById(R.id.user_pass_btn);
 		// If check is ok then load good to go
-		if (preferences.getBoolean("isPassedChk", false)){
+		if (settings.getBoolean("isPassedChk", false)){
 			//Log.d(DEBUG_TAG, "loadView() > Load ok button");
-			userPassBTN.setText(getString(R.string.user_pass_btn_good));	
+			userPassBTN.setText(getString(R.string.user_pass_btn_good));
+			
+			myEmailET.setText(settings.getString(USERNAME, ""));
+			myPassET.setText(settings.getString(PASSWORD, ""));
 		// Else assume check failed and load creditial check
 		} else {
 			//Log.d(DEBUG_TAG, "loadView() > Load check button");
 			userPassBTN.setText(getString(R.string.user_pass_btn_nogood));
 		}
+		
+		
 	}
 	
 	public void popup(String msg){
@@ -261,7 +274,34 @@ public class UserPassActivity extends Activity implements OnClickListener {
 	}
 	
 	public void setUserPass(){
-		Log.d(DEBUG_TAG, "setUserPass() > Set username / passworded ");
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putString(USERNAME, myEmail);
+		editor.putString(PASSWORD, myPass);
+		editor.commit();
+		
+		//Log.d(DEBUG_TAG, "setUserPass() > Username set to: " + settings.getString(USERNAME, USERNAME));
+		//Log.d(DEBUG_TAG, "setUserPass() > Password set to: " + settings.getString(PASSWORD, USERNAME));
+	}
+	
+	private URL buildUrl(){
+		
+		try {
+			myEmail = myEmailET.getText().toString();
+			myPass = myPassET.getText().toString();
+			
+			String pathString = "https://toolbox.iinet.net.au/cgi-bin/new/volume_usage_xml.cgi?" +
+					"username=" + myEmail + 
+					"&action=login" +
+					"&password=" + myPass;
+			myUrl = new URL(pathString);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Log.d(DEBUG_TAG, "checkCredentials() > URL: " + myUrl);
+		
+		return myUrl;
+		
 	}
 	
 }

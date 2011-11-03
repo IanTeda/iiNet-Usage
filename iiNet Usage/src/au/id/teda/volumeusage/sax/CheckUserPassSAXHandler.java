@@ -7,10 +7,14 @@ import org.xml.sax.helpers.DefaultHandler;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.widget.Toast;
 import au.id.teda.volumeusage.MyApp;
 import au.id.teda.volumeusage.activity.UserPassActivity;
 
 public class CheckUserPassSAXHandler extends DefaultHandler {
+	
+	private SharedPreferences mySettings = PreferenceManager
+            .getDefaultSharedPreferences(MyApp.getAppContext());
 	
 	/**
 	 *  Static tag strings for logging information and debug
@@ -23,12 +27,14 @@ public class CheckUserPassSAXHandler extends DefaultHandler {
 	public static final String II_FEED = "ii_feed"; // Man xml parent tag
 	public static final String ERROR = "error"; // Error tag
 	
+	private static final String ISPASSED = "isPassedChk";
+	private static final String ERRORTXT = "errorTxt";
+	
 	// Set inTag variables
     private boolean inFeed = false;
     private boolean inError = false;
     
     private boolean chkUserPass = true;
-    private String errorText = null;
     
 	/**
 	 * This method is called when the parser reaches an xml start tag
@@ -37,7 +43,7 @@ public class CheckUserPassSAXHandler extends DefaultHandler {
 	public void startElement(String uri, String myTag, String qName,
 			Attributes myAtt) throws SAXException {
 		super.startElement(uri, myTag, qName, myAtt); //TODO: Do I need this super?
-		//Log.d(DEBUG_TAG, "startElement is: " + myTag.trim());
+		Log.d(DEBUG_TAG, "startElement is: " + myTag.trim());
 		
 		if (myTag.trim().equalsIgnoreCase(II_FEED)){
 			inFeed = true;
@@ -56,7 +62,7 @@ public class CheckUserPassSAXHandler extends DefaultHandler {
 	public void endElement(String uri, String myTag, String qName)
 			throws SAXException {
 		super.endElement(uri, myTag, qName);
-		//Log.d(DEBUG_TAG, "endElement is: " + myTag.trim());
+		Log.d(DEBUG_TAG, "endElement is: " + myTag.trim());
 
 		if (myTag.trim().equalsIgnoreCase(ERROR)){
 			inError = false;
@@ -64,11 +70,8 @@ public class CheckUserPassSAXHandler extends DefaultHandler {
 			//Log.d(DEBUG_TAG, "chkUserPass : " + chkUserPass);
 			
 			// Once we reach the end of the feed set shared preferrence to username password boolean value
-			SharedPreferences preferences = PreferenceManager
-                    .getDefaultSharedPreferences(MyApp.getAppContext());
-			
-			SharedPreferences.Editor editor = preferences.edit();
-			editor.putBoolean("isPassedChk", chkUserPass); // 
+			SharedPreferences.Editor editor = mySettings.edit();
+			editor.putBoolean(ISPASSED, chkUserPass);
 			editor.commit();
 			
 			inFeed = false;
@@ -85,12 +88,14 @@ public class CheckUserPassSAXHandler extends DefaultHandler {
 		
 		// if we are in the feed tag and in an error tag set error string
 		if (inFeed && inError){
-			errorText = chars;
+			
+			// Load error text into preferences for retrieval
+			SharedPreferences.Editor editor = mySettings.edit();
+			editor.putString(ERRORTXT, chars);
+			editor.commit();
+			Log.d(DEBUG_TAG, "Error code is: " + chars);
 		}
-		
-		
+			
 	}
-
-
 
 }
