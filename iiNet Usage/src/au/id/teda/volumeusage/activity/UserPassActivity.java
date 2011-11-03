@@ -182,61 +182,6 @@ public class UserPassActivity extends Activity implements OnClickListener {
 		return check;
 	}
 	
-	public void checkCredentials(){
-		ProgressDialog myProgressDialog = null;
-		// Check if there is an error
-		try {
-			
-			// Load progress dialog
-			myProgressDialog = ProgressDialog.show(this,
-					MyApp.getAppContext().getString(R.string.user_pass_checking_title),
-					MyApp.getAppContext().getString(R.string.user_pass_checking_description),
-					true);
-			
-			myEmail = myEmailET.getText().toString();
-			myPass = myPassET.getText().toString();
-			
-			String pathString = "https://toolbox.iinet.net.au/cgi-bin/new/volume_usage_xml.cgi?" +
-					"username=" + myEmail + 
-					"&action=login" +
-					"&password=" + myPass;
-			URL url = new URL(pathString);
-			Log.d(DEBUG_TAG, "checkCredentials() > URL: " + url);
-			
-			// Load xml from our developement xml file
-			//InputSource is = new InputSource(MyApp.getAppContext().getResources().openRawResource(R.raw.auth_fail));
-			
-			// Create a SAXParserFactory so we can
-        	SAXParserFactory spf = SAXParserFactory.newInstance();
-        	
-        	// Create a SAXParser so we can
-        	SAXParser sp = spf.newSAXParser();
-        	
-        	// Create a XMLReader
-        	XMLReader xr = sp.getXMLReader();
-        	
-        	// Create a new ContentHandler and apply it to the XML-Reader
-        	CheckUserPassSAXHandler myUserPassSAXHandler = new CheckUserPassSAXHandler();
-        	xr.setContentHandler(myUserPassSAXHandler);
-        	
-        	// Parse the xml-data from our development file
-        	//xr.parse(new InputSource(is.getByteStream())); 
-        	xr.parse(new InputSource(url.openStream())); // Parse the xml-data from our URL.
-        	//Log.d(DEBUG_TAG, "checkCredentials() > Checking username / password > try");
-        	
-        	// Dismiss progress dialog
-        	myProgressDialog.dismiss();
-        } catch (Exception e) {
-        	// Display any Error to catLog
-        	myProgressDialog.dismiss();
-        	Log.d("iiNet Usage", "XML Querry error: " + e.getMessage());
-        }
-		
-		Log.d(DEBUG_TAG, "checkCredentials() > Checking username / passworded: " + settings.getBoolean("isPassedChk", false));
-		setUserPass();
-		loadView();
-	}
-
 	private void goHome(){
 		Intent dashboardActivityIntent = new Intent(this, MainActivity.class);
         startActivity(dashboardActivityIntent);
@@ -253,6 +198,7 @@ public class UserPassActivity extends Activity implements OnClickListener {
 			
 			myEmailET.setText(settings.getString(USERNAME, ""));
 			myPassET.setText(settings.getString(PASSWORD, ""));
+			
 		// Else assume check failed and load creditial check
 		} else {
 			//Log.d(DEBUG_TAG, "loadView() > Load check button");
