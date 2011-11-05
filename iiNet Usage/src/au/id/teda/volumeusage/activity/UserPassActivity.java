@@ -19,6 +19,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -39,7 +41,7 @@ import au.id.teda.volumeusage.view.SetStatusBar;
 
 //TODO: Add show password option in preferences / this activity
 
-public class UserPassActivity extends Activity implements OnClickListener {
+public class UserPassActivity extends Activity implements OnClickListener, TextWatcher {
 	
 	/**
 	 *  Static tag strings for logging information and debug
@@ -59,6 +61,8 @@ public class UserPassActivity extends Activity implements OnClickListener {
 	
 	private URL myUrl;
 	
+	private Button userPassBTN;
+	
 	private final static String PASSWORD = "iinet_password";
 	private final static String USERNAME = "iinet_username";
 	
@@ -76,6 +80,12 @@ public class UserPassActivity extends Activity implements OnClickListener {
         
         myEmailET = (EditText) findViewById(R.id.user_pass_email);
         myPassET = (EditText) findViewById(R.id.user_pass_pass);
+        
+        myEmailET.addTextChangedListener(this);
+        myPassET.addTextChangedListener(this);
+        
+    	// Load button
+        userPassBTN = (Button) findViewById(R.id.user_pass_btn);
        
 	}
 
@@ -189,8 +199,6 @@ public class UserPassActivity extends Activity implements OnClickListener {
 	
 	public void loadView(){
 		
-		// Load button and set depending on status of check
-		Button userPassBTN = (Button) findViewById(R.id.user_pass_btn);
 		// If check is ok then load good to go
 		if (settings.getBoolean("isPassedChk", false)){
 			//Log.d(DEBUG_TAG, "loadView() > Load ok button");
@@ -248,6 +256,30 @@ public class UserPassActivity extends Activity implements OnClickListener {
 		
 		return myUrl;
 		
+	}
+
+	@Override
+	public void afterTextChanged(Editable arg0) {
+		
+	}
+
+	@Override
+	public void beforeTextChanged(CharSequence s, int start, int count,
+			int after) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onTextChanged(CharSequence s, int start, int before, int count) {
+		// TODO Auto-generated method stub
+		Log.d(DEBUG_TAG, "onTextChanged()> CharSeq: " + s +
+				" Start: " + start +
+				" Before: " + before +
+				" Count: " + count);
+		if (before > 0){
+			userPassBTN.setText(getString(R.string.user_pass_btn_rechk));
+		}
 	}
 	
 }

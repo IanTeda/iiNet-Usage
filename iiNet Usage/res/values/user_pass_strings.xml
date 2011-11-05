@@ -10,6 +10,7 @@
     
 		<string name="user_pass_btn_nogood">Check Credentials</string>
 		<string name="user_pass_btn_good">All Good</string>
+		<string name="user_pass_btn_rechk">Re Check Credentials</string>
 		
 		<string name="user_pass_nouserpass">Username/Email and Password is empty</string>
 		<string name="user_pass_nouser">Username/Email is empty</string>
