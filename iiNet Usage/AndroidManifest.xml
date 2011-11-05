@@ -76,7 +76,7 @@
 		<activity android:name=".prefs.Preferences" />
 		
 		<!-- Refresh Activity -->
-    <activity android:name=".service.RefreshUsageData"
+    <activity android:name=".async.RefreshUsageData"
     	android:label="@string/app_name" />
     
     <!-- History Activity -->

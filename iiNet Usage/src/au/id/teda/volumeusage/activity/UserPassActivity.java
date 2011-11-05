@@ -31,9 +31,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import au.id.teda.volumeusage.MyApp;
 import au.id.teda.volumeusage.R;
+import au.id.teda.volumeusage.async.CheckCredentialsAsync;
+import au.id.teda.volumeusage.async.RefreshUsageData;
 import au.id.teda.volumeusage.sax.CheckUserPassSAXHandler;
-import au.id.teda.volumeusage.service.CheckCredentialsAsync;
-import au.id.teda.volumeusage.service.RefreshUsageData;
 import au.id.teda.volumeusage.view.SetStatusBar;
 
 
@@ -50,7 +50,6 @@ public class UserPassActivity extends Activity implements OnClickListener, TextW
 	private static final String INFO_TAG = UserPassActivity.class.getSimpleName();
 	
 	private SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(MyApp.getAppContext());
-	private final boolean showRefreshDialog = settings.getBoolean("hide_refresh_dialog", false);
 	
     // Set EditText id's
     private EditText myEmailET;
@@ -66,13 +65,8 @@ public class UserPassActivity extends Activity implements OnClickListener, TextW
 	private final static String PASSWORD = "iinet_password";
 	private final static String USERNAME = "iinet_username";
 	
-	// String values application setting keys
-	private static final String ERRORTXT = "errorTxt";
-	private static final String ISPASSED = "isPassedChk";
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		
 		// setting default screen to login.xml
@@ -260,23 +254,23 @@ public class UserPassActivity extends Activity implements OnClickListener, TextW
 
 	@Override
 	public void afterTextChanged(Editable arg0) {
-		
+		// Nothing to do here
 	}
 
 	@Override
 	public void beforeTextChanged(CharSequence s, int start, int count,
 			int after) {
-		// TODO Auto-generated method stub
+		// Nothing to do here
 		
 	}
 
 	@Override
 	public void onTextChanged(CharSequence s, int start, int before, int count) {
-		// TODO Auto-generated method stub
-		Log.d(DEBUG_TAG, "onTextChanged()> CharSeq: " + s +
+		Log.v(INFO_TAG, "onTextChanged()> CharSeq: " + s +
 				" Start: " + start +
 				" Before: " + before +
 				" Count: " + count);
+		// TODO: Manage backspaces
 		if (before > 0){
 			userPassBTN.setText(getString(R.string.user_pass_btn_rechk));
 		}

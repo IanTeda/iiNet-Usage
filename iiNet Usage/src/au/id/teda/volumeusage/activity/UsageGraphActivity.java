@@ -17,10 +17,10 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import au.id.teda.volumeusage.R;
+import au.id.teda.volumeusage.async.RefreshUsageData;
 import au.id.teda.volumeusage.chart.StackedBarChart;
 import au.id.teda.volumeusage.helper.AccountHelper;
 import au.id.teda.volumeusage.prefs.Preferences;
-import au.id.teda.volumeusage.service.RefreshUsageData;
 import au.id.teda.volumeusage.service.ServiceHelper;
 import au.id.teda.volumeusage.view.SetStatusBar;
 

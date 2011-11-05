@@ -1,4 +1,4 @@
-package au.id.teda.volumeusage.service;
+package au.id.teda.volumeusage.async;
 
 import java.io.IOException;
 import java.net.MalformedURLException;

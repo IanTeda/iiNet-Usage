@@ -1,4 +1,4 @@
-package au.id.teda.volumeusage.service;
+package au.id.teda.volumeusage.async;
 
 import java.net.URL;
 
@@ -22,6 +22,7 @@ import au.id.teda.volumeusage.R;
 import au.id.teda.volumeusage.helper.AccountHelper;
 import au.id.teda.volumeusage.notification.DialogHelper;
 import au.id.teda.volumeusage.sax.DailyUsageSAXHandler;
+import au.id.teda.volumeusage.service.ServiceHelper;
 
 /**
  *  RefreshUsageData.java
