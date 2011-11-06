@@ -94,6 +94,15 @@
                 style="@style/user_pass_et"
                 android:password="true"
                 android:hint="@string/user_pass_password_hint" />
+            <CheckBox 
+                android:id="@+id/user_pass_reveal_cbox"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="22sp"
+                android:text="@string/user_pass_show"
+                android:onClick="onCheckBoxClick" />
+            
+            
             <TextView
                 android:id="@+id/user_pass_status"
                 android:layout_width="fill_parent"
@@ -102,12 +111,12 @@
                 android:text="Checking username &amp; Password"
                 android:gravity="center" />
             
-            <!-- Login button -->
+            <!-- Check Credentials button -->
             <Button
                 android:id="@+id/user_pass_btn"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dip"
+                android:layout_marginTop="10dp"
                 android:text="@string/user_pass_btn_nogood"
                 android:onClick="onUserPassBtnClick" />
          

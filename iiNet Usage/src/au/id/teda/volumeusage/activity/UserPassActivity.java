@@ -21,10 +21,13 @@ import android.os.Message;
 import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.method.PasswordTransformationMethod;
+import android.text.method.TransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -36,35 +39,46 @@ import au.id.teda.volumeusage.async.RefreshUsageData;
 import au.id.teda.volumeusage.sax.CheckUserPassSAXHandler;
 import au.id.teda.volumeusage.view.SetStatusBar;
 
-
-// http://www.androidhive.info/2011/10/android-login-and-registration-screen-design/
-
-//TODO: Add show password option in preferences / this activity
-
+/**
+ * Class: UserPassActivity
+ * 
+ * Description: Activity for setting and checking username and passwod
+ * 
+ * @version Alpha
+ * 
+ * @author Ian Teda
+ *
+ */
 public class UserPassActivity extends Activity implements OnClickListener, TextWatcher {
 	
-	/**
-	 *  Static tag strings for logging information and debug
-	 */
+	// Static tags for logging
 	private static final String DEBUG_TAG = "iiNet Usage"; // Debug tag for LogCat
 	private static final String INFO_TAG = UserPassActivity.class.getSimpleName();
 	
+	// Set shared preferences object
 	private SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(MyApp.getAppContext());
 	
-    // Set EditText id's
+    // Set EditText objects
     private EditText myEmailET;
     private EditText myPassET;
 	
+    // Set email/username and password string object
 	private String myEmail;
 	private String myPass;
 	
+	// Set url string object
 	private URL myUrl;
 	
+	// Set button object
 	private Button userPassBTN;
 	
+	// Static strings for preference keys
 	private final static String PASSWORD = "iinet_password";
 	private final static String USERNAME = "iinet_username";
 	
+	/**
+	 * onCreate method for activity 
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -72,17 +86,22 @@ public class UserPassActivity extends Activity implements OnClickListener, TextW
 		// setting default screen to login.xml
         setContentView(R.layout.user_pass);
         
+        // Set reference for edit text objects
         myEmailET = (EditText) findViewById(R.id.user_pass_email);
         myPassET = (EditText) findViewById(R.id.user_pass_pass);
         
+        // Set onClick listner for edit text objects
         myEmailET.addTextChangedListener(this);
         myPassET.addTextChangedListener(this);
         
-    	// Load button
+    	// Set reference for activity button
         userPassBTN = (Button) findViewById(R.id.user_pass_btn);
        
 	}
 
+	/**
+	 * onResume method for activity
+	 */
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -106,8 +125,6 @@ public class UserPassActivity extends Activity implements OnClickListener, TextW
         	loadView();
         }
     };
-	
-	
 	
 	/**
 	 *  Method used to set action bar title, reference buttons and set onClick listener
@@ -140,6 +157,10 @@ public class UserPassActivity extends Activity implements OnClickListener, TextW
 		}
 	}
 	
+	/**
+	 * Method for handling activity button onClick events
+	 * @param view
+	 */
 	public void onUserPassBtnClick(View view){
 		
 		// Reference button so we can check button text for change once user/pass validated
@@ -147,13 +168,38 @@ public class UserPassActivity extends Activity implements OnClickListener, TextW
 		Log.i(INFO_TAG, "checkCredentials() > Button: " + myButton.getText());
 		
 		if (myButton.getText() == getString(R.string.user_pass_btn_good)){
-			//goHome();
-			new CheckCredentialsAsync(this, handler, buildUrl()).execute();
+			goHome();
+			//new CheckCredentialsAsync(this, handler, buildUrl()).execute();
 		} else if (validateInput()){
 			new CheckCredentialsAsync(this, handler, buildUrl()).execute();
 		}
 	}
 	
+	/**
+	 * Method for handling onClick events for the show/hide password check box
+	 *
+	 * @param view
+	 */
+	public void onCheckBoxClick(View view){
+		
+		//If check box is checked
+		if (((CheckBox) view).isChecked()) {
+			
+			// Show password
+			myPassET.setTransformationMethod(null);
+			
+		// If check box is unchecked	
+		} else {
+			
+			// Hide password
+			myPassET.setTransformationMethod(new PasswordTransformationMethod());
+		}
+	}
+	
+	/**
+	 * Method for validating input before submitting query
+	 * @return
+	 */
 	public boolean validateInput(){
 		
 		boolean check = true;
@@ -186,11 +232,17 @@ public class UserPassActivity extends Activity implements OnClickListener, TextW
 		return check;
 	}
 	
+	/**
+	 * Method for going to the application dashboard
+	 */
 	private void goHome(){
 		Intent dashboardActivityIntent = new Intent(this, MainActivity.class);
         startActivity(dashboardActivityIntent);
 	}
 	
+	/**
+	 * Method used to load/set activity view
+	 */
 	public void loadView(){
 		
 		// If check is ok then load good to go
@@ -206,14 +258,21 @@ public class UserPassActivity extends Activity implements OnClickListener, TextW
 			//Log.d(DEBUG_TAG, "loadView() > Load check button");
 			userPassBTN.setText(getString(R.string.user_pass_btn_nogood));
 		}
-		
-		
 	}
 	
+	/**
+	 * Method for displaying toast messages
+	 * @param msg
+	 */
 	public void popup(String msg){
 		Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
 	}
 	
+	/**
+	 * Method used to check if email looks like an email address
+	 * @param email
+	 * @return
+	 */
 	public boolean checkEmail(String email){
 	    Pattern pattern = Pattern.compile(".+@.+\\.[a-z]+");
 	    Matcher matcher = pattern.matcher(email);
@@ -221,6 +280,9 @@ public class UserPassActivity extends Activity implements OnClickListener, TextW
 
 	}
 	
+	/**
+	 * Method used to set username and password to preferences
+	 */
 	public void setUserPass(){
 		SharedPreferences.Editor editor = settings.edit();
 		editor.putString(USERNAME, myEmail);
@@ -231,6 +293,10 @@ public class UserPassActivity extends Activity implements OnClickListener, TextW
 		//Log.d(DEBUG_TAG, "setUserPass() > Password set to: " + settings.getString(PASSWORD, USERNAME));
 	}
 	
+	/**
+	 * Method used to build URL from username and password
+	 * @return
+	 */
 	private URL buildUrl(){
 		
 		try {
@@ -254,24 +320,25 @@ public class UserPassActivity extends Activity implements OnClickListener, TextW
 
 	@Override
 	public void afterTextChanged(Editable arg0) {
-		// Nothing to do here
+		// Nothing to do here, but is an implemented method so needs to go in
 	}
 
 	@Override
 	public void beforeTextChanged(CharSequence s, int start, int count,
 			int after) {
-		// Nothing to do here
+		// Nothing to do here, but is an implemented method so needs to go in
 		
 	}
 
+	/**
+	 * Method for detecting changes to the edittext object and changing the button text
+	 */
 	@Override
 	public void onTextChanged(CharSequence s, int start, int before, int count) {
-		Log.v(INFO_TAG, "onTextChanged()> CharSeq: " + s +
-				" Start: " + start +
-				" Before: " + before +
-				" Count: " + count);
-		// TODO: Manage backspaces
-		if (before > 0){
+		//Log.v(INFO_TAG, "onTextChanged()> CharSeq: " + s + " Start: " + start + " Before: " + before + " Count: " + count);
+		
+		// If edit text feilds change and password has already been check set button to recheck
+		if (before > 0 && settings.getBoolean("isPassedChk", false)){
 			userPassBTN.setText(getString(R.string.user_pass_btn_rechk));
 		}
 	}

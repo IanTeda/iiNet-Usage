@@ -8,6 +8,8 @@
     <string name="user_pass_password">Account Password</string>
     <string name="user_pass_password_hint">Password</string>
     
+    <string name="user_pass_show">Show password</string>
+        
 		<string name="user_pass_btn_nogood">Check Credentials</string>
 		<string name="user_pass_btn_good">All Good</string>
 		<string name="user_pass_btn_rechk">Re Check Credentials</string>

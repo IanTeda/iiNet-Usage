@@ -70,7 +70,7 @@ public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 			Log.d(DEBUG_TAG, "checkCredentials() > URL: " + myUrl);
 			
 			// Load xml from our developement xml file
-			InputSource is = new InputSource(MyApp.getAppContext().getResources().openRawResource(R.raw.auth_fail));
+			//InputSource is = new InputSource(MyApp.getAppContext().getResources().openRawResource(R.raw.auth_fail));
 			
 			// Create a SAXParserFactory so we can
 			SAXParserFactory spf = SAXParserFactory.newInstance();
@@ -86,10 +86,10 @@ public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 			xr.setContentHandler(myUserPassSAXHandler);
 			
 			// Parse the xml-data from our development file
-			xr.parse(new InputSource(is.getByteStream()));
+			//xr.parse(new InputSource(is.getByteStream()));
 			
 			// Parse the xml-data from our URL.
-			//xr.parse(new InputSource(myUrl.openStream()));
+			xr.parse(new InputSource(myUrl.openStream()));
 			
 			//Log.d(DEBUG_TAG, "checkCredentials() > Checking username / password > try");
 		} catch (MalformedURLException e) {
