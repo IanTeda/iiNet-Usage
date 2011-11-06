@@ -6,13 +6,18 @@
     
 	<!-- Update preference strings -->
 	<string name="update_preferences_screen_title">Update Preferences</string>
-	<string name="update_onload_title">Update on Load</string>
+	
+	<string name="update_onload_title">Startup Update</string>
 	<string name="update_onload_summary">Enable or disable update on load</string>
-	<string name="background_update_title">Enable Background Updates</string>
+	
+	<string name="background_update_title">Background Updates</string>
 	<string name="background_update_summary">Enable or disable auto update of data</string>
+	
 	<string name="background_interval_title">Updates Interval</string>
 	<string name="background_interval_summary">How often do you want to update</string>
 	<string name="update_int_list_prompt">Select update interval</string>
+	<string name="wifi_only_title">Update Wifi Only</string>
+  <string name="wifi_only_summary">Update when connect to wifi only</string>
 	
 	<!-- Data usage seekbar strings -->
 	<string name="peak_usage_alert_title">Peak Usage Alert</string>

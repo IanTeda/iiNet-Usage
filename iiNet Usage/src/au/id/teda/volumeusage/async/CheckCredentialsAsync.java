@@ -15,6 +15,8 @@ import org.xml.sax.XMLReader;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo.State;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -142,6 +144,23 @@ public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 	protected void onCancelled() {
 		// TODO Auto-generated method stub
 		super.onCancelled();
+	}
+	
+	public boolean isConnected(){
+		// Return value
+		boolean isConnected = false;
+		
+		// Set connectivity manager object
+		final ConnectivityManager myConMan = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+		 // Confirm 3G connectivity
+	    final Boolean is3g = myConMan.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isConnectedOrConnecting();
+	     // Confirm wifi connectivity
+	    final Boolean isWifi = myConMan.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnectedOrConnecting();
+		
+		
+		return isConnected;
+		
 	}
 
 }

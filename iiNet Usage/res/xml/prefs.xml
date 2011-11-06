@@ -77,6 +77,11 @@
     		android:title="@string/background_update_title"
       	android:summary="@string/background_update_summary" 
       	android:defaultValue="false" />
+      <CheckBoxPreference
+        android:key="wifi_only"
+        android:title="@string/wifi_only_title" 
+        android:summary="@string/wifi_only_summary"
+        android:defaultValue="true" />
 			<au.id.teda.volumeusage.prefs.IntegerListPreference
 				android:title="@string/update_int_list_prompt"
 				android:key="updateInterval"
@@ -84,5 +89,6 @@
 				intPref:entryList="@array/update_int_list"
 				android:defaultValue="86400000" />
     </PreferenceScreen>
+    
   </PreferenceCategory>
 </PreferenceScreen>
