@@ -158,6 +158,13 @@ public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 	     // Confirm wifi connectivity
 	    final Boolean isWifi = myConMan.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnectedOrConnecting();
 		
+	    if(is3g){
+	        
+	    }else if(isWifi){
+	        
+	    }else{
+	   
+	    }
 		
 		return isConnected;
 		
