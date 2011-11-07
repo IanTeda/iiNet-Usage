@@ -43,7 +43,7 @@ public class CheckUserPassSAXHandler extends DefaultHandler {
 	public void startElement(String uri, String myTag, String qName,
 			Attributes myAtt) throws SAXException {
 		super.startElement(uri, myTag, qName, myAtt); //TODO: Do I need this super?
-		Log.d(DEBUG_TAG, "startElement is: " + myTag.trim());
+		//Log.d(DEBUG_TAG, "startElement is: " + myTag.trim());
 		
 		if (myTag.trim().equalsIgnoreCase(II_FEED)){
 			inFeed = true;
@@ -62,7 +62,7 @@ public class CheckUserPassSAXHandler extends DefaultHandler {
 	public void endElement(String uri, String myTag, String qName)
 			throws SAXException {
 		super.endElement(uri, myTag, qName);
-		Log.d(DEBUG_TAG, "endElement is: " + myTag.trim());
+		//Log.d(DEBUG_TAG, "endElement is: " + myTag.trim());
 
 		if (myTag.trim().equalsIgnoreCase(ERROR)){
 			inError = false;

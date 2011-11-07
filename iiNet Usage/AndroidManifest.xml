@@ -95,6 +95,9 @@
   </application>
   
   <!-- Application permissions -->
+  <!--  Allow application access to network state -->
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+  
   <!-- Allow application access to the internet -->
   <uses-permission android:name="android.permission.INTERNET" />
   

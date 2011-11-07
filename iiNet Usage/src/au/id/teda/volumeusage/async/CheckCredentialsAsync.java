@@ -16,10 +16,12 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.NetworkInfo.State;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.Toast;
 import au.id.teda.volumeusage.MyApp;
@@ -41,6 +43,7 @@ public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 	
 	private static final String ISPASSED = "isPassedChk";
 	private static final String ERRORTXT = "errorTxt";
+	private static final String WIFI_ONLY = "wifi_only";
 	
     /**
      * Constructor for class. Pass activity context and return handler for update
@@ -68,46 +71,51 @@ public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 	@Override
 	protected Void doInBackground(Void... params) {
 
-		try {
-			Log.d(DEBUG_TAG, "checkCredentials() > URL: " + myUrl);
-			
-			// Load xml from our developement xml file
-			//InputSource is = new InputSource(MyApp.getAppContext().getResources().openRawResource(R.raw.auth_fail));
-			
-			// Create a SAXParserFactory so we can
-			SAXParserFactory spf = SAXParserFactory.newInstance();
-			
-			// Create a SAXParser so we can
-			SAXParser sp = spf.newSAXParser();
-			
-			// Create a XMLReader
-			XMLReader xr = sp.getXMLReader();
-			
-			// Create a new ContentHandler and apply it to the XML-Reader
-			CheckUserPassSAXHandler myUserPassSAXHandler = new CheckUserPassSAXHandler();
-			xr.setContentHandler(myUserPassSAXHandler);
-			
-			// Parse the xml-data from our development file
-			//xr.parse(new InputSource(is.getByteStream()));
-			
-			// Parse the xml-data from our URL.
-			xr.parse(new InputSource(myUrl.openStream()));
-			
-			//Log.d(DEBUG_TAG, "checkCredentials() > Checking username / password > try");
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SAXException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Log.d(DEBUG_TAG, "Connection is: " + isConnected());
 		
+		// Check if connectivity is true. If so try to parse xml
+		if (isConnected()){
+			try {
+				Log.d(DEBUG_TAG, "checkCredentials() > URL: " + myUrl);
+				
+				// Load xml from our developement xml file
+				InputSource is = new InputSource(MyApp.getAppContext().getResources().openRawResource(R.raw.auth_fail));
+				
+				// Create a SAXParserFactory so we can
+				SAXParserFactory spf = SAXParserFactory.newInstance();
+				
+				// Create a SAXParser so we can
+				SAXParser sp = spf.newSAXParser();
+				
+				// Create a XMLReader
+				XMLReader xr = sp.getXMLReader();
+				
+				// Create a new ContentHandler and apply it to the XML-Reader
+				CheckUserPassSAXHandler myUserPassSAXHandler = new CheckUserPassSAXHandler();
+				xr.setContentHandler(myUserPassSAXHandler);
+				
+				// Parse the xml-data from our development file
+				xr.parse(new InputSource(is.getByteStream()));
+				
+				// Parse the xml-data from our URL.
+				//xr.parse(new InputSource(myUrl.openStream()));
+				
+				//Log.d(DEBUG_TAG, "checkCredentials() > Checking username / password > try");
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ParserConfigurationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SAXException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
 		return null;
 	}
 
@@ -146,27 +154,43 @@ public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 		super.onCancelled();
 	}
 	
+	/**
+	 * See if we are able to pull the XML
+	 * @return
+	 */
 	public boolean isConnected(){
-		// Return value
-		boolean isConnected = false;
 		
 		// Set connectivity manager object
-		final ConnectivityManager myConMan = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-		 // Confirm 3G connectivity
-	    final Boolean is3g = myConMan.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isConnectedOrConnecting();
-	     // Confirm wifi connectivity
-	    final Boolean isWifi = myConMan.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnectedOrConnecting();
+		ConnectivityManager myConMan = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+		// Get connection information
+		NetworkInfo info = myConMan.getActiveNetworkInfo();
 		
-	    if(is3g){
-	        
-	    }else if(isWifi){
-	        
-	    }else{
-	   
-	    }
-		
-		return isConnected;
+		// Skip if no connection, or background data disabled
+		if (info == null || !myConMan.getBackgroundDataSetting()) { // TODO: Check for roaming settings
+			return false;
+		} else {
+			 // Confirm 3G connectivity
+		    Boolean is3g = myConMan.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isConnectedOrConnecting();
+		     // Confirm wifi connectivity
+		    Boolean isWifi = myConMan.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnectedOrConnecting();
+			
+		    Log.d(DEBUG_TAG, "is3g: " + is3g);
+		    Log.d(DEBUG_TAG, "isWifi: " + isWifi);
+		    Log.d(DEBUG_TAG, "Wifi Only: " + settings.getBoolean(WIFI_ONLY, false));
+		    
+		    if (is3g && !settings.getBoolean(WIFI_ONLY, false)) {
+		    	Log.d(DEBUG_TAG, "3G and non wifi connectin allowed");
+		    	return true;
+		    	
+		    } else if(isWifi && settings.getBoolean(WIFI_ONLY, false)) {
+		    	Log.d(DEBUG_TAG, "3G and non wifi connectin allowed");
+		    	return true;
+		    	
+		    } else {
+		    	
+		    	return false;
+		    }
+		}
 		
 	}
 

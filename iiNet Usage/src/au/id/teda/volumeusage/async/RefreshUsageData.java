@@ -32,6 +32,8 @@ import au.id.teda.volumeusage.service.ServiceHelper;
  *  @version Alpha
  *  
  */
+
+//TODO: Rename to async
 public class RefreshUsageData extends AsyncTask<Void, Void, Void> {
 	
 	private static final String DEBUG_TAG = "iiNet Usage"; // Debug tag for LogCat
