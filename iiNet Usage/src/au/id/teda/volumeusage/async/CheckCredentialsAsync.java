@@ -17,30 +17,37 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.NetworkInfo.State;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.Toast;
 import au.id.teda.volumeusage.MyApp;
 import au.id.teda.volumeusage.R;
 import au.id.teda.volumeusage.sax.CheckUserPassSAXHandler;
 
+/**
+ * Async class for checking user credentials
+ * @author Ian
+ */
+
+// TODO: Can this be incorporated with the refresh async task?
 public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 	
+	// Static strings used for debugging
 	private static final String DEBUG_TAG = "iiNet Usage"; // Debug tag for LogCat
 	private static final String INFO_TAG = CheckCredentialsAsync.class.getSimpleName();
 	
+	// Application settings object
 	private SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(MyApp.getAppContext());
 	
+	// Class objects
 	private Context context;
 	private Handler myHandler;
 	private ProgressDialog myProgressDialog;
-	
 	private URL myUrl;
 	
+	// Static strings for setting keys
 	private static final String ISPASSED = "isPassedChk";
 	private static final String ERRORTXT = "errorTxt";
 	private static final String WIFI_ONLY = "wifi_only";
@@ -58,20 +65,29 @@ public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 		myUrl = url;
 	}
 	
+	/**
+	 * What code should I process before execution
+	 */
 	@Override
 	protected void onPreExecute() {
 		super.onPreExecute();
 		
+		// Display progress dialog
 		myProgressDialog = ProgressDialog.show(context,
-				MyApp.getAppContext().getString(R.string.refresh_progress_dialog_title),
-				MyApp.getAppContext().getString(R.string.refresh_progress_dialog_description),
+				MyApp.getAppContext().getString(R.string.user_pass_checking_title),
+				MyApp.getAppContext().getString(R.string.user_pass_checking_description),
 				true);
 	}
 	
+	/**
+	 * Execution code for async task
+	 * @param params
+	 * @return
+	 */
 	@Override
 	protected Void doInBackground(Void... params) {
 
-		Log.d(DEBUG_TAG, "Connection is: " + isConnected());
+		//Log.d(DEBUG_TAG, "Connection is: " + isConnected());
 		
 		// Check if connectivity is true. If so try to parse xml
 		if (isConnected()){
@@ -79,7 +95,7 @@ public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 				Log.d(DEBUG_TAG, "checkCredentials() > URL: " + myUrl);
 				
 				// Load xml from our developement xml file
-				InputSource is = new InputSource(MyApp.getAppContext().getResources().openRawResource(R.raw.auth_fail));
+				InputSource is = new InputSource(MyApp.getAppContext().getResources().openRawResource(R.raw.adsl2));
 				
 				// Create a SAXParserFactory so we can
 				SAXParserFactory spf = SAXParserFactory.newInstance();
@@ -119,23 +135,37 @@ public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 		return null;
 	}
 
+	/**
+	 * Code to execute during async task. Typcially return to activity handler
+	 * @param values
+	 */
 	@Override
 	protected void onProgressUpdate(Void... values) {
-		// TODO Auto-generated method stub
+		// Implemented method. Nothing to do here
 		super.onProgressUpdate(values);
 	}
 
+	/**
+	 * Code to execute post async task running
+	 * @param result
+	 */
 	@Override
 	protected void onPostExecute(Void result) {
 		super.onPostExecute(result);
 		
+		// Close progress dialog
 		myProgressDialog.dismiss();
 		
+		// Check status and display toast messages
 		checkStatus();
 		
+		// Send empty message to activity executing task (typical reload of view)
 		myHandler.sendEmptyMessage(0);
 	}
 
+	/**
+	 * Retrieve status of check from preferences and display toast dialog accordingly
+	 */
 	private void checkStatus() {
 		if (!settings.getBoolean("isPassedChk", false)){
 			popup(settings.getString(ERRORTXT, "Error"));
@@ -144,13 +174,17 @@ public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 		}
 	}
 	
+	/**
+	 * Simple method for displaying toast messages. Saves code duplication.
+	 * @param msg
+	 */
 	public void popup(String msg){
 		Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
 	}
 	
 	@Override
 	protected void onCancelled() {
-		// TODO Auto-generated method stub
+		// Implemented method. Nothing to do here.
 		super.onCancelled();
 	}
 	
@@ -174,9 +208,9 @@ public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 		     // Confirm wifi connectivity
 		    Boolean isWifi = myConMan.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnectedOrConnecting();
 			
-		    Log.d(DEBUG_TAG, "is3g: " + is3g);
-		    Log.d(DEBUG_TAG, "isWifi: " + isWifi);
-		    Log.d(DEBUG_TAG, "Wifi Only: " + settings.getBoolean(WIFI_ONLY, false));
+		    //Log.d(DEBUG_TAG, "is3g: " + is3g);
+		    //Log.d(DEBUG_TAG, "isWifi: " + isWifi);
+		    //Log.d(DEBUG_TAG, "Wifi Only: " + settings.getBoolean(WIFI_ONLY, false));
 		    
 		    if (is3g && !settings.getBoolean(WIFI_ONLY, false)) {
 		    	Log.d(DEBUG_TAG, "3G and non wifi connectin allowed");

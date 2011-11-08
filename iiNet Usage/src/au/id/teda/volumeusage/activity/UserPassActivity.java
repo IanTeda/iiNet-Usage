@@ -5,14 +5,7 @@ import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-
-import org.xml.sax.InputSource;
-import org.xml.sax.XMLReader;
-
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -22,7 +15,6 @@ import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.PasswordTransformationMethod;
-import android.text.method.TransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -35,8 +27,6 @@ import android.widget.Toast;
 import au.id.teda.volumeusage.MyApp;
 import au.id.teda.volumeusage.R;
 import au.id.teda.volumeusage.async.CheckCredentialsAsync;
-import au.id.teda.volumeusage.async.RefreshUsageData;
-import au.id.teda.volumeusage.sax.CheckUserPassSAXHandler;
 import au.id.teda.volumeusage.view.SetStatusBar;
 
 /**
@@ -167,9 +157,16 @@ public class UserPassActivity extends Activity implements OnClickListener, TextW
 		Button myButton = (Button) findViewById(R.id.user_pass_btn);
 		Log.i(INFO_TAG, "checkCredentials() > Button: " + myButton.getText());
 		
+		// If button text set to good then then safe to save user/pass and go to dashboard
 		if (myButton.getText() == getString(R.string.user_pass_btn_good)){
+			
+			// Load username/password into preferences
+			setUserPass();
+			
+			// Take me to the dashboard
 			goHome();
-			//new CheckCredentialsAsync(this, handler, buildUrl()).execute();
+
+		// Else validate input, if true then execute async task
 		} else if (validateInput()){
 			new CheckCredentialsAsync(this, handler, buildUrl()).execute();
 		}
@@ -335,7 +332,7 @@ public class UserPassActivity extends Activity implements OnClickListener, TextW
 	 */
 	@Override
 	public void onTextChanged(CharSequence s, int start, int before, int count) {
-		//Log.v(INFO_TAG, "onTextChanged()> CharSeq: " + s + " Start: " + start + " Before: " + before + " Count: " + count);
+		Log.v(INFO_TAG, "onTextChanged()> CharSeq: " + s + " Start: " + start + " Before: " + before + " Count: " + count);
 		
 		// If edit text feilds change and password has already been check set button to recheck
 		if (before > 0 && settings.getBoolean("isPassedChk", false)){
