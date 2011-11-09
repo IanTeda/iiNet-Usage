@@ -65,6 +65,7 @@ public class UserPassActivity extends Activity implements OnClickListener, TextW
 	// Static strings for preference keys
 	private final static String PASSWORD = "iinet_password";
 	private final static String USERNAME = "iinet_username";
+	private static final String ISPASSED = "isPassedChk";
 	
 	/**
 	 * onCreate method for activity 
@@ -86,6 +87,13 @@ public class UserPassActivity extends Activity implements OnClickListener, TextW
         
     	// Set reference for activity button
         userPassBTN = (Button) findViewById(R.id.user_pass_btn);
+        
+        if (settings.getBoolean(ISPASSED, false) 
+        		&& settings.getString(USERNAME, "").length() > 0 
+        		&& settings.getString(PASSWORD, "").length() > 0) {
+        	myEmailET.setText(settings.getString(USERNAME, ""));
+			myPassET.setText(settings.getString(PASSWORD, ""));
+        }
        
 	}
 
@@ -160,11 +168,9 @@ public class UserPassActivity extends Activity implements OnClickListener, TextW
 		// If button text set to good then then safe to save user/pass and go to dashboard
 		if (myButton.getText() == getString(R.string.user_pass_btn_good)){
 			
-			// Load username/password into preferences
-			setUserPass();
-			
 			// Take me to the dashboard
-			goHome();
+			//goHome();
+			new CheckCredentialsAsync(this, handler, buildUrl()).execute();
 
 		// Else validate input, if true then execute async task
 		} else if (validateInput()){
@@ -202,8 +208,8 @@ public class UserPassActivity extends Activity implements OnClickListener, TextW
 		boolean check = true;
 		
 		// Get string values form edit text views
-		String myEmail = myEmailET.getText().toString();
-		String myPass = myPassET.getText().toString();
+		myEmail = myEmailET.getText().toString();
+		myPass = myPassET.getText().toString();
 		
 		// Check for no input edit text
 		if (myEmail.length()<1 && myPass.length()<1) {
@@ -233,6 +239,14 @@ public class UserPassActivity extends Activity implements OnClickListener, TextW
 	 * Method for going to the application dashboard
 	 */
 	private void goHome(){
+		// Load username/password into preferences
+		Log.d(DEBUG_TAG, "goHome() > isPassChk: " + settings.getBoolean("isPassedChk", false));
+
+		 if (settings.getBoolean(ISPASSED, false)) {
+			 setUserPass();
+		 }
+		
+		// Start dashboard activity
 		Intent dashboardActivityIntent = new Intent(this, MainActivity.class);
         startActivity(dashboardActivityIntent);
 	}
@@ -243,12 +257,9 @@ public class UserPassActivity extends Activity implements OnClickListener, TextW
 	public void loadView(){
 		
 		// If check is ok then load good to go
-		if (settings.getBoolean("isPassedChk", false)){
+		if (settings.getBoolean(ISPASSED, false)){
 			//Log.d(DEBUG_TAG, "loadView() > Load ok button");
 			userPassBTN.setText(getString(R.string.user_pass_btn_good));
-			
-			myEmailET.setText(settings.getString(USERNAME, ""));
-			myPassET.setText(settings.getString(PASSWORD, ""));
 			
 		// Else assume check failed and load creditial check
 		} else {
@@ -281,13 +292,14 @@ public class UserPassActivity extends Activity implements OnClickListener, TextW
 	 * Method used to set username and password to preferences
 	 */
 	public void setUserPass(){
+		
 		SharedPreferences.Editor editor = settings.edit();
 		editor.putString(USERNAME, myEmail);
 		editor.putString(PASSWORD, myPass);
 		editor.commit();
 		
-		//Log.d(DEBUG_TAG, "setUserPass() > Username set to: " + settings.getString(USERNAME, USERNAME));
-		//Log.d(DEBUG_TAG, "setUserPass() > Password set to: " + settings.getString(PASSWORD, USERNAME));
+		Log.d(DEBUG_TAG, "setUserPass() > Username set to: " + settings.getString(USERNAME, "Username Error"));
+		Log.d(DEBUG_TAG, "setUserPass() > Password set to: " + settings.getString(PASSWORD, "Password Error"));
 	}
 	
 	/**
@@ -331,12 +343,29 @@ public class UserPassActivity extends Activity implements OnClickListener, TextW
 	 * Method for detecting changes to the edittext object and changing the button text
 	 */
 	@Override
-	public void onTextChanged(CharSequence s, int start, int before, int count) {
-		Log.v(INFO_TAG, "onTextChanged()> CharSeq: " + s + " Start: " + start + " Before: " + before + " Count: " + count);
+	public void onTextChanged(CharSequence charSeq, int start, int before, int count) {
+		Log.v(INFO_TAG, "onTextChanged()> CharSeq: " + charSeq + " Start: " + start + " Before: " + before + " Count: " + count);
 		
 		// If edit text feilds change and password has already been check set button to recheck
-		if (before > 0 && settings.getBoolean("isPassedChk", false)){
-			userPassBTN.setText(getString(R.string.user_pass_btn_rechk));
+		if (count > 0 || before > 0) {
+			if (settings.getBoolean("isPassedChk", false)){
+				if (charSeq != settings.getString(USERNAME, "")) {
+					if ( charSeq != settings.getString(PASSWORD, "")) {
+					
+						Log.d(DEBUG_TAG, "onTextChanged() > Change detected " + settings.getBoolean(ISPASSED, false));
+						
+						// Reset isPassed to false and blank username & pass
+						SharedPreferences.Editor editor = settings.edit();
+						editor.putBoolean(ISPASSED, false);
+						
+						
+						editor.commit();
+						
+						// Change button text to recheck
+						userPassBTN.setText(getString(R.string.user_pass_btn_rechk));
+					}
+				}
+			}
 		}
 	}
 	
