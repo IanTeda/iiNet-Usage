@@ -67,6 +67,9 @@ public class UserPassActivity extends Activity implements OnClickListener, TextW
 	private final static String USERNAME = "iinet_username";
 	private static final String ISPASSED = "isPassedChk";
 	
+	// Loading flag
+	private boolean loadingFlag;
+	
 	/**
 	 * onCreate method for activity 
 	 */
@@ -88,11 +91,19 @@ public class UserPassActivity extends Activity implements OnClickListener, TextW
     	// Set reference for activity button
         userPassBTN = (Button) findViewById(R.id.user_pass_btn);
         
-        if (settings.getBoolean(ISPASSED, false) 
+        if (settings.getBoolean(ISPASSED, false)
         		&& settings.getString(USERNAME, "").length() > 0 
         		&& settings.getString(PASSWORD, "").length() > 0) {
+        	
+        	// Flag loading edittexts
+        	loadingFlag = true;
+        	
+        	// Load edit text objects with strings stored in preferences
         	myEmailET.setText(settings.getString(USERNAME, ""));
 			myPassET.setText(settings.getString(PASSWORD, ""));
+			
+			// Flag no longer loading edit text objects
+			loadingFlag = false;
         }
        
 	}
@@ -169,8 +180,8 @@ public class UserPassActivity extends Activity implements OnClickListener, TextW
 		if (myButton.getText() == getString(R.string.user_pass_btn_good)){
 			
 			// Take me to the dashboard
-			//goHome();
-			new CheckCredentialsAsync(this, handler, buildUrl()).execute();
+			goHome();
+			//new CheckCredentialsAsync(this, handler, buildUrl()).execute();
 
 		// Else validate input, if true then execute async task
 		} else if (validateInput()){
@@ -348,23 +359,19 @@ public class UserPassActivity extends Activity implements OnClickListener, TextW
 		
 		// If edit text feilds change and password has already been check set button to recheck
 		if (count > 0 || before > 0) {
-			if (settings.getBoolean("isPassedChk", false)){
-				if (charSeq != settings.getString(USERNAME, "")) {
-					if ( charSeq != settings.getString(PASSWORD, "")) {
-					
-						Log.d(DEBUG_TAG, "onTextChanged() > Change detected " + settings.getBoolean(ISPASSED, false));
+			if (settings.getBoolean(ISPASSED, false) && !loadingFlag){
+				
+				Log.d(DEBUG_TAG, "onTextChanged() > Change detected ");
 						
-						// Reset isPassed to false and blank username & pass
-						SharedPreferences.Editor editor = settings.edit();
-						editor.putBoolean(ISPASSED, false);
+				// Reset isPassed to false and blank username & pass
+				SharedPreferences.Editor editor = settings.edit();
+				editor.putBoolean(ISPASSED, false);
 						
+				editor.commit();
 						
-						editor.commit();
-						
-						// Change button text to recheck
-						userPassBTN.setText(getString(R.string.user_pass_btn_rechk));
-					}
-				}
+				// Change button text to recheck
+				userPassBTN.setText(getString(R.string.user_pass_btn_rechk));
+
 			}
 		}
 	}
