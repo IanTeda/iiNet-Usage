@@ -167,8 +167,8 @@ public class MainActivity extends Activity implements OnClickListener {
     	} else if (alertBoxButton.getText() == this.getString(R.string.db_alertbox_userpass)
     			|| alertBoxButton.getText() == this.getString(R.string.db_alertbox_user)
     			|| alertBoxButton.getText() == this.getString(R.string.db_alertbox_pass)){
-    		Intent menuIntent = new Intent(this, Preferences.class);
-    		startActivity(menuIntent);
+    		Intent myUserPassIntent = new Intent(MainActivity.this, UserPassActivity.class);
+			startActivity(myUserPassIntent);
     	}
     }
     
