@@ -332,7 +332,7 @@ public class UserPassActivity extends Activity implements OnClickListener, TextW
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Log.d(DEBUG_TAG, "checkCredentials() > URL: " + myUrl);
+		//Log.d(DEBUG_TAG, "buildUrl() > URL: " + myUrl);
 		
 		return myUrl;
 		
@@ -355,7 +355,7 @@ public class UserPassActivity extends Activity implements OnClickListener, TextW
 	 */
 	@Override
 	public void onTextChanged(CharSequence charSeq, int start, int before, int count) {
-		Log.v(INFO_TAG, "onTextChanged()> CharSeq: " + charSeq + " Start: " + start + " Before: " + before + " Count: " + count);
+		//Log.v(DEBUG_TAG, "onTextChanged()> CharSeq: " + charSeq + " Start: " + start + " Before: " + before + " Count: " + count);
 		
 		// If edit text feilds change and password has already been check set button to recheck
 		if (count > 0 || before > 0) {

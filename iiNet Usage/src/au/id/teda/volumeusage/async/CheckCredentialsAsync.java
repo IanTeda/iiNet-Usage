@@ -63,6 +63,8 @@ public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 		this.context = context;
 		myHandler = handler;
 		myUrl = url;
+		
+		
 	}
 	
 	/**
@@ -87,15 +89,15 @@ public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 	@Override
 	protected Void doInBackground(Void... params) {
 
-		//Log.d(DEBUG_TAG, "Connection is: " + isConnected());
+		Log.d(DEBUG_TAG, "Connection is: " + isConnected());
 		
 		// Check if connectivity is true. If so try to parse xml
 		if (isConnected()){
 			try {
-				Log.d(DEBUG_TAG, "checkCredentials() > URL: " + myUrl);
+				//Log.d(DEBUG_TAG, "checkCredentials() > URLl: " + myUrl);
 				
 				// Load xml from our developement xml file
-				InputSource is = new InputSource(MyApp.getAppContext().getResources().openRawResource(R.raw.adsl2));
+				//InputSource is = new InputSource(MyApp.getAppContext().getResources().openRawResource(R.raw.adsl2));
 				
 				// Create a SAXParserFactory so we can
 				SAXParserFactory spf = SAXParserFactory.newInstance();
@@ -111,10 +113,10 @@ public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 				xr.setContentHandler(myUserPassSAXHandler);
 				
 				// Parse the xml-data from our development file
-				xr.parse(new InputSource(is.getByteStream()));
+				//xr.parse(new InputSource(is.getByteStream()));
 				
 				// Parse the xml-data from our URL.
-				//xr.parse(new InputSource(myUrl.openStream()));
+				xr.parse(new InputSource(myUrl.openStream()));
 				
 				//Log.d(DEBUG_TAG, "checkCredentials() > Checking username / password > try");
 			} catch (MalformedURLException e) {
@@ -130,6 +132,8 @@ public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		} else {
+			Log.d(DEBUG_TAG, "doInBackground() > No connection");
 		}
 
 		return null;

@@ -67,7 +67,7 @@ public class CheckUserPassSAXHandler extends DefaultHandler {
 		if (myTag.trim().equalsIgnoreCase(ERROR)){
 			inError = false;
 		} else if (myTag.trim().equalsIgnoreCase(II_FEED)){
-			//Log.d(DEBUG_TAG, "chkUserPass : " + chkUserPass);
+			Log.d(DEBUG_TAG, "chkUserPass : " + chkUserPass);
 			
 			// Once we reach the end of the feed set shared preferrence to username password boolean value
 			SharedPreferences.Editor editor = mySettings.edit();
@@ -85,6 +85,8 @@ public class CheckUserPassSAXHandler extends DefaultHandler {
 		
 		// Set string value for xml tag currently in
 		String chars = (new String(ch).substring(start, start + length));
+		
+		//Log.d(DEBUG_TAG, "characters is: " + chars);
 		
 		// if we are in the feed tag and in an error tag set error string
 		if (inFeed && inError){
