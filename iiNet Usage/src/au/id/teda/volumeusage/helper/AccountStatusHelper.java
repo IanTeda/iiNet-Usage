@@ -18,6 +18,7 @@ public class AccountStatusHelper extends AccountHelper {
 	public AccountStatusHelper(Context context) {
 		super(context);
 		this.context = context;
+		
 	}
 
 	// Check if data usage is over usage alert preference

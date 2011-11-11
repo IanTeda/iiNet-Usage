@@ -24,6 +24,7 @@ import android.util.Log;
 import android.widget.Toast;
 import au.id.teda.volumeusage.MyApp;
 import au.id.teda.volumeusage.R;
+import au.id.teda.volumeusage.helper.ConnectivityHelper;
 import au.id.teda.volumeusage.sax.CheckUserPassSAXHandler;
 
 /**
@@ -89,10 +90,12 @@ public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 	@Override
 	protected Void doInBackground(Void... params) {
 
-		Log.d(DEBUG_TAG, "Connection is: " + isConnected());
+		//Log.d(DEBUG_TAG, "Connection is: " + isConnected());
 		
 		// Check if connectivity is true. If so try to parse xml
-		if (isConnected()){
+		ConnectivityHelper myConnection = new ConnectivityHelper(context);
+		
+		if (myConnection.isConnected()){
 			try {
 				//Log.d(DEBUG_TAG, "checkCredentials() > URLl: " + myUrl);
 				
@@ -192,44 +195,6 @@ public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 		super.onCancelled();
 	}
 	
-	/**
-	 * See if we are able to pull the XML
-	 * @return
-	 */
-	public boolean isConnected(){
-		
-		// Set connectivity manager object
-		ConnectivityManager myConMan = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-		// Get connection information
-		NetworkInfo info = myConMan.getActiveNetworkInfo();
-		
-		// Skip if no connection, or background data disabled
-		if (info == null || !myConMan.getBackgroundDataSetting()) { // TODO: Check for roaming settings
-			return false;
-		} else {
-			 // Confirm 3G connectivity
-		    Boolean is3g = myConMan.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isConnectedOrConnecting();
-		     // Confirm wifi connectivity
-		    Boolean isWifi = myConMan.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnectedOrConnecting();
-			
-		    //Log.d(DEBUG_TAG, "is3g: " + is3g);
-		    //Log.d(DEBUG_TAG, "isWifi: " + isWifi);
-		    //Log.d(DEBUG_TAG, "Wifi Only: " + settings.getBoolean(WIFI_ONLY, false));
-		    
-		    if (is3g && !settings.getBoolean(WIFI_ONLY, false)) {
-		    	Log.d(DEBUG_TAG, "3G and non wifi connectin allowed");
-		    	return true;
-		    	
-		    } else if(isWifi && settings.getBoolean(WIFI_ONLY, false)) {
-		    	Log.d(DEBUG_TAG, "3G and non wifi connectin allowed");
-		    	return true;
-		    	
-		    } else {
-		    	
-		    	return false;
-		    }
-		}
-		
-	}
+	
 
 }
