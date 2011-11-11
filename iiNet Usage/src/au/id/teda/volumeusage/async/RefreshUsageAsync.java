@@ -34,10 +34,10 @@ import au.id.teda.volumeusage.service.ServiceHelper;
  */
 
 //TODO: Rename to async
-public class RefreshUsageData extends AsyncTask<Void, Void, Void> {
+public class RefreshUsageAsync extends AsyncTask<Void, Void, Void> {
 	
 	private static final String DEBUG_TAG = "iiNet Usage"; // Debug tag for LogCat
-	private static final String INFO_TAG = RefreshUsageData.class.getSimpleName();
+	private static final String INFO_TAG = RefreshUsageAsync.class.getSimpleName();
 	
     private ProgressDialog progressDialog;
     private Context context;
@@ -50,7 +50,7 @@ public class RefreshUsageData extends AsyncTask<Void, Void, Void> {
      * @param context
      * @param myHandler
      */
-	public RefreshUsageData (Context context, Handler myHandler) {
+	public RefreshUsageAsync (Context context, Handler myHandler) {
 		Log.i(INFO_TAG, "Start constructor");
 		
 		this.context = context;
@@ -66,7 +66,7 @@ public class RefreshUsageData extends AsyncTask<Void, Void, Void> {
 	 * @param myHandler
 	 * @param hideDialog
 	 */
-	public RefreshUsageData(Context context, Handler myHandler,
+	public RefreshUsageAsync(Context context, Handler myHandler,
 			boolean hideDialog) {
 		Log.i(INFO_TAG, "Start constructor");
 		

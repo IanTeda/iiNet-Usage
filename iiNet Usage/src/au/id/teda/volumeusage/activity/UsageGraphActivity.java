@@ -17,7 +17,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import au.id.teda.volumeusage.R;
-import au.id.teda.volumeusage.async.RefreshUsageData;
+import au.id.teda.volumeusage.async.RefreshUsageAsync;
 import au.id.teda.volumeusage.chart.StackedBarChart;
 import au.id.teda.volumeusage.helper.AccountHelper;
 import au.id.teda.volumeusage.prefs.Preferences;
@@ -137,7 +137,7 @@ public class UsageGraphActivity extends Activity implements OnClickListener {
 			break;
 		case R.id.action_bar_refresh_button:
 			ServiceHelper serviceHelper = new ServiceHelper(this);
-			new RefreshUsageData(this, handler).execute();
+			new RefreshUsageAsync(this, handler).execute();
 			break;
 		default:
 			Log.i(INFO_TAG, "onClick() > Default switch");
@@ -171,7 +171,7 @@ public class UsageGraphActivity extends Activity implements OnClickListener {
 			return true;
 		case R.id.menu_refresh_button:
 			ServiceHelper serviceHelper = new ServiceHelper(this);
-			new RefreshUsageData(this, handler).execute();
+			new RefreshUsageAsync(this, handler).execute();
 			return true;
 		case R.id.menu_about_button:
 			Intent aboutIntent2 = new Intent(this, AboutActivity.class);

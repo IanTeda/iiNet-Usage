@@ -22,7 +22,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import au.id.teda.volumeusage.R;
-import au.id.teda.volumeusage.async.RefreshUsageData;
+import au.id.teda.volumeusage.async.RefreshUsageAsync;
 import au.id.teda.volumeusage.database.DataBaseHelper;
 import au.id.teda.volumeusage.prefs.Preferences;
 import au.id.teda.volumeusage.service.ServiceHelper;
@@ -163,7 +163,7 @@ public class MainActivity extends Activity implements OnClickListener {
     	Button alertBoxButton = (Button) findViewById(R.id.DB_AlertBTN);
     	Log.i(INFO_TAG, "onClickAlertBTN() > Button: " + alertBoxButton.getText());
     	if (alertBoxButton.getText() == this.getString(R.string.db_alertbox_nodata)){
-    		new RefreshUsageData(this, handler).execute();
+    		new RefreshUsageAsync(this, handler).execute();
     	} else if (alertBoxButton.getText() == this.getString(R.string.db_alertbox_userpass)
     			|| alertBoxButton.getText() == this.getString(R.string.db_alertbox_user)
     			|| alertBoxButton.getText() == this.getString(R.string.db_alertbox_pass)){
@@ -233,7 +233,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			startActivity(menuIntent);
 			return true;
 		case R.id.menu_refresh_button:
-			new RefreshUsageData(this, handler).execute();
+			new RefreshUsageAsync(this, handler).execute();
 			return true;
 		case R.id.menu_about_button:
 			Intent aboutIntent2 = new Intent(this, AboutActivity.class);
@@ -281,7 +281,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			boolean hideDialog = true;
 			
 			// Execute AsyncTask for data refresh
-			new RefreshUsageData(this, handler, hideDialog).execute();
+			new RefreshUsageAsync(this, handler, hideDialog).execute();
 		}
 
 	}

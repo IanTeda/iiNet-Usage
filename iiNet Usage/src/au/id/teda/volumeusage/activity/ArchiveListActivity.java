@@ -22,7 +22,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 import au.id.teda.volumeusage.R;
-import au.id.teda.volumeusage.async.RefreshUsageData;
+import au.id.teda.volumeusage.async.RefreshUsageAsync;
 import au.id.teda.volumeusage.prefs.Preferences;
 import au.id.teda.volumeusage.service.ServiceHelper;
 import au.id.teda.volumeusage.view.SetStatusBar;
@@ -229,7 +229,7 @@ public class ArchiveListActivity extends ListActivity {
 			return true;
 		case R.id.menu_refresh_button:
 			ServiceHelper serviceHelper = new ServiceHelper(this);
-			new RefreshUsageData(this, handler).execute();
+			new RefreshUsageAsync(this, handler).execute();
 			return true;
 		case R.id.menu_about_button:
 			Intent aboutIntent2 = new Intent(this, AboutActivity.class);

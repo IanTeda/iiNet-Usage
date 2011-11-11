@@ -19,7 +19,7 @@
 		<string name="user_pass_nopass">Password is empty</string>
 		<string name="user_pass_malformemail">Username does not appear to be an email</string>
 		
-		<string name="user_pass_checking_title">CCredential Check</string>
+		<string name="user_pass_checking_title">Credential Check</string>
 		<string name="user_pass_checking_description">Standby checking...</string>
   
 </resources>

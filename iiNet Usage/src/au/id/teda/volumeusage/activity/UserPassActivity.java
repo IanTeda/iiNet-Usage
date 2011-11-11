@@ -196,6 +196,9 @@ public class UserPassActivity extends Activity implements OnClickListener, TextW
 	 */
 	public void onCheckBoxClick(View view){
 		
+		// Flag loading edittexts so re-check doesn't come up
+    	loadingFlag = true;
+    	
 		//If check box is checked
 		if (((CheckBox) view).isChecked()) {
 			
@@ -208,6 +211,9 @@ public class UserPassActivity extends Activity implements OnClickListener, TextW
 			// Hide password
 			myPassET.setTransformationMethod(new PasswordTransformationMethod());
 		}
+		
+		// Flag no longer loading edit text objects
+		loadingFlag = false;
 	}
 	
 	/**
