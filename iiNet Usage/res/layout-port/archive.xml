@@ -4,7 +4,7 @@
   android:orientation="vertical"
   android:layout_width="fill_parent"
   android:layout_height="fill_parent"
-  android:background="@color/summary_background">
+  android:background="@color/background_color">
   
   <include android:id="@+id/action_bar" layout="@layout/action_bar" />
   
@@ -15,14 +15,18 @@
 		android:layout_marginRight="10dp"
 		android:layout_marginTop="10dp"
 		android:layout_marginBottom="20dp"
-		android:background="@drawable/db_alert_box" >
+		android:padding="5dp"
+		android:background="@drawable/archive_listitem_box" >
 		
-      <TextView
-      	android:layout_width="wrap_content"
-    		android:layout_height="wrap_content" 
-    		android:text="Archive Analysis"
-    		/>
-
+      <Button
+          android:id="@+id/archive_analysis_btn"
+          android:onClick="onAnalysisClick"
+          android:layout_width="fill_parent"
+          android:layout_height="fill_parent"
+          android:text="@string/archive_anaylsis_btn"
+          android:background="@color/background_contrast_color"
+          android:gravity="left" />
+          		
       <ImageButton
           android:id="@+id/arc_summary_button"
           android:layout_alignParentRight="true"

@@ -9,10 +9,17 @@
   
   <color name="foreground1">#ff355689</color>
   
+      
+  <!-- Application Colors -->
   <color name="app_base_color">#000000</color>
   <color name="main_container_background_color">#201f1f</color>
   <color name="background_seperator_color">#181717</color>
   <color name="db_button_text_color">#FF5900</color>
+  <!-- <color name="background_contrast_color">#8B1A1A</color> -->
+  
+  <color name="background_color">#181717</color>
+  <color name="background_contrast_color">#201f1f</color>
+  <color name="layout_border">#000000</color>
   
   <!-- Dashboard color -->
   <color name="h1_text_color">#FF5900</color>

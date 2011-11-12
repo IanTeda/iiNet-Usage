@@ -39,13 +39,13 @@ import au.id.teda.volumeusage.view.SetStatusBar;
 // http://ykyuen.wordpress.com/2010/01/03/android-simple-listview-using-simpleadapter/
 // http://ykyuen.wordpress.com/2010/03/15/android-%E2%80%93-applying-alternate-row-color-in-listview-with-simpleadapter/
 
-public class ArchiveListActivity extends ListActivity {
+public class ArchiveActivity extends ListActivity {
 	
 	/**
 	 *  Static tag strings for logging information and debug
 	 */
 	private static final String DEBUG_TAG = "iiNet Usage"; // Debug tag for LogCat
-	private static final String INFO_TAG = ArchiveListActivity.class.getSimpleName();
+	private static final String INFO_TAG = ArchiveActivity.class.getSimpleName();
 	static final ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();
 	
 	@Override

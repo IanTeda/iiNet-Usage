@@ -186,7 +186,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			startActivity(settingsIntent);
 			break;
 		case R.id.db_archive_button:
-			Intent mHistoryIntent = new Intent(this, ArchiveListActivity.class);
+			Intent mHistoryIntent = new Intent(this, ArchiveActivity.class);
 			startActivity(mHistoryIntent);
 			break;
 		case R.id.db_summary_activity_button:

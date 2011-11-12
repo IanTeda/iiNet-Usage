@@ -36,13 +36,13 @@ public class DashboardUsageStats {
 		SharedPreferences mySettings = PreferenceManager.getDefaultSharedPreferences(context);
         String myDataSetting = mySettings.getString("dashboard_summary_pref", SO_FARE);
         //String myDataSetting = "so_fare";
-		Log.d(DEBUG_TAG, "Summary Setting: " + myDataSetting + " String: " + SO_FARE);
+		//Log.d(DEBUG_TAG, "Summary Setting: " + myDataSetting + " String: " + SO_FARE);
 		
 		AccountHelper accountHelper = new AccountHelper(context);
 		if (accountHelper.infoExists() 
 				&& accountHelper.statusExists()
 				&& myDataSetting.equals(SO_FARE)){
-	        Log.d(DEBUG_TAG, "Summary Setting; " + myDataSetting);
+	        //Log.d(DEBUG_TAG, "Summary Setting; " + myDataSetting);
 			peakTextView.setText(accountHelper.dataUsageString(PEAK));
 	    	offpeakTextView.setText(accountHelper.dataUsageString(OFFPEAK));
 		} else if (accountHelper.infoExists() 
