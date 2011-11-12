@@ -94,7 +94,6 @@ public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 		
 		// Check if connectivity is true. If so try to parse xml
 		ConnectivityHelper myConnection = new ConnectivityHelper(context);
-		
 		if (myConnection.isConnected()){
 			try {
 				//Log.d(DEBUG_TAG, "checkCredentials() > URLl: " + myUrl);

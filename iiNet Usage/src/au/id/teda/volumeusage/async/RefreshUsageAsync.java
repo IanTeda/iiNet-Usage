@@ -1,11 +1,15 @@
 package au.id.teda.volumeusage.async;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
 import android.app.ProgressDialog;
@@ -20,6 +24,7 @@ import android.widget.Toast;
 import au.id.teda.volumeusage.MyApp;
 import au.id.teda.volumeusage.R;
 import au.id.teda.volumeusage.helper.AccountHelper;
+import au.id.teda.volumeusage.helper.ConnectivityHelper;
 import au.id.teda.volumeusage.notification.DialogHelper;
 import au.id.teda.volumeusage.sax.DailyUsageSAXHandler;
 import au.id.teda.volumeusage.service.ServiceHelper;
@@ -105,26 +110,53 @@ public class RefreshUsageAsync extends AsyncTask<Void, Void, Void> {
 	protected Void doInBackground(Void... params) {
 		Log.i(INFO_TAG, "doInBackground()");
 		
+		// Check if connectivity is true. If so try to parse xml
+		ConnectivityHelper myConnection = new ConnectivityHelper(context);
+		
 		// Check username & password exists else toast alert
 		AccountHelper accountHelper = new AccountHelper(context);
-		if (accountHelper.checkUsernamePassword()){
+		if (accountHelper.checkUsernamePassword() && myConnection.isConnected()){
 	        try {
+	        	// Get URL
 	        	ServiceHelper serviceHelper = new ServiceHelper(context);
 	        	URL url = new URL(serviceHelper.buildXMLPath());
-	        	Log.d(DEBUG_TAG, "URL: " + url);
-	        	//URL url = new URL("http://www.anddev.org/images/tut/basic/parsingxml/example.xml"); // Create a URL we want to load some xml-data from.
-	        	//InputSource is = new InputSource(MyApp.getAppContext().getResources().openRawResource(R.raw.adsl2  )); // Our developement xml file
-	        	SAXParserFactory spf = SAXParserFactory.newInstance(); // Create a SAXParserFactory so we can
-	        	SAXParser sp = spf.newSAXParser(); // Create a SAXParser so we can
-	        	XMLReader xr = sp.getXMLReader(); // Create a XMLReader
-	        	DailyUsageSAXHandler myAccountInfoSAXHandler = new DailyUsageSAXHandler(); // Create a new ContentHandler and apply it to the XML-Reader
+	        	//Log.d(DEBUG_TAG, "URL: " + url);
+	        	
+	        	// Load xml from our developement xml file
+				//InputSource is = new InputSource(MyApp.getAppContext().getResources().openRawResource(R.raw.adsl2));
+	        	
+	        	 // Create a SAXParserFactory so we can
+	        	SAXParserFactory spf = SAXParserFactory.newInstance();
+	        	
+	        	// Create a SAXParser so we can
+	        	SAXParser sp = spf.newSAXParser();
+	        	
+	        	// Create a XMLReader
+	        	XMLReader xr = sp.getXMLReader();
+	        	
+	        	// Create a new ContentHandler and apply it to the XML-Reader
+	        	DailyUsageSAXHandler myAccountInfoSAXHandler = new DailyUsageSAXHandler();
 	        	xr.setContentHandler(myAccountInfoSAXHandler);
-	        	//xr.parse(new InputSource(is.getByteStream())); // Parse the xml-data from our development file
-	        	xr.parse(new InputSource(url.openStream())); // Parse the xml-data from our URL.
-	        } catch (Exception e) {
-	        	// Display any Error to catLog
-	        	Log.d("iiNet Usage", "XML Querry error: " + e.getMessage());
-	        }
+	        	
+	        	// Parse the xml-data from our development file
+	        	//xr.parse(new InputSource(is.getByteStream()));
+	        	
+	        	// Else parse the xml-data from our URL.
+	        	xr.parse(new InputSource(url.openStream()));
+	        	
+	        } catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ParserConfigurationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SAXException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
 			// Load dialog for going to settings
 			DialogHelper dialogHelper = new DialogHelper(context);
