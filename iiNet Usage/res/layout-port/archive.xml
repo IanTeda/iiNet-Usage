@@ -25,7 +25,7 @@
           android:layout_height="fill_parent"
           android:text="@string/archive_anaylsis_btn"
           android:background="@color/background_contrast_color"
-          android:gravity="left" />
+          android:gravity="left|center_vertical" android:textSize="21sp" android:textColor="@color/h1_text" android:layout_marginLeft="5dp"/>
           		
       <ImageButton
           android:id="@+id/arc_summary_button"

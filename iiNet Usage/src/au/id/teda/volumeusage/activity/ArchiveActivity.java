@@ -117,6 +117,11 @@ public class ArchiveActivity extends ListActivity {
 				.show();
 	}
 	
+	private void onAnalysisClick(View view){
+		Toast.makeText(this, "Analysis Archive", Toast.LENGTH_LONG)
+		.show();
+	}
+	
 	private void populateList() {
 		HashMap<String,String> temp = new HashMap<String,String>();
 		temp.put("pen","MONT Blanc");
