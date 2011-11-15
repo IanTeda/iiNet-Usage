@@ -39,6 +39,9 @@ import au.id.teda.volumeusage.view.SetStatusBar;
  * @author Ian Teda
  *
  */
+
+// TODO: Toast no connectivity
+
 public class UserPassActivity extends Activity implements OnClickListener, TextWatcher {
 	
 	// Static tags for logging
@@ -257,7 +260,7 @@ public class UserPassActivity extends Activity implements OnClickListener, TextW
 	 */
 	private void goHome(){
 		// Load username/password into preferences
-		Log.d(DEBUG_TAG, "goHome() > isPassChk: " + settings.getBoolean("isPassedChk", false));
+		//Log.d(DEBUG_TAG, "goHome() > isPassChk: " + settings.getBoolean("isPassedChk", false));
 
 		 if (settings.getBoolean(ISPASSED, false)) {
 			 setUserPass();
@@ -315,8 +318,8 @@ public class UserPassActivity extends Activity implements OnClickListener, TextW
 		editor.putString(PASSWORD, myPass);
 		editor.commit();
 		
-		Log.d(DEBUG_TAG, "setUserPass() > Username set to: " + settings.getString(USERNAME, "Username Error"));
-		Log.d(DEBUG_TAG, "setUserPass() > Password set to: " + settings.getString(PASSWORD, "Password Error"));
+		//Log.d(DEBUG_TAG, "setUserPass() > Username set to: " + settings.getString(USERNAME, "Username Error"));
+		//Log.d(DEBUG_TAG, "setUserPass() > Password set to: " + settings.getString(PASSWORD, "Password Error"));
 	}
 	
 	/**
@@ -367,7 +370,7 @@ public class UserPassActivity extends Activity implements OnClickListener, TextW
 		if (count > 0 || before > 0) {
 			if (settings.getBoolean(ISPASSED, false) && !loadingFlag){
 				
-				Log.d(DEBUG_TAG, "onTextChanged() > Change detected ");
+				//Log.d(DEBUG_TAG, "onTextChanged() > Change detected ");
 						
 				// Reset isPassed to false and blank username & pass
 				SharedPreferences.Editor editor = settings.edit();

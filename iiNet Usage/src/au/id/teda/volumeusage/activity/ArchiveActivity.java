@@ -39,6 +39,8 @@ import au.id.teda.volumeusage.view.SetStatusBar;
 // http://ykyuen.wordpress.com/2010/01/03/android-simple-listview-using-simpleadapter/
 // http://ykyuen.wordpress.com/2010/03/15/android-%E2%80%93-applying-alternate-row-color-in-listview-with-simpleadapter/
 
+// http://www.vogella.de/articles/AndroidListView/article.html
+
 public class ArchiveActivity extends ListActivity {
 	
 	/**
@@ -55,34 +57,11 @@ public class ArchiveActivity extends ListActivity {
 		Log.i(INFO_TAG, "onCreate()");
 		setContentView(R.layout.archive);
 
-        // create the grid item mapping
-        String[] from = new String[] {"rowid", "col_1", "col_2", "col_3"};
-        int[] to = new int[] { R.id.item1, R.id.item2, R.id.item3, R.id.item4 };
+		// Create an array of Strings, that will be put to our ListActivity
+				String[] names = new String[] { "Linux", "Windows7", "Eclipse", "Suse",
+						"Ubuntu", "Solaris", "Android", "iPhone", "Linux", "Windows7",
+						"Eclipse", "Suse", "Ubuntu", "Solaris", "Android", "iPhone" };        
 
-        // prepare the list of all records
-        List<HashMap<String, String>> fillMaps = new ArrayList<HashMap<String, String>>();
-        for(int i = 0; i < 10; i++){
-        	HashMap<String, String> map = new HashMap<String, String>();
-        	map.put("rowid", "" + i);
-        	map.put("col_1", "col_1_item_" + i);
-        	map.put("col_2", "col_2_item_" + i);
-        	map.put("col_3", "col_3_item_" + i);
-        	fillMaps.add(map);
-        }
-
-        // fill in the grid_item layout
-        SimpleAdapter myAdapter = new SimpleAdapter(this,
-        		fillMaps,
-        		R.drawable.archive_listitem_row,
-        		from,
-        		to);
-
-        populateList();
-
-        setListAdapter(myAdapter);
-        
-		// Setup action bar title and buttons
-		//setupActionBar();
 		
 	}
 	
