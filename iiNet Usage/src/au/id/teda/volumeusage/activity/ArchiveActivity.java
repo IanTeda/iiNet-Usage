@@ -64,27 +64,7 @@ public class ArchiveActivity extends ListActivity {
 
 		
 	}
-	
-	
-	
-    /**
-     * Creates and returns a list adapter for the current list activity
-     * @return
-     */
-    protected ListAdapter createAdapter() {
-    	// Create some mock data
-    	String[] testValues = new String[] {
-    			"Test1",
-    			"Test2",
-    			"Test3"
-    	};
- 
-    	// Create a simple array adapter (of type string) with the test values
-    	ListAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, testValues);
- 
-    	return adapter;
-    }
-    
+
 	@Override
 	protected void onListItemClick(ListView listView, View view, int position, long id) {
 		super.onListItemClick(listView, view, position, id);
@@ -100,34 +80,6 @@ public class ArchiveActivity extends ListActivity {
 		Toast.makeText(this, "Analysis Archive", Toast.LENGTH_LONG)
 		.show();
 	}
-	
-	private void populateList() {
-		HashMap<String,String> temp = new HashMap<String,String>();
-		temp.put("pen","MONT Blanc");
-		temp.put("price", "200.00$");
-		temp.put("color", "Silver, Grey, Black");
-		list.add(temp);
-		HashMap<String,String> temp1 = new HashMap<String,String>();
-		temp1.put("pen","Gucci");
-		temp1.put("price", "300.00$");
-		temp1.put("color", "Gold, Red");
-		list.add(temp1);
-		HashMap<String,String> temp2 = new HashMap<String,String>();
-		temp2.put("pen","Parker");
-		temp2.put("price", "400.00$");
-		temp2.put("color", "Gold, Blue");
-		list.add(temp2);
-		HashMap<String,String> temp3 = new HashMap<String,String>();
-		temp3.put("pen","Sailor");
-		temp3.put("price", "500.00$");
-		temp3.put("color", "Silver");
-		list.add(temp3);
-		HashMap<String,String> temp4 = new HashMap<String,String>();
-		temp4.put("pen","Porsche Design");
-		temp4.put("price", "600.00$");
-		temp4.put("color", "Silver, Grey, Red");
-		list.add(temp4);
-		}
 	
 	@Override
 	protected void onRestart() {
@@ -165,27 +117,6 @@ public class ArchiveActivity extends ListActivity {
         }
     };
 
-    /**
-     * Method for handling onClicks in this activity
-     * @param: button
-     */
-    /**
-	@Override
-	public void onClick(View button) {
-		Log.i(INFO_TAG, "onClick() > Button: " + button.getId());
-		switch (button.getId()) {
-		case R.id.action_bar_home_button:
-			Intent dashboardActivityIntent = new Intent(this, MainActivity.class);
-            startActivity(dashboardActivityIntent);
-			break;
-		case R.id.action_bar_refresh_button:
-			new RefreshUsageData(this, handler).execute();
-			break;
-		default:
-			Log.i(INFO_TAG, "onClick() > Default switch");
-		}
-	}**/
-	
 	/**
 	 * onCreate method for options menu
 	 * What happens when we press the menu button
