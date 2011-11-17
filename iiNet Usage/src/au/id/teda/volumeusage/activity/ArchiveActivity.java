@@ -81,6 +81,26 @@ public class ArchiveActivity extends ListActivity {
 		.show();
 	}
 	
+	/**
+	 * onClick method for action bar
+	 * @param button
+	 */
+	public void onActionBarClick(View button){
+		Log.i(INFO_TAG, "onClick() > Button: " + button.getId());
+		switch (button.getId()) {
+		case R.id.action_bar_home_button:
+			Intent dashboardActivityIntent = new Intent(this, MainActivity.class);
+            startActivity(dashboardActivityIntent);
+			break;
+		case R.id.action_bar_refresh_button:
+			new RefreshUsageAsync(this, handler).execute();
+			break;
+		default:
+			Log.i(INFO_TAG, "onClick() > Default switch");
+		}
+	}
+	
+	
 	@Override
 	protected void onRestart() {
 		// TODO Auto-generated method stub

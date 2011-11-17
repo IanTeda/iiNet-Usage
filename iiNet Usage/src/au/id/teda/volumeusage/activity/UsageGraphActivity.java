@@ -87,10 +87,10 @@ public class UsageGraphActivity extends Activity implements OnClickListener {
 		abTitle.setText(R.string.ab_usage_graph_view_title);
 		
 		// Set action bar onClick
-        ImageButton abRefreshButton = (ImageButton) findViewById(R.id.action_bar_refresh_button); // This is the refresh button on the action bar
-        abRefreshButton.setOnClickListener(this);
-        ImageButton abHomeButton = (ImageButton) findViewById(R.id.action_bar_home_button); // Take me back to the dashboard
-        abHomeButton.setOnClickListener(this);
+        //ImageButton abRefreshButton = (ImageButton) findViewById(R.id.action_bar_refresh_button); // This is the refresh button on the action bar
+        //abRefreshButton.setOnClickListener(this);
+        //ImageButton abHomeButton = (ImageButton) findViewById(R.id.action_bar_home_button); // Take me back to the dashboard
+        //abHomeButton.setOnClickListener(this);
 	}
 	
 	public void loadChart(){
@@ -130,13 +130,21 @@ public class UsageGraphActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View button) {
 		Log.i(INFO_TAG, "onClick() > Button: " + button.getId());
+
+	}
+	
+	/**
+	 * onClick method for action bar
+	 * @param button
+	 */
+	public void onActionBarClick(View button){
+		Log.i(INFO_TAG, "onClick() > Button: " + button.getId());
 		switch (button.getId()) {
 		case R.id.action_bar_home_button:
 			Intent dashboardActivityIntent = new Intent(this, MainActivity.class);
             startActivity(dashboardActivityIntent);
 			break;
 		case R.id.action_bar_refresh_button:
-			ServiceHelper serviceHelper = new ServiceHelper(this);
 			new RefreshUsageAsync(this, handler).execute();
 			break;
 		default:

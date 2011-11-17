@@ -163,6 +163,14 @@ public class SummaryActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View button) {
 		Log.i(INFO_TAG, "onClick() > Button: " + button.getId());
+	}
+
+	/**
+	 * onClick method for action bar
+	 * @param button
+	 */
+	public void onActionBarClick(View button){
+		Log.i(INFO_TAG, "onClick() > Button: " + button.getId());
 		switch (button.getId()) {
 		case R.id.action_bar_home_button:
 			Intent dashboardActivityIntent = new Intent(this, MainActivity.class);

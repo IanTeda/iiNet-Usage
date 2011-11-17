@@ -25,6 +25,7 @@
         android:layout_marginLeft="4dip"
         android:layout_marginBottom = "4dip"
         android:paddingBottom = "3dip"
+        android:onClick="onActionBarClick"
         android:background="@drawable/home_bg" />
         
         <ImageView
@@ -61,6 +62,7 @@
             android:layout_marginBottom="4dip"
             android:background="@drawable/home_bg"
             android:layout_marginRight="5dip"
+            android:onClick="onActionBarClick"
             android:src="@drawable/ic_refresh" />
       </LinearLayout>
   </LinearLayout>

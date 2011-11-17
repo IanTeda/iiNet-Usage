@@ -98,10 +98,10 @@ public class UsageDataActivity extends ListActivity implements OnClickListener {
 		abTitle.setText(R.string.ab_usage_data_view_title);
 		
 		// Reference action bar buttons and set onClick
-        ImageButton abRefreshButton = (ImageButton) findViewById(R.id.action_bar_refresh_button); // This is the refresh button on the action bar
-        abRefreshButton.setOnClickListener(this);
-        ImageButton abHomeButton = (ImageButton) findViewById(R.id.action_bar_home_button); // Take me back to the dashboard
-        abHomeButton.setOnClickListener(this);
+        //ImageButton abRefreshButton = (ImageButton) findViewById(R.id.action_bar_refresh_button); // This is the refresh button on the action bar
+       // abRefreshButton.setOnClickListener(this);
+       // ImageButton abHomeButton = (ImageButton) findViewById(R.id.action_bar_home_button); // Take me back to the dashboard
+        //abHomeButton.setOnClickListener(this);
 	}
 	
 	/**
@@ -128,6 +128,14 @@ public class UsageDataActivity extends ListActivity implements OnClickListener {
      */
 	@Override
 	public void onClick(View button) {
+		Log.i(INFO_TAG, "onClick() > Button: " + button.getId());
+	}
+
+	/**
+	 * onClick method for action bar
+	 * @param button
+	 */
+	public void onActionBarClick(View button){
 		Log.i(INFO_TAG, "onClick() > Button: " + button.getId());
 		switch (button.getId()) {
 		case R.id.action_bar_home_button:
