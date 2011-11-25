@@ -43,7 +43,7 @@ public class ArchiveArrayAdapter extends ArrayAdapter<String> {
 			rowView = inflater.inflate(R.layout.archive_row_layout, null, true);
 			holder = new ViewHolder();
 			holder.textView = (TextView) rowView.findViewById(R.id.archive_row_month);
-				holder.imageView = (ImageView) rowView.findViewById(R.id.icon);
+				holder.imageView = (ImageView) rowView.findViewById(R.id.arch_list_icon);
 				rowView.setTag(holder);
 			} else {
 				holder = (ViewHolder) rowView.getTag();
@@ -51,14 +51,12 @@ public class ArchiveArrayAdapter extends ArrayAdapter<String> {
 
 			holder.textView.setText(names[position]);
 			// Change the icon for Windows and iPhone
-			/**String s = names[position];
-			if (s.startsWith("Windows7") || s.startsWith("iPhone")
-					|| s.startsWith("Solaris")) {
-
-				holder.imageView.setImageResource(android.R.drawable.ic_menu_crop);
+			String s = names[position];
+			if (s.startsWith("Add")) {
+				holder.imageView.setImageResource(R.drawable.arch_ic_plus);
 			} else {
-				holder.imageView.setImageResource(android.R.drawable.ic_delete);
-			}**/
+				holder.imageView.setImageResource(R.drawable.arch_ic_calendar);
+			}
 
 			return rowView;
 		}

@@ -55,9 +55,7 @@ public class ArchiveActivity extends ListActivity {
 		setContentView(R.layout.archive);
 
 		// Create an array of Strings, that will be put to our ListActivity
-		String[] values = new String[] { "January", "February", "March", "April",
-						"May", "June", "July", "August", "September", "October",
-						"November", "December" };        
+		String[] values = new String[] { "2011 October", "2011 September", "2011 August", "Add" };        
 
 		setListAdapter((ListAdapter) new ArchiveArrayAdapter(this, values));
 		
