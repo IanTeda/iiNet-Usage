@@ -42,7 +42,7 @@ public class ArchiveArrayAdapter extends ArrayAdapter<String> {
 			LayoutInflater inflater = context.getLayoutInflater();
 			rowView = inflater.inflate(R.layout.archive_row_layout, null, true);
 			holder = new ViewHolder();
-			holder.textView = (TextView) rowView.findViewById(R.id.label);
+			holder.textView = (TextView) rowView.findViewById(R.id.archive_row_month);
 				holder.imageView = (ImageView) rowView.findViewById(R.id.icon);
 				rowView.setTag(holder);
 			} else {
@@ -51,14 +51,14 @@ public class ArchiveArrayAdapter extends ArrayAdapter<String> {
 
 			holder.textView.setText(names[position]);
 			// Change the icon for Windows and iPhone
-			String s = names[position];
+			/**String s = names[position];
 			if (s.startsWith("Windows7") || s.startsWith("iPhone")
 					|| s.startsWith("Solaris")) {
 
 				holder.imageView.setImageResource(android.R.drawable.ic_menu_crop);
 			} else {
 				holder.imageView.setImageResource(android.R.drawable.ic_delete);
-			}
+			}**/
 
 			return rowView;
 		}

@@ -12,4 +12,12 @@
     <dimen name="text_size_small">14sp</dimen>
     <dimen name="text_size_medium">18sp</dimen>
     <dimen name="text_size_large">22sp</dimen>
+    
+      <!-- Archive Activity Dimensions -->
+      <dimen name="archive_row_height">40dp</dimen>
+      <dimen name="archive_row_margin">10dp</dimen>
+      <dimen name="archive_row_padding">5dp</dimen>
+      <dimen name="archive_row_icon_height">35dp</dimen>
+      <dimen name="archive_row_icon_width">35dp</dimen>
+      <dimen name="archive_row_text_size">18sp</dimen>
 </resources>

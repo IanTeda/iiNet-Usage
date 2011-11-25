@@ -2,8 +2,6 @@ package au.id.teda.volumeusage.activity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,14 +12,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 import au.id.teda.volumeusage.R;
+import au.id.teda.volumeusage.adapter.ArchiveArrayAdapter;
 import au.id.teda.volumeusage.async.RefreshUsageAsync;
 import au.id.teda.volumeusage.prefs.Preferences;
 import au.id.teda.volumeusage.service.ServiceHelper;
@@ -58,10 +55,11 @@ public class ArchiveActivity extends ListActivity {
 		setContentView(R.layout.archive);
 
 		// Create an array of Strings, that will be put to our ListActivity
-				String[] names = new String[] { "Linux", "Windows7", "Eclipse", "Suse",
-						"Ubuntu", "Solaris", "Android", "iPhone", "Linux", "Windows7",
-						"Eclipse", "Suse", "Ubuntu", "Solaris", "Android", "iPhone" };        
+		String[] values = new String[] { "January", "February", "March", "April",
+						"May", "June", "July", "August", "September", "October",
+						"November", "December" };        
 
+		setListAdapter((ListAdapter) new ArchiveArrayAdapter(this, values));
 		
 	}
 

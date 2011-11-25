@@ -1,25 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/archive_row_height"
+    android:background="@drawable/archive_listitem_box"
+    android:gravity="center_vertical"
+    android:padding="5dp" >
 
     <ImageView
-        android:id="@+id/icon"
-        android:layout_width="22px"
-        android:layout_height="22px"
-        android:layout_marginLeft="4px"
-        android:layout_marginRight="10px"
-        android:layout_marginTop="4px"
-        android:src="@drawable/icon" >
-    </ImageView>
-
-    <TextView
-        android:id="@+id/label"
+        android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@+id/label"
-        android:textSize="20px" >
-    </TextView>
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@android:drawable/ic_media_next" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/archive_row_month"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/icon"
+        android:text="@string/archive_default_text"
+        android:textColor="@color/white"
+        android:textSize="@dimen/archive_row_text_size" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/icon"
+        android:layout_alignParentLeft="true"
+        android:text="2011"
+        android:textColor="#40ffffff"
+        android:textSize="35sp"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+</RelativeLayout>

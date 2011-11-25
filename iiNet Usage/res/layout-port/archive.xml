@@ -25,7 +25,10 @@
           android:layout_height="fill_parent"
           android:text="@string/archive_anaylsis_btn"
           android:background="@color/background_contrast_color"
-          android:gravity="left|center_vertical" android:textSize="21sp" android:textColor="@color/h1_text" android:layout_marginLeft="5dp"/>
+          android:gravity="left|center_vertical" 
+          android:textSize="21sp" 
+          android:textColor="@color/h1_text" 
+          android:layout_marginLeft="5dp"/>
           		
       <ImageButton
           android:id="@+id/arc_summary_button"
@@ -51,7 +54,12 @@
     android:layout_width="fill_parent"
     android:layout_height="0dip"
     android:layout_weight="1.0"
-    android:background="@color/background_seperator_color" />
+    android:background="@color/background_seperator_color"
+    android:layout_margin="@dimen/archive_row_margin"
+    android:divider="@android:color/transparent"
+    android:dividerHeight="10.0sp" >
+	    <!-- Preview: listitem=@layout/archive_row_layout -->
+	</ListView>
     
   <TextView 
     android:id="@android:id/empty"
