@@ -7,10 +7,13 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.util.Log;
+import au.id.teda.volumeusage.activity.ArchiveActivity;
 
 public class DailyDataDBAdapter {
-	
-	private final String DEBUG_TAG = "iiNet Usage"; // Debug tag for LogCat
+		
+	// Static strings for debug tags
+	private static final String DEBUG_TAG = "iiNet Usage";
+	private static final String INFO_TAG = DailyDataDBAdapter.class.getSimpleName();
 	
 	// Set variables for adapter
 	public static final String KEY_ROWID = "_id";
@@ -55,15 +58,19 @@ public class DailyDataDBAdapter {
         
         //Log.d(DEBUG_TAG, "DailyDataDBAdapter > createDailyUsage > dbQuery: " + INSERT);
         try {
-            insertStmt = this .database.compileStatement(INSERT);
+            insertStmt = this.database.compileStatement(INSERT);
             insertStmt.bindString(1, Long.toString(date));
             insertStmt.bindString(2, period);
             insertStmt.bindString(3, Long.toString(peak));
             insertStmt.bindString(4, Long.toString(offpeak));
             insertStmt.bindString(5, Long.toString(upload));
             insertStmt.bindString(6, Long.toString(freezone));
-            retLong = insertStmt.executeInsert();
+            //retLong = insertStmt.executeInsert();
 
+            Log.d(DEBUG_TAG, "DB Insert: " + Long.toString(date) 
+            		+ period + Long.toString(peak) + Long.toString(offpeak)
+            		+ Long.toString(upload) + Long.toString(freezone));
+            
         } catch (Exception e) {
             Log.e(DEBUG_TAG, "opps");
         } finally {

@@ -20,6 +20,7 @@ import android.widget.Toast;
 import au.id.teda.volumeusage.R;
 import au.id.teda.volumeusage.adapter.ArchiveArrayAdapter;
 import au.id.teda.volumeusage.async.RefreshUsageAsync;
+import au.id.teda.volumeusage.helper.AccountHelper;
 import au.id.teda.volumeusage.prefs.Preferences;
 import au.id.teda.volumeusage.service.ServiceHelper;
 import au.id.teda.volumeusage.view.SetStatusBar;
@@ -40,12 +41,9 @@ import au.id.teda.volumeusage.view.SetStatusBar;
 
 public class ArchiveActivity extends ListActivity {
 	
-	/**
-	 *  Static tag strings for logging information and debug
-	 */
-	private static final String DEBUG_TAG = "iiNet Usage"; // Debug tag for LogCat
+	// Static strings for debug tags
+	private static final String DEBUG_TAG = "iiNet Usage";
 	private static final String INFO_TAG = ArchiveActivity.class.getSimpleName();
-	static final ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +52,11 @@ public class ArchiveActivity extends ListActivity {
 		Log.i(INFO_TAG, "onCreate()");
 		setContentView(R.layout.archive);
 
-		// Create an array of Strings, that will be put to our ListActivity
-		String[] values = new String[] { "2011 October", "2011 September", "2011 August", "Add" };        
+		// Create instance of AccountHelper 
+		AccountHelper myAccountHelper = new AccountHelper(this);
 
-		setListAdapter((ListAdapter) new ArchiveArrayAdapter(this, values));
+		// Set list adapter with string array values from AccountHelper
+		setListAdapter((ListAdapter) new ArchiveArrayAdapter(this, myAccountHelper.getArchivedMonths()));
 		
 	}
 
@@ -66,15 +65,12 @@ public class ArchiveActivity extends ListActivity {
 		super.onListItemClick(listView, view, position, id);
 		
 		// Get the item that was clicked
-		Object listItem = this.getListAdapter().getItem(position);
-		String keyword = listItem.toString();
-		Toast.makeText(this, "You selected: " + keyword, Toast.LENGTH_LONG)
-				.show();
+		String item = (String) getListAdapter().getItem(position);
+		Toast.makeText(this, item + " selected", Toast.LENGTH_LONG).show();
 	}
 	
-	private void onAnalysisClick(View view){
-		Toast.makeText(this, "Analysis Archive", Toast.LENGTH_LONG)
-		.show();
+	public void onAnalysisClick(View view){
+		Toast.makeText(this, "Analysis Archive", Toast.LENGTH_LONG).show();
 	}
 	
 	/**

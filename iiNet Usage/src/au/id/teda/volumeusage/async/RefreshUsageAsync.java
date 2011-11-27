@@ -123,7 +123,7 @@ public class RefreshUsageAsync extends AsyncTask<Void, Void, Void> {
 	        	//Log.d(DEBUG_TAG, "URL: " + url);
 	        	
 	        	// Load xml from our developement xml file
-				//InputSource is = new InputSource(MyApp.getAppContext().getResources().openRawResource(R.raw.adsl2));
+				InputSource is = new InputSource(MyApp.getAppContext().getResources().openRawResource(R.raw.may2011));
 	        	
 	        	 // Create a SAXParserFactory so we can
 	        	SAXParserFactory spf = SAXParserFactory.newInstance();
@@ -139,10 +139,10 @@ public class RefreshUsageAsync extends AsyncTask<Void, Void, Void> {
 	        	xr.setContentHandler(myAccountInfoSAXHandler);
 	        	
 	        	// Parse the xml-data from our development file
-	        	//xr.parse(new InputSource(is.getByteStream()));
+	        	xr.parse(new InputSource(is.getByteStream()));
 	        	
 	        	// Else parse the xml-data from our URL.
-	        	xr.parse(new InputSource(url.openStream()));
+	        	//xr.parse(new InputSource(url.openStream()));
 	        	
 	        } catch (MalformedURLException e) {
 				// TODO Auto-generated catch block

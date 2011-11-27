@@ -522,10 +522,19 @@ public class AccountHelper {
 	// Return Current Data Period
 	public String getCurrentPeriod(){
 		
-		Long datePeriodMillsecToGo = getDaysToGo()*24*60*60*1000; // Convert string value of days to go into millseconds
-		Long datePeriodMillsec = System.currentTimeMillis() + datePeriodMillsecToGo; // Add current time in millseconds to days to go
-		SimpleDateFormat date_format = new SimpleDateFormat("MMM yyyy"); // Convert millesconds timestamp into MMM yyyy
+		// Convert string value of days to go into millseconds
+		Long datePeriodMillsecToGo = getDaysToGo()*24*60*60*1000;
+		
+		// Add current time in millseconds to days to go
+		Long datePeriodMillsec = System.currentTimeMillis() + datePeriodMillsecToGo;
+		
+		// Convert millesconds timestamp into MMM yyyy
+		SimpleDateFormat date_format = new SimpleDateFormat("MMM yyyy");
+		
+		// Create string
 		String datePeriodString = date_format.format(datePeriodMillsec);
+		
+		// TODO: Should be able to just have "date_format.format(datePeriodMillsec)" as return no need for string first 
 		
 		return datePeriodString;
 		
@@ -540,6 +549,18 @@ public class AccountHelper {
 		String datePeriodString = date_format.format(datePeriodMillsec);
 		
 		return datePeriodString;
+		
+	}
+
+	public String[] getArchivedMonths() {
+		
+		// Set current data period
+		String CURRENT_PERIOD = getPeriodString();
+		Log.d(DEBUG_TAG, "getArchivedMonths()> CURRENT_PERIOD: " + CURRENT_PERIOD);
+		
+		// Create an array of Strings, that will be put to our ListActivity
+		String[] values = new String[] { "2011 October", "2011 September", "2011 August", "Add" };
+		return values;
 		
 	}
 }

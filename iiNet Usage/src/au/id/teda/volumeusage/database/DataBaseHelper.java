@@ -4,12 +4,15 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import au.id.teda.volumeusage.activity.MainActivity;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
 
-	private final String DEBUG_TAG = "iiNet Usage"; // Debug tag for LogCat
+	// Static tags for logging
+	private static final String DEBUG_TAG = "iiNet Usage";
+	private static final String INFO_TAG = DataBaseHelper.class.getSimpleName();
 	
-	/** Set some variables for the handler **/
+	// Set some variables for the handler
 	public static String DATABASE_NAME = "iiusage.db";
 	public static final int DATABASE_VERSION = 1;
 	

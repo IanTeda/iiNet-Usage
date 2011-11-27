@@ -218,9 +218,15 @@ public class DailyUsageSAXHandler extends DefaultHandler {
 		if (tempAcountStatus.daysToGo != null
 				&& fetchHistory == false
 				&& dataPeriod == null){
-			Long datePeriodMillsecToGo = Long.parseLong(tempAcountStatus.daysToGo)*24*60*60*1000; // Convert string value of days to go into millseconds
-			Long datePeriodMillsec = System.currentTimeMillis() + datePeriodMillsecToGo; // Add current time in millseconds to days to go
-			SimpleDateFormat date_format = new SimpleDateFormat("MMM yyyy"); // Convert millesconds timestamp into MMM yyyy
+			// Convert string value of days to go into millseconds
+			Long datePeriodMillsecToGo = Long.parseLong(tempAcountStatus.daysToGo)*24*60*60*1000;
+			
+			// Add current time in millseconds to days to go
+			Long datePeriodMillsec = System.currentTimeMillis() + datePeriodMillsecToGo;
+			
+			// Convert millesconds timestamp into MMM yyyy
+			SimpleDateFormat date_format = new SimpleDateFormat("MMM yyyy");
+			
 			String datePeriodString = date_format.format(datePeriodMillsec);
 			//dataPeriod = "Sep2011";
 			tempDailyUsage.period = datePeriodString; //TODO: Change to datePeriodString after development
