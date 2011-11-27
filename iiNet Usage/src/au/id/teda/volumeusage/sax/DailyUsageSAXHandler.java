@@ -216,10 +216,18 @@ public class DailyUsageSAXHandler extends DefaultHandler {
 		}
 		
 		if (tempAcountStatus.daysToGo != null
-				&& fetchHistory == false
-				&& dataPeriod == null){
+				&& tempAcountStatus.daysSoFar != null
+				&& tempDailyUsage.date != null){
 			// Convert string value of days to go into millseconds
 			Long datePeriodMillsecToGo = Long.parseLong(tempAcountStatus.daysToGo)*24*60*60*1000;
+			Long datePeriodMillsecSoFare = Long.parseLong(tempAcountStatus.daysToGo)*24*60*60*1000;
+			
+			Long myCheckDate = StringToLongDate(tempDailyUsage.date, "yyyy-MM-dd").getTime()
+					+ datePeriodMillsecToGo
+					+ datePeriodMillsecSoFare;
+			
+			Log.d(DEBUG_TAG, "Check date: " + myCheckDate + " Current Date: " + System.currentTimeMillis());
+			
 			
 			// Add current time in millseconds to days to go
 			Long datePeriodMillsec = System.currentTimeMillis() + datePeriodMillsecToGo;
@@ -251,9 +259,10 @@ public class DailyUsageSAXHandler extends DefaultHandler {
 			
 			dailyDataDB = new DailyDataDBAdapter(MyApp.getAppContext());
 			dailyDataDB.open();
-			dailyDataDB.createDailyUsage(date, period, peak, offpeak, upload, freezone);
+			//dailyDataDB.createDailyUsage(date, period, peak, offpeak, upload, freezone);
 			dailyDataDB.close();
-			//Log.d(DEBUG_TAG, "DailyUsageSAXHandler > endElement > insert DailyUsageDB entry");
+			Log.d(DEBUG_TAG, "Insert DailyUsageDB > " + " date: "+ date + " | period: "+ period 
+					+ " | peak: " + peak + " | offpeak: " + offpeak + " | upload: " + upload + " | freezone: " + freezone);
 			
 			// Clear objects for next pass over xml
 			tempDailyUsage.date = null;

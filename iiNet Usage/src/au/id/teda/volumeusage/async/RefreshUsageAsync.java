@@ -139,10 +139,10 @@ public class RefreshUsageAsync extends AsyncTask<Void, Void, Void> {
 	        	xr.setContentHandler(myAccountInfoSAXHandler);
 	        	
 	        	// Parse the xml-data from our development file
-	        	xr.parse(new InputSource(is.getByteStream()));
+	        	//xr.parse(new InputSource(is.getByteStream()));
 	        	
 	        	// Else parse the xml-data from our URL.
-	        	//xr.parse(new InputSource(url.openStream()));
+	        	xr.parse(new InputSource(url.openStream()));
 	        	
 	        } catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
@@ -159,8 +159,8 @@ public class RefreshUsageAsync extends AsyncTask<Void, Void, Void> {
 			}
 		} else {
 			// Load dialog for going to settings
-			DialogHelper dialogHelper = new DialogHelper(context);
-			dialogHelper.dialogUsernamePassword();
+			//DialogHelper dialogHelper = new DialogHelper(context);
+			//dialogHelper.dialogUsernamePassword();
 		}
 		return null;
 	}

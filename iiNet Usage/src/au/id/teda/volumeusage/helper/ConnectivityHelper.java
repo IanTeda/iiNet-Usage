@@ -30,7 +30,7 @@ public class ConnectivityHelper {
 	 * @param context
 	 */
 	public ConnectivityHelper(Context context) {
-		Log.d(INFO_TAG, "ConnectivityHelper()");
+		//Log.i(INFO_TAG, "ConnectivityHelper()");
 		
 		// Set context for class
 		this.context = context;
@@ -59,20 +59,22 @@ public class ConnectivityHelper {
 		     // Confirm wifi connectivity
 		    Boolean isWifi = myConMan.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnectedOrConnecting();
 			
-		    Log.d(DEBUG_TAG, "is3g: " + is3g);
-		    Log.d(DEBUG_TAG, "isWifi: " + isWifi);
-		    Log.d(DEBUG_TAG, "Wifi Only: " + mySettings.getBoolean(WIFI_ONLY, false));
+		    //Log.d(DEBUG_TAG, "is3g: " + is3g);
+		    //Log.d(DEBUG_TAG, "isWifi: " + isWifi);
+		    //Log.d(DEBUG_TAG, "Wifi Only: " + mySettings.getBoolean(WIFI_ONLY, false));
 		    
 		    if (is3g && !mySettings.getBoolean(WIFI_ONLY, false)) {
 		    	Log.d(DEBUG_TAG, "3G and non wifi connectin allowed");
+		    	Log.i(INFO_TAG, "Connectivity true");
 		    	return true;
 		    	
 		    } else if(isWifi && mySettings.getBoolean(WIFI_ONLY, false)) {
 		    	Log.d(DEBUG_TAG, "3G and non wifi connectin allowed");
+		    	Log.i(INFO_TAG, "Connectivity true");
 		    	return true;
 		    	
 		    } else {
-		    	
+		    	Log.i(INFO_TAG, "Connectivity false");
 		    	return false;
 		    }
 		}

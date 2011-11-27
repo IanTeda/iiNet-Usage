@@ -65,7 +65,7 @@ public class DailyDataDBAdapter {
             insertStmt.bindString(4, Long.toString(offpeak));
             insertStmt.bindString(5, Long.toString(upload));
             insertStmt.bindString(6, Long.toString(freezone));
-            //retLong = insertStmt.executeInsert();
+            retLong = insertStmt.executeInsert();
 
             Log.d(DEBUG_TAG, "DB Insert: " + Long.toString(date) 
             		+ period + Long.toString(peak) + Long.toString(offpeak)
