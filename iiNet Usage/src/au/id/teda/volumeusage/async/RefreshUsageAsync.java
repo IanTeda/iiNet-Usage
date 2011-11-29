@@ -90,7 +90,7 @@ public class RefreshUsageAsync extends AsyncTask<Void, Void, Void> {
 		super.onPreExecute();
 		Log.i(INFO_TAG, "onPreExecute()");
 		
-		Log.d(DEBUG_TAG, "RefreshUsageData > Onload update: " + updateRefresh);
+		//Log.d(DEBUG_TAG, "RefreshUsageData > Onload update: " + updateRefresh);
 		
 		// Show dialog if preference set true and it isn't an auto update at load
 		if (showRefreshDialog == false && updateRefresh == false){
@@ -139,10 +139,10 @@ public class RefreshUsageAsync extends AsyncTask<Void, Void, Void> {
 	        	xr.setContentHandler(myAccountInfoSAXHandler);
 	        	
 	        	// Parse the xml-data from our development file
-	        	//xr.parse(new InputSource(is.getByteStream()));
+	        	xr.parse(new InputSource(is.getByteStream()));
 	        	
 	        	// Else parse the xml-data from our URL.
-	        	xr.parse(new InputSource(url.openStream()));
+	        	//xr.parse(new InputSource(url.openStream()));
 	        	
 	        } catch (MalformedURLException e) {
 				// TODO Auto-generated catch block

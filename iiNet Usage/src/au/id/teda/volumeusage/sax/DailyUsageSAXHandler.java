@@ -87,7 +87,7 @@ public class DailyUsageSAXHandler extends DefaultHandler {
 	// This function is called when the parser reaches an element
 	@Override
 	public void startElement(String uri, String name, String qName, Attributes atts) {
-		//Log.d(DEBUG_TAG, "DailyUsageSAXHandler > startElement name.trim() is: " + name.trim());
+		//Log.d(DEBUG_TAG, "DailyUsageSAXHandler > startElement: " + name.trim());
 		if (name.trim().equalsIgnoreCase(II_FEED)){
 			inFeed = true;
 		} else if (name.trim().equalsIgnoreCase(ACCOUNT_INFO)){
@@ -172,7 +172,7 @@ public class DailyUsageSAXHandler extends DefaultHandler {
 	// This function is called when the parser reaches the end of an element
 	@Override
 	public void endElement(String uri, String name, String qName) {
-		//Log.d(DEBUG_TAG, "DailyUsageSAXHandler > endElement name.trim() is: " + name.trim());
+		//Log.d(DEBUG_TAG, "DailyUsageSAXHandler > endElement: " + name.trim());
 		if (name.trim().equalsIgnoreCase(II_FEED)){
 			inFeed = false;
 		} else if (name.trim().equalsIgnoreCase(ACCOUNT_INFO)){
@@ -215,30 +215,35 @@ public class DailyUsageSAXHandler extends DefaultHandler {
 			inIP = false;
 		}
 		
-		if (tempAcountStatus.daysToGo != null
-				&& tempAcountStatus.daysSoFar != null
-				&& tempDailyUsage.date != null){
+		// Check to see if we have values for 'Days to Go', 'Days so Fare' & first date in  xml
+		// Then check that we haven't set the data period yet
+		if (tempAcountStatus.daysToGo != null 
+				&& tempAcountStatus.daysSoFar != null 
+				&& tempDailyUsage.date != null
+				&& tempDailyUsage.period == null){
+			
+			Log.d(DEBUG_TAG, "daysToGo: " + tempAcountStatus.daysToGo);
+			Log.d(DEBUG_TAG, "daysSoFar: " + tempAcountStatus.daysSoFar);
+			Log.d(DEBUG_TAG, "date: " + tempDailyUsage.date);
+			
 			// Convert string value of days to go into millseconds
-			Long datePeriodMillsecToGo = Long.parseLong(tempAcountStatus.daysToGo)*24*60*60*1000;
-			Long datePeriodMillsecSoFare = Long.parseLong(tempAcountStatus.daysToGo)*24*60*60*1000;
+			long millSecToGoLong = Long.parseLong(tempAcountStatus.daysToGo)*24*60*60*1000;
+			long millSecSoFareLong = Long.parseLong(tempAcountStatus.daysToGo)*24*60*60*1000;
 			
-			Long myCheckDate = StringToLongDate(tempDailyUsage.date, "yyyy-MM-dd").getTime()
-					+ datePeriodMillsecToGo
-					+ datePeriodMillsecSoFare;
+			// Convert date string to milliseconds
+			long dateLong = StringToLongDate(tempDailyUsage.date, "yyyy-MM-dd").getTime();
 			
-			Log.d(DEBUG_TAG, "Check date: " + myCheckDate + " Current Date: " + System.currentTimeMillis());
-			
-			
-			// Add current time in millseconds to days to go
-			Long datePeriodMillsec = System.currentTimeMillis() + datePeriodMillsecToGo;
+			long myDataPeriodLong = dateLong
+					+ millSecToGoLong
+					+ millSecSoFareLong;
 			
 			// Convert millesconds timestamp into MMM yyyy
 			SimpleDateFormat date_format = new SimpleDateFormat("MMM yyyy");
 			
-			String datePeriodString = date_format.format(datePeriodMillsec);
+			String myDataPeriodString = date_format.format(myDataPeriodLong);
 			//dataPeriod = "Sep2011";
-			tempDailyUsage.period = datePeriodString; //TODO: Change to datePeriodString after development
-			//Log.d(DEBUG_TAG, "DailyUsageSAXHandler > endElement > datePeriodString: " + dataPeriod);
+			tempDailyUsage.period = myDataPeriodString; //TODO: Change to datePeriodString after development
+			Log.d(DEBUG_TAG, "DailyUsageSAXHandler > myDataPeriodString: " + tempDailyUsage.period);
 		}
 		
 		// Check to see if we have all the data required for a dailyDB entry
@@ -386,7 +391,7 @@ public class DailyUsageSAXHandler extends DefaultHandler {
 	@Override
 	public void characters(char ch[], int start, int length) {
         String chars = (new String(ch).substring(start, start + length));
-        //Log.d(DEBUG_TAG, "DailyUsageSAXHandler > characters is: " + chars);
+        //Log.d(DEBUG_TAG, "DailyUsageSAXHandler > characters: " + chars);
         if (inFeed && inAccountInfo && inPlan){
         	//Log.d(DEBUG_TAG, "DailyUsageSAXHandler > tempAcountInfo.plan set to: " + chars);
         	tempAcountInfo.plan = chars;

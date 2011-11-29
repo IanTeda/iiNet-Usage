@@ -64,12 +64,12 @@ public class ConnectivityHelper {
 		    //Log.d(DEBUG_TAG, "Wifi Only: " + mySettings.getBoolean(WIFI_ONLY, false));
 		    
 		    if (is3g && !mySettings.getBoolean(WIFI_ONLY, false)) {
-		    	Log.d(DEBUG_TAG, "3G and non wifi connectin allowed");
+		    	//Log.d(DEBUG_TAG, "3G and non wifi connection allowed");
 		    	Log.i(INFO_TAG, "Connectivity true");
 		    	return true;
 		    	
 		    } else if(isWifi && mySettings.getBoolean(WIFI_ONLY, false)) {
-		    	Log.d(DEBUG_TAG, "3G and non wifi connectin allowed");
+		    	//Log.d(DEBUG_TAG, "3G and non wifi connectin allowed");
 		    	Log.i(INFO_TAG, "Connectivity true");
 		    	return true;
 		    	
