@@ -8,13 +8,11 @@ import java.util.Date;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
 
-import android.text.format.DateFormat;
 import android.util.Log;
 import au.id.teda.volumeusage.MyApp;
 import au.id.teda.volumeusage.database.AccountInfoDBAdapter;
 import au.id.teda.volumeusage.database.AccountStatusDBAdapter;
 import au.id.teda.volumeusage.database.DailyDataDBAdapter;
-import au.id.teda.volumeusage.service.ServiceHelper;
 
 public class DailyUsageSAXHandler extends DefaultHandler {
 	
@@ -223,60 +221,33 @@ public class DailyUsageSAXHandler extends DefaultHandler {
 				&& tempDailyUsage.date != null
 				&& tempDailyUsage.period == null){
 		
-			try {
-				Log.d(DEBUG_TAG, "Try: " + tempDailyUsage.date);
+				//Log.d(DEBUG_TAG, "Try: " + tempDailyUsage.date);
 				
-				SimpleDateFormat myInputDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-				SimpleDateFormat myOutputDateFormat = new SimpleDateFormat("MMM yyyy");
-				
-				Date myDate = myInputDateFormat.parse(tempDailyUsage.date);
-				
-				Log.d(DEBUG_TAG, "Date is: " + myDate);
-				
-				Calendar myCalendar = Calendar.getInstance();
-				myCalendar.setTime(myDate);
-				myCalendar.add(Calendar.DATE, 27);
-				
-				tempDailyUsage.period = myOutputDateFormat.format(myCalendar.getTime());
-				
-				Log.d(DEBUG_TAG, "myDataPeriodString: " + tempDailyUsage.period);
-				//tempDailyUsage.period = myOutputDateFormat.format(myCalendar);
-			} catch (ParseException e) {
-				Log.d(DEBUG_TAG, "Catch");
-				e.printStackTrace();
-			};
-			
-
-				
-			
-			
-				//Log.d(DEBUG_TAG, "daysToGo: " + tempAcountStatus.daysToGo);
-				//Log.d(DEBUG_TAG, "daysSoFar: " + tempAcountStatus.daysSoFar);
-				//Log.d(DEBUG_TAG, "date: " + tempDailyUsage.date);
-			
-			/**
-			// Convert string value of days to go into millseconds
-			long millSecToGoLong = Long.parseLong(tempAcountStatus.daysToGo)*24*60*60*1000;
-			long millSecSoFareLong = Long.parseLong(tempAcountStatus.daysToGo)*24*60*60*1000;
-			
-			// Convert date string to milliseconds
-			long myDateLong = StringToLongDate(tempDailyUsage.date, "yyyy-MM-dd").getTime();
-			
-			long myTwentySevenDays = 27*24*60*60*1000;
-			long myDataPeriodLong = myDateLong + myTwentySevenDays;
-			
-			Log.d(DEBUG_TAG, "myDateLong: " + myDateLong);
-			Log.d(DEBUG_TAG, "myTwentySevenDays: " + myTwentySevenDays);
-			Log.d(DEBUG_TAG, "myDataPeriodLong: " + myDataPeriodLong);
-			
-			// Convert millesconds timestamp into MMM yyyy
-			SimpleDateFormat date_format = new SimpleDateFormat("MMM yyyy");
-			
-			String myDataPeriodString = date_format.format(myDataPeriodLong);
-			//dataPeriod = "Sep2011";
-			tempDailyUsage.period = myDataPeriodString; //TODO: Change to datePeriodString after development
-			Log.d(DEBUG_TAG, "DailyUsageSAXHandler > myDataPeriodString: " + tempDailyUsage.period);
-			**/
+				try {
+					
+					// Set date format for string input and output
+					SimpleDateFormat myInputDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+					SimpleDateFormat myOutputDateFormat = new SimpleDateFormat("MMM yyyy");
+					
+					// Convert date string to date
+					Date myDate = myInputDateFormat.parse(tempDailyUsage.date);
+					
+					//Log.d(DEBUG_TAG, "Date is: " + myDate);
+					
+					// Add date to calendar and then add 27 days to get data period
+					Calendar myCalendar = Calendar.getInstance();
+					myCalendar.setTime(myDate);
+					myCalendar.add(Calendar.DATE, 27);
+					
+					// Convert and set date to string value
+					tempDailyUsage.period = myOutputDateFormat.format(myCalendar.getTime());
+					Log.i(INFO_TAG, "myDataPeriodString: " + tempDailyUsage.period);
+					
+				// Catch any parse errors during string to date parse
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		}
 		
 		// Check to see if we have all the data required for a dailyDB entry
@@ -297,10 +268,13 @@ public class DailyUsageSAXHandler extends DefaultHandler {
 			
 			dailyDataDB = new DailyDataDBAdapter(MyApp.getAppContext());
 			dailyDataDB.open();
-			//dailyDataDB.createDailyUsage(date, period, peak, offpeak, upload, freezone);
+			dailyDataDB.createDailyUsage(date, period, peak, offpeak, upload, freezone);
 			dailyDataDB.close();
+			
+			/**
 			Log.d(DEBUG_TAG, "Insert DailyUsageDB > " + " date: "+ date + " | period: "+ period 
 					+ " | peak: " + peak + " | offpeak: " + offpeak + " | upload: " + upload + " | freezone: " + freezone);
+			**/
 			
 			// Clear objects for next pass over xml
 			tempDailyUsage.date = null;
