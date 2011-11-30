@@ -2,6 +2,7 @@ package au.id.teda.volumeusage.sax;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.xml.sax.Attributes;
@@ -221,21 +222,52 @@ public class DailyUsageSAXHandler extends DefaultHandler {
 				&& tempAcountStatus.daysSoFar != null 
 				&& tempDailyUsage.date != null
 				&& tempDailyUsage.period == null){
+		
+			try {
+				Log.d(DEBUG_TAG, "Try: " + tempDailyUsage.date);
+				
+				SimpleDateFormat myInputDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+				SimpleDateFormat myOutputDateFormat = new SimpleDateFormat("MMM yyyy");
+				
+				Date myDate = myInputDateFormat.parse(tempDailyUsage.date);
+				
+				Log.d(DEBUG_TAG, "Date is: " + myDate);
+				
+				Calendar myCalendar = Calendar.getInstance();
+				myCalendar.setTime(myDate);
+				myCalendar.add(Calendar.DATE, 27);
+				
+				tempDailyUsage.period = myOutputDateFormat.format(myCalendar.getTime());
+				
+				Log.d(DEBUG_TAG, "myDataPeriodString: " + tempDailyUsage.period);
+				//tempDailyUsage.period = myOutputDateFormat.format(myCalendar);
+			} catch (ParseException e) {
+				Log.d(DEBUG_TAG, "Catch");
+				e.printStackTrace();
+			};
 			
-			Log.d(DEBUG_TAG, "daysToGo: " + tempAcountStatus.daysToGo);
-			Log.d(DEBUG_TAG, "daysSoFar: " + tempAcountStatus.daysSoFar);
-			Log.d(DEBUG_TAG, "date: " + tempDailyUsage.date);
+
+				
 			
+			
+				//Log.d(DEBUG_TAG, "daysToGo: " + tempAcountStatus.daysToGo);
+				//Log.d(DEBUG_TAG, "daysSoFar: " + tempAcountStatus.daysSoFar);
+				//Log.d(DEBUG_TAG, "date: " + tempDailyUsage.date);
+			
+			/**
 			// Convert string value of days to go into millseconds
 			long millSecToGoLong = Long.parseLong(tempAcountStatus.daysToGo)*24*60*60*1000;
 			long millSecSoFareLong = Long.parseLong(tempAcountStatus.daysToGo)*24*60*60*1000;
 			
 			// Convert date string to milliseconds
-			long dateLong = StringToLongDate(tempDailyUsage.date, "yyyy-MM-dd").getTime();
+			long myDateLong = StringToLongDate(tempDailyUsage.date, "yyyy-MM-dd").getTime();
 			
-			long myDataPeriodLong = dateLong
-					+ millSecToGoLong
-					+ millSecSoFareLong;
+			long myTwentySevenDays = 27*24*60*60*1000;
+			long myDataPeriodLong = myDateLong + myTwentySevenDays;
+			
+			Log.d(DEBUG_TAG, "myDateLong: " + myDateLong);
+			Log.d(DEBUG_TAG, "myTwentySevenDays: " + myTwentySevenDays);
+			Log.d(DEBUG_TAG, "myDataPeriodLong: " + myDataPeriodLong);
 			
 			// Convert millesconds timestamp into MMM yyyy
 			SimpleDateFormat date_format = new SimpleDateFormat("MMM yyyy");
@@ -244,6 +276,7 @@ public class DailyUsageSAXHandler extends DefaultHandler {
 			//dataPeriod = "Sep2011";
 			tempDailyUsage.period = myDataPeriodString; //TODO: Change to datePeriodString after development
 			Log.d(DEBUG_TAG, "DailyUsageSAXHandler > myDataPeriodString: " + tempDailyUsage.period);
+			**/
 		}
 		
 		// Check to see if we have all the data required for a dailyDB entry
