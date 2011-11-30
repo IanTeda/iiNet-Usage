@@ -49,7 +49,7 @@ public class ArchiveActivity extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		Log.i(INFO_TAG, "onCreate()");
+		//Log.i(INFO_TAG, "onCreate()");
 		setContentView(R.layout.archive);
 
 		// Create instance of AccountHelper 
@@ -104,7 +104,7 @@ public class ArchiveActivity extends ListActivity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		Log.i(INFO_TAG, "onResume()");
+		//Log.i(INFO_TAG, "onResume()");
 		
         // Set status bar hide or not
     	SetStatusBar setStatusBar = new SetStatusBar(this);

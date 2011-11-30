@@ -508,13 +508,14 @@ public class AccountHelper {
 
 	// Check if username and password exist. Return true if they do
 	public boolean checkUsernamePassword() {
-        Log.i(INFO_TAG, "checkUsernamePassword()");
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context); //TODO: Change this to accoutHelper
         String myUsername = settings.getString("iinet_username", "");
         String myPassword = settings.getString("iinet_password", "");
         if (myUsername.length() == 0 || myPassword.length() == 0){
+            Log.i(INFO_TAG, "checkUsernamePassword(): false");
         	return false;
         } else {
+            Log.i(INFO_TAG, "checkUsernamePassword(): true");
         	return true;
         }
 	}

@@ -25,7 +25,6 @@ import au.id.teda.volumeusage.MyApp;
 import au.id.teda.volumeusage.R;
 import au.id.teda.volumeusage.helper.AccountHelper;
 import au.id.teda.volumeusage.helper.ConnectivityHelper;
-import au.id.teda.volumeusage.notification.DialogHelper;
 import au.id.teda.volumeusage.sax.DailyUsageSAXHandler;
 import au.id.teda.volumeusage.service.ServiceHelper;
 
@@ -38,7 +37,6 @@ import au.id.teda.volumeusage.service.ServiceHelper;
  *  
  */
 
-//TODO: Rename to async
 public class RefreshUsageAsync extends AsyncTask<Void, Void, Void> {
 	
 	private static final String DEBUG_TAG = "iiNet Usage"; // Debug tag for LogCat
@@ -56,7 +54,7 @@ public class RefreshUsageAsync extends AsyncTask<Void, Void, Void> {
      * @param myHandler
      */
 	public RefreshUsageAsync (Context context, Handler myHandler) {
-		Log.i(INFO_TAG, "Start constructor");
+		//Log.i(INFO_TAG, "Start constructor");
 		
 		this.context = context;
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
@@ -73,7 +71,7 @@ public class RefreshUsageAsync extends AsyncTask<Void, Void, Void> {
 	 */
 	public RefreshUsageAsync(Context context, Handler myHandler,
 			boolean hideDialog) {
-		Log.i(INFO_TAG, "Start constructor");
+		//Log.i(INFO_TAG, "Start constructor");
 		
 		this.context = context;
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
