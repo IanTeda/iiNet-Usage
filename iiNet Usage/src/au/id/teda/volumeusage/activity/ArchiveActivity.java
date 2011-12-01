@@ -1,7 +1,5 @@
 package au.id.teda.volumeusage.activity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;

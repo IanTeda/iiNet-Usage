@@ -66,5 +66,22 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" 
     android:text="@string/no_history_data" />
+  
+    <!-- Footer -->
+  <LinearLayout
+    android:id="@+id/DB_DataLayout"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="70dp"
+    android:padding="7dp"
+    android:background="@color/background_seperator_color" >
+
+      <Button
+          android:id="@+id/archive_add_btn"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Add" />
+      
+      </LinearLayout>
     
 </LinearLayout>
