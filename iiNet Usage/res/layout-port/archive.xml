@@ -1,87 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:orientation="vertical"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent"
-  android:background="@color/background_color">
-  
-  <include android:id="@+id/action_bar" layout="@layout/action_bar" />
-  
-  <RelativeLayout
-		android:layout_width="fill_parent"
-		android:layout_height="50dp"
-		android:layout_marginLeft="10dp"
-		android:layout_marginRight="10dp"
-		android:layout_marginTop="10dp"
-		android:layout_marginBottom="20dp"
-		android:padding="5dp"
-		android:background="@drawable/archive_listitem_box" >
-		
-      <Button
-          android:id="@+id/archive_analysis_btn"
-          android:onClick="onAnalysisClick"
-          android:layout_width="fill_parent"
-          android:layout_height="fill_parent"
-          android:text="@string/archive_anaylsis_btn"
-          android:background="@color/background_contrast_color"
-          android:gravity="left|center_vertical" 
-          android:textSize="21sp" 
-          android:textColor="@color/h1_text" 
-          android:layout_marginLeft="5dp"/>
-          		
-      <ImageButton
-          android:id="@+id/arc_summary_button"
-          android:layout_alignParentRight="true"
-          android:src="@drawable/arc_ic_summary_button"
-          android:drawableTop="@drawable/arch_summary_button"
-          style="@style/arc_list_button"
-          />
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/main_container_background_color"
+    android:orientation="vertical" >
 
-      <ImageButton
-          android:id="@+id/arc_graph_button"
-          android:layout_toLeftOf="@id/arc_summary_button"
-          android:src="@drawable/arc_ic_graph_button"
-          android:drawableTop="@drawable/arch_graph_button"
-          style="@style/arc_list_button"
-          />
-      
-  </RelativeLayout>	
-  	
-	<ListView 
-    android:id="@id/android:list"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="0dip"
-    android:layout_weight="1.0"
-    android:background="@color/background_seperator_color"
-    android:layout_margin="@dimen/archive_row_margin"
-    android:divider="@android:color/transparent"
-    android:dividerHeight="10.0sp" >
-	    <!-- Preview: listitem=@layout/archive_row_layout -->
-	</ListView>
-    
-  <TextView 
-    android:id="@android:id/empty"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" 
-    android:text="@string/no_history_data" />
-  
+    <include
+        android:id="@+id/action_bar"
+        layout="@layout/action_bar" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/archive_listitem_box"
+        android:padding="5dp" >
+
+        <Button
+            android:id="@+id/archive_analysis_btn"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="5dp"
+            android:background="@color/footer_background_color"
+            android:gravity="left|center_vertical"
+            android:onClick="onAnalysisClick"
+            android:text="@string/archive_anaylsis_btn"
+            android:textColor="@color/h1_text"
+            android:textSize="21sp" />
+
+        <ImageButton
+            android:id="@+id/arc_summary_button"
+            style="@style/arc_list_button"
+            android:layout_alignParentRight="true"
+            android:drawableTop="@drawable/arch_summary_button"
+            android:src="@drawable/arc_ic_summary_button" />
+
+        <ImageButton
+            android:id="@+id/arc_graph_button"
+            style="@style/arc_list_button"
+            android:layout_toLeftOf="@id/arc_summary_button"
+            android:drawableTop="@drawable/arch_graph_button"
+            android:src="@drawable/arc_ic_graph_button" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@id/android:list"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_margin="@dimen/archive_row_margin"
+        android:layout_weight="1.0"
+        android:background="@color/main_container_background_color"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="10.0sp"
+        android:orientation="vertical" >
+
+        <!-- Preview: listitem=@layout/archive_row_layout -->
+    </ListView>
+
+    <TextView
+        android:id="@android:id/empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_history_data" />
+
     <!-- Footer -->
-  <LinearLayout
-    android:id="@+id/DB_DataLayout"
-    android:orientation="horizontal"
-    android:layout_width="fill_parent"
-    android:layout_height="70dp"
-    android:padding="7dp"
-    android:background="@color/background_seperator_color" >
-
-      <Button
-          android:id="@+id/archive_add_btn"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:text="Add" />
-      
-      </LinearLayout>
-    
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/db_footer_line" />
+
+    <LinearLayout
+        android:id="@+id/DB_DataLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="70dp"
+        android:background="@color/background_seperator_color"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="7dp" >
+
+        <Button
+            android:id="@+id/archive_add_btn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/arch_ic_plus"
+            android:drawablePadding="10dp"
+            android:gravity="center"
+            android:text="@string/archive_add_data_period_btn" />
+    </LinearLayout>
+
 </LinearLayout>

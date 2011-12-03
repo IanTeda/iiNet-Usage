@@ -13,6 +13,7 @@
   <!-- Application Colors -->
   <color name="app_base_color">#000000</color>
   <color name="main_container_background_color">#201f1f</color>
+  <color name="footer_background_color">#181717</color>
   <color name="background_seperator_color">#181717</color>
   <color name="db_button_text_color">#FF5900</color>
   <!-- <color name="background_contrast_color">#8B1A1A</color> -->

@@ -3,6 +3,7 @@
     
     <!-- ArchiveActivity Strings -->
     <string name="archive_anaylsis_btn">Analysis Archive</string>
+    <string name="archive_add_data_period_btn">Add Data Period</string>
     
     <!-- Text View Strings -->
     <string name="archive_default_text">Default Month</string>

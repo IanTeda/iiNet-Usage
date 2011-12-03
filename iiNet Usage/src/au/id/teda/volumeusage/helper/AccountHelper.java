@@ -560,7 +560,7 @@ public class AccountHelper {
 		Log.d(DEBUG_TAG, "getArchivedMonths()> CURRENT_PERIOD: " + CURRENT_PERIOD);
 		
 		// Create an array of Strings, that will be put to our ListActivity
-		String[] values = new String[] { "2011 October", "2011 September", "2011 August", "Add" };
+		String[] values = new String[] {"2011 October", "2011 September", "2011 August"};
 		return values;
 		
 	}
