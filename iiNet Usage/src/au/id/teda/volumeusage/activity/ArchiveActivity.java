@@ -1,6 +1,8 @@
 package au.id.teda.volumeusage.activity;
 
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -69,6 +71,30 @@ public class ArchiveActivity extends ListActivity {
 	
 	public void onAnalysisClick(View view){
 		Toast.makeText(this, "Analysis Archive", Toast.LENGTH_LONG).show();
+	}
+	
+	public void onAddDataClick(View view){
+		AlertDialog dialog;
+		final CharSequence[] dataPeriods = { "2011 October", "2011 September", "2011 August" };
+		
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Select Data Period");
+		builder.setItems(dataPeriods, new DialogInterface.OnClickListener() {
+
+			public void onClick(DialogInterface dialog, int pos) {
+				switch (pos) {
+				case 0:{
+					Log.d(DEBUG_TAG, "Clicked on: "+dataPeriods[pos]);
+					break;
+				}
+		        case 1:{
+		        	Log.d(DEBUG_TAG, "Clicked on: "+dataPeriods[pos]);
+		        	break;
+		        }
+				}
+		    }});
+		dialog=builder.create();
+		dialog.show();
 	}
 	
 	/**

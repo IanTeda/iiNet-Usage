@@ -89,7 +89,8 @@
             android:drawableLeft="@drawable/arch_ic_plus"
             android:drawablePadding="10dp"
             android:gravity="center"
-            android:text="@string/archive_add_data_period_btn" />
+            android:text="@string/archive_add_data_period_btn"
+            android:onClick="onAddDataClick" />
     </LinearLayout>
 
 </LinearLayout>
