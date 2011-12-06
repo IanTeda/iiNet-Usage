@@ -111,22 +111,26 @@ public class ArchiveActivity extends ListActivity {
 	 * @return
 	 */
 	private CharSequence[] getLastTwelveMonths() {
-		// Set output format for date
-		SimpleDateFormat myOutputDateFormat = new SimpleDateFormat("yyyy MMMM");
+		// Create instance of ArrayList
+		ArrayList<String> lastTwelveMonth = new ArrayList<String> ();
+		
+		// Add 'All 12 months' to list
+		lastTwelveMonth.add("Download all of them");
 		
 		// Create instance of calendar
 		Calendar myCalendar = Calendar.getInstance();
+		
+		// Set output format for date
+		SimpleDateFormat myOutputDateFormat = new SimpleDateFormat("yyyy MMMM");
 		
 		// Set calendar to current date
 		myCalendar.getTime(); // TODO: This needs to be set from a perference value of current date
 		myCalendar.add(Calendar.MONTH, -1);
 		
-		ArrayList<String> lastTwelveMonth = new ArrayList<String> ();
-		
 		int i = 0;
 		while (i < 12){
 			// Out put date
-			Log.d(DEBUG_TAG, "Current date is: " + myOutputDateFormat.format(myCalendar.getTime()));
+			//Log.d(DEBUG_TAG, "Current date is: " + myOutputDateFormat.format(myCalendar.getTime()));
 			
 			lastTwelveMonth.add(myOutputDateFormat.format(myCalendar.getTime()));
 			
