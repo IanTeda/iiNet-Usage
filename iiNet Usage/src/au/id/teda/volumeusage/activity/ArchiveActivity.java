@@ -1,5 +1,9 @@
 package au.id.teda.volumeusage.activity;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
@@ -73,22 +77,27 @@ public class ArchiveActivity extends ListActivity {
 		Toast.makeText(this, "Analysis Archive", Toast.LENGTH_LONG).show();
 	}
 	
+	/**
+	 * When add button clicked build dialog and handle click event
+	 * @param view
+	 */
 	public void onAddDataClick(View view){
 		AlertDialog dialog;
-		final CharSequence[] dataPeriods = { "2011 October", "2011 September", "2011 August" };
+		
+		final CharSequence[] lastTwelveMonths = getLastTwelveMonths();
 		
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle("Select Data Period");
-		builder.setItems(dataPeriods, new DialogInterface.OnClickListener() {
+		builder.setItems(lastTwelveMonths, new DialogInterface.OnClickListener() {
 
 			public void onClick(DialogInterface dialog, int pos) {
 				switch (pos) {
 				case 0:{
-					Log.d(DEBUG_TAG, "Clicked on: "+dataPeriods[pos]);
+					Log.d(DEBUG_TAG, "Clicked on Case 0: " + lastTwelveMonths[pos]);
 					break;
 				}
 		        case 1:{
-		        	Log.d(DEBUG_TAG, "Clicked on: "+dataPeriods[pos]);
+		        	Log.d(DEBUG_TAG, "Clicked on Case 1: " + lastTwelveMonths[pos]);
 		        	break;
 		        }
 				}
@@ -97,6 +106,43 @@ public class ArchiveActivity extends ListActivity {
 		dialog.show();
 	}
 	
+	/**
+	 * Method used to return the last 12 months from the current data period
+	 * @return
+	 */
+	private CharSequence[] getLastTwelveMonths() {
+		// Set output format for date
+		SimpleDateFormat myOutputDateFormat = new SimpleDateFormat("yyyy MMMM");
+		
+		// Create instance of calendar
+		Calendar myCalendar = Calendar.getInstance();
+		
+		// Set calendar to current date
+		myCalendar.getTime(); // TODO: This needs to be set from a perference value of current date
+		myCalendar.add(Calendar.MONTH, -1);
+		
+		ArrayList<String> lastTwelveMonth = new ArrayList<String> ();
+		
+		int i = 0;
+		while (i < 12){
+			// Out put date
+			Log.d(DEBUG_TAG, "Current date is: " + myOutputDateFormat.format(myCalendar.getTime()));
+			
+			lastTwelveMonth.add(myOutputDateFormat.format(myCalendar.getTime()));
+			
+			// Decrease date by one month
+			myCalendar.add(Calendar.MONTH, -1);
+			
+			// Add to counter
+			i++;
+		}
+		
+		// Change ArrayList to CharSequence
+		CharSequence[] myCharSequence = lastTwelveMonth.toArray(new CharSequence[lastTwelveMonth.size()]);
+		
+		return myCharSequence;
+	}
+
 	/**
 	 * onClick method for action bar
 	 * @param button
