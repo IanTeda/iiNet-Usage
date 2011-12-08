@@ -1,16 +1,21 @@
 package au.id.teda.volumeusage.activity;
 
+
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,6 +26,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import au.id.teda.volumeusage.MyApp;
 import au.id.teda.volumeusage.R;
 import au.id.teda.volumeusage.adapter.ArchiveArrayAdapter;
 import au.id.teda.volumeusage.async.RefreshUsageAsync;
@@ -49,6 +55,11 @@ public class ArchiveActivity extends ListActivity {
 	private static final String DEBUG_TAG = "iiNet Usage";
 	private static final String INFO_TAG = ArchiveActivity.class.getSimpleName();
 	
+	// Preference instance
+	private SharedPreferences mySettings = PreferenceManager.getDefaultSharedPreferences(MyApp.getAppContext());
+
+	private AccountHelper myAccountHelper = new AccountHelper(this);
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -57,7 +68,7 @@ public class ArchiveActivity extends ListActivity {
 		setContentView(R.layout.archive);
 
 		// Create instance of AccountHelper 
-		AccountHelper myAccountHelper = new AccountHelper(this);
+
 
 		// Set list adapter with string array values from AccountHelper
 		setListAdapter((ListAdapter) new ArchiveArrayAdapter(this, myAccountHelper.getArchivedMonths()));
@@ -111,6 +122,11 @@ public class ArchiveActivity extends ListActivity {
 	 * @return
 	 */
 	private CharSequence[] getLastTwelveMonths() {
+
+		// Set output format for date
+		SimpleDateFormat myOutputDateFormat = new SimpleDateFormat("yyyy MMMM");
+		SimpleDateFormat myInputDateFormat = new SimpleDateFormat("MMM yyyy");
+		
 		// Create instance of ArrayList
 		ArrayList<String> lastTwelveMonth = new ArrayList<String> ();
 		
@@ -120,11 +136,18 @@ public class ArchiveActivity extends ListActivity {
 		// Create instance of calendar
 		Calendar myCalendar = Calendar.getInstance();
 		
-		// Set output format for date
-		SimpleDateFormat myOutputDateFormat = new SimpleDateFormat("yyyy MMMM");
+		
+		// Get current data period
+		Date myCurrentDataPeriod = null;
+		try {
+			myCurrentDataPeriod = (Date) myInputDateFormat.parse(myAccountHelper.getCurrentDataPeriod());
+			myCalendar.setTime(myCurrentDataPeriod); // TODO: This needs to be set from a perference value of current date
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		// Set calendar to current date
-		myCalendar.getTime(); // TODO: This needs to be set from a perference value of current date
 		myCalendar.add(Calendar.MONTH, -1);
 		
 		int i = 0;
