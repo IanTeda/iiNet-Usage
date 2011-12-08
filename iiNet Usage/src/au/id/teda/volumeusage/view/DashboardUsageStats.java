@@ -25,7 +25,7 @@ public class DashboardUsageStats {
 	private Context context;
 	
 	public DashboardUsageStats(Context context) {
-		Log.i(INFO_TAG, "Constructor");
+		//Log.i(INFO_TAG, "Constructor");
 		this.context = context;
 	}
 

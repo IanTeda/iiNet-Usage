@@ -23,7 +23,7 @@ public class ServiceHelper {
 	
 	// ServiceHelper constructor
 	public ServiceHelper(Context context) {
-		Log.i(INFO_TAG, "Constructor");
+		//Log.i(INFO_TAG, "Constructor");
 		this.context = context;
 		serviceIntent = new Intent(context, DataCollectionService.class);
 	}

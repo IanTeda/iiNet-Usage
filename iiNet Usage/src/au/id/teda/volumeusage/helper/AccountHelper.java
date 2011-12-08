@@ -95,18 +95,20 @@ public class AccountHelper extends AccountStatusHelper {
         }
 	}
 	
-	// Check if data period is newest
+	// Check if data period is latest
 	public boolean checkDataPeriodLatest(String inputDataPeriod){
 		
 		try {
-			//Log.d(DEBUG_TAG, "myCheckDate: " + inputDataPeriod + "| myCurrentDate: " + getCurrentDataPeriod()); 
+			Log.d(DEBUG_TAG, "myCheckDate: " + inputDataPeriod + "| myCurrentDate: " + getCurrentDataPeriod()); 
 			
 			Date myCheckDate = myDataPeriodFormat.parse(inputDataPeriod);
 			Date myCurrentDate = myDataPeriodFormat.parse(getCurrentDataPeriod());
 			
-			if (myCheckDate.after(myCurrentDate)){
+			if (myCheckDate.after(myCurrentDate) || myCheckDate.equals(myCurrentDate)){
+				Log.i(INFO_TAG, "checkDataPeriodLatest(" + inputDataPeriod + ") + True");
 				return true;
 			} else {
+				Log.i(INFO_TAG, "checkDataPeriodLatest(" + inputDataPeriod + ") + False");
 				return false;
 			}
 				
