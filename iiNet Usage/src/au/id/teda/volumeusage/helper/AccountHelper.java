@@ -2,6 +2,7 @@ package au.id.teda.volumeusage.helper;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -24,6 +25,10 @@ public class AccountHelper extends AccountStatusHelper {
 	
 	// Create instance of shared preferences based on app context
 	private SharedPreferences mySettings = PreferenceManager.getDefaultSharedPreferences(MyApp.getAppContext());
+	
+	// Set data period format
+	private final SimpleDateFormat myDataPeriodFormat = new SimpleDateFormat("MMM yyyy");
+	
 	
 	private static final String PEAK = "peak";
 	private static final String OFFPEAK = "offpeak";
@@ -88,6 +93,27 @@ public class AccountHelper extends AccountStatusHelper {
         } else {
         	return false;
         }
+	}
+	
+	// Check if data period is newest
+	public boolean checkDataPeriodLatest(String inputDataPeriod){
+		
+		try {
+			//Log.d(DEBUG_TAG, "myCheckDate: " + inputDataPeriod + "| myCurrentDate: " + getCurrentDataPeriod()); 
+			
+			Date myCheckDate = myDataPeriodFormat.parse(inputDataPeriod);
+			Date myCurrentDate = myDataPeriodFormat.parse(getCurrentDataPeriod());
+			
+			if (myCheckDate.after(myCurrentDate)){
+				return true;
+			} else {
+				return false;
+			}
+				
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 	// Get quota and used data calc percentage and then build return string

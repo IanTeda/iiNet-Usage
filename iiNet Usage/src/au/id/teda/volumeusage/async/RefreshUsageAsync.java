@@ -121,7 +121,7 @@ public class RefreshUsageAsync extends AsyncTask<Void, Void, Void> {
 	        	//Log.d(DEBUG_TAG, "URL: " + url);
 	        	
 	        	// Load xml from our developement xml file
-				InputSource is = new InputSource(MyApp.getAppContext().getResources().openRawResource(R.raw.feb2011));
+				InputSource is = new InputSource(MyApp.getAppContext().getResources().openRawResource(R.raw.may2011));
 	        	
 	        	 // Create a SAXParserFactory so we can
 	        	SAXParserFactory spf = SAXParserFactory.newInstance();

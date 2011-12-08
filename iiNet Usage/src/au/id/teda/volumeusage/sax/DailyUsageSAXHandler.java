@@ -298,7 +298,8 @@ public class DailyUsageSAXHandler extends DefaultHandler {
 				&& tempAcountInfo.offpeakStart != null
 				&& tempAcountInfo.offpeakEnd !=null
 				&& tempAcountInfo.peakQuota !=null
-				&& tempAcountInfo.offpeakQuota !=null ){
+				&& tempAcountInfo.offpeakQuota !=null
+				&& tempDailyUsage.period != null){
 			
 			// If we have all the data add to database
 			String plan = tempAcountInfo.plan;
@@ -308,8 +309,11 @@ public class DailyUsageSAXHandler extends DefaultHandler {
 			long peakQuota = Long.parseLong(tempAcountInfo.peakQuota);
 			long offpeakQuota = Long.parseLong(tempAcountInfo.offpeakQuota);
 			
-			AccountInfoHelper myAccountInfoHelper = new AccountInfoHelper();
-			myAccountInfoHelper.setAccountInfo(plan, product, offpeakStart, offpeakEnd, peakQuota, offpeakQuota);
+			AccountHelper myAccountHelper = new AccountHelper(MyApp.getAppContext());
+			
+			if (myAccountHelper.checkDataPeriodLatest(tempDailyUsage.period)){
+				myAccountHelper.setAccountInfo(plan, product, offpeakStart, offpeakEnd, peakQuota, offpeakQuota);
+			}
 			
 			// Open accountInfoDB and insert/update entry
 			accountInfoDB = new AccountInfoDBAdapter(MyApp.getAppContext());
@@ -361,10 +365,6 @@ public class DailyUsageSAXHandler extends DefaultHandler {
 			long offpeak_shaped_speed = Long.parseLong(tempAcountStatus.offpeakShapingSpeed);
 			int peak_shaped = returnBooleanInt(tempAcountStatus.peakShaped);
 			int offpeak_shaped = returnBooleanInt(tempAcountStatus.offpeakShaped);
-			
-			
-			Log.d(DEBUG_TAG, "Current Period" );
-			
 			
 			AccountStatusHelper myAccountStatus = new AccountStatusHelper();
 			myAccountStatus.setAccoutStatus(systemDateTime, period, anniversary,
