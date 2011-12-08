@@ -15,6 +15,7 @@ import au.id.teda.volumeusage.MyApp;
 import au.id.teda.volumeusage.database.AccountInfoDBAdapter;
 import au.id.teda.volumeusage.database.AccountStatusDBAdapter;
 import au.id.teda.volumeusage.database.DailyDataDBAdapter;
+import au.id.teda.volumeusage.helper.AccountHelper;
 import au.id.teda.volumeusage.helper.AccountInfoHelper;
 import au.id.teda.volumeusage.helper.AccountStatusHelper;
 
@@ -360,6 +361,9 @@ public class DailyUsageSAXHandler extends DefaultHandler {
 			long offpeak_shaped_speed = Long.parseLong(tempAcountStatus.offpeakShapingSpeed);
 			int peak_shaped = returnBooleanInt(tempAcountStatus.peakShaped);
 			int offpeak_shaped = returnBooleanInt(tempAcountStatus.offpeakShaped);
+			
+			
+			Log.d(DEBUG_TAG, "Current Period" );
 			
 			
 			AccountStatusHelper myAccountStatus = new AccountStatusHelper();

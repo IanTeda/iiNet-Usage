@@ -11,7 +11,6 @@ import android.database.Cursor;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import au.id.teda.volumeusage.MyApp;
-import au.id.teda.volumeusage.activity.MainActivity;
 import au.id.teda.volumeusage.database.AccountInfoDBAdapter;
 import au.id.teda.volumeusage.database.AccountStatusDBAdapter;
 
@@ -72,8 +71,7 @@ public class AccountHelper extends AccountStatusHelper {
 	// Check if username exists
 	public boolean usernameExists(){
 		//Log.d(DEBUG_TAG, "AccountHelper > usernameExists()");
-		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
-        String myUsername = settings.getString("iinet_username", "");
+        String myUsername = mySettings.getString("iinet_username", "");
         if (myUsername.length() > 0 ){
         	return true;
         } else {
@@ -84,8 +82,7 @@ public class AccountHelper extends AccountStatusHelper {
 	// Check if password exists
 	public boolean passwordExists(){
 		//Log.d(DEBUG_TAG, "AccountHelper > passwordExists()");
-		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
-        String myPassword = settings.getString("iinet_password", "");
+        String myPassword = mySettings.getString("iinet_password", "");
         if (myPassword.length() > 0 ){
         	return true;
         } else {
@@ -218,13 +215,12 @@ public class AccountHelper extends AccountStatusHelper {
 	// TODO: Move to AccountStatusHelper
 	public boolean usageAlert(String period){
 		// Get peak and offpeak alert preferences
-		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
 		boolean alert = false;
 		
 		// Check for peak usage alert
 		if (period == "peak"){
 			
-			double peakAlert = settings.getInt("peak_usage_alert", 75);
+			double peakAlert = mySettings.getInt("peak_usage_alert", 75);
 			peakAlert = peakAlert/100;
 			double peakUsed = getPercentageUsed("peak");
 			
@@ -237,7 +233,7 @@ public class AccountHelper extends AccountStatusHelper {
 		// Check for offpeak usage alert
 		} else if (period == "offpeak"){
 			
-			double offpeakAlert = settings.getInt("offpeak_usage_alert", 75);
+			double offpeakAlert = mySettings.getInt("offpeak_usage_alert", 75);
 			offpeakAlert = offpeakAlert/100;
 			double offpeakUsed = getPercentageUsed("offpeak");
 			
@@ -512,9 +508,8 @@ public class AccountHelper extends AccountStatusHelper {
 
 	// Check if username and password exist. Return true if they do
 	public boolean checkUsernamePassword() {
-        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context); //TODO: Change this to accoutHelper
-        String myUsername = settings.getString("iinet_username", "");
-        String myPassword = settings.getString("iinet_password", "");
+        String myUsername = mySettings.getString("iinet_username", "");
+        String myPassword = mySettings.getString("iinet_password", "");
         if (myUsername.length() == 0 || myPassword.length() == 0){
             Log.i(INFO_TAG, "checkUsernamePassword(): false");
         	return false;
