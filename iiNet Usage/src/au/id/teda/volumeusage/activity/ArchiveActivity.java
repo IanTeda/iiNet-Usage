@@ -60,6 +60,9 @@ public class ArchiveActivity extends ListActivity {
 
 	private AccountHelper myAccountHelper = new AccountHelper(this);
 	
+	// Set output format for date
+	private final SimpleDateFormat myCurrentDataPeriodFormat = new SimpleDateFormat("MMM yyyy");
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -82,6 +85,20 @@ public class ArchiveActivity extends ListActivity {
 		// Get the item that was clicked
 		String item = (String) getListAdapter().getItem(position);
 		Toast.makeText(this, item + " selected", Toast.LENGTH_LONG).show();
+		
+		final SimpleDateFormat myInputFormat = new SimpleDateFormat("yyyy MMMM");
+		final SimpleDateFormat myOutputFormat = new SimpleDateFormat("yyyyMM");
+		
+		try {
+			Date myListDate = myInputFormat.parse(item);
+			String myUrlDate = myOutputFormat.format(myListDate);
+			Log.d(DEBUG_TAG, "URL String: " + myUrlDate);
+			
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public void onAnalysisClick(View view){
@@ -122,10 +139,8 @@ public class ArchiveActivity extends ListActivity {
 	 * @return
 	 */
 	private CharSequence[] getLastTwelveMonths() {
-
-		// Set output format for date
+		
 		SimpleDateFormat myOutputDateFormat = new SimpleDateFormat("yyyy MMMM");
-		SimpleDateFormat myInputDateFormat = new SimpleDateFormat("MMM yyyy");
 		
 		// Create instance of ArrayList
 		ArrayList<String> lastTwelveMonth = new ArrayList<String> ();
@@ -140,7 +155,7 @@ public class ArchiveActivity extends ListActivity {
 		// Get current data period
 		Date myCurrentDataPeriod = null;
 		try {
-			myCurrentDataPeriod = (Date) myInputDateFormat.parse(myAccountHelper.getCurrentDataPeriod());
+			myCurrentDataPeriod = (Date) myCurrentDataPeriodFormat.parse(myAccountHelper.getCurrentDataPeriod());
 			myCalendar.setTime(myCurrentDataPeriod); // TODO: This needs to be set from a perference value of current date
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
