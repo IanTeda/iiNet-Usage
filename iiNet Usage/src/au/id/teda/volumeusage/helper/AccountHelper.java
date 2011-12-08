@@ -10,17 +10,21 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import au.id.teda.volumeusage.MyApp;
 import au.id.teda.volumeusage.activity.MainActivity;
 import au.id.teda.volumeusage.database.AccountInfoDBAdapter;
 import au.id.teda.volumeusage.database.AccountStatusDBAdapter;
 
-public class AccountHelper {
+public class AccountHelper extends AccountStatusHelper {
 	
 	/**
 	 *  Static tag strings for loging information and debug
 	 */
 	private static final String DEBUG_TAG = "iiNet Usage"; // Debug tag for LogCat
 	private static final String INFO_TAG = AccountHelper.class.getSimpleName();
+	
+	// Create instance of shared preferences based on app context
+	private SharedPreferences mySettings = PreferenceManager.getDefaultSharedPreferences(MyApp.getAppContext());
 	
 	private static final String PEAK = "peak";
 	private static final String OFFPEAK = "offpeak";
@@ -564,4 +568,52 @@ public class AccountHelper {
 		return values;
 		
 	}
+	
+	// Check if data usage is over usage alert preference
+	public boolean usageAlert2(String period){
+		boolean alert = false;
+		
+		// Check for peak usage alert
+		if (period == PEAK){
+			
+			double peakAlert = mySettings.getInt("peak_usage_alert", 75);
+			peakAlert = peakAlert/100;
+			double peakUsed = getPercentageUsed(PEAK);
+			
+			if (peakUsed > peakAlert){
+				alert = true;
+			} else {
+				alert = false;
+			}
+			
+		// Check for offpeak usage alert
+		} else if (period == OFFPEAK){
+			
+			double offpeakAlert = mySettings.getInt("offpeak_usage_alert", 75);
+			offpeakAlert = offpeakAlert/100;
+			double offpeakUsed = getPercentageUsed(OFFPEAK);
+			
+			if (offpeakUsed > offpeakAlert){
+				alert = true;
+			} else {
+				alert = false;
+			}
+		}
+		return alert;
+	}
+
+	// Check if data usage is over quota
+	public boolean usageOver2(String period){
+		boolean check = false;
+		double dataUsed = getPercentageUsed(period);
+		
+		if (dataUsed > 1){
+			check = true;
+		} else {
+			check = false;
+		}
+		return check;
+	}
+	
+
 }

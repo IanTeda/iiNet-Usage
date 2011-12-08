@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
 import au.id.teda.volumeusage.R;
+import au.id.teda.volumeusage.helper.AccountHelper;
 import au.id.teda.volumeusage.helper.AccountStatusHelper;
 import au.id.teda.volumeusage.notification.NotificationHelper;
 import au.id.teda.volumeusage.sax.DailyUsageSAXHandler;
@@ -193,10 +194,10 @@ public class DataCollectionService extends Service {
 	 */
 	public void checkStatus(){
 		
-		AccountStatusHelper accoutStatusHelper = new AccountStatusHelper(this);
+		AccountHelper accoutStatusHelper = new AccountHelper(this);
 		NotificationHelper notify = new NotificationHelper(this);
 		
-			if (accoutStatusHelper.usageAlert(PEAK) && notifyAlertPeak){
+			if (accoutStatusHelper.usageAlert2(PEAK) && notifyAlertPeak){
 				//Log.d(DEBUG_TAG, "Peak alert");
 				
 				// Set notification

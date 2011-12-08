@@ -8,11 +8,15 @@ import java.util.Date;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import au.id.teda.volumeusage.MyApp;
 import au.id.teda.volumeusage.database.AccountInfoDBAdapter;
 import au.id.teda.volumeusage.database.AccountStatusDBAdapter;
 import au.id.teda.volumeusage.database.DailyDataDBAdapter;
+import au.id.teda.volumeusage.helper.AccountInfoHelper;
+import au.id.teda.volumeusage.helper.AccountStatusHelper;
 
 public class DailyUsageSAXHandler extends DefaultHandler {
 	
@@ -32,6 +36,9 @@ public class DailyUsageSAXHandler extends DefaultHandler {
 	private AccountInfoDBAdapter accountInfoDB; // TODO: is the null needed?
 	private AccountStatusDBAdapter accountStatusDB;
 	private DailyDataDBAdapter dailyDataDB;
+	
+	// Preference instance
+	private SharedPreferences mySettings = PreferenceManager.getDefaultSharedPreferences(MyApp.getAppContext());
 	
 	public static final boolean fetchHistory= false; // Am i fetching historical data?
 	private static String dataPeriod = null; // Only set the data period once, not need to do it over and over again.
@@ -300,6 +307,9 @@ public class DailyUsageSAXHandler extends DefaultHandler {
 			long peakQuota = Long.parseLong(tempAcountInfo.peakQuota);
 			long offpeakQuota = Long.parseLong(tempAcountInfo.offpeakQuota);
 			
+			AccountInfoHelper myAccountInfoHelper = new AccountInfoHelper();
+			myAccountInfoHelper.setAccountInfo(plan, product, offpeakStart, offpeakEnd, peakQuota, offpeakQuota);
+			
 			// Open accountInfoDB and insert/update entry
 			accountInfoDB = new AccountInfoDBAdapter(MyApp.getAppContext());
 			accountInfoDB.open();
@@ -330,24 +340,34 @@ public class DailyUsageSAXHandler extends DefaultHandler {
 				&& tempAcountStatus.peakShapingSpeed !=null
 				&& tempAcountStatus.offpeakShapingSpeed !=null
 				&& tempAcountStatus.uptime != null
-				&& tempAcountStatus.ipAddress != null){
+				&& tempAcountStatus.ipAddress != null
+				&& tempDailyUsage.period != null){
 			
 			// If we have all the data add to database
-			long refresh_date = System.nanoTime(); // Set current time
+			long systemDateTime = System.nanoTime(); // Set current time
+			String period = tempDailyUsage.period;
 			String ip_address = tempAcountStatus.ipAddress; 
 			long uptime = StringToLongDate(tempAcountStatus.uptime, "yyyy-MM-dd HH:mm:ss").getTime();
 			long days_so_far = Long.parseLong(tempAcountStatus.daysSoFar); 
 			long days_to_go = Long.parseLong(tempAcountStatus.daysToGo); 
 			//long anniversary = Long.parseLong(tempAcountStatus.anniversary);
-			long anniversary = System.currentTimeMillis() + (days_to_go * 24 * 60 * 60 * 1000);
+			long anniversary = System.currentTimeMillis() + (days_to_go * 24 * 60 * 60 * 1000); //TODO: Can this be changed to current sytem time + days to go?
 			long peak_used = Long.parseLong(tempAcountStatus.peakUsed);
 			long offpeak_used = Long.parseLong(tempAcountStatus.offpeakUsed);
 			long upload_used = Long.parseLong(tempAcountStatus.uploadsUsed);  
 			long freezone_used = Long.parseLong(tempAcountStatus.freezoneUsed);
-			long peak_shaping_speed = Long.parseLong(tempAcountStatus.peakShapingSpeed);
-			long offpeak_shaping_speed = Long.parseLong(tempAcountStatus.offpeakShapingSpeed);
+			long peak_shaped_speed = Long.parseLong(tempAcountStatus.peakShapingSpeed);
+			long offpeak_shaped_speed = Long.parseLong(tempAcountStatus.offpeakShapingSpeed);
 			int peak_shaped = returnBooleanInt(tempAcountStatus.peakShaped);
 			int offpeak_shaped = returnBooleanInt(tempAcountStatus.offpeakShaped);
+			
+			
+			AccountStatusHelper myAccountStatus = new AccountStatusHelper();
+			myAccountStatus.setAccoutStatus(systemDateTime, period, anniversary,
+					days_so_far, days_to_go, peak_shaped, offpeak_shaped,
+					peak_used, offpeak_used, upload_used, freezone_used,
+					peak_shaped_speed, offpeak_shaped_speed,
+					uptime, ip_address );
 			
 			//long anni = System.currentTimeMillis() + (days_to_go * 24 * 60 * 60 * 1000);
 			//SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yy");
@@ -356,10 +376,14 @@ public class DailyUsageSAXHandler extends DefaultHandler {
 			
 			//Log.d(DEBUG_TAG, "DailyUsageSAXHandler >" + Long.parseLong(tempAcountStatus.peakShapingSpeed));
 			
+			
 			// Open accountInfoDB and insert/update entry
 			accountStatusDB = new AccountStatusDBAdapter(MyApp.getAppContext());
 			accountStatusDB.open();
-			accountStatusDB.createAccoutStatus(refresh_date, ip_address, uptime, anniversary, days_so_far, days_to_go, peak_used, offpeak_used, upload_used, freezone_used, peak_shaping_speed, offpeak_shaping_speed, peak_shaped, offpeak_shaped);
+			accountStatusDB.createAccoutStatus(systemDateTime, ip_address,
+					uptime, anniversary, days_so_far, days_to_go,
+					peak_used, offpeak_used, upload_used, freezone_used,
+					peak_shaped_speed, offpeak_shaped_speed, peak_shaped, offpeak_shaped);
 			accountStatusDB.close();
 			
 			/**Log.d(DEBUG_TAG, "DailyUsageSAXHandler > endElement > insert accountStatusDB entry (" + refresh_date + ", "
