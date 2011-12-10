@@ -1,23 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<!-- Layout dimensions -->
-	<dimen name="action_bar_height">50dp</dimen>
-  <dimen name="action_bar_item_height">50dp</dimen>
-  <dimen name="action_bar_item_width">35dp</dimen>
-  
-  <dimen name="daily_usage_col_width">60dp</dimen>
-  <dimen name="daily_usage_col_title_text_size">14sp</dimen>
-  
-  <!-- Text Sizes -->
+
+    <!-- Layout dimensions -->
+    <dimen name="action_bar_height">50dp</dimen>
+    <dimen name="action_bar_item_height">50dp</dimen>
+    <dimen name="action_bar_item_width">35dp</dimen>
+    <dimen name="daily_usage_col_width">60dp</dimen>
+    <dimen name="daily_usage_col_title_text_size">14sp</dimen>
+
+    <!-- Text Sizes -->
     <dimen name="text_size_small">14sp</dimen>
     <dimen name="text_size_medium">18sp</dimen>
     <dimen name="text_size_large">22sp</dimen>
+
+    <!-- Archive Activity Dimensions -->
+    <dimen name="archive_row_height">40dp</dimen>
+    <dimen name="archive_row_margin">10dp</dimen>
+    <dimen name="archive_row_padding">5dp</dimen>
+    <dimen name="archive_row_icon_height">35dp</dimen>
+    <dimen name="archive_row_icon_width">35dp</dimen>
+    <dimen name="archive_row_text_size">18sp</dimen>
     
-      <!-- Archive Activity Dimensions -->
-      <dimen name="archive_row_height">40dp</dimen>
-      <dimen name="archive_row_margin">10dp</dimen>
-      <dimen name="archive_row_padding">5dp</dimen>
-      <dimen name="archive_row_icon_height">35dp</dimen>
-      <dimen name="archive_row_icon_width">35dp</dimen>
-      <dimen name="archive_row_text_size">18sp</dimen>
+    <dimen name="actionbar_compat_height">48dp</dimen>
+    <dimen name="actionbar_compat_button_width">48dp</dimen>
+    <dimen name="actionbar_compat_button_home_width">56dp</dimen>
+
 </resources>

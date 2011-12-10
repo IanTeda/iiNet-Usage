@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu
-	xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
-  <!-- Menu items -->
-  <item android:id="@+id/menu_settings_button"
-    android:title="@string/menu_settings_title"
-    android:alphabeticShortcut="@string/menu_settings_shortcut"
-    android:icon="@drawable/menu_ic_settings" />
-  <item android:id="@+id/menu_refresh_button"
-    android:title="@string/menu_refresh_title"
-    android:alphabeticShortcut="@string/menu_refresh_shortcut"
-    android:icon="@drawable/menu_ic_refresh" />
-  <item android:id="@+id/menu_about_button"
-    android:title="@string/menu_about_title"
-    android:alphabeticShortcut="@string/menu_about_shortcut"
-    android:icon="@drawable/menu_ic_about" />
-  	
+    <!-- Menu items -->
+
+    <item
+        android:id="@+id/menu_settings_button"
+        android:alphabeticShortcut="@string/menu_settings_shortcut"
+        android:icon="@drawable/menu_ic_settings"
+        android:title="@string/menu_settings_title"/>
+
+    <item
+        android:id="@+id/menu_refresh_button"
+        android:alphabeticShortcut="@string/menu_refresh_shortcut"
+        android:icon="@drawable/menu_ic_refresh"
+        android:title="@string/menu_refresh_title"/>
+
+    <item
+        android:id="@+id/menu_about_button"
+        android:alphabeticShortcut="@string/menu_about_shortcut"
+        android:icon="@drawable/menu_ic_about"
+        android:title="@string/menu_about_title"/>
+
+    
+    
+    
 </menu>

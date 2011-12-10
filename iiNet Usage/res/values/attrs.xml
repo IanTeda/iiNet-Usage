@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-        <declare-styleable name="au.id.teda.volumeusage.SeekBarPreference">
-        <attr name="minValue" format="integer" />
-        <attr name="maxValue" format="integer" />
+
+    <declare-styleable name="au.id.teda.volumeusage.SeekBarPreference">
+        <attr format="integer" name="minValue" />
+        <attr format="integer" name="maxValue" />
     </declare-styleable>
+    <declare-styleable name="AppTheme">
+        <attr format="reference" name="actionbarCompatTitleStyle" />
+        <attr format="reference" name="actionbarCompatItemStyle" />
+        <attr format="reference" name="actionbarCompatItemHomeStyle" />
+        <attr format="reference" name="actionbarCompatProgressIndicatorStyle" />
+    </declare-styleable>
+    <declare-styleable name="BezelImageView">
+        <attr format="reference" name="maskDrawable" />
+        <attr format="reference" name="borderDrawable" />
+    </declare-styleable>
+
 </resources>
