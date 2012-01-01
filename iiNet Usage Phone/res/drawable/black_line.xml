@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<selector
+  xmlns:android="http://schemas.android.com/apk/res/android">
+  <item>
+    <shape
+      android:shape="line">
+      <stroke
+        android:width="2dip" 
+        android:color="@color/black" /><!-- This can not be wider the layout it is drawing -->
+    </shape>
+  </item>
+</selector>

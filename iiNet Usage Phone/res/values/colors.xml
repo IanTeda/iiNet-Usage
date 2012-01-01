@@ -31,5 +31,7 @@
     <color name="alert_box_border_color">#CC3333</color>
     <color name="alert_box_text_color">#CC3333</color>
     <color name="alert_box_background_color">#55b9b9b9</color>
+    
+    <color name="black">#000000</color>
 
 </resources>
