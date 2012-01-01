@@ -28,9 +28,9 @@
 		<color name="application_background_alt_color">#181717</color>
 		
 		<!-- Phone dashboard alert -->
-    <color name="alert_box_border_color">#CC3333</color>
-    <color name="alert_box_text_color">#CC3333</color>
-    <color name="alert_box_background_color">#55b9b9b9</color>
+    <color name="alertbox_border_color">#CC3333</color>
+    <color name="alertbox_text_color">#CC3333</color>
+    <color name="alertbox_background_color">#55b9b9b9</color>
     
     <color name="black">#000000</color>
 

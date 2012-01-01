@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Alertbox styling -->
+    <style name="dashboard_alertbox_style">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:padding">@dimen/alertbox_padding</item>
+        <item name="android:layout_margin">@dimen/application_padding</item>
+        <item name="android:textColor">@color/alertbox_text_color</item>
+        <item name="android:background">@drawable/dashboard_alertbox</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+</resources>

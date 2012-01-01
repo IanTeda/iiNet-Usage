@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:example="http://schemas.android.com/apk/res/au.id.teda.volumeusage.phone"
+    xmlns:intPref="http://schemas.android.com/apk/res/au.id.teda.volumeusage.phone" >
+
+    <!-- Parent Category for username & Password -->
+    <PreferenceCategory android:title="@string/username_password_preferences_category_title" >
+
+        <!-- Launch Username / Password Activity -->
+        <Preference
+            android:summary="@string/user_pass_summary"
+            android:title="@string/user_pass_title" >
+            <intent android:action=".activity.UserPassActivity" />
+        </Preference>
+    </PreferenceCategory>
+
+</PreferenceScreen>
