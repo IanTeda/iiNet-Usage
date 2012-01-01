@@ -1,0 +1,27 @@
+iiNet Usage
+===========
+About
+-----
+OS: Android +2.2
+Version: Alpha
+Description: Application for monitoring and analysing iiNet broadband usage.
+
+Features
+--------
+Background Service
+User specific usage alert
+Over quota alert
+Optional status bar service alert
+Update data on application load
+Show/Hide phone status bar
+Graph current usage
+Historical data analysis
+
+FAQ
+---
+Q:
+A:
+
+Release notes
+--------------
+Alpha was a development release only.
