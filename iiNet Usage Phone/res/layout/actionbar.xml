@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativeLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="50dp"
+    android:background="@drawable/actionbar_gradient_backgroud" >
+
+    <ImageButton
+        android:id="@+id/actionbar_refresh_button"
+        style="@style/actionbar_image_button"
+        android:layout_alignParentRight="true"
+        android:contentDescription="@string/actionbar_refersh_button_description"
+        android:onClick="onClickActionbarRefresh"
+        android:src="@drawable/ic_actionbar_refresh" />
+
+    <ImageButton
+        android:id="@+id/actionbar_home_button"
+        style="@style/actionbar_image_button"
+        android:layout_alignParentLeft="true"
+        android:contentDescription="@string/actionbar_home_button_description"
+        android:onClick="onClickActionBarHome"
+        android:src="@drawable/ic_actionbar_home" />
+
+    <ImageView
+        android:id="@+id/actionbar_separator_1"
+        style="@style/actionbar_separator"
+        android:layout_toRightOf="@+id/actionbar_home_button"
+        android:contentDescription="@string/actionbar_separator_description" />
+
+    <TextView
+        android:id="@+id/actionbar_title"
+        style="@style/action_bar_title_text"
+        android:layout_toRightOf="@+id/actionbar_separator_1"
+        android:text="@string/actionbar_default_title" />
+
+</RelativeLayout>

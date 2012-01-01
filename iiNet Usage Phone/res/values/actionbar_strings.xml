@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Actionbar Strings -->
+    <string name="actionbar_home_button_description">Home</string>
+    <string name="actionbar_refersh_button_description">Refresh Data</string>
+    <string name="actionbar_separator_description">Separator image</string>
+
+    <!-- Actionbar titles -->
+    <string name="actionbar_default_title">iiNet Usage</string>
+    <string name="actionbar_user_pass_title">Account Settings</string>
+    <string name="actionbar_summary_view_title">Summary</string>
+    <string name="actionbar_usage_graph_view_title">Usage Graph</string>
+    <string name="actionbar_usage_data_view_title">Daily Usage (MB)</string>
+    <string name="actionbar_history_title">History</string>
+
+</resources>
