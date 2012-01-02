@@ -33,5 +33,6 @@
     <color name="alertbox_background_color">#55b9b9b9</color>
     
     <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
 
 </resources>

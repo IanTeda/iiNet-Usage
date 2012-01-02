@@ -5,9 +5,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 import au.id.teda.iinetusage.phone.R;
 import au.id.teda.iinetusage.phone.helper.UserPassHelper;
+import au.id.teda.iinetusage.phone.view.AlertboxView;
 
 public class MainActivity extends ActionbarActivity {
 	
@@ -34,6 +36,11 @@ public class MainActivity extends ActionbarActivity {
 	
 	public void onClickAlertBoxButton (View view){
 		Toast.makeText(this, "Alertbox", Toast.LENGTH_SHORT).show();
+		Button myAlertboxButton = (Button) findViewById(R.id.alertbox_button);
+		AlertboxView myAlertBoxView = new AlertboxView();
+		
+		myAlertBoxView.hideAlertbox(myAlertboxButton);
+		
 	}
 	
 	/**

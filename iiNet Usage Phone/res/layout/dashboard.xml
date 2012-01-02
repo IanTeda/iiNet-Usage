@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/application_background_color"
     android:orientation="vertical">
 
     <include
@@ -10,7 +9,7 @@
         layout="@layout/actionbar" />
 
     <Button
-        android:id="@+id/alert_box_button"
+        android:id="@+id/alertbox_button"
         style="@style/dashboard_alertbox_style"
         android:background="@drawable/dashboard_alertbox"
         android:onClick="onClickAlertBoxButton"
