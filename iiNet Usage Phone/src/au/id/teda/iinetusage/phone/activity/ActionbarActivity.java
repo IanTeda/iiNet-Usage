@@ -36,5 +36,15 @@ public class ActionbarActivity extends Activity {
 		TextView myActionbarTitle = (TextView) findViewById(R.id.actionbar_title);
 		myActionbarTitle.setText(actionbarTitle);
 	}
+	
+	public void hideActionbarRefersh(){
+		ImageButton myRefereshImageButton = (ImageButton) findViewById(R.id.actionbar_refresh_button);
+		myRefereshImageButton.setVisibility(View.GONE);
+	}
+	
+	public void showActionbarRefersh(){
+		ImageButton myRefereshImageButton = (ImageButton) findViewById(R.id.actionbar_refresh_button);
+		myRefereshImageButton.setVisibility(View.VISIBLE);
+	}
 
 }

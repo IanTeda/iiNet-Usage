@@ -1,5 +1,6 @@
 package au.id.teda.iinetusage.phone.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -17,6 +18,10 @@ public class MainActivity extends ActionbarActivity {
 	private static final String DEBUG_TAG = "iiNet Usage";
 	private static final String INFO_TAG = MainActivity.class.getSimpleName();
 	
+	private Button myAlertboxButton;
+	private AlertboxView myAlertboxView;
+	
+	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -24,6 +29,12 @@ public class MainActivity extends ActionbarActivity {
         setContentView(R.layout.dashboard);
         
         userPassCheck();
+        
+		myAlertboxButton = (Button) findViewById(R.id.alertbox_button);
+		myAlertboxView = new AlertboxView();
+		
+        myAlertboxView.setAlert(myAlertboxButton);
+        
     }
 
 	private void userPassCheck() {
@@ -34,12 +45,25 @@ public class MainActivity extends ActionbarActivity {
 		
 	}
 	
-	public void onClickAlertBoxButton (View view){
-		Toast.makeText(this, "Alertbox", Toast.LENGTH_SHORT).show();
-		Button myAlertboxButton = (Button) findViewById(R.id.alertbox_button);
-		AlertboxView myAlertBoxView = new AlertboxView();
+	/**
+	 * Method for managing onClick events of the Alertbox based on current alert text
+	 * @param view
+	 */
+	public void onClickAlertboxButton (View view){
+		// Get current string value of the alert box
+		String alertboxButtonText =  (String) myAlertboxButton.getText();
+		Log.i(INFO_TAG, "onClickAlertboxButton() > Button: " + alertboxButtonText);
 		
-		myAlertBoxView.hideAlertbox(myAlertboxButton);
+		// Set action based on value of alertbox string
+    	if ( alertboxButtonText == this.getString(R.string.alertbox_no_data)){
+    		Toast.makeText(this, "Refersh data", Toast.LENGTH_SHORT).show();
+    		
+    	} else if (alertboxButtonText == this.getString(R.string.alertbox_no_userpass)
+    			|| alertboxButtonText == this.getString(R.string.alertbox_no_user)
+    			|| alertboxButtonText == this.getString(R.string.alertbox_no_pass)){
+    		Intent myUserPassIntent = new Intent(MainActivity.this, UserPassActivity.class);
+			startActivity(myUserPassIntent);
+    	}
 		
 	}
 	

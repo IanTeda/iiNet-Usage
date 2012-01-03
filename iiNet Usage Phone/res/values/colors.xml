@@ -11,7 +11,7 @@
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
-  limitations under the License.
+  limitations under the License.
 -->
 
 <resources>
@@ -22,16 +22,18 @@
     <!-- Testing only -->
     <color name="actionbar_background_start_color">#ff5800</color>
     <color name="actionbar_background_end_color">#ff8647</color>
-    
+
     <!-- App Defaults -->
-		<color name="application_background_color">#201f1f</color>
-		<color name="application_background_alt_color">#181717</color>
-		
-		<!-- Phone dashboard alert -->
+    <color name="application_background_color">#201f1f</color>
+    <color name="application_background_alt_color">#181717</color>
+    <color name="application_h1_text_color">#FF5900</color>
+    <color name="application_h1_background_color">#181717</color>
+    <color name="application_h2_text_color">#b9b9b9</color>
+
+    <!-- Phone dashboard alert -->
     <color name="alertbox_border_color">#CC3333</color>
     <color name="alertbox_text_color">#CC3333</color>
     <color name="alertbox_background_color">#55b9b9b9</color>
-    
     <color name="black">#000000</color>
     <color name="transparent">#00000000</color>
 

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Alert box strings -->
+    <string name="alertbox_default">Alert box</string>
+    <string name="alertbox_no_userpass">No Username or Password Set</string>
+    <string name="alertbox_no_user">No Username Set</string>
+    <string name="alertbox_no_pass">No Password Set</string>
+    <string name="alertbox_no_data">No Data Available</string>
+    <string name="alertbox_overpeak">Peak Data Over Quota</string>
+    <string name="alertbox_overoffpeak">Offpeak Data Over Quota</string>
+    <string name="alertbox_overpeak_offpeak">Peak &amp; Offpeak Data Over Quota</string>
+
+</resources>

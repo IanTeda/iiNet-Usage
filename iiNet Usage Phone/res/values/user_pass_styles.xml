@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Username Password Activity Styles -->
+    
+    <!-- Edit Text Titles -->
+    <style name="user_pass_h1">
+        <item name="android:layout_width">fill_parent</item>
+    		<item name="android:layout_height">wrap_content</item>
+    		<item name="android:textSize">@dimen/application_h1_text_size</item>
+    		<item name="android:paddingLeft">@dimen/application_h1_intent</item>
+    		<item name="android:paddingTop">@dimen/aaplication_h1_line_padding</item>
+    		<item name="android:textStyle">bold</item>
+    		<item name="android:textColor">@color/application_h1_text_color</item>
+    		<item name="android:singleLine">true</item>
+    </style>
+    
+		<!-- Edit Text -->
+    <style name="user_pass_edit_text">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:inputType">textNoSuggestions</item>
+    </style>
+
+    
+</resources>

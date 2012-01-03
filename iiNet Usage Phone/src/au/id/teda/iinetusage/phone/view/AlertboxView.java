@@ -21,17 +21,17 @@ public class AlertboxView extends PreferenceHelper {
 		// Missing password and username
 		if (!isUsernamePasswordSet()){
 			showAlertbox(alertboxButton);
-			alertboxButton.setText(myContext.getString(R.string.alertbox_userpass));
+			alertboxButton.setText(myContext.getString(R.string.alertbox_no_userpass));
         	
         // Missing password
 		} else if (!isPasswordSet()){
 			showAlertbox(alertboxButton);
-			alertboxButton.setText(myContext.getString(R.string.alertbox_pass));
+			alertboxButton.setText(myContext.getString(R.string.alertbox_no_pass));
         	
 		// Missing username
 		} else if (!isUsernameSet()){
 			showAlertbox(alertboxButton);
-			alertboxButton.setText(myContext.getString(R.string.alertbox_user));
+			alertboxButton.setText(myContext.getString(R.string.alertbox_no_user));
 
 		}
 	}
