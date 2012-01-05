@@ -1,6 +1,7 @@
 package au.id.teda.iinetusage.phone.activity;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -9,7 +10,7 @@ import android.widget.Toast;
 import au.id.teda.iinetusage.phone.R;
 
 public class ActionbarActivity extends Activity {
-	
+
 	public void onClickActionBarHome (View view){
 		Toast.makeText(this, "Take me home", Toast.LENGTH_SHORT).show();
 	}
@@ -46,5 +47,7 @@ public class ActionbarActivity extends Activity {
 		ImageButton myRefereshImageButton = (ImageButton) findViewById(R.id.actionbar_refresh_button);
 		myRefereshImageButton.setVisibility(View.VISIBLE);
 	}
+	
+	
 
 }

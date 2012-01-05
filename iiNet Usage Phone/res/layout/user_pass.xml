@@ -36,7 +36,8 @@
                 android:id="@+id/user_pass_email"
                 style="@style/user_pass_edit_text"
                 android:hint="@string/user_pass_email_hint"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:drawableLeft="@drawable/ic_password" />
 
             <!-- Password Label -->
 
@@ -50,7 +51,8 @@
                 style="@style/user_pass_edit_text"
                 android:hint="@string/user_pass_password_hint"
                 android:inputType="textPassword"
-                android:password="true" />
+                android:password="true"
+                android:drawableLeft="@drawable/ic_user" />
 
             <CheckBox
                 android:id="@+id/user_pass_reveal_cbox"
@@ -65,7 +67,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/aaplication_h1_line_padding"
-                android:gravity="center"
+                android:gravity="left"
+                android:paddingLeft="@dimen/application_h1_intent"
                 android:text="@string/user_pass_enter_email_pass" />
 
             <!-- Check Credentials button -->

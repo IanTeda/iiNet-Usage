@@ -3,5 +3,6 @@
 
     <string name="hello">Hello World, MainActivity!</string>
     <string name="app_name">iiNet Usage Phone</string>
+    <string name="no_internet">There appears to be no internet connection</string>
 
 </resources>

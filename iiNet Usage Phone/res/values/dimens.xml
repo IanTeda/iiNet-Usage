@@ -4,7 +4,7 @@
     <!-- Application defaults -->
     <dimen name="application_padding">3dp</dimen>
     <dimen name="application_h1_text_size">20sp</dimen>
-    <dimen name="application_h1_intent">1dp</dimen>
+    <dimen name="application_h1_intent">4dp</dimen>
     <dimen name="aaplication_h1_line_padding">5dp</dimen>
     
     <!-- Actionbar dimensions -->

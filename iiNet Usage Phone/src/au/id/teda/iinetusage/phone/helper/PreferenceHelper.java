@@ -5,7 +5,7 @@ package au.id.teda.iinetusage.phone.helper;
  * @author Ian
  *
  */
-public class PreferenceHelper extends UserPassHelper {
+public class PreferenceHelper extends ConnectivityHelper {
 	
 
 }

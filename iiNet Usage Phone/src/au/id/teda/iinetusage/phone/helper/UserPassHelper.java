@@ -7,7 +7,7 @@ import au.id.teda.iinetusage.phone.AppGlobals;
 public class UserPassHelper {
 	
 	// Set shared preferences object
-	private SharedPreferences mySettings = PreferenceManager.getDefaultSharedPreferences(AppGlobals.getAppContext());
+	protected SharedPreferences mySettings = PreferenceManager.getDefaultSharedPreferences(AppGlobals.getAppContext());
 	private SharedPreferences.Editor myEditor = mySettings.edit();
 
 	/**
@@ -16,7 +16,8 @@ public class UserPassHelper {
 	// Static strings for preference keys
 	private final static String PASSWORD = "iinet_password";
 	private final static String USERNAME = "iinet_username";
-	private static final String ISPASSED = "isPassedChk";
+	private final static String ISPASSED = "isPassedChk";
+	private final static String ERRORTXT = "errortxt"; 
 	
 	// Set username and password to App preferences
 	public void setUserPass(String user, String pass){
@@ -25,6 +26,28 @@ public class UserPassHelper {
 			myEditor.putString(PASSWORD, pass);
 			myEditor.commit();
 		}
+	}
+	
+	public void setUsername(String username){
+		myEditor.putString(USERNAME, username);
+		myEditor.commit();
+	}
+	
+	public void setPassword(String password){
+		myEditor.putString(PASSWORD, password);
+		myEditor.commit();
+	}
+	
+	// Set username password has been checked and works
+	public void setIsPassed(boolean isPassed){
+		myEditor.putBoolean(ISPASSED, isPassed);
+		myEditor.commit();
+	}
+	
+	// Set error text
+	public void setErrorTxt(String errorTxt){
+		myEditor.putString(ERRORTXT, errorTxt);
+		myEditor.commit();
 	}
 	
 	// Get username from App preferences
@@ -37,6 +60,11 @@ public class UserPassHelper {
 		return mySettings.getString(PASSWORD, "");
 	}
 	
+	// Get error text
+	public String getErrorTxt(){
+		return mySettings.getString(ERRORTXT, "Error retriving error text");
+	}
+	
 	// Check if username and password are set in the App preferences
 	public boolean isUsernamePasswordSet() {
 		if ( getUsername().length() > 0 
@@ -45,6 +73,10 @@ public class UserPassHelper {
 		} else {
 			return false;
 		}
+	}
+	
+	public boolean isPassed(){
+		return mySettings.getBoolean(ISPASSED, false);
 	}
 	
 	// Check if username is set
