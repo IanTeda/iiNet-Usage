@@ -51,7 +51,7 @@ public class UserPassActivity extends ActionbarActivity implements OnClickListen
 	private static final String INFO_TAG = UserPassActivity.class.getSimpleName();
 	
 	// Set shared preference helper object
-	private PreferenceHelper myPreferenceHelper = new PreferenceHelper();
+	private PreferenceHelper mySettings = new PreferenceHelper();
 	
     // Set EditText objects
     private EditText myEmailET;
@@ -91,15 +91,15 @@ public class UserPassActivity extends ActionbarActivity implements OnClickListen
     	// Set reference for activity button
         userPassBTN = (Button) findViewById(R.id.user_pass_btn);
         
-        if (myPreferenceHelper.isPassed()
-        		&& myPreferenceHelper.isUsernamePasswordSet()) {
+        if (mySettings.isPassed()
+        		&& mySettings.isUsernamePasswordSet()) {
         	
         	// Flag loading edittexts
         	loadingFlag = true;
         	
         	// Load edit text objects with strings stored in preferences
-        	myEmailET.setText(myPreferenceHelper.getUsername());
-			myPassET.setText(myPreferenceHelper.getPassword());
+        	myEmailET.setText(mySettings.getUsername());
+			myPassET.setText(mySettings.getPassword());
 			
 			// Flag no longer loading edit text objects
 			loadingFlag = false;
@@ -113,7 +113,30 @@ public class UserPassActivity extends ActionbarActivity implements OnClickListen
 	@Override
 	protected void onResume() {
 		super.onResume();
+		loadView();
 		
+	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		Log.d(DEBUG_TAG, "isPassed(): " + mySettings.isPassed() + " & isUsernamePasswordSet(): " + mySettings.isUsernamePasswordSet());
+		
+		// Check if creditial check has passed
+		if (mySettings.isPassed()
+				&& !mySettings.isUsernamePasswordSet()){
+			// if so then set username and password to preferences
+			
+			// TODO: make method for getting and setting edittext value
+			// Get string values form edit text views
+			myEmail = myEmailET.getText().toString();
+			myPass = myPassET.getText().toString();
+			
+			
+			mySettings.setUserPass(myEmailET.getText().toString(), myPassET.getText().toString());
+		}
+		
+		super.onDestroy();
 	}
 	
 	/**
@@ -238,10 +261,6 @@ public class UserPassActivity extends ActionbarActivity implements OnClickListen
 	private void goHome(){
 		// Load username/password into preferences
 		//Log.d(DEBUG_TAG, "goHome() > isPassChk: " + settings.getBoolean("isPassedChk", false));
-
-		 if (!myPreferenceHelper.isPassed()) {
-				myPreferenceHelper.setUserPass(myEmail, myPass);
-		 }
 		
 		// Start dashboard activity
 		Intent dashboardActivityIntent = new Intent(this, MainActivity.class);
@@ -254,7 +273,7 @@ public class UserPassActivity extends ActionbarActivity implements OnClickListen
 	public void loadView(){
 		
 		// If check is ok then load good to go
-		if (myPreferenceHelper.isPassed()){
+		if (mySettings.isPassed()){
 			//Log.d(DEBUG_TAG, "loadView() > Load ok button");
 			userPassBTN.setText(getString(R.string.user_pass_btn_good));
 			
@@ -263,6 +282,8 @@ public class UserPassActivity extends ActionbarActivity implements OnClickListen
 			//Log.d(DEBUG_TAG, "loadView() > Load check button");
 			userPassBTN.setText(getString(R.string.user_pass_btn_nogood));
 		}
+		
+		setUpActionBar();
 	}
 	
 	/**
@@ -283,18 +304,6 @@ public class UserPassActivity extends ActionbarActivity implements OnClickListen
 	    Matcher matcher = pattern.matcher(email);
 	    return matcher.matches();
 
-	}
-	
-	/**
-	 * Method used to set username and password to preferences
-	 */
-	public void setUserPass(){
-		
-
-		
-		
-		//Log.d(DEBUG_TAG, "setUserPass() > Username set to: " + settings.getString(USERNAME, "Username Error"));
-		//Log.d(DEBUG_TAG, "setUserPass() > Password set to: " + settings.getString(PASSWORD, "Password Error"));
 	}
 	
 	/**
@@ -341,16 +350,19 @@ public class UserPassActivity extends ActionbarActivity implements OnClickListen
 	public void onTextChanged(CharSequence charSeq, int start, int before, int count) {
 		//Log.v(DEBUG_TAG, "onTextChanged()> CharSeq: " + charSeq + " Start: " + start + " Before: " + before + " Count: " + count);
 		
+		//Log.d(DEBUG_TAG, "onTextChanged() > CharSeq: " + charSeq);
+		
+		
 		// If edit text feilds change 
 		if (count > 0 || before > 0) {
 			// and password has already been checked set button to recheck
-			if (myPreferenceHelper.isPassed() && !loadingFlag){
+			if (mySettings.isPassed() && !loadingFlag){
 				
 				//Log.d(DEBUG_TAG, "onTextChanged() > Change detected ");
 						
 				// Reset isPassed to false and blank username & pass
-				myPreferenceHelper.setIsPassed(false);
-				myPreferenceHelper.setUserPass("", "");
+				mySettings.setIsPassed(false);
+				mySettings.setUserPass("", "");
 						
 				// Change button text to recheck
 				userPassBTN.setText(getString(R.string.user_pass_btn_rechk));

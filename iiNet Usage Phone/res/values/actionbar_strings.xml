@@ -8,7 +8,7 @@
 
     <!-- Actionbar titles -->
     <string name="actionbar_default_title">iiNet Usage</string>
-    <string name="actionbar_user_pass_title">Account Settings</string>
+    <string name="actionbar_user_pass_title">Credential Check</string>
     <string name="actionbar_summary_view_title">Summary</string>
     <string name="actionbar_usage_graph_view_title">Usage Graph</string>
     <string name="actionbar_usage_data_view_title">Daily Usage (MB)</string>
