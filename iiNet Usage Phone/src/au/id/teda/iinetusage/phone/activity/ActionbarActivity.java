@@ -1,7 +1,7 @@
 package au.id.teda.iinetusage.phone.activity;
 
 import android.app.Activity;
-import android.os.Bundle;
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -12,7 +12,10 @@ import au.id.teda.iinetusage.phone.R;
 public class ActionbarActivity extends Activity {
 
 	public void onClickActionBarHome (View view){
-		Toast.makeText(this, "Take me home", Toast.LENGTH_SHORT).show();
+		
+		// Start dashboard activity
+		Intent dashboardActivityIntent = new Intent(this, MainActivity.class);
+        startActivity(dashboardActivityIntent);
 	}
 	
 	public void onClickActionbarRefresh (View view){

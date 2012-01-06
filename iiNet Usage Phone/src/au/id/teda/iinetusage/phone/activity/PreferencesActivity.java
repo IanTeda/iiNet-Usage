@@ -33,6 +33,8 @@ public class PreferencesActivity extends PreferenceActivity implements OnSharedP
     @Override
     protected void onDestroy() {
     	Log.i(INFO_TAG, "onDestroy()");
+    	
+    	getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
     	super.onDestroy();
     }
 	

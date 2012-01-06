@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -80,5 +81,28 @@ public class MainActivity extends ActionbarActivity {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.menu, menu);
 		return true;
+	}
+	
+	/**
+	 * onClick method for menu buttons
+	 * What happens when some clicks a menu item
+	 */
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		Log.i(INFO_TAG, "onOptionsItemSelected() > Button: " + item.getTitle());
+		switch (item.getItemId()) {
+		case R.id.menu_settings_button:
+			Intent userPassIntent = new Intent(this, UserPassActivity.class);
+			startActivity(userPassIntent);
+			return true;
+		case R.id.menu_refresh_button:
+			
+			return true;
+		case R.id.menu_about_button:
+
+			return true;
+		}
+		//Log.d(DEBUG_TAG, "MainActivity > onOptionsItemSelected() > Default switch");
+		return false;
 	}
 }

@@ -14,15 +14,10 @@ import org.xml.sax.XMLReader;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
-import au.id.teda.iinetusage.phone.AppGlobals;
 import au.id.teda.iinetusage.phone.R;
 import au.id.teda.iinetusage.phone.helper.ConnectivityHelper;
 import au.id.teda.iinetusage.phone.helper.PreferenceHelper;
@@ -47,7 +42,7 @@ public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 	private PreferenceHelper mySettings = new PreferenceHelper();
 
 	// Class objects
-	private Context myContext;
+	private Context myActivityContext;
 	private Handler myHandler;
 	private ProgressDialog myProgressDialog;
 	private URL myUrl;
@@ -59,11 +54,11 @@ public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 	 * @param context
 	 * @param myHandler
 	 */
-	public CheckCredentialsAsync(Handler handler, URL url) {
+	public CheckCredentialsAsync(Context activityContext, Handler handler, URL url) {
 		Log.i(INFO_TAG, "Start constructor");
 
 		// Set context for class
-		myContext = AppGlobals.getAppContext();
+		myActivityContext = activityContext;
 
 		// Set handler object
 		myHandler = handler;
@@ -81,10 +76,10 @@ public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 		super.onPreExecute();
 
 		// Display progress dialog
-		/**myProgressDialog = ProgressDialog.show(myContext,
-				myContext.getString(R.string.user_pass_checking_title),
-				myContext.getString(R.string.user_pass_checking_description),
-				true);**/
+		myProgressDialog = ProgressDialog.show(myActivityContext,
+				myActivityContext.getString(R.string.user_pass_checking_title),
+				myActivityContext.getString(R.string.user_pass_checking_description),
+				true);
 	}
 
 	/**
@@ -200,7 +195,7 @@ public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 	 * @param msg
 	 */
 	public void popup(String msg) {
-		Toast.makeText(myContext, msg, Toast.LENGTH_SHORT).show();
+		Toast.makeText(myActivityContext, msg, Toast.LENGTH_SHORT).show();
 	}
 
 	@Override

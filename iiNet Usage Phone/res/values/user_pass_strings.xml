@@ -14,7 +14,7 @@
 		<string name="user_pass_btn_good">All Good</string>
 		<string name="user_pass_btn_rechk">Re Check Credentials</string>
 		
-		<string name="user_pass_enter_email_pass">Enter Email &amp; Password</string>
+		<string name="user_pass_enter_email_pass">Enter account email &amp; password to check</string>
 		<string name="user_pass_nouserpass">Username/Email and Password is empty</string>
 		<string name="user_pass_nouser">Username/Email is empty</string>
 		<string name="user_pass_nopass">Password is empty</string>
