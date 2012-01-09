@@ -29,7 +29,6 @@ public class ConnectivityHelper extends UserPassHelper {
 	 * Class constructor
 	 */
 	public ConnectivityHelper() {
-		//Log.i(INFO_TAG, "ConnectivityHelper()");
 		
 		// Set context for class
 		myContext = AppGlobals.getAppContext();

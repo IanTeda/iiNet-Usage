@@ -18,6 +18,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import au.id.teda.iinetusage.phone.R;
 import au.id.teda.iinetusage.phone.async.CheckCredentialsAsync;
@@ -41,11 +42,17 @@ public class UserPassActivity extends ActionbarActivity implements
 
 	// Static tags for logging
 	private static final String DEBUG_TAG = "iiNet Usage";
-	private static final String INFO_TAG = UserPassActivity.class
-			.getSimpleName();
+	private static final String INFO_TAG = UserPassActivity.class.getSimpleName();
 
 	// Set shared preference helper object
 	private PreferenceHelper mySettings = new PreferenceHelper();
+
+	// Set status strings options
+	private static final String SET = "set";
+	private static final String CHECK = "check";
+	private static final String ERROR = "error";
+	private static final String CORRECT = "correct";
+	private static final String RECHECK = "recheck";
 
 	// Set EditText objects
 	private EditText myEmailET;
@@ -58,9 +65,6 @@ public class UserPassActivity extends ActionbarActivity implements
 	// Set url string object
 	private URL myUrl;
 
-	// Set button object
-	private Button userPassBTN;
-
 	// Loading flag
 	private boolean loadingFlag;
 
@@ -71,6 +75,8 @@ public class UserPassActivity extends ActionbarActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		Log.d(DEBUG_TAG, "onCreate()");
+		
 		// setting default screen to login.xml
 		setContentView(R.layout.user_pass);
 
@@ -82,22 +88,22 @@ public class UserPassActivity extends ActionbarActivity implements
 		myEmailET.addTextChangedListener(this);
 		myPassET.addTextChangedListener(this);
 
-		// Set reference for activity button
-		userPassBTN = (Button) findViewById(R.id.user_pass_btn);
+	}
 
-		if (mySettings.isPassed() && mySettings.isUsernamePasswordSet()) {
-
-			// Flag loading edittexts
-			loadingFlag = true;
-
-			// Load edit text objects with strings stored in preferences
-			myEmailET.setText(mySettings.getUsername());
-			myPassET.setText(mySettings.getPassword());
-
-			// Flag no longer loading edit text objects
-			loadingFlag = false;
-		}
-
+	@Override
+	protected void onPause() {
+		Log.d(DEBUG_TAG, "onPause()");
+		
+		// Set username password if credential check has passed
+		setUsernamePassword();
+		
+		// Clear error text
+		mySettings.setErrorTxt("");
+		
+		// Clear pass check
+		mySettings.setIsPassed(false);
+		
+		super.onPause();
 	}
 
 	/**
@@ -106,35 +112,27 @@ public class UserPassActivity extends ActionbarActivity implements
 	@Override
 	protected void onResume() {
 		super.onResume();
-		
+		Log.d(DEBUG_TAG, "onResume()");
+
 		loadView();
 	}
 
+	
+	
 	@Override
-	protected void onPause() {
+	protected void onDestroy() {
 
+		Log.d(DEBUG_TAG, "onDestroy()");
+		
+		// Check if we should set the username and password
 		setUsernamePassword();
-
-		super.onPause();
+		
+		// Reset error text to null
+		mySettings.setErrorTxt("");
+		
+		super.onDestroy();
 	}
 
-	private void setUsernamePassword() {
-		// Log.d(DEBUG_TAG, "isPassed(): " + mySettings.isPassed() +
-		// " & isUsernamePasswordSet(): " + mySettings.isUsernamePasswordSet());
-
-		// Check if creditial check has passed
-		if (mySettings.isPassed() && !mySettings.isUsernamePasswordSet()) {
-			// if so then set username and password to preferences
-
-			// TODO: make method for getting and setting edittext value
-			// Get string values form edit text views
-			myEmail = myEmailET.getText().toString();
-			myPass = myPassET.getText().toString();
-
-			mySettings.setUserPass(myEmailET.getText().toString(), myPassET
-					.getText().toString());
-		}
-	}
 
 	/**
 	 * Handler for passing messages from other classes
@@ -165,7 +163,7 @@ public class UserPassActivity extends ActionbarActivity implements
 	 */
 	@Override
 	public void onClick(View button) {
-		Log.i(INFO_TAG, "onClick() > Button: " + button.getId());
+		//Log.i(INFO_TAG, "onClick() > Button: " + button.getId());
 	}
 
 	/**
@@ -178,12 +176,10 @@ public class UserPassActivity extends ActionbarActivity implements
 		// Reference button so we can check button text for change once
 		// user/pass validated
 		Button myButton = (Button) findViewById(R.id.user_pass_btn);
-		// Log.i(INFO_TAG, "checkCredentials() > Button: " +
-		// myButton.getText());
 
 		// If button text set to good then then safe to save user/pass and go to
 		// dashboard
-		if (myButton.getText() == getString(R.string.user_pass_btn_good)) {
+		if (myButton.getText() == getString(R.string.user_pass_button_correct)) {
 
 			// Start dashboard activity
 			Intent dashboardActivityIntent = new Intent(this,
@@ -192,6 +188,9 @@ public class UserPassActivity extends ActionbarActivity implements
 
 			// Else validate input,
 		} else if (validateInput()) {
+			// Clear error text
+			mySettings.setErrorTxt("");
+			
 			// If true then execute async task
 			new CheckCredentialsAsync(this, handler, buildUrl()).execute();
 		}
@@ -267,18 +266,56 @@ public class UserPassActivity extends ActionbarActivity implements
 	 */
 	public void loadView() {
 
-		// If check is ok then load good to go
-		if (mySettings.isPassed()) {
-			// Log.d(DEBUG_TAG, "loadView() > Load ok button");
-			userPassBTN.setText(getString(R.string.user_pass_btn_good));
+		Log.d(DEBUG_TAG, "Loading view");
+		
+		// Set up the actionbar
+		setUpActionBar();
+		
+		// Check if username and password have already been set
+		if (mySettings.isUsernamePasswordSet()){
+			// If it is then load view set
+			Log.d(DEBUG_TAG, "loadView() > Userpass set");
+			
+			// Set check button password set
+			setCheckButton(SET);
+			// Set status text as password set
+			setStatusText(SET);
 
-			// Else assume check failed and load creditial check
+			// Flag loading edittexts
+			loadingFlag = true;
+			// Load saved username password into edit texts
+			setEmailEditText();
+			setPasswordEditText();
+			// Flag no longer loading edit text objects
+			loadingFlag = false;
+			
+		
+		// Check if we are trying to set a new password
+		} else if (mySettings.isPassed()) {
+			// If it is then load view correct
+			Log.d(DEBUG_TAG, "loadView() > Userpass correct");
+			
+			// Set check button show all good
+			setCheckButton(CORRECT);
+			// Set status text to all good
+			setStatusText(CORRECT);
+		
+		// Check if password is not set and we have an error text
+		} else if (mySettings.isErrorTxt()) {
+			// If there is set status as error
+			Log.d(DEBUG_TAG, "loadView() > Userpass error");
+			
+			// set check button to error
+			setCheckButton(ERROR);
+			// Set status text to error
+			setStatusText(ERROR);
+		
+		// Else we must be checking
 		} else {
-			// Log.d(DEBUG_TAG, "loadView() > Load check button");
-			userPassBTN.setText(getString(R.string.user_pass_btn_nogood));
+			Log.d(DEBUG_TAG, "loadView() > Userpass check");
+			
 		}
 
-		setUpActionBar();
 	}
 
 	/**
@@ -353,23 +390,148 @@ public class UserPassActivity extends ActionbarActivity implements
 		// Log.v(DEBUG_TAG, "onTextChanged()> CharSeq: " + charSeq + " Start: "
 		// + start + " Before: " + before + " Count: " + count);
 
-		// Log.d(DEBUG_TAG, "onTextChanged() > CharSeq: " + charSeq);
+		//Log.d(DEBUG_TAG, "onTextChanged() > CharSeq: " + charSeq);
 
 		// If edit text feilds change
 		if (count > 0 || before > 0) {
-			// and password has already been checked set button to recheck
-			if (mySettings.isPassed() && !loadingFlag) {
+			//Log.d(DEBUG_TAG, "onTextChanged() > count: " + count + "before: " + before);
+			//Log.d(DEBUG_TAG, "onTextChanged() > isUsernamePasswordSet: " + mySettings.isUsernamePasswordSet() + " loadingFlag: " + loadingFlag); 
+			
+			// and username password has already been set then set button to recheck
+			if (mySettings.isUsernamePasswordSet() || mySettings.isPassed()) {
+				if (!loadingFlag){
+					Log.d(DEBUG_TAG, "onTextChanged() > Change detected ");
 
-				// Log.d(DEBUG_TAG, "onTextChanged() > Change detected ");
+					// Reset isPassed to false and blank username & pass
+					mySettings.setIsPassed(false);
+					mySettings.setUserPass("", "");
 
-				// Reset isPassed to false and blank username & pass
-				mySettings.setIsPassed(false);
-				mySettings.setUserPass("", "");
-
-				// Change button text to recheck
-				userPassBTN.setText(getString(R.string.user_pass_btn_rechk));
+					// Change button text to recheck
+					setCheckButton(RECHECK);
+					setStatusText(RECHECK);
+				}
 
 			}
+		}
+	}
+	
+	/**
+	 * Method used to check if valid username password has been checked and
+	 * add to shared prefferences if it has.
+	 */
+	private void setUsernamePassword() {
+		Log.d(DEBUG_TAG, "isPassed(): " + mySettings.isPassed());
+
+		// Check if creditial check has passed
+		if (mySettings.isPassed()) {
+			// if so then set username and password to preferences
+
+			// TODO: make method for getting and setting edittext value
+			// Get string values form edit text views
+			myEmail = myEmailET.getText().toString();
+			myPass = myPassET.getText().toString();
+
+			mySettings.setUserPass(myEmailET.getText().toString(), myPassET
+					.getText().toString());
+		}
+	}
+
+	public void setStatusText(String status) {
+
+		// Set objects for text views
+		TextView myCheckTextView = (TextView) findViewById(R.id.user_pass_status_enter);
+		TextView myCorrectTextView = (TextView) findViewById(R.id.user_pass_status_correct);
+		TextView myErrorTextView = (TextView) findViewById(R.id.user_pass_status_error);
+
+		// Everything looks correct
+		if (status == CORRECT || status == SET) {
+
+			// Show status as correct
+			myCheckTextView.setVisibility(View.GONE);
+			myErrorTextView.setVisibility(View.GONE);
+			myCorrectTextView.setVisibility(View.VISIBLE);
+			
+			if (status == SET){
+				myCorrectTextView.setText(R.string.user_pass_status_set);
+			} else {
+				myCorrectTextView.setText(R.string.user_pass_status_correct);
+			}
+
+		// There appears to be an error
+		} else if (status == ERROR) {
+
+			// Show status as error
+			myCheckTextView.setVisibility(View.GONE);
+			myCorrectTextView.setVisibility(View.GONE);
+			myErrorTextView.setVisibility(View.VISIBLE);
+
+		// Show status as recheck
+		} else if (status == RECHECK) {
+
+			// Show status as recheck
+			myErrorTextView.setVisibility(View.GONE);
+			myCorrectTextView.setVisibility(View.GONE);
+			myCheckTextView.setVisibility(View.VISIBLE);
+
+			myCheckTextView.setText(getString(R.string.user_pass_status_recheck));
+
+		// If all else fails
+		} else {
+
+			// Show status as to be checked
+			myErrorTextView.setVisibility(View.GONE);
+			myCorrectTextView.setVisibility(View.GONE);
+			myCheckTextView.setVisibility(View.VISIBLE);
+
+			myCheckTextView.setText(getString(R.string.user_pass_status_enter));
+		}
+	}
+
+	public void setCheckButton(String status) {
+
+		// Set button object
+		Button userPassBTN = (Button) findViewById(R.id.user_pass_btn);
+
+		if (status == CORRECT || status == SET) {
+
+			// Set button text to correct
+			userPassBTN.setText(getString(R.string.user_pass_button_correct));
+
+		} else if (status == ERROR) {
+
+			// Set button text to error
+			userPassBTN.setText(getString(R.string.user_pass_button_check));
+
+		} else if (status == RECHECK) {
+
+			// Set button text to error
+			userPassBTN.setText(getString(R.string.user_pass_button_recheck));
+
+		} else {
+
+			// Set button text to error
+			userPassBTN.setText(getString(R.string.user_pass_button_check));
+
+		}
+	}
+
+	private String getEmailEditText() {
+		return myEmailET.getText().toString();
+	}
+
+	private String getPasswordEditText() {
+		return myPassET.getText().toString();
+	}
+
+	private void setEmailEditText() {
+		if (mySettings.isUsernameSet()) {
+			myEmailET.setText(mySettings.getUsername());
+		}
+	}
+
+	private void setPasswordEditText() {
+		if (mySettings.isPasswordSet()) {
+			myPassET.setText(mySettings.getPassword());
 		}
 	}
 

@@ -63,7 +63,6 @@ public class CheckUserPassSAXHandler extends DefaultHandler {
 		if (myTag.trim().equalsIgnoreCase(ERROR)){
 			inError = false;
 		} else if (myTag.trim().equalsIgnoreCase(II_FEED)){
-			Log.d(DEBUG_TAG, "chkUserPass : " + chkUserPass);
 			
 			// Once we reach the end of the feed set shared preferrence to username password boolean value
 			mySettings.setIsPassed(chkUserPass);

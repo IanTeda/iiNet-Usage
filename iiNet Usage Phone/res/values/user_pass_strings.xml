@@ -1,26 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+
     <!-- Username Password Activity Strings -->
     <string name="user_pass_email">Email / Username</string>
     <string name="user_pass_email_hint">username@iinet.net.au</string>
-    
     <string name="user_pass_password">Account Password</string>
     <string name="user_pass_password_hint">Password</string>
-    
     <string name="user_pass_show">Show password</string>
-        
-		<string name="user_pass_btn_nogood">Check Credentials</string>
-		<string name="user_pass_btn_good">All Good</string>
-		<string name="user_pass_btn_rechk">Re Check Credentials</string>
-		
-		<string name="user_pass_enter_email_pass">Enter account email &amp; password to check</string>
-		<string name="user_pass_nouserpass">Username/Email and Password is empty</string>
-		<string name="user_pass_nouser">Username/Email is empty</string>
-		<string name="user_pass_nopass">Password is empty</string>
-		<string name="user_pass_malformemail">Username does not appear to be an email</string>
-		
-		<string name="user_pass_checking_title">Credential Check</string>
-		<string name="user_pass_checking_description">Standby checking...</string>
-  
+    <string name="user_pass_button_check">Check Credentials</string>
+    <string name="user_pass_button_correct">All Good</string>
+    <string name="user_pass_button_recheck">Re Check Credentials</string>
+    <string name="user_pass_status_set"> <b>SET</b> - Credentials already set</string>
+    <string name="user_pass_status_enter">Enter credentials to check</string>
+    <string name="user_pass_status_recheck">Username/Password changed</string>
+    <string name="user_pass_status_error"> <b>ERROR</b> - Incorrect Credentials</string>
+    <string name="user_pass_status_correct"> <b>PASS</b> - Credentials look good</string>
+    <string name="user_pass_nouserpass">Username/Email and Password is empty</string>
+    <string name="user_pass_nouser">Username/Email is empty</string>
+    <string name="user_pass_nopass">Password is empty</string>
+    <string name="user_pass_malformemail">Username does not appear to be an email</string>
+    <string name="user_pass_checking_title">Credential Check</string>
+    <string name="user_pass_checking_description">Standby checking...</string>
+
 </resources>

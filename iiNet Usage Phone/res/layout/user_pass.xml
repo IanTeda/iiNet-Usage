@@ -15,8 +15,6 @@
             android:id="@+id/actionbar"
             layout="@layout/actionbar" />
 
-        <!-- Login Form -->
-
         <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
@@ -30,29 +28,36 @@
             <TextView
                 style="@style/user_pass_h1"
                 android:text="@string/user_pass_email" />
+
             <!-- Username/Email Edit Text -->
 
             <EditText
                 android:id="@+id/user_pass_email"
                 style="@style/user_pass_edit_text"
+                android:drawableLeft="@drawable/ic_password"
                 android:hint="@string/user_pass_email_hint"
-                android:inputType="textEmailAddress"
-                android:drawableLeft="@drawable/ic_password" />
+                android:inputType="textEmailAddress" >
+
+                <requestFocus />
+            </EditText>
 
             <!-- Password Label -->
 
             <TextView
                 style="@style/user_pass_h1"
                 android:text="@string/user_pass_password" />
+
             <!-- Password Edit Text -->
 
             <EditText
                 android:id="@+id/user_pass_pass"
                 style="@style/user_pass_edit_text"
+                android:drawableLeft="@drawable/ic_user"
                 android:hint="@string/user_pass_password_hint"
                 android:inputType="textPassword"
-                android:password="true"
-                android:drawableLeft="@drawable/ic_user" />
+                android:password="true" />
+
+            <!-- Checkbox to reveal password -->
 
             <CheckBox
                 android:id="@+id/user_pass_reveal_cbox"
@@ -60,16 +65,27 @@
                 android:layout_height="wrap_content"
                 android:onClick="onCheckBoxClick"
                 android:text="@string/user_pass_show"
-                android:textSize="22sp" />
+                android:textSize="@dimen/status_text_size"
+                android:layout_marginTop="@dimen/status_text_line_spacing" />
 
             <TextView
-                android:id="@+id/user_pass_status"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/aaplication_h1_line_padding"
-                android:gravity="left"
-                android:paddingLeft="@dimen/application_h1_intent"
-                android:text="@string/user_pass_enter_email_pass" />
+                android:id="@+id/user_pass_status_enter"
+                style="@style/user_pass_text_view"
+                android:text="@string/user_pass_status_enter" />
+
+            <TextView
+                android:id="@+id/user_pass_status_error"
+                style="@style/user_pass_text_view"
+                android:drawableLeft="@drawable/ic_error"
+                android:text="@string/user_pass_status_error"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/user_pass_status_correct"
+                style="@style/user_pass_text_view"
+                android:drawableLeft="@drawable/ic_correct"
+                android:text="@string/user_pass_status_correct"
+                android:visibility="gone" />
 
             <!-- Check Credentials button -->
 
@@ -77,12 +93,12 @@
                 android:id="@+id/user_pass_btn"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/aaplication_h1_line_padding"
+                android:layout_marginTop="@dimen/application_h1_line_padding"
                 android:onClick="onUserPassBtnClick"
-                android:text="@string/user_pass_btn_nogood" />
+                android:text="@string/user_pass_button_check" />
         </LinearLayout>
         <!-- Login Form Ends -->
-
+        -->
     </RelativeLayout>
 
 </ScrollView>

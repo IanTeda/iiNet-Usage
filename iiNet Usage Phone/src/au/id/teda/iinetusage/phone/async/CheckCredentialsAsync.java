@@ -55,7 +55,7 @@ public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 	 * @param myHandler
 	 */
 	public CheckCredentialsAsync(Context activityContext, Handler handler, URL url) {
-		Log.i(INFO_TAG, "Start constructor");
+		//Log.i(INFO_TAG, "Start constructor");
 
 		// Set context for class
 		myActivityContext = activityContext;

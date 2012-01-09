@@ -96,4 +96,12 @@ public class UserPassHelper {
 			return false;
 		}
 	}
+	
+	public boolean isErrorTxt(){
+		if (getErrorTxt().length() >0){
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
