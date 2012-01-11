@@ -74,8 +74,6 @@ public class UserPassActivity extends ActionbarActivity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		Log.d(DEBUG_TAG, "onCreate()");
 		
 		// setting default screen to login.xml
 		setContentView(R.layout.user_pass);
@@ -92,7 +90,6 @@ public class UserPassActivity extends ActionbarActivity implements
 
 	@Override
 	protected void onPause() {
-		Log.d(DEBUG_TAG, "onPause()");
 		
 		// Set username password if credential check has passed
 		setUsernamePassword();
@@ -112,7 +109,6 @@ public class UserPassActivity extends ActionbarActivity implements
 	@Override
 	protected void onResume() {
 		super.onResume();
-		Log.d(DEBUG_TAG, "onResume()");
 
 		loadView();
 	}
@@ -121,8 +117,6 @@ public class UserPassActivity extends ActionbarActivity implements
 	
 	@Override
 	protected void onDestroy() {
-
-		Log.d(DEBUG_TAG, "onDestroy()");
 		
 		// Check if we should set the username and password
 		setUsernamePassword();
@@ -163,7 +157,6 @@ public class UserPassActivity extends ActionbarActivity implements
 	 */
 	@Override
 	public void onClick(View button) {
-		//Log.i(INFO_TAG, "onClick() > Button: " + button.getId());
 	}
 
 	/**
@@ -262,69 +255,12 @@ public class UserPassActivity extends ActionbarActivity implements
 	}
 
 	/**
-	 * Method used to load/set activity view
-	 */
-	public void loadView() {
-
-		Log.d(DEBUG_TAG, "Loading view");
-		
-		// Set up the actionbar
-		setUpActionBar();
-		
-		// Check if username and password have already been set
-		if (mySettings.isUsernamePasswordSet()){
-			// If it is then load view set
-			Log.d(DEBUG_TAG, "loadView() > Userpass set");
-			
-			// Set check button password set
-			setCheckButton(SET);
-			// Set status text as password set
-			setStatusText(SET);
-
-			// Flag loading edittexts
-			loadingFlag = true;
-			// Load saved username password into edit texts
-			setEmailEditText();
-			setPasswordEditText();
-			// Flag no longer loading edit text objects
-			loadingFlag = false;
-			
-		
-		// Check if we are trying to set a new password
-		} else if (mySettings.isPassed()) {
-			// If it is then load view correct
-			Log.d(DEBUG_TAG, "loadView() > Userpass correct");
-			
-			// Set check button show all good
-			setCheckButton(CORRECT);
-			// Set status text to all good
-			setStatusText(CORRECT);
-		
-		// Check if password is not set and we have an error text
-		} else if (mySettings.isErrorTxt()) {
-			// If there is set status as error
-			Log.d(DEBUG_TAG, "loadView() > Userpass error");
-			
-			// set check button to error
-			setCheckButton(ERROR);
-			// Set status text to error
-			setStatusText(ERROR);
-		
-		// Else we must be checking
-		} else {
-			Log.d(DEBUG_TAG, "loadView() > Userpass check");
-			
-		}
-
-	}
-
-	/**
 	 * Method for displaying toast messages
 	 * 
 	 * @param msg
 	 */
 	public void popup(String msg) {
-		Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+		Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
 	}
 
 	/**
@@ -368,11 +304,9 @@ public class UserPassActivity extends ActionbarActivity implements
 
 	}
 
-	@Override
-	public void afterTextChanged(Editable arg0) {
-		// Nothing to do here, but is an implemented method so needs to go in
-	}
-
+	/**
+	 * Method called on text change detected but before onTextChanged
+	 */
 	@Override
 	public void beforeTextChanged(CharSequence s, int start, int count,
 			int after) {
@@ -387,20 +321,13 @@ public class UserPassActivity extends ActionbarActivity implements
 	@Override
 	public void onTextChanged(CharSequence charSeq, int start, int before,
 			int count) {
-		// Log.v(DEBUG_TAG, "onTextChanged()> CharSeq: " + charSeq + " Start: "
-		// + start + " Before: " + before + " Count: " + count);
-
-		//Log.d(DEBUG_TAG, "onTextChanged() > CharSeq: " + charSeq);
-
+		
 		// If edit text feilds change
 		if (count > 0 || before > 0) {
-			//Log.d(DEBUG_TAG, "onTextChanged() > count: " + count + "before: " + before);
-			//Log.d(DEBUG_TAG, "onTextChanged() > isUsernamePasswordSet: " + mySettings.isUsernamePasswordSet() + " loadingFlag: " + loadingFlag); 
 			
 			// and username password has already been set then set button to recheck
 			if (mySettings.isUsernamePasswordSet() || mySettings.isPassed()) {
 				if (!loadingFlag){
-					Log.d(DEBUG_TAG, "onTextChanged() > Change detected ");
 
 					// Reset isPassed to false and blank username & pass
 					mySettings.setIsPassed(false);
@@ -416,11 +343,18 @@ public class UserPassActivity extends ActionbarActivity implements
 	}
 	
 	/**
+	 * Method called after text change detected
+	 */
+	@Override
+	public void afterTextChanged(Editable arg0) {
+		// Nothing to do here, but is an implemented method so needs to go in
+	}
+
+	/**
 	 * Method used to check if valid username password has been checked and
 	 * add to shared prefferences if it has.
 	 */
 	private void setUsernamePassword() {
-		Log.d(DEBUG_TAG, "isPassed(): " + mySettings.isPassed());
 
 		// Check if creditial check has passed
 		if (mySettings.isPassed()) {
@@ -434,6 +368,58 @@ public class UserPassActivity extends ActionbarActivity implements
 			mySettings.setUserPass(myEmailET.getText().toString(), myPassET
 					.getText().toString());
 		}
+	}
+
+	/**
+	 * Method used to load/set activity view
+	 */
+	public void loadView() {
+		
+		// Set up the actionbar
+		setUpActionBar();
+		
+		// Check if username and password have already been set
+		if (mySettings.isUsernamePasswordSet()){
+			// If it is then load view set
+			
+			// Set check button password set
+			setCheckButton(SET);
+			// Set status text as password set
+			setStatusText(SET);
+	
+			// Flag loading edittexts
+			loadingFlag = true;
+			// Load saved username password into edit texts
+			setEmailEditText();
+			setPasswordEditText();
+			// Flag no longer loading edit text objects
+			loadingFlag = false;
+			
+		
+		// Check if we are trying to set a new password
+		} else if (mySettings.isPassed()) {
+			// If it is then load view correct
+			
+			// Set check button show all good
+			setCheckButton(CORRECT);
+			// Set status text to all good
+			setStatusText(CORRECT);
+		
+		// Check if password is not set and we have an error text
+		} else if (mySettings.isErrorTxt()) {
+			// If there is set status as error
+			
+			// set check button to error
+			setCheckButton(ERROR);
+			// Set status text to error
+			setStatusText(ERROR);
+		
+		// Else we must be checking
+		} else {
+			Log.d(DEBUG_TAG, "loadView() > Userpass check");
+			
+		}
+	
 	}
 
 	public void setStatusText(String status) {
