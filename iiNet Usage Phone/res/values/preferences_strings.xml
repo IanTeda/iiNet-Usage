@@ -7,5 +7,7 @@
     <!-- Username Password Strings -->
     <string name="user_pass_title">Username &amp; Password</string>
     <string name="user_pass_summary">Set iiNet username &amp; password</string>
+    <string name="wifi_only_title">Update Wifi Only</string>
+    <string name="wifi_only_summary">Update when connect to wifi only</string>
 
 </resources>

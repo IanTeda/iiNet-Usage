@@ -4,12 +4,20 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
+    <!-- Permissions -->
+    <!-- Allow application access to network state -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- Allow application access to the Internet -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="13" />
 
     <application
         android:name=".AppGlobals"
+        android:debuggable="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/application_theme" >
@@ -28,13 +36,9 @@
 
         <!-- Username password activity intent -->
         <activity android:name=".activity.UserPassActivity" />
+
+        <!-- Preference activity -->
+        <activity android:name=".activity.PreferencesActivity" />
     </application>
-
-    <!-- Permissions -->
-    <!-- Allow application access to network state -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-    <!-- Allow application access to the Internet -->
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

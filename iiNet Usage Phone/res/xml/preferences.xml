@@ -13,5 +13,16 @@
             <intent android:action=".activity.UserPassActivity" />
         </Preference>
     </PreferenceCategory>
+    
+    <!-- Application Behaviour Parent Category -->
+    <PreferenceCategory android:title="Category" >
+        <PreferenceScreen android:title="Application Behaviour" >
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="wifi_only"
+                android:summary="@string/wifi_only_summary"
+                android:title="@string/wifi_only_title" />
+        </PreferenceScreen>
+    </PreferenceCategory>
 
 </PreferenceScreen>

@@ -2,6 +2,7 @@ package au.id.teda.iinetusage.phone.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -92,8 +93,8 @@ public class MainActivity extends ActionbarActivity {
 		Log.i(INFO_TAG, "onOptionsItemSelected() > Button: " + item.getTitle());
 		switch (item.getItemId()) {
 		case R.id.menu_settings_button:
-			Intent userPassIntent = new Intent(this, UserPassActivity.class);
-			startActivity(userPassIntent);
+			Intent menuIntent = new Intent(this, PreferencesActivity.class);
+			startActivity(menuIntent);
 			return true;
 		case R.id.menu_refresh_button:
 			

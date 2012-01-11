@@ -33,10 +33,8 @@ import au.id.teda.iinetusage.phone.sax.CheckUserPassSAXHandler;
 public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 
 	// Static strings used for debugging
-	private static final String DEBUG_TAG = "iiNet Usage"; // Debug tag for
-															// LogCat
-	private static final String INFO_TAG = CheckCredentialsAsync.class
-			.getSimpleName();
+	private static final String DEBUG_TAG = "iiNet Usage";
+	private static final String INFO_TAG = CheckCredentialsAsync.class.getSimpleName();
 
 	// Set shared preference helper object
 	private PreferenceHelper mySettings = new PreferenceHelper();
@@ -46,19 +44,20 @@ public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 	private Handler myHandler;
 	private ProgressDialog myProgressDialog;
 	private URL myUrl;
-
+	
 	/**
-	 * Constructor for class. Pass activity context and return handler for
-	 * update
+	 *  Constructor for class. Pass activity context and return handler for
+	 *  update
 	 * 
-	 * @param context
-	 * @param myHandler
+	 * @param activityContext
+	 * @param handler
+	 * @param url
 	 */
 	public CheckCredentialsAsync(Context activityContext, Handler handler, URL url) {
 		//Log.i(INFO_TAG, "Start constructor");
 
 		// Set context for class
-		myActivityContext = activityContext;
+		this.myActivityContext = activityContext;
 
 		// Set handler object
 		myHandler = handler;
@@ -75,6 +74,10 @@ public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 	protected void onPreExecute() {
 		super.onPreExecute();
 
+		showProgressDialog();
+	}
+
+	private void showProgressDialog() {
 		// Display progress dialog
 		myProgressDialog = ProgressDialog.show(myActivityContext,
 				myActivityContext.getString(R.string.user_pass_checking_title),
@@ -100,8 +103,7 @@ public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 				// Log.d(DEBUG_TAG, "checkCredentials() > URLl: " + myUrl);
 
 				// Load xml from our developement xml file
-				// InputSource is = new
-				// InputSource(MyApp.getAppContext().getResources().openRawResource(R.raw.adsl2));
+				//InputSource is = new InputSource(AppGlobals.getAppContext().getResources().openRawResource(R.raw.may2011));
 
 				// Create a SAXParserFactory so we can
 				SAXParserFactory spf = SAXParserFactory.newInstance();

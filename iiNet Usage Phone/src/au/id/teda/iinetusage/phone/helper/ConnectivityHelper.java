@@ -75,7 +75,6 @@ public class ConnectivityHelper extends UserPassHelper {
 		    	
 		    } else {
 		    	Log.i(INFO_TAG, "isConnected(): false");
-		    	Toast.makeText(myContext, myContext.getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
 		    	return false;
 		    }
 		}
