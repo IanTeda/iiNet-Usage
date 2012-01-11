@@ -63,10 +63,10 @@
                 android:id="@+id/user_pass_reveal_cbox"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/status_text_line_spacing"
                 android:onClick="onCheckBoxClick"
                 android:text="@string/user_pass_show"
-                android:textSize="@dimen/status_text_size"
-                android:layout_marginTop="@dimen/status_text_line_spacing" />
+                android:textSize="@dimen/status_text_size" />
 
             <TextView
                 android:id="@+id/user_pass_status_enter"
@@ -98,7 +98,7 @@
                 android:text="@string/user_pass_button_check" />
         </LinearLayout>
         <!-- Login Form Ends -->
-        -->
+        -->
     </RelativeLayout>
 
 </ScrollView>
