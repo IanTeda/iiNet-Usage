@@ -23,16 +23,15 @@ public class ConnectivityHelper extends UserPassHelper {
 	// Preference string key object
 	private static final String WIFI_ONLY = "wifi_only";
 	
-	private Context myContext;
+	private Context myActivityContext;
 	
 	/**
 	 * Class constructor
 	 */
-	public ConnectivityHelper() {
+	public ConnectivityHelper(Context activityContext) {
 		
-		// Set context for class
-		myContext = AppGlobals.getAppContext();
-		
+		// Set activity context
+		myActivityContext = activityContext;
 	}
 	
 	public boolean isWifiOnly(){
@@ -46,37 +45,43 @@ public class ConnectivityHelper extends UserPassHelper {
 	public boolean isConnected(){
 		
 		// Set connectivity manager object
-		ConnectivityManager myConMan = (ConnectivityManager) myContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+		ConnectivityManager myConMan = (ConnectivityManager) myActivityContext.getSystemService(Context.CONNECTIVITY_SERVICE);
 		// Get connection information
-		NetworkInfo info = myConMan.getActiveNetworkInfo();
+		NetworkInfo netInfo = myConMan.getActiveNetworkInfo();
 		
-		// Skip if no connection, or background data disabled
-		if (info == null || !myConMan.getBackgroundDataSetting()) { // TODO: Check for roaming settings
+		// Skip if no connection manager, or background data disabled
+		if (netInfo == null || !myConMan.getBackgroundDataSetting()) {
+			
+			// Looks like we have airplane mode on or background roaming is not allowed
 			return false;
+			
+		// Else we ware good to check for connectivity
 		} else {
-			// Confirm 3G connectivity
+			// Get 3G connectivity
 		    Boolean is3g = myConMan.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isConnectedOrConnecting();
-		    // Confirm wifi connectivity
+		    // Get WiFi connectivity
 		    Boolean isWifi = myConMan.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnectedOrConnecting();
 			
-		    //Log.d(DEBUG_TAG, "is3g: " + is3g);
-		    //Log.d(DEBUG_TAG, "isWifi: " + isWifi);
-		    //Log.d(DEBUG_TAG, "Wifi Only: " + mySettings.getBoolean(WIFI_ONLY, false));
+		    Log.d(DEBUG_TAG, "is3g: " + is3g + " | isWifi: " + isWifi + " | Wifi Only: " + isWifiOnly());
 		    
-		    if (is3g && !isWifiOnly()) {
-		    	//Log.d(DEBUG_TAG, "3G and non wifi connection allowed");
-		    	Log.i(INFO_TAG, "isConnected(): true");
-		    	return true;
+		    // Check to see if we have WiFi
+		    if (isWifi){
 		    	
-		    } else if(isWifi && isWifiOnly()) {
-		    	//Log.d(DEBUG_TAG, "3G and non wifi connectin allowed");
-		    	Log.i(INFO_TAG, "isConnected(): true");
+		    	// Looks like we have WiFi connectivity
+		    	return true;
+		    
+		    // Check to see if we have 3G and not WiFi only
+		    } else if (is3g && !isWifiOnly()){
+		    	
+		    	// Looks like we have 3G and not set to WiFi only
 		    	return true;
 		    	
 		    } else {
-		    	Log.i(INFO_TAG, "isConnected(): false");
+		    	
+		    	// Looks like we have no connectivity
 		    	return false;
 		    }
+		    
 		}
 		
 	}

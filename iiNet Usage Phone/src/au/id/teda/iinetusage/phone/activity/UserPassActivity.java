@@ -46,7 +46,7 @@ public class UserPassActivity extends ActionbarActivity implements
 			.getSimpleName();
 
 	// Set shared preference helper object
-	private PreferenceHelper mySettings = new PreferenceHelper();
+	private PreferenceHelper mySettings;
 
 	// Set status strings options
 	private static final String SET = "set";
@@ -86,6 +86,8 @@ public class UserPassActivity extends ActionbarActivity implements
 		// Set onClick listner for edit text objects
 		myEmailET.addTextChangedListener(this);
 		myPassET.addTextChangedListener(this);
+		
+		mySettings = new PreferenceHelper(this);
 
 	}
 

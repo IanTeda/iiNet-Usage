@@ -33,8 +33,7 @@ public class MainActivity extends ActionbarActivity {
         userPassCheck();
         
 		myAlertboxButton = (Button) findViewById(R.id.alertbox_button);
-		myAlertboxView = new AlertboxView();
-		
+		myAlertboxView = new AlertboxView(this);
         myAlertboxView.setAlert(myAlertboxButton);
         
     }
@@ -42,7 +41,6 @@ public class MainActivity extends ActionbarActivity {
 	private void userPassCheck() {
 		UserPassHelper UserPassHelper = new UserPassHelper();
 		if (!UserPassHelper.isUsernamePasswordSet()){
-			Log.d(DEBUG_TAG, "User password not set, open settings");
 		}
 		
 	}
@@ -54,7 +52,6 @@ public class MainActivity extends ActionbarActivity {
 	public void onClickAlertboxButton (View view){
 		// Get current string value of the alert box
 		String alertboxButtonText =  (String) myAlertboxButton.getText();
-		Log.i(INFO_TAG, "onClickAlertboxButton() > Button: " + alertboxButtonText);
 		
 		// Set action based on value of alertbox string
     	if ( alertboxButtonText == this.getString(R.string.alertbox_no_data)){
@@ -75,7 +72,6 @@ public class MainActivity extends ActionbarActivity {
 	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		Log.i(INFO_TAG, "onCreateOptionsMenu()");
 		super.onCreateOptionsMenu(menu);
 		
 		// Menu inflator object
@@ -90,7 +86,6 @@ public class MainActivity extends ActionbarActivity {
 	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		Log.i(INFO_TAG, "onOptionsItemSelected() > Button: " + item.getTitle());
 		switch (item.getItemId()) {
 		case R.id.menu_settings_button:
 			Intent menuIntent = new Intent(this, PreferencesActivity.class);

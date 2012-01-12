@@ -4,13 +4,14 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import android.content.Context;
 import android.util.Log;
 import au.id.teda.iinetusage.phone.helper.PreferenceHelper;
 
 public class CheckUserPassSAXHandler extends DefaultHandler {
 	
 	// Set shared preference helper object
-	private PreferenceHelper mySettings = new PreferenceHelper();
+	private PreferenceHelper mySettings;
 	
 	/**
 	 *  Static tag strings for logging information and debug
@@ -25,12 +26,21 @@ public class CheckUserPassSAXHandler extends DefaultHandler {
 	// Error tag
 	public static final String ERROR = "error";
 	
+	// Class objects
+	private Context myActivityContext;
 	
 	// Set inTag variables
     private boolean inFeed = false;
     private boolean inError = false;
     
     private boolean chkUserPass = true;
+    
+	public CheckUserPassSAXHandler(Context activityContext) {
+		super();
+		
+		myActivityContext = activityContext;
+		mySettings = new PreferenceHelper(activityContext);
+	}
     
 	/**
 	 * This method is called when the parser reaches an xml start tag
@@ -39,7 +49,7 @@ public class CheckUserPassSAXHandler extends DefaultHandler {
 	public void startElement(String uri, String myTag, String qName,
 			Attributes myAtt) throws SAXException {
 		super.startElement(uri, myTag, qName, myAtt); //TODO: Do I need this super?
-		//Log.d(DEBUG_TAG, "startElement is: " + myTag.trim());
+		Log.d(DEBUG_TAG, "startElement is: " + myTag.trim());
 		
 		if (myTag.trim().equalsIgnoreCase(II_FEED)){
 			inFeed = true;
@@ -58,7 +68,7 @@ public class CheckUserPassSAXHandler extends DefaultHandler {
 	public void endElement(String uri, String myTag, String qName)
 			throws SAXException {
 		super.endElement(uri, myTag, qName);
-		//Log.d(DEBUG_TAG, "endElement is: " + myTag.trim());
+		Log.d(DEBUG_TAG, "endElement is: " + myTag.trim());
 
 		if (myTag.trim().equalsIgnoreCase(ERROR)){
 			inError = false;
@@ -79,14 +89,13 @@ public class CheckUserPassSAXHandler extends DefaultHandler {
 		// Set string value for xml tag currently in
 		String chars = (new String(ch).substring(start, start + length));
 		
-		//Log.d(DEBUG_TAG, "characters is: " + chars);
+		Log.d(DEBUG_TAG, "characters is: " + chars);
 		
 		// if we are in the feed tag and in an error tag set error string
 		if (inFeed && inError){
 			
-			// Load error text into preferences for retrieval
+			// Set error text into preferences for retrieval
 			mySettings.setErrorTxt(chars);
-			Log.i(INFO_TAG, "Error code is: " + chars);
 		}
 			
 	}

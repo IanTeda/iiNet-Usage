@@ -9,6 +9,14 @@ import au.id.teda.iinetusage.phone.helper.PreferenceHelper;
 
 public class AlertboxView extends PreferenceHelper {
 	
+	private Context myActivityContext;
+	
+	public AlertboxView(Context activityContext) {
+		super(activityContext);
+		
+		myActivityContext = activityContext;
+	}
+
 	private Context myContext = AppGlobals.getAppContext();
 
 	private final String DEBUG_TAG = "iiNet Usage"; // Debug tag for LogCat

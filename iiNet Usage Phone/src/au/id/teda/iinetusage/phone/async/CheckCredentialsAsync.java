@@ -37,7 +37,7 @@ public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 	private static final String INFO_TAG = CheckCredentialsAsync.class.getSimpleName();
 
 	// Set shared preference helper object
-	private PreferenceHelper mySettings = new PreferenceHelper();
+	private PreferenceHelper mySettings;
 
 	// Class objects
 	private Context myActivityContext;
@@ -56,7 +56,7 @@ public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 	public CheckCredentialsAsync(Context activityContext, Handler handler, URL url) {
 		//Log.i(INFO_TAG, "Start constructor");
 
-		// Set context for class
+		// Set activity context
 		this.myActivityContext = activityContext;
 
 		// Set handler object
@@ -64,6 +64,8 @@ public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 
 		// Set URL to check
 		myUrl = url;
+		
+		mySettings = new PreferenceHelper(activityContext);
 
 	}
 
@@ -97,7 +99,7 @@ public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 		// Log.d(DEBUG_TAG, "Connection is: " + isConnected());
 
 		// Check if connectivity is true. If so try to parse xml
-		ConnectivityHelper myConnection = new ConnectivityHelper();
+		ConnectivityHelper myConnection = new ConnectivityHelper(myActivityContext);
 		if (myConnection.isConnected()) {
 			try {
 				// Log.d(DEBUG_TAG, "checkCredentials() > URLl: " + myUrl);
@@ -115,7 +117,7 @@ public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 				XMLReader xr = sp.getXMLReader();
 
 				// Create a new ContentHandler and apply it to the XML-Reader
-				CheckUserPassSAXHandler myUserPassSAXHandler = new CheckUserPassSAXHandler();
+				CheckUserPassSAXHandler myUserPassSAXHandler = new CheckUserPassSAXHandler(myActivityContext);
 				xr.setContentHandler(myUserPassSAXHandler);
 
 				// Parse the xml-data from our development file
@@ -140,7 +142,7 @@ public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 				e.printStackTrace();
 			}
 		} else {
-			Log.d(DEBUG_TAG, "doInBackground() > No connection");
+			// No connectivity
 		}
 
 		return null;
@@ -184,20 +186,11 @@ public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 	 * accordingly
 	 */
 	private void checkStatus() {
-		if (!mySettings.isPassed()) {
-			popup(mySettings.getErrorTxt());
+		if (!mySettings.isPassed() && mySettings.isErrorTxt()) {
+			Toast.makeText(myActivityContext, mySettings.getErrorTxt(), Toast.LENGTH_SHORT).show();
 		} else {
-			popup("Looking good");
+			Toast.makeText(myActivityContext, "Looking good", Toast.LENGTH_SHORT).show();
 		}
-	}
-
-	/**
-	 * Simple method for displaying toast messages. Saves code duplication.
-	 * 
-	 * @param msg
-	 */
-	public void popup(String msg) {
-		Toast.makeText(myActivityContext, msg, Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
