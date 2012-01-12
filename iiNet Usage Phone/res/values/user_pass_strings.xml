@@ -13,7 +13,7 @@
     <string name="user_pass_status_set"> <b>SET</b> - Credentials already set</string>
     <string name="user_pass_status_enter">Enter credentials to check</string>
     <string name="user_pass_status_recheck">Username/Password changed</string>
-    <string name="user_pass_status_error"> <b>ERROR</b> - Incorrect Credentials</string>
+    <string name="user_pass_status_error"> <b>FAIL</b> - Credential check</string>
     <string name="user_pass_status_correct"> <b>PASS</b> - Credentials look good</string>
     <string name="user_pass_nouserpass">Username/Email and Password is empty</string>
     <string name="user_pass_nouser">Username/Email is empty</string>

@@ -143,6 +143,7 @@ public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 			}
 		} else {
 			// No connectivity
+			mySettings.setErrorTxt("There appears to be no internet connection");
 		}
 
 		return null;
