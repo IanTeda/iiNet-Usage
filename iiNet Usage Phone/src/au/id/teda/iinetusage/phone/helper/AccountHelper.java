@@ -157,59 +157,25 @@ public class AccountHelper extends AccountStatusHelper {
 		return remainingString;
 	}
 	
-	// Get account quota from database based on period flag
-	public long getAccountQuota(String period){
-        //Log.d(DEBUG_TAG, "MainActivity > getAccountQuota() > Period: " + period);
-    	long usage = 0;
-    	
-    	AccountHelper accountInfo = new AccountHelper(myApplicationContext);
-        if (accountInfo.infoExists()){
-            AccountInfoDBAdapter accountInfoDBAdapter = new AccountInfoDBAdapter(myApplicationContext);
-            accountInfoDBAdapter.open();
-            Cursor cursor = accountInfoDBAdapter.fetchAccountInfo(1);
-            if (period == "peak"){
-            	usage = cursor.getLong(cursor.getColumnIndex(accountInfoDBAdapter.PEAK_QUOTA)); // Pull peak quota from cursor
-            } else if (period == "offpeak"){
-            	usage = cursor.getLong(cursor.getColumnIndex(accountInfoDBAdapter.OFFPEAK_QUOTA)); // Pull peak quota from cursor
-            }
-            //Log.d(DEBUG_TAG, "MainActivity > getAccountQuota() > usage: " + usage);
-            cursor.close();
-            accountInfoDBAdapter.close();
-        } else {
-        	usage = 0;
-        }
-		return usage;
-	}
-	
-	// Get current used data from database based on period flag
-	public long getAccountUsed(String period){
-		//Log.d(DEBUG_TAG, "MainActivity > getAccountUsed() > Period: " + period);
-		long usage = 0;
-	        
-		AccountHelper accountInfo = new AccountHelper(myApplicationContext);
-		if (accountInfo.statusExists()){
-			AccountStatusDBAdapter accountStatusDBHelper = new AccountStatusDBAdapter(myApplicationContext);
-			accountStatusDBHelper.open();
-			Cursor cursor = accountStatusDBHelper.fetchAllAccountStatus();
-			cursor.moveToLast();
-			if (period == "peak"){
-				usage = cursor.getLong(cursor.getColumnIndex(accountStatusDBHelper.PEAK_USED))/1000000; // Pull peak quota from cursor
-			} else if (period == "offpeak"){
-				usage = cursor.getLong(cursor.getColumnIndex(accountStatusDBHelper.OFFPEAK_USED))/1000000; // Pull peak quota from cursor
-			}
-			//Log.d(DEBUG_TAG, "MainActivity > getAccountUsed() > usage: " + usage);       
-			cursor.close();
-			accountStatusDBHelper.close();
-		} else {
-			usage = 0;
-		}
-		return usage;
-	}
-	
 	// Get data used as a percentage
 	public double getPercentageUsed(String period){
+		
+		double quotaLong;
+		double usedLong;
+		
 		// Get quota and used data values
-		double quotaLong = getAccountQuota(period);
+		if (period == PEAK){
+			
+			quotaLong =  getPeakQuota();
+			usedLong = getCurrentPeakUsed();
+		} else if (period == OFFPEAK){
+			
+			quotaLong =  getOffPeakQuota();
+			usedLong = getCurrentOffPeakUsed();
+		}
+		
+		
+		double quotaLong =  getAccountQuota(period);
 		double usedLong = getAccountUsed(period);
 		
 		double percentageUsedDouble = usedLong/quotaLong;
