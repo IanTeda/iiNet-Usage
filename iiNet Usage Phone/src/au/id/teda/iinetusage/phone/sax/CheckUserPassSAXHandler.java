@@ -4,21 +4,20 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import android.content.Context;
 import android.util.Log;
 import au.id.teda.iinetusage.phone.helper.PreferenceHelper;
 
 public class CheckUserPassSAXHandler extends DefaultHandler {
 	
 	// Set shared preference helper object
-	private PreferenceHelper mySettings;
+	private PreferenceHelper mySettings = new PreferenceHelper();
 	
 	/**
 	 *  Static tag strings for logging information and debug
 	 */
 	// Debug tag for LogCat
 	private static final String DEBUG_TAG = "iiNet Usage";
-	private static final String INFO_TAG = CheckUserPassSAXHandler.class.getSimpleName();
+	//private static final String INFO_TAG = CheckUserPassSAXHandler.class.getSimpleName();
 	
 	// Set tag variables
 	// Main xml parent tag
@@ -26,21 +25,11 @@ public class CheckUserPassSAXHandler extends DefaultHandler {
 	// Error tag
 	public static final String ERROR = "error";
 	
-	// Class objects
-	private Context myActivityContext;
-	
 	// Set inTag variables
     private boolean inFeed = false;
     private boolean inError = false;
     
     private boolean chkUserPass = true;
-    
-	public CheckUserPassSAXHandler(Context activityContext) {
-		super();
-		
-		myActivityContext = activityContext;
-		mySettings = new PreferenceHelper(activityContext);
-	}
     
 	/**
 	 * This method is called when the parser reaches an xml start tag

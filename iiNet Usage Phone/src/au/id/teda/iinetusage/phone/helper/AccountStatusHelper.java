@@ -1,17 +1,9 @@
 package au.id.teda.iinetusage.phone.helper;
 
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import au.id.teda.iinetusage.phone.AppGlobals;
-
 public class AccountStatusHelper extends AccountInfoHelper {
 	
 	//private static final String DEBUG_TAG = "iiNet Usage"; // Debug tag for LogCat
 	//private static final String INFO_TAG = AccountStatusHelper.class.getSimpleName();
-	
-	// Create instance of shared preferences based on app context
-	private SharedPreferences mySettings = PreferenceManager.getDefaultSharedPreferences(AppGlobals.getAppContext());
-	
 	
 	// Set static string values for preference keys
 	private final static String LAST_UPDATE = "lastUpdate";
@@ -56,9 +48,6 @@ public class AccountStatusHelper extends AccountInfoHelper {
 			long peak_shaped_speed, long offpeak_shaped_speed, long uptime,
 			String ip_address) {
 		
-		// Set object for editor
-		SharedPreferences.Editor myEditor = mySettings.edit();
-		
 		myEditor.putLong(LAST_UPDATE, systemDateTime);
 		myEditor.putString(CURRENT_DATA_PERIOD, period);
 		myEditor.putLong(CURRENT_ANNIVERSARY, anniversary);
@@ -77,6 +66,38 @@ public class AccountStatusHelper extends AccountInfoHelper {
 		// Commit values to preferences
 		myEditor.commit();
 		
+	}
+	
+	/**
+	 * Method for checking if all account status information exists
+	 * @return true if all data present
+	 */
+	public boolean statusExists() {
+		// Check to see if we have all the account status information stored
+		if (getLastUpdate() > 0
+				&& getCurrentDataPeriod().length() > 0
+				&& getCurrentAnniversary() >= 0
+				&& getCurrentDaysToGo() >= 0
+				&& getCurrentDaysSoFar() >= 0
+				&& isCurrentPeakShaped() >= 0
+				&& isCurrentOffPeakShaped() >= 0
+				&& getCurrentPeakUsed() >= 0
+				&& getCurrentOffPeakUsed() >= 0
+				&& getCurrentUploadUsed() >= 0
+				&& getCurrentFreezoneUsed() >= 0
+				&& getCurrentPeakShapedSpeed() >= 0
+				&& getCurrentOffPeakShapedSpeed() >= 0
+				&& getCurrentUpTime() >= 0
+				&& getCurrentIp().length() > 0){
+			
+			// Looks like we have every thing, so return true
+			return true;
+		} else {
+			
+			// Dosen't seem to be all there so return false
+			return false;
+			
+		}
 	}
 
 	/**

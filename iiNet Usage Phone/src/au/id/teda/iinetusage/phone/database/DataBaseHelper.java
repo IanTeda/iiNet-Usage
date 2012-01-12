@@ -1,9 +1,9 @@
 package au.id.teda.iinetusage.phone.database;
 
-import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import au.id.teda.iinetusage.phone.AppGlobals;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
 
@@ -20,8 +20,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
      * Takes and keeps a reference of the passed context in order to access to the application assets and resources.
      * @param context
      */
-	public DataBaseHelper(Context context) {
-		super(context, DATABASE_NAME, null, DATABASE_VERSION);
+	public DataBaseHelper() {
+		super(AppGlobals.getAppContext(), DATABASE_NAME, null, DATABASE_VERSION);
 	}
 	
 	// Method is called during creation of the database

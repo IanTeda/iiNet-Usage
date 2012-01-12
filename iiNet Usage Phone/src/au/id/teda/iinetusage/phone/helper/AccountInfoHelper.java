@@ -11,7 +11,8 @@ public class AccountInfoHelper {
 	//private static final String INFO_TAG = AccountInfoHelper.class.getSimpleName();
 	
 	// Create instance of shared preferences based on app context
-	private SharedPreferences mySettings = PreferenceManager.getDefaultSharedPreferences(AppGlobals.getAppContext());
+	protected SharedPreferences mySettings = PreferenceManager.getDefaultSharedPreferences(AppGlobals.getAppContext());
+	protected SharedPreferences.Editor myEditor = mySettings.edit();
 	
 	// Set static string values for preference keys
 	private final static String PLAN = "plan";
@@ -34,7 +35,6 @@ public class AccountInfoHelper {
 			String offPeakStart, String offPeakEnd, long peakQuota,
 			long offpeakQuota){
 		
-		SharedPreferences.Editor myEditor = mySettings.edit();
 		myEditor.putString(PLAN, plan);
 		myEditor.putString(PRODUCT, product);
 		myEditor.putString(OFF_PEAK_START, offPeakStart);
@@ -43,6 +43,28 @@ public class AccountInfoHelper {
 		myEditor.putLong(OFF_PEAK_QUOTA, offpeakQuota);
 		myEditor.commit();
 		
+	}
+	
+	/**
+	 * Method for checking if all account information exists
+	 * @return true if all data present
+	 */
+	public boolean infoExists() {
+		// Check to see if we have all the account information stored
+		if (getPlan().length() > 0
+				&& getProduct().length() >0
+				&& getOffPeakStart().length() > 0
+				&& getOffPeakEnd().length() > 0
+				&& getPeakQuota() > 0
+				&& getOffPeakQuota() > 0){
+			
+			// Looks like it does so lets return true
+			return true;
+		} else {
+			
+			// Doesn't seem to be all there so return false
+			return false;
+		}
 	}
 	
 	/**

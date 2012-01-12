@@ -87,7 +87,7 @@ public class UserPassActivity extends ActionbarActivity implements
 		myEmailET.addTextChangedListener(this);
 		myPassET.addTextChangedListener(this);
 		
-		mySettings = new PreferenceHelper(this);
+		mySettings = new PreferenceHelper();
 
 	}
 
