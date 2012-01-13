@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import au.id.teda.iinetusage.phone.R;
 
 public class ActionbarHelperActivity extends Activity {
@@ -16,10 +15,6 @@ public class ActionbarHelperActivity extends Activity {
 		// Start dashboard activity
 		Intent dashboardActivityIntent = new Intent(this, MainActivity.class);
         startActivity(dashboardActivityIntent);
-	}
-	
-	public void onClickActionbarRefresh (View view){
-		Toast.makeText(this, "Refersh data", Toast.LENGTH_SHORT).show();
 	}
 	
 	public void hideActionbarHomeIcon(){

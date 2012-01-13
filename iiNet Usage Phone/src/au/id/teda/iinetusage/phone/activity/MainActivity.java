@@ -2,6 +2,8 @@ package au.id.teda.iinetusage.phone.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.preference.PreferenceActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 import au.id.teda.iinetusage.phone.R;
+import au.id.teda.iinetusage.phone.async.RefreshUsageAsync;
 import au.id.teda.iinetusage.phone.helper.UserPassHelper;
 import au.id.teda.iinetusage.phone.view.AlertboxView;
 
@@ -65,6 +68,21 @@ public class MainActivity extends ActionbarHelperActivity {
     	}
 		
 	}
+	
+
+	
+	public void onClickActionbarRefresh (View view){
+		new RefreshUsageAsync(this, handler).execute();
+	}
+	
+	/**
+	 *  Handler for passing messages from other classes
+	 */
+    public Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
+        	//fillSummaryView();
+        }
+    };
 	
 	/**
 	 * onCreate method for options menu
