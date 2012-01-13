@@ -37,7 +37,7 @@ import au.id.teda.iinetusage.phone.sax.DailyUsageSAXHandler;
 
 public class RefreshUsageAsync extends AsyncTask<Void, Void, Void> {
 	
-	private static final String DEBUG_TAG = "iiNet Usage"; // Debug tag for LogCat
+	//private static final String DEBUG_TAG = "iiNet Usage";
 	private static final String INFO_TAG = RefreshUsageAsync.class.getSimpleName();
 	
     private Context myApplicationContext = AppGlobals.getAppContext();
@@ -49,7 +49,6 @@ public class RefreshUsageAsync extends AsyncTask<Void, Void, Void> {
 
     private ProgressDialog progressDialog;
     private Handler handler;
-    private boolean updateRefresh = false;
 	
     /**
      * Constructor for class. Pass activity context and return handler for update
@@ -76,7 +75,6 @@ public class RefreshUsageAsync extends AsyncTask<Void, Void, Void> {
 		
 		this.myActivityContext = context;
 		handler = myHandler;
-		updateRefresh = hideDialog;
 	}
 
 	/**
@@ -119,7 +117,7 @@ public class RefreshUsageAsync extends AsyncTask<Void, Void, Void> {
 	        	//Log.d(DEBUG_TAG, "URL: " + url);
 	        	
 	        	// Load xml from our development xml file
-				InputSource is = new InputSource(myApplicationContext.getResources().openRawResource(R.raw.may2011));
+				//InputSource is = new InputSource(myApplicationContext.getResources().openRawResource(R.raw.may2011));
 	        	
 	        	 // Create a SAXParserFactory so we can
 	        	SAXParserFactory spf = SAXParserFactory.newInstance();

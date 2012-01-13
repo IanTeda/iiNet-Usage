@@ -10,4 +10,13 @@
     <string name="wifi_only_title">Update Wifi Only</string>
     <string name="wifi_only_summary">Update when connect to wifi only</string>
 
+    <!-- Application Behaviour -->
+    <string name="application_behaviour_category_title">Application Behaviour</string>
+    <string name="hide_status_bar_title">Hide Status Bar</string>
+    <string name="hide_status_bar_summary">Hide phone status bar</string>
+    <string name="show_refresh_dialog_title">Show Refresh Dialog</string>
+    <string name="show_refresh_dialog_summary">Show refresh dialog</string>
+    <string name="show_decimal_title">Show Decimal Point</string>
+    <string name="show_decimal_summary">Show decimal point in daily usage</string>
+
 </resources>

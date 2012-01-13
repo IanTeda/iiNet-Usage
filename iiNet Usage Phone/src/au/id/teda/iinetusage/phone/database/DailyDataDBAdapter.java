@@ -1,13 +1,11 @@
 package au.id.teda.iinetusage.phone.database;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.util.Log;
-import au.id.teda.iinetusage.phone.AppGlobals;
 
 public class DailyDataDBAdapter {
 		

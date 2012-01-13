@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.preference.PreferenceActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,8 +18,8 @@ import au.id.teda.iinetusage.phone.view.AlertboxView;
 public class MainActivity extends ActionbarHelperActivity {
 	
 	// Static strings for debug tags
-	private static final String DEBUG_TAG = "iiNet Usage";
-	private static final String INFO_TAG = MainActivity.class.getSimpleName();
+	//private static final String DEBUG_TAG = "iiNet Usage";
+	//private static final String INFO_TAG = MainActivity.class.getSimpleName();
 	
 	private Button myAlertboxButton;
 	private AlertboxView myAlertboxView;

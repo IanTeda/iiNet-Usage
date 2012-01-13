@@ -13,15 +13,25 @@
             <intent android:action=".activity.UserPassActivity" />
         </Preference>
     </PreferenceCategory>
-    
+
     <!-- Application Behaviour Parent Category -->
     <PreferenceCategory android:title="Category" >
-        <PreferenceScreen android:title="Application Behaviour" >
+        <PreferenceScreen android:title="@string/application_behaviour_category_title" >
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="hide_status_bar"
+                android:summary="@string/hide_status_bar_summary"
+                android:title="@string/hide_status_bar_title" />
             <CheckBoxPreference
                 android:defaultValue="true"
                 android:key="wifi_only"
                 android:summary="@string/wifi_only_summary"
                 android:title="@string/wifi_only_title" />
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="show_refresh_dialog"
+                android:summary="@string/show_refresh_dialog_summary"
+                android:title="@string/show_refresh_dialog_title" />
         </PreferenceScreen>
     </PreferenceCategory>
 

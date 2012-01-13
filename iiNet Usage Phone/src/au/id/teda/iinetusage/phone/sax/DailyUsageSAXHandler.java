@@ -112,36 +112,29 @@ public class DailyUsageSAXHandler extends DefaultHandler {
 			String typeUsedValue = atts.getValue(USED);
 			if (typeClassificationValue.trim().equalsIgnoreCase("peak")){
 				tempAcountStatus.peakUsed = typeUsedValue;
-				//Log.d(DEBUG_TAG, "DailyUsageSAXHandler > tempAcountStatus.peakUsed set to: " + tempAcountStatus.peakUsed);
 				
 			} else if (typeClassificationValue.trim().equalsIgnoreCase("offpeak")){
 				tempAcountStatus.offpeakUsed = typeUsedValue;
-				//Log.d(DEBUG_TAG, "DailyUsageSAXHandler > tempAcountStatus.offpeakUsed set to: " + tempAcountStatus.offpeakUsed);
 				
 			} else if (typeClassificationValue.trim().equalsIgnoreCase("uploads")){
 				tempAcountStatus.uploadsUsed = typeUsedValue;
-				//Log.d(DEBUG_TAG, "DailyUsageSAXHandler > tempAcountStatus.uploads set to: " + tempAcountStatus.uploadsUsed);
 				
 			} else if (typeClassificationValue.trim().equalsIgnoreCase("freezone")){
 				tempAcountStatus.freezoneUsed = typeUsedValue;
-				//Log.d(DEBUG_TAG, "DailyUsageSAXHandler > tempAcountStatus.freezoneUsed set to: " + tempAcountStatus.freezoneUsed);
 				
 			}
 			
 		} else if (name.trim().equalsIgnoreCase(NAME)){
 			inName = true;
-			//Log.d(DEBUG_TAG, "DailyUsageSAXHandler > inName set as: " + inFeed + inVolumeUsage + inExpectedTrafficTypes + inType + inName);
 		} else if (name.trim().equalsIgnoreCase(QUOTA_ALLOCATION)){
 			inQuotaAllocation = true;
 		} else if (name.trim().equalsIgnoreCase(IS_SHAPED)){
 			inIsShaped = true;
 			if (usageFlag.trim().equalsIgnoreCase("peak")){
 				tempAcountStatus.peakShapingSpeed = atts.getValue("speed");
-				//Log.d(DEBUG_TAG, "DailyUsageSAXHandler > tempAcountStatus.peakShapingSpeed set to: " + tempAcountStatus.peakShapingSpeed);
 				
 			} else if (usageFlag.trim().equalsIgnoreCase("offpeak")){
 				tempAcountStatus.offpeakShapingSpeed = atts.getValue("speed");
-				//Log.d(DEBUG_TAG, "DailyUsageSAXHandler > tempAcountStatus.offpeakShapingSpeed set to: " + tempAcountStatus.offpeakShapingSpeed);
 				
 			}
 			
@@ -149,7 +142,6 @@ public class DailyUsageSAXHandler extends DefaultHandler {
 			inDayHour = true;
 			String dayHourValue = atts.getValue(PERIOD);
 			tempDailyUsage.date =  dayHourValue;
-			//Log.d(DEBUG_TAG, "DailyUsageSAXHandler > tempDailyUsage.date set to: " + tempDailyUsage.date);
 			
 		} else if (name.trim().equalsIgnoreCase(USAGE)){
 			inUsage = true;
@@ -216,8 +208,6 @@ public class DailyUsageSAXHandler extends DefaultHandler {
 				&& tempDailyUsage.date != null
 				&& tempDailyUsage.period == null){
 		
-				//Log.d(DEBUG_TAG, "Try: " + tempDailyUsage.date);
-				
 				try {
 					
 					// Set date format for string input and output
@@ -227,8 +217,6 @@ public class DailyUsageSAXHandler extends DefaultHandler {
 					// Convert date string to date
 					Date myDate = myInputDateFormat.parse(tempDailyUsage.date);
 					
-					//Log.d(DEBUG_TAG, "Date is: " + myDate);
-					
 					// Add date to calendar and then add 27 days to get data period
 					Calendar myCalendar = Calendar.getInstance();
 					myCalendar.setTime(myDate);
@@ -236,7 +224,6 @@ public class DailyUsageSAXHandler extends DefaultHandler {
 					
 					// Convert and set date to string value
 					tempDailyUsage.period = myOutputDateFormat.format(myCalendar.getTime());
-					//Log.i(INFO_TAG, "myDataPeriodString: " + tempDailyUsage.period);
 					
 				// Catch any parse errors during string to date parse
 				} catch (ParseException e) {
@@ -385,33 +372,25 @@ public class DailyUsageSAXHandler extends DefaultHandler {
 	@Override
 	public void characters(char ch[], int start, int length) {
         String chars = (new String(ch).substring(start, start + length));
-        //Log.d(DEBUG_TAG, "DailyUsageSAXHandler > characters: " + chars);
         if (inFeed && inAccountInfo && inPlan){
-        	//Log.d(DEBUG_TAG, "DailyUsageSAXHandler > tempAcountInfo.plan set to: " + chars);
         	tempAcountInfo.plan = chars;
         	
         } else if (inFeed && inAccountInfo && inProduct){
-			//Log.d(DEBUG_TAG, "DailyUsageSAXHandler > tempAcountInfo.product set to: " + chars);
 			tempAcountInfo.product = chars;
 			
 		} else if (inFeed && inVolumeUsage && inOffpeakStart){
-			//Log.d(DEBUG_TAG, "DailyUsageSAXHandler > tempAcountInfo.offpeakStart set to: " + chars);
 			tempAcountInfo.offpeakStart = chars;
 			
 		} else if (inFeed && inVolumeUsage && inOffpeakEnd){
-			//Log.d(DEBUG_TAG, "DailyUsageSAXHandler > tempAcountInfo.offpeakEnd set to: " + chars);
 			tempAcountInfo.offpeakEnd = chars;
 			
 		} else if (inFeed && inVolumeUsage && inQuotaReset && inAnniversary){
-			//Log.d(DEBUG_TAG, "DailyUsageSAXHandler > tempAcountStatus.anniversary set to: " + chars);
 			tempAcountStatus.anniversary = chars;
 			
 		} else if (inFeed && inVolumeUsage && inQuotaReset && inDaysSoFare){
-			//Log.d(DEBUG_TAG, "DailyUsageSAXHandler > tempAcountStatus.daysSoFar set to: " + chars);
 			tempAcountStatus.daysSoFar = chars;
 			
 		} else if (inFeed && inVolumeUsage && inQuotaReset && inDaysRemaining){
-			//Log.d(DEBUG_TAG, "DailyUsageSAXHandler > tempAcountStatus.daysToGo set to: " + chars);
 			tempAcountStatus.daysToGo = chars;
 			
 		} else if (inFeed && inVolumeUsage && inExpectedTrafficTypes && inType && inName){
@@ -419,19 +398,17 @@ public class DailyUsageSAXHandler extends DefaultHandler {
 			
 		} else if (inFeed && inVolumeUsage && inExpectedTrafficTypes && inType && inQuotaAllocation){
 			if (usageFlag.trim().equalsIgnoreCase("peak")){
-				//Log.d(DEBUG_TAG, "DailyUsageSAXHandler > tempAcountInfo.peakQuota set to: " + chars);
 				tempAcountInfo.peakQuota = chars;
+
 			} else if (usageFlag.trim().equalsIgnoreCase("offpeak")){
-				//Log.d(DEBUG_TAG, "DailyUsageSAXHandler > tempAcountInfo.offpeakQuota set to: " + chars);
 				tempAcountInfo.offpeakQuota = chars;
 			}
 			
 		} else if (inFeed && inVolumeUsage && inExpectedTrafficTypes && inType && inIsShaped){
 			if (usageFlag.trim().equalsIgnoreCase("peak")){
-				//Log.d(DEBUG_TAG, "DailyUsageSAXHandler > tempAcountStatus.peakShaped set to: " + chars);
 				tempAcountStatus.peakShaped = chars;
+			
 			} else if (usageFlag.trim().equalsIgnoreCase("offpeak")){
-				//Log.d(DEBUG_TAG, "DailyUsageSAXHandler > tempAcountStatus.offpeakShaped set to: " + chars);
 				tempAcountStatus.offpeakShaped = chars;
 			}
 			
@@ -439,24 +416,19 @@ public class DailyUsageSAXHandler extends DefaultHandler {
 		} else if (inFeed && inVolumeUsage && inDayHour && inUsage){
 			if (typeUsageFlag.trim().equalsIgnoreCase("peak")){
 				tempDailyUsage.peak = chars;
-				//Log.d(DEBUG_TAG, "DailyUsageSAXHandler > tempDailyUsage.peak set to: " + tempDailyUsage.peak);
 				
 			} else if (typeUsageFlag.trim().equalsIgnoreCase("offpeak")){
 				tempDailyUsage.offpeak = chars;
-				//Log.d(DEBUG_TAG, "DailyUsageSAXHandler > tempDailyUsage.offpeak set to: " + tempDailyUsage.offpeak);
 				
 			} else if (typeUsageFlag.trim().equalsIgnoreCase("uploads")){
 				tempDailyUsage.uploads = chars;
-				//Log.d(DEBUG_TAG, "DailyUsageSAXHandler > tempDailyUsage.uploads set to: " + tempDailyUsage.uploads);
 				
 			} else if (typeUsageFlag.trim().equalsIgnoreCase("freezone")){
 				tempDailyUsage.freezone = chars;
-				//Log.d(DEBUG_TAG, "DailyUsageSAXHandler > tempDailyUsage.freezone set to: " + tempDailyUsage.freezone);
 			}
 			
 		} else if (inConnections && inIP){
 			tempAcountStatus.ipAddress = chars;
-			//Log.d(DEBUG_TAG, "DailyUsageSAXHandler characters inIP, chars is: " + chars);
 			
 		}
 	}
