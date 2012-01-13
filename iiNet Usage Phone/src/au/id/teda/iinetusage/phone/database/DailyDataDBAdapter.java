@@ -26,12 +26,6 @@ public class DailyDataDBAdapter {
     public static final String DATABASE_TABLE = "daily_data_usage";
 	private SQLiteDatabase myDatabase;
 	private DataBaseHelper myDbHelper;
-	private Context myContext;
-	
-    // Constructor - takes the context to allow the database to be opened/created
-    public DailyDataDBAdapter() {
-    	this.myContext = AppGlobals.getAppContext();
-    }
 	
     // Opens database. If it cannot be opened, try to create a new. If it cannot be created, throw an exception to signal the failure
     public DailyDataDBAdapter open() throws SQLException {
@@ -58,7 +52,7 @@ public class DailyDataDBAdapter {
         
         //Log.d(DEBUG_TAG, "DailyDataDBAdapter > createDailyUsage > dbQuery: " + INSERT);
         try {
-            insertStmt = myDbHelper.compileStatement(INSERT);
+            insertStmt = myDatabase.compileStatement(INSERT);
             insertStmt.bindString(1, Long.toString(date));
             insertStmt.bindString(2, period);
             insertStmt.bindString(3, Long.toString(peak));

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ii_feed>
+	<account_info>
+		<plan>Naked Home-1</plan>
+		<product>adsl_home V2</product>
+	</account_info>
+	<volume_usage>
+		<offpeak_start>02:00</offpeak_start>
+		<offpeak_end>08:00</offpeak_end>
+		<quota_reset>
+			<anniversary>28</anniversary>
+			<days_so_far>28</days_so_far>
+			<days_remaining>1</days_remaining>
+		</quota_reset>
+		<expected_traffic_types>
+			<type classification="peak" used="41876262677">
+				<name>peak</name>
+				<quota_allocation>50000</quota_allocation>
+				<is_shaped speed="0">false</is_shaped>
+			</type>
+			<type classification="offpeak" used="42888382268">
+				<name>offpeak</name>
+				<quota_allocation>50000</quota_allocation>
+				<is_shaped speed="0">false</is_shaped>
+			</type>
+			<type classification="uploads" used="8098169699">
+				<name>non-free</name>
+			</type>
+			<type classification="freezone" used="1516125261">
+				<name>freezone</name>
+			</type>
+		</expected_traffic_types>
+		<volume_usage>
+			<day_hour period="2011-02-28">
+				<usage type="peak">874195029</usage>
+				<usage type="offpeak">833391268</usage>
+				<usage type="uploads">235608445</usage>
+				<usage type="freezone">471867</usage>
+			</day_hour>
+			<day_hour period="2011-03-01">
+				<usage type="peak">1302812509</usage>
+				<usage type="offpeak">6593929</usage>
+				<usage type="uploads">41770657</usage>
+				<usage type="freezone">262316</usage>
+			</day_hour>
+			<day_hour period="2011-03-02">
+				<usage type="peak">36752956</usage>
+				<usage type="offpeak">3489136</usage>
+				<usage type="uploads">4322475</usage>
+				<usage type="freezone">303433</usage>
+			</day_hour>
+			<day_hour period="2011-03-03">
+				<usage type="peak">256011294</usage>
+				<usage type="offpeak">24431218</usage>
+				<usage type="uploads">22716035</usage>
+				<usage type="freezone">732612</usage>
+			</day_hour>
+			<day_hour period="2011-03-04">
+				<usage type="peak">9860634455</usage>
+				<usage type="offpeak">3155599</usage>
+				<usage type="uploads">396130311</usage>
+				<usage type="freezone">607240</usage>
+			</day_hour>
+			<day_hour period="2011-03-05">
+				<usage type="peak">126322002</usage>
+				<usage type="offpeak">4221287047</usage>
+				<usage type="uploads">300542371</usage>
+				<usage type="freezone">84292168</usage>
+			</day_hour>
+			<day_hour period="2011-03-06">
+				<usage type="peak">179969696</usage>
+				<usage type="offpeak">2374035</usage>
+				<usage type="uploads">27212911</usage>
+				<usage type="freezone">194344808</usage>
+			</day_hour>
+			<day_hour period="2011-03-07">
+				<usage type="peak">22968186</usage>
+				<usage type="offpeak">2292138</usage>
+				<usage type="uploads">3615148</usage>
+				<usage type="freezone">242472</usage>
+			</day_hour>
+			<day_hour period="2011-03-08">
+				<usage type="peak">258289905</usage>
+				<usage type="offpeak">2071233</usage>
+				<usage type="uploads">149456412</usage>
+				<usage type="freezone">1298091</usage>
+			</day_hour>
+			<day_hour period="2011-03-09">
+				<usage type="peak">887540720</usage>
+				<usage type="offpeak">1289779918</usage>
+				<usage type="uploads">319524058</usage>
+				<usage type="freezone">1424130</usage>
+			</day_hour>
+			<day_hour period="2011-03-10">
+				<usage type="peak">562313228</usage>
+				<usage type="offpeak">15612026578</usage>
+				<usage type="uploads">960841703</usage>
+				<usage type="freezone">751526737</usage>
+			</day_hour>
+			<day_hour period="2011-03-11">
+				<usage type="peak">2152096736</usage>
+				<usage type="offpeak">1326803167</usage>
+				<usage type="uploads">694714427</usage>
+				<usage type="freezone">166226880</usage>
+			</day_hour>
+			<day_hour period="2011-03-12">
+				<usage type="peak">4515868908</usage>
+				<usage type="offpeak">2020389795</usage>
+				<usage type="uploads">1668749130</usage>
+				<usage type="freezone">682476</usage>
+			</day_hour>
+			<day_hour period="2011-03-13">
+				<usage type="peak">1546065259</usage>
+				<usage type="offpeak">263854967</usage>
+				<usage type="uploads">305614747</usage>
+				<usage type="freezone">11629610</usage>
+			</day_hour>
+			<day_hour period="2011-03-14">
+				<usage type="peak">11710087711</usage>
+				<usage type="offpeak">2741546536</usage>
+				<usage type="uploads">791906613</usage>
+				<usage type="freezone">14562475</usage>
+			</day_hour>
+			<day_hour period="2011-03-15">
+				<usage type="peak">4218316392</usage>
+				<usage type="offpeak">1264854188</usage>
+				<usage type="uploads">772812136</usage>
+				<usage type="freezone">2271916</usage>
+			</day_hour>
+			<day_hour period="2011-03-16">
+				<usage type="peak">161107046</usage>
+				<usage type="offpeak">16796888</usage>
+				<usage type="uploads">134253798</usage>
+				<usage type="freezone">241259244</usage>
+			</day_hour>
+			<day_hour period="2011-03-17">
+				<usage type="peak">140682504</usage>
+				<usage type="offpeak">4925232</usage>
+				<usage type="uploads">11224857</usage>
+				<usage type="freezone">7827770</usage>
+			</day_hour>
+			<day_hour period="2011-03-18">
+				<usage type="peak">656909848</usage>
+				<usage type="offpeak">4562550</usage>
+				<usage type="uploads">31691378</usage>
+				<usage type="freezone">18982715</usage>
+			</day_hour>
+			<day_hour period="2011-03-19">
+				<usage type="peak">38000884</usage>
+				<usage type="offpeak">911173770</usage>
+				<usage type="uploads">103771201</usage>
+				<usage type="freezone">778232</usage>
+			</day_hour>
+			<day_hour period="2011-03-20">
+				<usage type="peak">84103664</usage>
+				<usage type="offpeak">204955665</usage>
+				<usage type="uploads">13313766</usage>
+				<usage type="freezone">551519</usage>
+			</day_hour>
+			<day_hour period="2011-03-21">
+				<usage type="peak">196227207</usage>
+				<usage type="offpeak">2902922</usage>
+				<usage type="uploads">16197067</usage>
+				<usage type="freezone">894668</usage>
+			</day_hour>
+			<day_hour period="2011-03-22">
+				<usage type="peak">317999872</usage>
+				<usage type="offpeak">5186591705</usage>
+				<usage type="uploads">385173956</usage>
+				<usage type="freezone">852659</usage>
+			</day_hour>
+			<day_hour period="2011-03-23">
+				<usage type="peak">348474248</usage>
+				<usage type="offpeak">3654953020</usage>
+				<usage type="uploads">297212791</usage>
+				<usage type="freezone">1365107</usage>
+			</day_hour>
+			<day_hour period="2011-03-24">
+				<usage type="peak">136818450</usage>
+				<usage type="offpeak">2403245076</usage>
+				<usage type="uploads">225010225</usage>
+				<usage type="freezone">412908</usage>
+			</day_hour>
+			<day_hour period="2011-03-25">
+				<usage type="peak">746258964</usage>
+				<usage type="offpeak">866504495</usage>
+				<usage type="uploads">168240764</usage>
+				<usage type="freezone">473937</usage>
+			</day_hour>
+			<day_hour period="2011-03-26">
+				<usage type="peak">489492841</usage>
+				<usage type="offpeak">10982188</usage>
+				<usage type="uploads">12287838</usage>
+				<usage type="freezone">1790880</usage>
+			</day_hour>
+			<day_hour period="2011-03-27">
+				<usage type="peak">49942163</usage>
+				<usage type="offpeak">2448005</usage>
+				<usage type="uploads">4254479</usage>
+				<usage type="freezone">10056391</usage>
+			</day_hour>
+		</volume_usage>
+	</volume_usage>
+	<connections>
+		<ip on_since="2011-11-18 07:32:02">203.217.49.236</ip>
+	</connections>
+</ii_feed>

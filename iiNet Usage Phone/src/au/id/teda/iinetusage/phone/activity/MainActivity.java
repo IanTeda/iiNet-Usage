@@ -14,7 +14,7 @@ import au.id.teda.iinetusage.phone.R;
 import au.id.teda.iinetusage.phone.helper.UserPassHelper;
 import au.id.teda.iinetusage.phone.view.AlertboxView;
 
-public class MainActivity extends ActionbarActivity {
+public class MainActivity extends ActionbarHelperActivity {
 	
 	// Static strings for debug tags
 	private static final String DEBUG_TAG = "iiNet Usage";

@@ -37,7 +37,7 @@ import au.id.teda.iinetusage.phone.helper.PreferenceHelper;
 
 // TODO: Toast no connectivity
 
-public class UserPassActivity extends ActionbarActivity implements
+public class UserPassActivity extends ActionbarHelperActivity implements
 		OnClickListener, TextWatcher {
 
 	// Static tags for logging

@@ -8,17 +8,13 @@ import java.util.Date;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.util.Log;
-import au.id.teda.iinetusage.phone.AppGlobals;
 import au.id.teda.iinetusage.phone.database.DailyDataDBAdapter;
+import au.id.teda.iinetusage.phone.helper.AccountHelper;
 
 public class DailyUsageSAXHandler extends DefaultHandler {
 	
-	private final String DEBUG_TAG = "iiNet Usage"; // Debug tag for LogCat
-	private static final String INFO_TAG = DailyUsageSAXHandler.class.getSimpleName();
+	//private final String DEBUG_TAG = "iiNet Usage";
+	//private static final String INFO_TAG = DailyUsageSAXHandler.class.getSimpleName();
 	
 	// Objects for storing data types in xml
 	private String usageFlag;
@@ -33,10 +29,7 @@ public class DailyUsageSAXHandler extends DefaultHandler {
 	private DailyDataDBAdapter myDailyDataDB;
 	
 	// Preference instance
-	private SharedPreferences mySettings = PreferenceManager.getDefaultSharedPreferences(AppGlobals.getAppContext());
-	
-	public static final boolean fetchHistory= false; // Am i fetching historical data?
-	private static String dataPeriod = null; // Only set the data period once, not need to do it over and over again.
+	AccountHelper myAccount = new AccountHelper();
 	
 	// Set tag variables
 	public static final String II_FEED = "ii_feed"; // Man xml parent tag
@@ -243,7 +236,7 @@ public class DailyUsageSAXHandler extends DefaultHandler {
 					
 					// Convert and set date to string value
 					tempDailyUsage.period = myOutputDateFormat.format(myCalendar.getTime());
-					Log.i(INFO_TAG, "myDataPeriodString: " + tempDailyUsage.period);
+					//Log.i(INFO_TAG, "myDataPeriodString: " + tempDailyUsage.period);
 					
 				// Catch any parse errors during string to date parse
 				} catch (ParseException e) {
@@ -268,7 +261,7 @@ public class DailyUsageSAXHandler extends DefaultHandler {
 			long upload = Long.parseLong(tempDailyUsage.uploads);
 			long freezone = Long.parseLong(tempDailyUsage.freezone );
 			
-			myDailyDataDB = new DailyDataDBAdapter(MyApp.getAppContext());
+			myDailyDataDB = new DailyDataDBAdapter();
 			myDailyDataDB.open();
 			myDailyDataDB.createDailyUsage(date, period, peak, offpeak, upload, freezone);
 			myDailyDataDB.close();
@@ -295,7 +288,7 @@ public class DailyUsageSAXHandler extends DefaultHandler {
 				&& tempAcountInfo.offpeakQuota !=null
 				&& tempDailyUsage.period != null){
 			
-			// If we have all the data add to database
+			// If we have all the data add to shared preferences
 			String plan = tempAcountInfo.plan;
 			String product = tempAcountInfo.product;
 			String offpeakStart = tempAcountInfo.offpeakStart;
@@ -303,19 +296,9 @@ public class DailyUsageSAXHandler extends DefaultHandler {
 			long peakQuota = Long.parseLong(tempAcountInfo.peakQuota);
 			long offpeakQuota = Long.parseLong(tempAcountInfo.offpeakQuota);
 			
-			AccountHelper myAccountHelper = new AccountHelper(AppGlobals.getAppContext());
-			
-			if (myAccountHelper.checkDataPeriodLatest(tempDailyUsage.period)){
-				myAccountHelper.setAccountInfo(plan, product, offpeakStart, offpeakEnd, peakQuota, offpeakQuota);
+			if (myAccount.checkDataPeriodLatest(tempDailyUsage.period)){
+				myAccount.setAccountInfo(plan, product, offpeakStart, offpeakEnd, peakQuota, offpeakQuota);
 			}
-			
-			// Open accountInfoDB and insert/update entry
-			accountInfoDB = new AccountInfoDBAdapter(MyApp.getAppContext());
-			accountInfoDB.open();
-			accountInfoDB.createAccoutInfo(plan, product, offpeakStart, offpeakEnd, peakQuota, offpeakQuota);
-			accountInfoDB.close();
-			//Log.d(DEBUG_TAG, "DailyUsageSAXHandler > endElement > insert AccountInfoDB entry");
-			//Log.d(DEBUG_TAG, "DailyUsageSAXHandler > endElement > insert AccountInfoDB entry (" + plan + ", " + product + ", " + offpeakStart + ", " + offpeakEnd + ", " + peakQuota+ ", " + offpeakQuota + " );");
 			
 			// Clear objects for next pass over xml
 			tempAcountInfo.plan = null;
@@ -342,7 +325,7 @@ public class DailyUsageSAXHandler extends DefaultHandler {
 				&& tempAcountStatus.ipAddress != null
 				&& tempDailyUsage.period != null){
 			
-			// If we have all the data add to database
+			// If we have all the data add to shared preferences
 			long systemDateTime = System.nanoTime(); // Set current time
 			String period = tempDailyUsage.period;
 			String ip_address = tempAcountStatus.ipAddress; 
@@ -360,29 +343,11 @@ public class DailyUsageSAXHandler extends DefaultHandler {
 			int peak_shaped = returnBooleanInt(tempAcountStatus.peakShaped);
 			int offpeak_shaped = returnBooleanInt(tempAcountStatus.offpeakShaped);
 			
-			AccountStatusHelper myAccountStatus = new AccountStatusHelper();
-			myAccountStatus.setAccoutStatus(systemDateTime, period, anniversary,
+			myAccount.setAccoutStatus(systemDateTime, period, anniversary,
 					days_so_far, days_to_go, peak_shaped, offpeak_shaped,
 					peak_used, offpeak_used, upload_used, freezone_used,
 					peak_shaped_speed, offpeak_shaped_speed,
 					uptime, ip_address );
-			
-			//long anni = System.currentTimeMillis() + (days_to_go * 24 * 60 * 60 * 1000);
-			//SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yy");
-			//Date resultdate = new Date(anni);
-			//Log.d(DEBUG_TAG, "DailyUsageSAXHandler >" + resultdate);
-			
-			//Log.d(DEBUG_TAG, "DailyUsageSAXHandler >" + Long.parseLong(tempAcountStatus.peakShapingSpeed));
-			
-			
-			// Open accountInfoDB and insert/update entry
-			accountStatusDB = new AccountStatusDBAdapter(MyApp.getAppContext());
-			accountStatusDB.open();
-			accountStatusDB.createAccoutStatus(systemDateTime, ip_address,
-					uptime, anniversary, days_so_far, days_to_go,
-					peak_used, offpeak_used, upload_used, freezone_used,
-					peak_shaped_speed, offpeak_shaped_speed, peak_shaped, offpeak_shaped);
-			accountStatusDB.close();
 			
 			/**Log.d(DEBUG_TAG, "DailyUsageSAXHandler > endElement > insert accountStatusDB entry (" + refresh_date + ", "
 					+ ip_address + ", "

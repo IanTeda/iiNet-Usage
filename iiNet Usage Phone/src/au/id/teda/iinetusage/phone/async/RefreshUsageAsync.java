@@ -21,12 +21,12 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.widget.Toast;
-import au.id.teda.volumeusage.MyApp;
-import au.id.teda.volumeusage.R;
-import au.id.teda.volumeusage.helper.AccountHelper;
-import au.id.teda.volumeusage.helper.ConnectivityHelper;
-import au.id.teda.volumeusage.sax.DailyUsageSAXHandler;
-import au.id.teda.volumeusage.service.ServiceHelper;
+import au.id.teda.iinetusage.phone.AppGlobals;
+import au.id.teda.iinetusage.phone.R;
+import au.id.teda.iinetusage.phone.helper.AccountHelper;
+import au.id.teda.iinetusage.phone.helper.ConnectivityHelper;
+import au.id.teda.iinetusage.phone.helper.PreferenceHelper;
+import au.id.teda.iinetusage.phone.sax.DailyUsageSAXHandler;
 
 /**
  *  RefreshUsageData.java
@@ -42,10 +42,15 @@ public class RefreshUsageAsync extends AsyncTask<Void, Void, Void> {
 	private static final String DEBUG_TAG = "iiNet Usage"; // Debug tag for LogCat
 	private static final String INFO_TAG = RefreshUsageAsync.class.getSimpleName();
 	
+    private Context myApplicationContext = AppGlobals.getAppContext();
+    private Context myActivityContext;
+	
+	// Create instance of shared preferences based on app context
+	AccountHelper myAccount = new AccountHelper();
+	PreferenceHelper mySettings = new PreferenceHelper();
+
     private ProgressDialog progressDialog;
-    private Context context;
     private Handler handler;
-    private boolean showRefreshDialog;
     private boolean updateRefresh = false;
 	
     /**
@@ -56,9 +61,7 @@ public class RefreshUsageAsync extends AsyncTask<Void, Void, Void> {
 	public RefreshUsageAsync (Context context, Handler myHandler) {
 		//Log.i(INFO_TAG, "Start constructor");
 		
-		this.context = context;
-		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
-		showRefreshDialog = settings.getBoolean("hide_refresh_dialog", false);
+		this.myActivityContext = context;
 		handler = myHandler;
 	}
 
@@ -73,9 +76,7 @@ public class RefreshUsageAsync extends AsyncTask<Void, Void, Void> {
 			boolean hideDialog) {
 		//Log.i(INFO_TAG, "Start constructor");
 		
-		this.context = context;
-		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
-		showRefreshDialog = settings.getBoolean("hide_refresh_dialog", false);
+		this.myActivityContext = context;
 		handler = myHandler;
 		updateRefresh = hideDialog;
 	}
@@ -91,11 +92,11 @@ public class RefreshUsageAsync extends AsyncTask<Void, Void, Void> {
 		//Log.d(DEBUG_TAG, "RefreshUsageData > Onload update: " + updateRefresh);
 		
 		// Show dialog if preference set true and it isn't an auto update at load
-		if (showRefreshDialog == false && updateRefresh == false){
+		if (mySettings.showRefreshDialog() == true){
 			
-			progressDialog = ProgressDialog.show(context,
-					MyApp.getAppContext().getString(R.string.refresh_progress_dialog_title),
-					MyApp.getAppContext().getString(R.string.refresh_progress_dialog_description),
+			progressDialog = ProgressDialog.show(myActivityContext,
+					myApplicationContext.getString(R.string.refresh_progress_dialog_title),
+					myApplicationContext.getString(R.string.refresh_progress_dialog_description),
 					true);
 		}
 	}
@@ -109,19 +110,18 @@ public class RefreshUsageAsync extends AsyncTask<Void, Void, Void> {
 		Log.i(INFO_TAG, "doInBackground()");
 		
 		// Check if connectivity is true. If so try to parse xml
-		ConnectivityHelper myConnection = new ConnectivityHelper(context);
+		ConnectivityHelper myConnection = new ConnectivityHelper();
 		
 		// Check username & password exists else toast alert
-		AccountHelper accountHelper = new AccountHelper(context);
-		if (accountHelper.checkUsernamePassword() && myConnection.isConnected()){
+		
+		if (mySettings.isUsernamePasswordSet() && myConnection.isConnected()){
 	        try {
 	        	// Get URL
-	        	ServiceHelper serviceHelper = new ServiceHelper(context);
-	        	URL url = new URL(serviceHelper.buildXMLPath());
+	        	URL url = new URL(buildXMLPath());
 	        	//Log.d(DEBUG_TAG, "URL: " + url);
 	        	
-	        	// Load xml from our developement xml file
-				InputSource is = new InputSource(MyApp.getAppContext().getResources().openRawResource(R.raw.may2011));
+	        	// Load xml from our development xml file
+				InputSource is = new InputSource(myApplicationContext.getResources().openRawResource(R.raw.may2011));
 	        	
 	        	 // Create a SAXParserFactory so we can
 	        	SAXParserFactory spf = SAXParserFactory.newInstance();
@@ -171,15 +171,33 @@ public class RefreshUsageAsync extends AsyncTask<Void, Void, Void> {
 	@Override
 	protected void onPostExecute(Void result) {
 		Log.i(INFO_TAG, "onPostExecute()");
-		if (showRefreshDialog == false && updateRefresh == false){
+		if (progressDialog != null){
 			progressDialog.dismiss();
 		}
+		
 		handler.sendEmptyMessage(0);
 		
-		Toast refreshToast=Toast.makeText(context, "Usage Updated", 2000);
+		Toast refreshToast=Toast.makeText(myActivityContext, "Usage Updated", 2000);
 		refreshToast.setGravity(Gravity.CENTER, 0, 250); // TODO: Not sure if this is the right way to center toast at bottom
 		refreshToast.show();	
 
 		super.onPostExecute(result);
+	}
+	
+	// Build URL to fetch XML
+	public String buildXMLPath(){
+		//Log.i(INFO_TAG, "buildXMLPath()");
+		String pathString = null;
+		
+		String myUsername = mySettings.getUsername();
+		String myPassword = mySettings.getPassword();
+		
+		pathString = "https://toolbox.iinet.net.au/cgi-bin/new/volume_usage_xml.cgi?" +
+					"username=" + myUsername + 
+					"&action=login" +
+					"&password=" + myPassword;
+		
+		//Log.d(DEBUG_TAG, "buildXMLPath() > pathString: " + pathString);
+		return pathString;
 	}
 }

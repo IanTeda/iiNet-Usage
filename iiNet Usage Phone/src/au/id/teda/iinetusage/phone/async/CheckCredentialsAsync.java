@@ -16,7 +16,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Handler;
-import android.util.Log;
 import android.widget.Toast;
 import au.id.teda.iinetusage.phone.R;
 import au.id.teda.iinetusage.phone.helper.ConnectivityHelper;
@@ -33,8 +32,8 @@ import au.id.teda.iinetusage.phone.sax.CheckUserPassSAXHandler;
 public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 
 	// Static strings used for debugging
-	private static final String DEBUG_TAG = "iiNet Usage";
-	private static final String INFO_TAG = CheckCredentialsAsync.class.getSimpleName();
+	//private static final String DEBUG_TAG = "iiNet Usage";
+	//private static final String INFO_TAG = CheckCredentialsAsync.class.getSimpleName();
 
 	// Set shared preference helper object
 	private PreferenceHelper mySettings;
@@ -65,7 +64,7 @@ public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 		// Set URL to check
 		myUrl = url;
 		
-		mySettings = new PreferenceHelper(activityContext);
+		mySettings = new PreferenceHelper();
 
 	}
 
@@ -99,7 +98,7 @@ public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 		// Log.d(DEBUG_TAG, "Connection is: " + isConnected());
 
 		// Check if connectivity is true. If so try to parse xml
-		ConnectivityHelper myConnection = new ConnectivityHelper(myActivityContext);
+		ConnectivityHelper myConnection = new ConnectivityHelper();
 		if (myConnection.isConnected()) {
 			try {
 				// Log.d(DEBUG_TAG, "checkCredentials() > URLl: " + myUrl);
@@ -117,7 +116,7 @@ public class CheckCredentialsAsync extends AsyncTask<Void, Void, Void> {
 				XMLReader xr = sp.getXMLReader();
 
 				// Create a new ContentHandler and apply it to the XML-Reader
-				CheckUserPassSAXHandler myUserPassSAXHandler = new CheckUserPassSAXHandler(myActivityContext);
+				CheckUserPassSAXHandler myUserPassSAXHandler = new CheckUserPassSAXHandler();
 				xr.setContentHandler(myUserPassSAXHandler);
 
 				// Parse the xml-data from our development file

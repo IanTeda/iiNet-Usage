@@ -3,24 +3,21 @@ package au.id.teda.iinetusage.phone.view;
 import android.content.Context;
 import android.view.View;
 import android.widget.Button;
-import au.id.teda.iinetusage.phone.AppGlobals;
 import au.id.teda.iinetusage.phone.R;
 import au.id.teda.iinetusage.phone.helper.PreferenceHelper;
 
 public class AlertboxView extends PreferenceHelper {
 	
+	//private final String DEBUG_TAG = "iiNet Usage"; // Debug tag for LogCat
+	//private static final String INFO_TAG = AlertboxView.class.getSimpleName();
+	
 	private Context myActivityContext;
 	
 	public AlertboxView(Context activityContext) {
-		super(activityContext);
+		super();
 		
 		myActivityContext = activityContext;
 	}
-
-	private Context myContext = AppGlobals.getAppContext();
-
-	private final String DEBUG_TAG = "iiNet Usage"; // Debug tag for LogCat
-	private static final String INFO_TAG = AlertboxView.class.getSimpleName();
 
 	public void setAlert(Button alertboxButton) {
         
@@ -29,17 +26,17 @@ public class AlertboxView extends PreferenceHelper {
 		// Missing password and username
 		if (!isUsernamePasswordSet()){
 			showAlertbox(alertboxButton);
-			alertboxButton.setText(myContext.getString(R.string.alertbox_no_userpass));
+			alertboxButton.setText(myActivityContext.getString(R.string.alertbox_no_userpass));
         	
         // Missing password
 		} else if (!isPasswordSet()){
 			showAlertbox(alertboxButton);
-			alertboxButton.setText(myContext.getString(R.string.alertbox_no_pass));
+			alertboxButton.setText(myActivityContext.getString(R.string.alertbox_no_pass));
         	
 		// Missing username
 		} else if (!isUsernameSet()){
 			showAlertbox(alertboxButton);
-			alertboxButton.setText(myContext.getString(R.string.alertbox_no_user));
+			alertboxButton.setText(myActivityContext.getString(R.string.alertbox_no_user));
 
 		}
 	}

@@ -9,7 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import au.id.teda.iinetusage.phone.R;
 
-public class ActionbarActivity extends Activity {
+public class ActionbarHelperActivity extends Activity {
 
 	public void onClickActionBarHome (View view){
 		
