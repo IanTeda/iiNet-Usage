@@ -19,9 +19,11 @@
     <color name="actionbar_backgroud_color">#ff5800</color>
     <color name="actionbar_title_color">#ffffff</color>
 
-    <!-- Testing only -->
+    <!-- Actionbar gradient colors -->
     <color name="actionbar_background_start_color">#ff5800</color>
     <color name="actionbar_background_end_color">#ff8647</color>
+    <color name="actionbar_buttom_background_start_color">#2d2c2c</color>
+    <color name="actionbar_buttom_background_end_color">#545252</color>
 
     <!-- App Defaults -->
     <color name="application_background_color">#201f1f</color>

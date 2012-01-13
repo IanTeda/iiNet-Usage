@@ -42,8 +42,7 @@ public class UserPassActivity extends ActionbarHelperActivity implements
 
 	// Static tags for logging
 	private static final String DEBUG_TAG = "iiNet Usage";
-	private static final String INFO_TAG = UserPassActivity.class
-			.getSimpleName();
+	private static final String INFO_TAG = UserPassActivity.class.getSimpleName();
 
 	// Set shared preference helper object
 	private PreferenceHelper mySettings;

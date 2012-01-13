@@ -10,6 +10,8 @@
         <item name="android:textColor">@color/alertbox_text_color</item>
         <item name="android:background">@drawable/dashboard_alertbox</item>
         <item name="android:layout_gravity">center</item>
+        <item name="android:textSize">@dimen/alertbox_text_size</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
 </resources>
