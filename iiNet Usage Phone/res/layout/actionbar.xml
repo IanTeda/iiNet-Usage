@@ -1,74 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/actionbar_top"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="@dimen/actionbar_height"
+    android:background="@drawable/actionbar_gradient_backgroud" >
 
-    <RelativeLayout
-        android:id="@+id/actionbar_top"
-        android:layout_width="fill_parent"
-        android:layout_height="@dimen/actionbar_height"
-        android:background="@drawable/actionbar_gradient_backgroud" >
+    <ImageButton
+        android:id="@+id/actionbar_refresh_button"
+        style="@style/actionbar_image_button"
+        android:layout_alignParentRight="true"
+        android:contentDescription="@string/actionbar_refersh_button_description"
+        android:onClick="onClickActionbarRefresh"
+        android:src="@drawable/ic_actionbar_refresh" />
 
-        <ImageButton
-            android:id="@+id/actionbar_refresh_button"
-            style="@style/actionbar_image_button"
-            android:layout_alignParentRight="true"
-            android:contentDescription="@string/actionbar_refersh_button_description"
-            android:onClick="onClickActionbarRefresh"
-            android:src="@drawable/ic_actionbar_refresh" />
+    <ImageButton
+        android:id="@+id/actionbar_home_button"
+        style="@style/actionbar_image_button"
+        android:layout_alignParentLeft="true"
+        android:contentDescription="@string/actionbar_home_button_description"
+        android:onClick="onClickActionBarHome"
+        android:src="@drawable/ic_actionbar_home" />
 
-        <ImageButton
-            android:id="@+id/actionbar_home_button"
-            style="@style/actionbar_image_button"
-            android:layout_alignParentLeft="true"
-            android:contentDescription="@string/actionbar_home_button_description"
-            android:onClick="onClickActionBarHome"
-            android:src="@drawable/ic_actionbar_home" />
+    <ImageView
+        android:id="@+id/actionbar_separator_1"
+        style="@style/actionbar_separator"
+        android:layout_toRightOf="@+id/actionbar_home_button"
+        android:contentDescription="@string/actionbar_separator_description" />
 
-        <ImageView
-            android:id="@+id/actionbar_separator_1"
-            style="@style/actionbar_separator"
-            android:layout_toRightOf="@+id/actionbar_home_button"
-            android:contentDescription="@string/actionbar_separator_description" />
-
-        <TextView
-            android:id="@+id/actionbar_title"
-            style="@style/actionbar_title_text"
-            android:layout_toRightOf="@+id/actionbar_separator_1"
-            android:text="@string/actionbar_default_title" />
-    </RelativeLayout>
-
-    <LinearLayout
-        android:id="@+id/actionbar_bottom"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/actionbar_top"
-        android:background="@drawable/actionbar_bottom_gradient_backgroud"
-        android:padding="5dp" >
-
-        <TextView
-            android:id="@+id/actionbar_bottom_stats"
-            style="@style/actionbar_bottom_button"
-            android:drawableLeft="@drawable/ic_stats"
-            android:text="@string/actionbar_button_stats" />
-
-        <TextView
-            android:id="@+id/actionbar_bottom_graph"
-            style="@style/actionbar_bottom_button"
-            android:drawableLeft="@drawable/ic_charts"
-            android:text="@string/actionbar_button_charts" />
-
-        <TextView
-            android:id="@+id/actionbar_bottom_data"
-            style="@style/actionbar_bottom_button"
-            android:drawableLeft="@drawable/ic_data"
-            android:text="@string/actionbar_button_data" />
-
-        <TextView
-            android:id="@+id/actoionbar_bottom_archive"
-            style="@style/actionbar_bottom_button"
-            android:drawableLeft="@drawable/ic_archive"
-            android:text="@string/actionbar_button_archive" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/actionbar_title"
+        style="@style/actionbar_title_text"
+        android:layout_toRightOf="@+id/actionbar_separator_1"
+        android:text="@string/actionbar_default_title" />
 
 </RelativeLayout>

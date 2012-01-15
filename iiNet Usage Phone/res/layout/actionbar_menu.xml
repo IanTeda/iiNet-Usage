@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/actionbar_bottom"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/actionbar_menu_height"
+    android:layout_below="@+id/actionbar_top"
+    android:background="@drawable/actionbar_bottom_gradient_backgroud" >
+
+    <Button
+        android:id="@+id/actionbar_bottom_stats"
+        style="@style/actionbar_menu_button"
+        android:drawableLeft="@drawable/ic_stats"
+        android:text="@string/actionbar_button_stats" />
+
+    <TextView
+        android:id="@+id/actionbar_bottom_graph"
+        style="@style/actionbar_menu_button"
+        android:drawableLeft="@drawable/ic_charts"
+        android:text="@string/actionbar_button_charts" />
+
+    <TextView
+        android:id="@+id/actionbar_bottom_data"
+        style="@style/actionbar_menu_button"
+        android:drawableLeft="@drawable/ic_data"
+        android:text="@string/actionbar_button_data" />
+
+    <TextView
+        android:id="@+id/actoionbar_bottom_archive"
+        style="@style/actionbar_menu_button"
+        android:drawableLeft="@drawable/ic_archive"
+        android:text="@string/actionbar_button_archive" />
+
+</LinearLayout>

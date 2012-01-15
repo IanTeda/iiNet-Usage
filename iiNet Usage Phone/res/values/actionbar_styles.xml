@@ -26,17 +26,18 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/actionbar_title_color</item>
         <item name="android:singleLine">true</item>
-        <item name="android:ellipsize">end</item>
     </style>
 
-    <style name="actionbar_bottom_button">
+    <style name="actionbar_menu_button">
         <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">fill_parent</item>
         <item name="android:layout_weight">1</item>
         <item name="android:drawablePadding">3dp</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">13sp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:singleLine">true</item>
     </style>
 
 </resources>

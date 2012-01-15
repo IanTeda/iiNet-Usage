@@ -9,6 +9,10 @@
         android:id="@+id/actionbar"
         layout="@layout/actionbar" />
 
+    <include
+        android:id="@+id/actionbar_menu"
+        layout="@layout/actionbar_menu" />
+
     <Button
         android:id="@+id/alertbox_button"
         style="@style/dashboard_alertbox_style"
