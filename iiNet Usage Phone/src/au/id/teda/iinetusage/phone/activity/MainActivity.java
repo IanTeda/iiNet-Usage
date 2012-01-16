@@ -14,6 +14,7 @@ import android.view.animation.Transformation;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
+import android.widget.TextView;
 import android.widget.Toast;
 import au.id.teda.iinetusage.phone.R;
 import au.id.teda.iinetusage.phone.animation.DropDownAnimation;
@@ -80,16 +81,12 @@ public class MainActivity extends ActionbarHelperActivity {
 	public void onAccountInfoExpandClick(View button){
 		
 		// Get the layout reference
-		RelativeLayout myAccountInfoLayout = (RelativeLayout) findViewById(R.id.dashboard_account_info);
+		TextView tv1 = (TextView) findViewById(R.id.textView1);
+		TextView tv2 = (TextView) findViewById(R.id.textView2);
 		
-		// Gets the layout params that will allow you to resize the layout
-		LayoutParams params = (LayoutParams) myAccountInfoLayout.getLayoutParams();
-		// Changes the height and width to the specified *pixels*
-		params.height = 100;
-		params.width = RelativeLayout.LayoutParams.FILL_PARENT;
-		//RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT, 80);
-		//myAccountInfoLayout.setLayoutParams(params);
-		//myAccountInfoLayout.setMinimumHeight(200);
+		tv1.setVisibility(View.VISIBLE);
+		tv2.setVisibility(View.VISIBLE);
+		
 	}
 	
 	/**

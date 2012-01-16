@@ -24,7 +24,7 @@
     <RelativeLayout
         android:id="@+id/dashboard_account_info"
         android:layout_width="fill_parent"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/application_margin"
         android:background="@drawable/rounded_border" >
 
@@ -41,14 +41,33 @@
         <ImageButton
             android:id="@+id/dashboard_account_info_expand_button"
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:src="@drawable/ic_expand"
             android:background="@android:color/transparent"
-            android:paddingRight="10dp"
-            android:onClick="onAccountInfoExpandClick" />
-        
+            android:onClick="onAccountInfoExpandClick"
+            android:padding="5dp"
+            android:src="@drawable/ic_expand" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dashboard_account_info_plan"
+            android:layout_centerHorizontal="true"
+            android:text="Large Text"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView1"
+            android:layout_centerHorizontal="true"
+            android:text="Large Text"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:visibility="gone" />
     </RelativeLayout>
 
     <RelativeLayout
