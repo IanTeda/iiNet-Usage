@@ -2,32 +2,39 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/actionbar_bottom"
     android:layout_width="fill_parent"
-    android:layout_height="@dimen/actionbar_menu_height"
-    android:layout_below="@+id/actionbar_top"
-    android:background="@drawable/actionbar_bottom_gradient_backgroud" >
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/actionbar_top" >
 
     <Button
-        android:id="@+id/actionbar_bottom_stats"
+        android:id="@+id/actionbar_menu_stats"
         style="@style/actionbar_menu_button"
-        android:drawableLeft="@drawable/ic_stats"
         android:text="@string/actionbar_button_stats" />
 
-    <TextView
-        android:id="@+id/actionbar_bottom_graph"
+    <ImageView
+        style="@style/actionbar_separator"
+        android:contentDescription="@string/actionbar_separator_description" />
+
+    <Button
+        android:id="@+id/actionbar_menu_graph"
         style="@style/actionbar_menu_button"
-        android:drawableLeft="@drawable/ic_charts"
         android:text="@string/actionbar_button_charts" />
 
-    <TextView
-        android:id="@+id/actionbar_bottom_data"
+    <ImageView
+        style="@style/actionbar_separator"
+        android:contentDescription="@string/actionbar_separator_description" />
+
+    <Button
+        android:id="@+id/actionbar_menu_data"
         style="@style/actionbar_menu_button"
-        android:drawableLeft="@drawable/ic_data"
         android:text="@string/actionbar_button_data" />
 
-    <TextView
-        android:id="@+id/actoionbar_bottom_archive"
+    <ImageView
+        style="@style/actionbar_separator"
+        android:contentDescription="@string/actionbar_separator_description" />
+
+    <Button
+        android:id="@+id/actoionbar_menu_archive"
         style="@style/actionbar_menu_button"
-        android:drawableLeft="@drawable/ic_archive"
         android:text="@string/actionbar_button_archive" />
 
 </LinearLayout>

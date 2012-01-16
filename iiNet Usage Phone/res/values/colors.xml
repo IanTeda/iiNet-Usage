@@ -22,8 +22,8 @@
     <!-- Actionbar gradient colors -->
     <color name="actionbar_background_start_color">#ff5800</color>
     <color name="actionbar_background_end_color">#ff8647</color>
-    <color name="actionbar_buttom_background_start_color">#2d2c2c</color>
-    <color name="actionbar_buttom_background_end_color">#545252</color>
+    <color name="actionbar_menu_background_start_color">#2d2c2c</color>
+    <color name="actionbar_menu_background_end_color">#545252</color>
 
     <!-- App Defaults -->
     <color name="application_background_color">#201f1f</color>
@@ -36,7 +36,10 @@
     <color name="alertbox_border_color">#CC3333</color>
     <color name="alertbox_text_color">#CC3333</color>
     <color name="alertbox_background_color">#55b9b9b9</color>
+    
+    <!-- Standard Colors -->
     <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
     <color name="transparent">#00000000</color>
 
 </resources>
