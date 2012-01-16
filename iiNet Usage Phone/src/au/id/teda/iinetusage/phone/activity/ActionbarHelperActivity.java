@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import au.id.teda.iinetusage.phone.R;
 
 public class ActionbarHelperActivity extends Activity {
@@ -44,6 +45,28 @@ public class ActionbarHelperActivity extends Activity {
 	public void showActionbarRefersh(){
 		ImageButton myRefereshImageButton = (ImageButton) findViewById(R.id.actionbar_refresh_button);
 		myRefereshImageButton.setVisibility(View.VISIBLE);
+	}
+	
+	public void onActionbarMenuClick(View button){
+		switch (button.getId()) {
+		case R.id.actionbar_menu_stats:
+			//Intent statsIntent = new Intent(this, MainActivity.class);
+			//startActivity(statsIntent);
+			Toast.makeText(this, "Stats Activity", Toast.LENGTH_SHORT).show();
+			break;
+		case R.id.actionbar_menu_graph:
+			Toast.makeText(this, "Graph Activity", Toast.LENGTH_SHORT).show();
+			break;
+		case R.id.actionbar_menu_data:
+			Toast.makeText(this, "Data Activity", Toast.LENGTH_SHORT).show();
+			break;
+		case R.id.actoionbar_menu_archive:
+			Toast.makeText(this, "Archive Activity", Toast.LENGTH_SHORT).show();
+			break;
+		default:
+			Toast.makeText(this, "Button not recognised", Toast.LENGTH_SHORT).show();
+			
+		}
 	}
 	
 	

@@ -11,7 +11,7 @@
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
-  limitations under the License.
+  limitations under the License.
 -->
 
 <resources>
@@ -36,7 +36,11 @@
     <color name="alertbox_border_color">#CC3333</color>
     <color name="alertbox_text_color">#CC3333</color>
     <color name="alertbox_background_color">#55b9b9b9</color>
-    
+
+    <!-- Standard border -->
+    <color name="border_color">#000000</color>
+    <color name="border_background">#201f1f</color>
+
     <!-- Standard Colors -->
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>

@@ -1,5 +1,6 @@
 package au.id.teda.iinetusage.phone.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,9 +9,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.view.animation.Transformation;
 import android.widget.Button;
+import android.widget.RelativeLayout;
+import android.widget.RelativeLayout.LayoutParams;
 import android.widget.Toast;
 import au.id.teda.iinetusage.phone.R;
+import au.id.teda.iinetusage.phone.animation.DropDownAnimation;
 import au.id.teda.iinetusage.phone.async.RefreshUsageAsync;
 import au.id.teda.iinetusage.phone.helper.UserPassHelper;
 import au.id.teda.iinetusage.phone.view.AlertboxView;
@@ -67,10 +73,23 @@ public class MainActivity extends ActionbarHelperActivity {
 		
 	}
 	
-
-	
 	public void onClickActionbarRefresh (View view){
 		new RefreshUsageAsync(this, handler).execute();
+	}
+	
+	public void onAccountInfoExpandClick(View button){
+		
+		// Get the layout reference
+		RelativeLayout myAccountInfoLayout = (RelativeLayout) findViewById(R.id.dashboard_account_info);
+		
+		// Gets the layout params that will allow you to resize the layout
+		LayoutParams params = (LayoutParams) myAccountInfoLayout.getLayoutParams();
+		// Changes the height and width to the specified *pixels*
+		params.height = 100;
+		params.width = RelativeLayout.LayoutParams.FILL_PARENT;
+		//RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT, 80);
+		//myAccountInfoLayout.setLayoutParams(params);
+		//myAccountInfoLayout.setMinimumHeight(200);
 	}
 	
 	/**
