@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dashboard_account_info"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/application_margin"
+    android:background="@drawable/rounded_border" >
+
+    <TextView
+        android:id="@+id/dashboard_account_info_plan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="Naked Home-1 (adsl_home V2)"
+        android:textSize="18sp" />
+
+    <ImageButton
+        android:id="@+id/dashboard_account_info_expand_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/transparent"
+        android:onClick="onAccountInfoExpandClick"
+        android:padding="5dp"
+        android:src="@drawable/ic_expand" />
+
+    <TextView
+        android:id="@+id/dashboard_account_info_ip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/dashboard_account_info_expand_button"
+        android:text="156.158.15.2"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/dashboard_account_info_ip"
+        android:layout_alignBottom="@+id/dashboard_account_info_ip"
+        android:layout_alignParentRight="true"
+        android:text="Up Since: "
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+</RelativeLayout>
