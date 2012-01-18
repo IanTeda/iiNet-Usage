@@ -6,7 +6,7 @@
       android:shape="line">
       <stroke
         android:width="2dip" 
-        android:color="@color/black" /><!-- This can not be wider the layout it is drawing -->
+        android:color="@color/white" /><!-- This can not be wider the layout it is drawing -->
     </shape>
   </item>
 </selector>

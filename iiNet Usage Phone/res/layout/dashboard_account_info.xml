@@ -3,46 +3,98 @@
     android:id="@+id/dashboard_account_info"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/application_margin"
-    android:background="@drawable/rounded_border" >
+    android:layout_margin="@dimen/application_margin" >
 
-    <TextView
+    <Button
         android:id="@+id/dashboard_account_info_plan"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:text="Naked Home-1 (adsl_home V2)"
-        android:textSize="18sp" />
-
-    <ImageButton
-        android:id="@+id/dashboard_account_info_expand_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
+        android:textSize="18sp"
         android:background="@android:color/transparent"
-        android:onClick="onAccountInfoExpandClick"
-        android:padding="5dp"
-        android:src="@drawable/ic_expand" />
+        android:drawableRight="@drawable/ic_expand"
+        android:textColor="@color/white" />
+
+    <View
+        android:id="@+id/dashboard_account_info_line"
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/dashboard_account_info_plan"
+        android:background="#ffffff" />
 
     <TextView
-        android:id="@+id/dashboard_account_info_ip"
+        android:id="@+id/dashboard_account_info_rollover_period_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/dashboard_account_info_expand_button"
+        android:layout_below="@+id/dashboard_account_info_line"
+        android:text="Roll Over/Data Period"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/dashboard_account_info_rollover_period_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/dashboard_account_info_rollover_period_title"
+        android:text="Wed, 25 Jan 2012"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/dashboard_account_info_ip_up_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/dashboard_account_info_rollover_period_text"
+        android:text="IP Address / Up Time"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/dashboard_account_info_ip_up_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/dashboard_account_info_ip_up_title"
         android:text="156.158.15.2"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/dashboard_account_info_days_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/dashboard_account_info_ip"
-        android:layout_alignBottom="@+id/dashboard_account_info_ip"
+        android:layout_below="@+id/dashboard_account_info_line"
         android:layout_alignParentRight="true"
-        android:text="Up Since: "
+        android:text="Days so Fare/to Go"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/dashboard_account_info_days_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dashboard_account_info_days_title"
+        android:layout_alignParentRight="true"
+        android:text="23 Days"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/dashboard_account_info_quota_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/dashboard_account_info_days_text"
+        android:text="Quota Peak / Offpeak"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/dashboard_account_info_quota_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/dashboard_account_info_quota_title"
+        android:text="50.00(Gb)"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>

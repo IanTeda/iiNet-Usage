@@ -127,7 +127,7 @@
 	<View
 		android:background="@drawable/db_footer_line"
 		android:layout_width="fill_parent"
-		android:layout_height="2dp" />
+		android:layout_height="3dp" />
 	<!-- Footer -->
 	<LinearLayout
 		android:id="@+id/DB_DataLayout"

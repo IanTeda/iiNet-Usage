@@ -19,7 +19,8 @@
         android:layout_margin="5dp"
         android:background="@drawable/dashboard_alertbox"
         android:onClick="onClickAlertboxButton"
-        android:text="@string/alertbox_default" />
+        android:text="@string/alertbox_default"
+        android:visibility="gone" />
     
     <include
         android:id="@+id/dashboard_account_info"
@@ -37,9 +38,10 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:text="60"
-            android:textAppearance="?android:attr/textAppearanceLarge"
             android:textSize="130sp"
-            android:typeface="serif" />
+            android:textScaleX="1"
+            android:typeface="serif"
+            android:layout_marginTop="-15dp" />
 
         <TextView
             android:id="@+id/peak_percent"
@@ -56,8 +58,9 @@
             android:id="@+id/peak_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/peak_percent"
+            android:layout_marginTop="16dp"
             android:paddingLeft="5dp"
             android:text="PEAK USED / REMAINING"
             android:textColor="@color/application_h1_text_color"
