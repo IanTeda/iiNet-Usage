@@ -15,7 +15,8 @@
         android:textSize="18sp"
         android:background="@android:color/transparent"
         android:drawableRight="@drawable/ic_expand"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"
+        android:onClick="onAccountInfoClick" />
 
     <View
         android:id="@+id/dashboard_account_info_line"
