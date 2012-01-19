@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Heading of account information -->
+    <style name="account_info_title">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/account_info_title_text_size</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">left</item>
+    </style>
+
+    <!-- Style for account information category titles -->
+    <style name="account_info_cat_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/account_info_cat_title_text_size</item>
+        <item name="android:paddingTop">@dimen/account_info_cat_title_padding_top</item>
+        <item name="android:textColor">@color/application_h2_text_color</item>
+    </style>
+
+    <!-- Alternate style for account information category titles -->
+    <style name="account_info_cat_title.alt">
+        <item name="android:textColor">@color/application_h2_text_alt_color</item>
+        
+    </style>
+    
+    <!-- Statistic -->
+    <style name="account_info_stat">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/account_info_stat_text_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:typeface">sans</item>
+        <item name="android:textColor">@color/application_text_highlight_color</item>
+        
+    </style>
+
+</resources>
