@@ -21,52 +21,17 @@
         android:onClick="onClickAlertboxButton"
         android:text="@string/alertbox_default"
         android:visibility="gone" />
-    
+
     <include
         android:id="@+id/dashboard_account_info"
         layout="@layout/dashboard_account_info" />
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+    <include
+        android:id="@+id/dashboard_peak_stats_include"
+        layout="@layout/dashboard_peak_stats" />
 
-        <TextView
-            android:id="@+id/dashboard_peak_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:text="60"
-            android:textSize="130sp"
-            android:textScaleX="1"
-            android:typeface="serif"
-            android:layout_marginTop="-15dp" />
-
-        <TextView
-            android:id="@+id/peak_percent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="16dp"
-            android:layout_toRightOf="@+id/dashboard_peak_number"
-            android:text="%"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/peak_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/peak_percent"
-            android:layout_marginTop="16dp"
-            android:paddingLeft="5dp"
-            android:text="PEAK USED / REMAINING"
-            android:textColor="@color/application_h1_text_color"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-
-    </RelativeLayout>
+    <include
+        android:id="@+id/dashboard_peak_stats_include"
+        layout="@layout/dashboard_peak_stats" />
 
 </LinearLayout>

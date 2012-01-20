@@ -76,28 +76,32 @@
         style="@style/account_info_cat_title"
         android:layout_below="@+id/dashboard_account_info_days_text"
         android:layout_toLeftOf="@+id/dashboard_account_info_days_title_slash2"
-        android:text="Quota Peak" />
+        android:text="Quota Peak"
+         android:visibility="gone" />
 
     <TextView
         android:id="@+id/dashboard_account_info_days_title_slash2"
         style="@style/account_info_cat_title.alt"
         android:layout_below="@+id/dashboard_account_info_days_text"
         android:layout_toLeftOf="@+id/dashboard_account_info_quota_title2"
-        android:text=" / " />
+        android:text=" / "
+         android:visibility="gone" />
 
     <TextView
         android:id="@+id/dashboard_account_info_quota_title2"
         style="@style/account_info_cat_title.alt"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/dashboard_account_info_days_text"
-        android:text="Offpeak" />
+        android:text="Offpeak"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/dashboard_account_info_quota_text"
         style="@style/account_info_stat"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/dashboard_account_info_quota_title1"
-        android:text="50.00(Gb)" />
+        android:text="50.00(Gb)"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/dashboard_account_info_rollover_period_text"
@@ -111,27 +115,31 @@
         style="@style/account_info_cat_title"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/dashboard_account_info_rollover_period_text"
-        android:text="IP Address" />
+        android:text="IP Address"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/dashboard_account_info_days_title_slash4"
         style="@style/account_info_cat_title.alt"
         android:layout_below="@+id/dashboard_account_info_rollover_period_text"
         android:layout_toRightOf="@+id/dashboard_account_info_ip_up_title1"
-        android:text=" / " />
+        android:text=" / "
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/dashboard_account_info_ip_up_title2"
         style="@style/account_info_cat_title.alt"
         android:layout_below="@+id/dashboard_account_info_rollover_period_text"
         android:layout_toRightOf="@+id/dashboard_account_info_days_title_slash4"
-        android:text="Up Time" />
+        android:text="Up Time"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/dashboard_account_info_ip_up_text"
         style="@style/account_info_stat"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/dashboard_account_info_ip_up_title1"
-        android:text="156.158.15.2" />
+        android:text="156.158.15.2"
+        android:visibility="gone" />
 
 </RelativeLayout>

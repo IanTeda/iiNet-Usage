@@ -1,6 +1,5 @@
 package au.id.teda.iinetusage.phone.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,15 +8,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.AnimationUtils;
-import android.view.animation.Transformation;
 import android.widget.Button;
-import android.widget.RelativeLayout;
-import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
 import au.id.teda.iinetusage.phone.R;
-import au.id.teda.iinetusage.phone.animation.DropDownAnimation;
 import au.id.teda.iinetusage.phone.async.RefreshUsageAsync;
 import au.id.teda.iinetusage.phone.helper.UserPassHelper;
 import au.id.teda.iinetusage.phone.view.AlertboxView;

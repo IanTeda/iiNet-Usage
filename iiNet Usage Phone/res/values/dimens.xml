@@ -30,5 +30,6 @@
     <dimen name="account_info_cat_title_text_size">13sp</dimen>
     <dimen name="account_info_cat_title_padding_top">5dp</dimen>
     <dimen name="account_info_stat_text_size">18sp</dimen>
+    <dimen name="account_info_stat_text_marginTop">-4dp</dimen>
 
 </resources>
