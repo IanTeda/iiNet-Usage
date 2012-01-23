@@ -122,7 +122,7 @@
         android:text=" / " />
 
     <TextView
-        android:id="@+id/dashboard_account_info_up"
+        android:id="@+id/account_info_up"
         style="@style/account_info_cat_title.alt"
         android:layout_below="@+id/account_info_rollover_period_data"
         android:layout_toRightOf="@+id/account_info_ip_up_slash"
