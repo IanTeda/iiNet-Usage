@@ -87,8 +87,26 @@ public class MainActivity extends ActionbarHelperActivity {
     }
     
     public void onAccountInfoClick (View button){
-    	Toast.makeText(this, "onAccountInfoClick " + button, Toast.LENGTH_SHORT).show();
+    	
     	switch (button.getId()) {
+    	case R.id.account_info_expand:
+    		Toast.makeText(this, "Expand", Toast.LENGTH_SHORT).show();
+    		break;
+    	case R.id.account_info_rollover_period_button:
+    		Toast.makeText(this, "Rollover period", Toast.LENGTH_SHORT).show();
+    		break;
+    	case R.id.account_info_days_button:
+    		Toast.makeText(this, "Days", Toast.LENGTH_SHORT).show();
+    		break;
+    	case R.id.account_info_ip_up_button:
+    		Toast.makeText(this, "Up IP", Toast.LENGTH_SHORT).show();
+    		break;
+    	case R.id.account_info_quota_button:
+    		Toast.makeText(this, "Quota", Toast.LENGTH_SHORT).show();
+    		break;
+    	default:
+    		Toast.makeText(this, "onAccountInfoClick Error ", Toast.LENGTH_SHORT).show();
+    		break;
     	}
 			
     }

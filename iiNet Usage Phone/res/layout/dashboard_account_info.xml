@@ -6,7 +6,7 @@
     android:layout_margin="@dimen/application_margin" >
 
     <Button
-        android:id="@+id/account_info_plan_expand"
+        android:id="@+id/account_info_expand"
         style="@style/account_info_title"
         android:layout_width="fill_parent"
         android:layout_alignParentLeft="true"
@@ -20,7 +20,7 @@
         android:layout_width="fill_parent"
         android:layout_height="2dp"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/account_info_plan_expand"
+        android:layout_below="@+id/account_info_expand"
         android:background="#ffffff" />
 
     <TextView
@@ -150,13 +150,13 @@
         android:layout_alignParentLeft="true"
         android:layout_alignRight="@+id/account_info_rollover_period_data"
         android:layout_alignTop="@+id/account_info_ip" />
-
+
     <Button
         android:id="@+id/account_info_days_button"
         style="@style/dashboard_button_overlay.accountInfo"
         android:layout_alignBottom="@+id/account_info_days_data"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/account_info_plan_expand"
+        android:layout_alignTop="@+id/account_info_days_soFare"
         android:layout_toRightOf="@+id/account_info_rollover_period_data" />
 
     <Button
