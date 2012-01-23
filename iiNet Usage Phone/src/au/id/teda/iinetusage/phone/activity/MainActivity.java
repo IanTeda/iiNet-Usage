@@ -14,6 +14,7 @@ import android.widget.Toast;
 import au.id.teda.iinetusage.phone.R;
 import au.id.teda.iinetusage.phone.async.RefreshUsageAsync;
 import au.id.teda.iinetusage.phone.helper.UserPassHelper;
+import au.id.teda.iinetusage.phone.view.AccountInfoView;
 import au.id.teda.iinetusage.phone.view.AlertboxView;
 
 public class MainActivity extends ActionbarHelperActivity {
@@ -88,9 +89,12 @@ public class MainActivity extends ActionbarHelperActivity {
     
     public void onAccountInfoClick (View button){
     	
+    	AccountInfoView myAccountInfoView = new AccountInfoView(this);
+    	
     	switch (button.getId()) {
     	case R.id.account_info_expand:
     		Toast.makeText(this, "Expand", Toast.LENGTH_SHORT).show();
+    		myAccountInfoView.hideIpTitle();
     		break;
     	case R.id.account_info_rollover_period_button:
     		Toast.makeText(this, "Rollover period", Toast.LENGTH_SHORT).show();
