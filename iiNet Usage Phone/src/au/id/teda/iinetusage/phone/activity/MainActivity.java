@@ -72,17 +72,6 @@ public class MainActivity extends ActionbarHelperActivity {
 		new RefreshUsageAsync(this, handler).execute();
 	}
 	
-	public void onAccountInfoExpandClick(View button){
-		
-		// Get the layout reference
-		TextView tv1 = (TextView) findViewById(R.id.textView1);
-		TextView tv2 = (TextView) findViewById(R.id.textView2);
-		
-		tv1.setVisibility(View.VISIBLE);
-		tv2.setVisibility(View.VISIBLE);
-		
-	}
-	
 	/**
 	 *  Handler for passing messages from other classes
 	 */
@@ -95,6 +84,13 @@ public class MainActivity extends ActionbarHelperActivity {
     public void onPeakStatsClick (View button){
     	Toast.makeText(this, "onPeakStatsClick " + button, Toast.LENGTH_SHORT).show();
     	
+    }
+    
+    public void onAccountInfoClick (View button){
+    	Toast.makeText(this, "onAccountInfoClick " + button, Toast.LENGTH_SHORT).show();
+    	switch (button.getId()) {
+    	}
+			
     }
 	
 	/**
