@@ -132,7 +132,7 @@
 
     <Button
         android:id="@+id/peak_perctage_button"
-        style="@style/dashboard_button_overlay"
+        style="@style/dashboard_button_overlay.peakStats"
         android:layout_alignBottom="@+id/peak_daily_data"
         android:layout_alignLeft="@+id/dashboard_account_info_line"
         android:layout_alignRight="@+id/dashboard_peak_number"
@@ -140,7 +140,7 @@
 
     <Button
         android:id="@+id/peak_perctage_used_remaining_button"
-        style="@style/dashboard_button_overlay"
+        style="@style/dashboard_button_overlay.peakStats"
         android:layout_alignBottom="@+id/peak_percent_used"
         android:layout_alignLeft="@+id/peak_percent"
         android:layout_alignRight="@+id/dashboard_account_info_line"
@@ -148,7 +148,7 @@
 
     <Button
         android:id="@+id/peak_data_used_remaining_button"
-        style="@style/dashboard_button_overlay"
+        style="@style/dashboard_button_overlay.peakStats"
         android:layout_alignBottom="@+id/peak_data"
         android:layout_alignLeft="@+id/peak_percent"
         android:layout_alignParentRight="true"
@@ -156,7 +156,7 @@
 
     <Button
         android:id="@+id/peak_average_data_used_remaining_button"
-        style="@style/dashboard_button_overlay"
+        style="@style/dashboard_button_overlay.peakStats"
         android:layout_alignBottom="@+id/peak_daily_data"
         android:layout_alignLeft="@+id/peak_data_used_remaining_button"
         android:layout_alignParentRight="true"
@@ -164,7 +164,7 @@
 
     <Button
         android:id="@+id/peak_data_title"
-        style="@style/dashboard_button_overlay"
+        style="@style/dashboard_button_overlay.peakStats"
         android:layout_above="@+id/dashboard_peak_number"
         android:layout_alignBottom="@+id/dashboard_account_info_line"
         android:layout_alignParentLeft="true"

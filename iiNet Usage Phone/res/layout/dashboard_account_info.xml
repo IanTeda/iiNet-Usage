@@ -77,32 +77,28 @@
         style="@style/account_info_cat_title"
         android:layout_below="@+id/dashboard_account_info_days_text"
         android:layout_toLeftOf="@+id/dashboard_account_info_days_title_slash2"
-        android:text="Quota Peak"
-         android:visibility="gone" />
+        android:text="Quota Peak" />
 
     <TextView
         android:id="@+id/dashboard_account_info_days_title_slash2"
         style="@style/account_info_cat_title.alt"
         android:layout_below="@+id/dashboard_account_info_days_text"
         android:layout_toLeftOf="@+id/dashboard_account_info_quota_title2"
-        android:text=" / "
-         android:visibility="gone" />
+        android:text=" / " />
 
     <TextView
         android:id="@+id/dashboard_account_info_quota_title2"
         style="@style/account_info_cat_title.alt"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/dashboard_account_info_days_text"
-        android:text="Offpeak"
-        android:visibility="gone" />
+        android:text="Offpeak" />
 
     <TextView
         android:id="@+id/dashboard_account_info_quota_text"
         style="@style/account_info_stat"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/dashboard_account_info_quota_title1"
-        android:text="50.00(Gb)"
-        android:visibility="gone" />
+        android:text="50.00(Gb)" />
 
     <TextView
         android:id="@+id/dashboard_account_info_rollover_period_text"
@@ -116,31 +112,59 @@
         style="@style/account_info_cat_title"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/dashboard_account_info_rollover_period_text"
-        android:text="IP Address"
-        android:visibility="gone" />
+        android:text="IP Address" />
 
     <TextView
         android:id="@+id/dashboard_account_info_days_title_slash4"
         style="@style/account_info_cat_title.alt"
         android:layout_below="@+id/dashboard_account_info_rollover_period_text"
         android:layout_toRightOf="@+id/dashboard_account_info_ip_up_title1"
-        android:text=" / "
-        android:visibility="gone" />
+        android:text=" / " />
 
     <TextView
         android:id="@+id/dashboard_account_info_ip_up_title2"
         style="@style/account_info_cat_title.alt"
         android:layout_below="@+id/dashboard_account_info_rollover_period_text"
         android:layout_toRightOf="@+id/dashboard_account_info_days_title_slash4"
-        android:text="Up Time"
-        android:visibility="gone" />
+        android:text="Up Time" />
 
     <TextView
         android:id="@+id/dashboard_account_info_ip_up_text"
         style="@style/account_info_stat"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/dashboard_account_info_ip_up_title1"
-        android:text="156.158.15.2"
-        android:visibility="gone" />
+        android:text="156.158.15.2" />
+
+    <Button
+        android:id="@+id/dashboard_account_info_days_button"
+        style="@style/dashboard_button_overlay.accountInfo"
+        android:layout_alignBottom="@+id/dashboard_account_info_days_text"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/dashboard_account_info_days_title1"
+        android:layout_toRightOf="@+id/dashboard_account_info_rollover_period_text" />
+
+    <Button
+        android:id="@+id/dashboard_account_info_rollover_period_button"
+        style="@style/dashboard_button_overlay.accountInfo"
+        android:layout_alignBottom="@+id/dashboard_account_info_rollover_period_text"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/dashboard_account_info_rollover_period_text"
+        android:layout_alignTop="@+id/dashboard_account_info_rollover_period_title1" />
+
+    <Button
+        android:id="@+id/dashboard_account_info_ip_up_button"
+        style="@style/dashboard_button_overlay.accountInfo"
+        android:layout_alignBottom="@+id/dashboard_account_info_ip_up_text"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/dashboard_account_info_ip_up_title1"
+        android:layout_toLeftOf="@+id/dashboard_account_info_days_button" />
+
+    <Button
+        android:id="@+id/dashboard_account_info_quota_button"
+        style="@style/dashboard_button_overlay.accountInfo"
+        android:layout_alignBottom="@+id/dashboard_account_info_quota_text"
+        android:layout_alignLeft="@+id/dashboard_account_info_days_button"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/dashboard_account_info_quota_title1" />
 
 </RelativeLayout>

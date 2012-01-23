@@ -23,9 +23,8 @@
     <!-- Alternate style for account information category titles -->
     <style name="account_info_cat_title.alt">
         <item name="android:textColor">@color/application_h2_text_alt_color</item>
-        
     </style>
-    
+
     <!-- Statistic -->
     <style name="account_info_stat">
         <item name="android:layout_width">wrap_content</item>
@@ -36,7 +35,7 @@
         <item name="android:textColor">@color/application_text_highlight_color</item>
         <item name="android:layout_marginTop">@dimen/account_info_stat_text_marginTop</item>
     </style>
-    
+
     <style name="account_info_stat_used_title">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -45,15 +44,22 @@
         <item name="android:textSize">@dimen/account_info_stat_used_title_textSize</item>
         <item name="android:textStyle">bold</item>
     </style>
-    
+
     <style name="account_info_stat_used_title.alt">
         <item name="android:textColor">@color/application_h2_text_alt_color</item>
     </style>
-    
+
     <style name="dashboard_button_overlay">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="dashboard_button_overlay.accountInfo">
+        <item name="android:onClick">onAccountInfoClick</item>
+    </style>
+    
+    <style name="dashboard_button_overlay.peakStats">
         <item name="android:onClick">onPeakStatsClick</item>
     </style>
 
