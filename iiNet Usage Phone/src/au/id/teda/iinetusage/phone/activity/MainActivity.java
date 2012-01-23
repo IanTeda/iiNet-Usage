@@ -91,6 +91,11 @@ public class MainActivity extends ActionbarHelperActivity {
         	//fillSummaryView();
         }
     };
+    
+    public void onPeakStatsClick (View button){
+    	Toast.makeText(this, "onPeakStatsClick " + button, Toast.LENGTH_SHORT).show();
+    	
+    }
 	
 	/**
 	 * onCreate method for options menu

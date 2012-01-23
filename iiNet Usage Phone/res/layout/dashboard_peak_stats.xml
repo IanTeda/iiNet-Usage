@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/relativeLayout1"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="-12dp"
+    android:layout_marginBottom="@dimen/stats_container_marginBottom"
+    android:layout_marginTop="@dimen/stats_container_marginTop"
     android:padding="@dimen/application_margin" >
 
     <TextView
@@ -23,7 +23,7 @@
     <View
         android:id="@+id/dashboard_account_info_line"
         android:layout_width="fill_parent"
-        android:layout_height="2dp"
+        android:layout_height="@dimen/dashboard_line_height"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/dashboard_peak_title"
         android:background="#ffffff" />
@@ -33,21 +33,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/dashboard_account_info_line"
-        android:layout_marginLeft="-8dp"
-        android:layout_marginTop="-22dp"
+        android:layout_marginLeft="@dimen/stats_number_marginLeft"
+        android:layout_marginTop="@dimen/stats_number_marginTop"
         android:text="60"
-        android:textSize="130sp"
+        android:textSize="@dimen/stats_number_text_size"
         android:typeface="serif" />
 
     <TextView
         android:id="@+id/peak_percent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/account_info_stat_used_title.alt"
         android:layout_below="@+id/dashboard_account_info_line"
         android:layout_toRightOf="@+id/dashboard_peak_number"
-        android:text="%"
-        android:textSize="22sp"
-        android:textStyle="bold" />
+        android:text="%" />
 
     <TextView
         android:id="@+id/peak_percent_used"
@@ -101,36 +98,77 @@
     <TextView
         android:id="@+id/peak_daily_av"
         style="@style/account_info_cat_title"
-        android:layout_toLeftOf="@+id/peak_daily_used"
         android:layout_below="@+id/peak_data"
-        android:text="Daily Av. "/>
-    
+        android:layout_toLeftOf="@+id/peak_daily_used"
+        android:text="Daily Av. " />
+
     <TextView
         android:id="@+id/peak_daily_used"
         style="@style/account_info_cat_title"
-        android:layout_toLeftOf="@+id/peak_daily_slash"
         android:layout_below="@+id/peak_data"
-        android:text="Used"/>
-    
+        android:layout_toLeftOf="@+id/peak_daily_slash"
+        android:text="Used" />
+
     <TextView
         android:id="@+id/peak_daily_slash"
         style="@style/account_info_cat_title.alt"
-        android:layout_toLeftOf="@+id/peak_daily_remaing"
         android:layout_below="@+id/peak_data"
-        android:text=" / "/>
-    
+        android:layout_toLeftOf="@+id/peak_daily_remaing"
+        android:text=" / " />
+
     <TextView
         android:id="@+id/peak_daily_remaing"
         style="@style/account_info_cat_title.alt"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/peak_data"
-        android:text="Remaining"/>
+        android:text="Remaining" />
 
     <TextView
         android:id="@+id/peak_daily_data"
         style="@style/account_info_stat"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/peak_daily_remaing"
-        android:text="1,027 (MB)"/>
+        android:text="1,027 (MB)" />
+
+    <Button
+        android:id="@+id/peak_perctage_button"
+        style="@style/dashboard_button_overlay"
+        android:layout_alignBottom="@+id/peak_daily_data"
+        android:layout_alignLeft="@+id/dashboard_account_info_line"
+        android:layout_alignRight="@+id/dashboard_peak_number"
+        android:layout_alignTop="@+id/peak_percent" />
+
+    <Button
+        android:id="@+id/peak_perctage_used_remaining_button"
+        style="@style/dashboard_button_overlay"
+        android:layout_alignBottom="@+id/peak_percent_used"
+        android:layout_alignLeft="@+id/peak_percent"
+        android:layout_alignRight="@+id/dashboard_account_info_line"
+        android:layout_alignTop="@+id/dashboard_account_info_line" />
+
+    <Button
+        android:id="@+id/peak_data_used_remaining_button"
+        style="@style/dashboard_button_overlay"
+        android:layout_alignBottom="@+id/peak_data"
+        android:layout_alignLeft="@+id/peak_percent"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/peak_percent_remaing" />
+
+    <Button
+        android:id="@+id/peak_average_data_used_remaining_button"
+        style="@style/dashboard_button_overlay"
+        android:layout_alignBottom="@+id/peak_daily_data"
+        android:layout_alignLeft="@+id/peak_data_used_remaining_button"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/peak_data" />
+
+    <Button
+        android:id="@+id/peak_data_title"
+        style="@style/dashboard_button_overlay"
+        android:layout_above="@+id/dashboard_peak_number"
+        android:layout_alignBottom="@+id/dashboard_account_info_line"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/dashboard_peak_time" />
 
 </RelativeLayout>

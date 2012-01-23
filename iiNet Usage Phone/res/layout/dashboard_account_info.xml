@@ -8,6 +8,7 @@
     <Button
         android:id="@+id/dashboard_account_info_plan"
         style="@style/account_info_title"
+        android:layout_width="fill_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:drawableRight="@drawable/ic_expand"

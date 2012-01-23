@@ -22,16 +22,25 @@
         android:text="@string/alertbox_default"
         android:visibility="gone" />
 
-    <include
-        android:id="@+id/dashboard_account_info"
-        layout="@layout/dashboard_account_info" />
+    <ScrollView
+        android:id="@+id/main_container"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
 
-    <include
-        android:id="@+id/dashboard_peak_stats_include"
-        layout="@layout/dashboard_peak_stats" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-    <include
-        android:id="@+id/dashboard_peak_stats_include"
-        layout="@layout/dashboard_peak_stats" />
+            <include
+                android:id="@+id/dashboard_account_info"
+                layout="@layout/dashboard_account_info" />
+
+            <include
+                android:id="@+id/dashboard_peak_include"
+                layout="@layout/dashboard_peak_stats" />
+            
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
