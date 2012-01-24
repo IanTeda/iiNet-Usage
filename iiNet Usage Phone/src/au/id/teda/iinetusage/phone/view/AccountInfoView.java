@@ -28,6 +28,18 @@ public class AccountInfoView extends AccountHelper {
 	private final TextView myPeakOffpeakTitle;
 	private final TextView myOffPeakTitle;
 	private final TextView myPeakOffpeakData;
+	
+	// TextView objects for rollover period block
+	private final TextView myRolloverTitle;
+	private final TextView myRolloverPeriodTitle;
+	private final TextView myPeriodTitle;
+	private final TextView myRolloverPeriodData;
+	
+	// TextView objects for rollover period block
+	private final TextView myDaysSoFareTitle;
+	private final TextView myDaysTitle;
+	private final TextView myDaysToGoTitle;
+	private final TextView myDaysData;
 
 	public AccountInfoView(Context context) {
 		// Construct context
@@ -46,6 +58,18 @@ public class AccountInfoView extends AccountHelper {
 		myPeakOffpeakTitle = (TextView) myActivity.findViewById(R.id.account_info_quota_slash);
 		myOffPeakTitle = (TextView) myActivity.findViewById(R.id.account_info_quota_offpeak);
 		myPeakOffpeakData = (TextView) myActivity.findViewById(R.id.account_info_quota_data);
+		
+		// Rollover & Period TextView objects
+		myRolloverTitle = (TextView) myActivity.findViewById(R.id.account_info_rollover);
+		myRolloverPeriodTitle = (TextView) myActivity.findViewById(R.id.account_info_rollover_period_slash);
+		myPeriodTitle = (TextView) myActivity.findViewById(R.id.account_info_period);
+		myRolloverPeriodData = (TextView) myActivity.findViewById(R.id.account_info_rollover_period_data);
+		
+		// Days TextView objects
+		myDaysSoFareTitle = (TextView) myActivity.findViewById(R.id.account_info_days_soFare);
+		myDaysTitle = (TextView) myActivity.findViewById(R.id.account_info_days_soFare_toGo_slash);
+		myDaysToGoTitle = (TextView) myActivity.findViewById(R.id.account_info_days_toGo);
+		myDaysData = (TextView) myActivity.findViewById(R.id.account_info_days_data);		
 	}
 
 	/**
@@ -120,6 +144,88 @@ public class AccountInfoView extends AccountHelper {
 				&& myPeakOffpeakTitle.getVisibility() == View.GONE
 				&& myOffPeakTitle.getVisibility() == View.GONE
 				&& myPeakOffpeakData.getVisibility() == View.GONE) {
+			// They are so lets return true
+			return true;
+		}
+		// Else it must be visible
+		else {
+			// So lets return false
+			return false;
+		}
+	}
+	
+	/**
+	 * Method for hiding Quota block
+	 */
+	public void hideRolloverPeriodBlock() {
+		myRolloverTitle.setVisibility(View.GONE);
+		myRolloverPeriodTitle.setVisibility(View.GONE);
+		myPeriodTitle.setVisibility(View.GONE);
+		myRolloverPeriodData.setVisibility(View.GONE);
+	}
+
+	/**
+	 * Method for showing Quota block
+	 */
+	public void showRolloverPeriodBlock() {
+		myRolloverTitle.setVisibility(View.VISIBLE);
+		myRolloverPeriodTitle.setVisibility(View.VISIBLE);
+		myPeriodTitle.setVisibility(View.VISIBLE);
+		myRolloverPeriodData.setVisibility(View.VISIBLE);
+	}
+
+	/**
+	 * Method for checking if Quota block is hidden
+	 * 
+	 * @return true if block hidden
+	 */
+	public boolean isRolloverPeriodBlockHidden() {
+		// Check if views are set to gone
+		if (myRolloverTitle.getVisibility() == View.GONE
+				&& myRolloverPeriodTitle.getVisibility() == View.GONE
+				&& myPeriodTitle.getVisibility() == View.GONE
+				&& myRolloverPeriodData.getVisibility() == View.GONE) {
+			// They are so lets return true
+			return true;
+		}
+		// Else it must be visible
+		else {
+			// So lets return false
+			return false;
+		}
+	}
+	
+	/**
+	 * Method for hiding Days block
+	 */
+	public void hideDaysBlock() {
+		myDaysSoFareTitle.setVisibility(View.GONE);
+		myDaysTitle.setVisibility(View.GONE);
+		myDaysToGoTitle.setVisibility(View.GONE);
+		myDaysData.setVisibility(View.GONE);
+	}
+
+	/**
+	 * Method for showing Days block
+	 */
+	public void showDaysBlock() {
+		myDaysSoFareTitle.setVisibility(View.VISIBLE);
+		myDaysTitle.setVisibility(View.VISIBLE);
+		myDaysToGoTitle.setVisibility(View.VISIBLE);
+		myDaysData.setVisibility(View.VISIBLE);
+	}
+
+	/**
+	 * Method for checking if Days block is hidden
+	 * 
+	 * @return true if block hidden
+	 */
+	public boolean isDaysBlockHidden() {
+		// Check if views are set to gone
+		if (myDaysSoFareTitle.getVisibility() == View.GONE
+				&& myDaysTitle.getVisibility() == View.GONE
+				&& myDaysToGoTitle.getVisibility() == View.GONE
+				&& myDaysData.getVisibility() == View.GONE) {
 			// They are so lets return true
 			return true;
 		}

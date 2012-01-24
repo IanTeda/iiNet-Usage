@@ -97,7 +97,7 @@ public class MainActivity extends ActionbarHelperActivity {
     		if (myAccountInfoView.isIpUpBlockHidden()
     				&& myAccountInfoView.isQuotaBlockHidden()){
     			
-    			// Then lets make it visible
+    			// Look like it is so lets make it visible
     			myAccountInfoView.showIpUpBlock();
     			myAccountInfoView.showQuotaBlock();
     		}
