@@ -73,6 +73,58 @@ public class AccountInfoView extends AccountHelper {
 	}
 
 	/**
+	 * Determine what state the account info view is in and change it between restore and minimise
+	 */
+	public void resizeAccountInfo(){
+		// Check if block is already hidden
+		if (isIpUpBlockHidden()
+				&& isQuotaBlockHidden()){
+			
+			// Look like it is so lets make it visible
+			maximiseAccountInfo();
+		}
+		// Else it must be visible
+		else {
+			
+			// So lets hide it
+			restoreAccountInfo();
+		}
+
+	}
+	
+	/**
+	 * Method for minimise (hiding) all blocks
+	 */
+	public void minimiseAccountInfo() {
+		hideDaysBlock();
+		hideIpUpBlock();
+		hideQuotaBlock();
+		hideRolloverPeriodBlock();
+	}
+	
+	
+	/**
+	 * Method for maximising (showing) all blocks
+	 */
+	public void maximiseAccountInfo(){
+		showDaysBlock();
+		showIpUpBlock();
+		showQuotaBlock();
+		showRolloverPeriodBlock();
+	}
+	
+	/**
+	 * Method to restore (top only) blocks 
+	 */
+	public void restoreAccountInfo(){
+		showRolloverPeriodBlock();
+		showDaysBlock();
+		hideQuotaBlock();
+		hideIpUpBlock();
+		
+	}
+	
+	/**
 	 * Method for hiding IP Up-time block
 	 */
 	public void hideIpUpBlock() {

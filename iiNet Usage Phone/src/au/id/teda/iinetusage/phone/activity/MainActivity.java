@@ -93,23 +93,7 @@ public class MainActivity extends ActionbarHelperActivity {
     	
     	switch (button.getId()) {
     	case R.id.account_info_expand:
-    		// Check if block is already hidden
-    		if (myAccountInfoView.isIpUpBlockHidden()
-    				&& myAccountInfoView.isQuotaBlockHidden()){
-    			
-    			// Look like it is so lets make it visible
-    			myAccountInfoView.showIpUpBlock();
-    			myAccountInfoView.showQuotaBlock();
-    		}
-    		// Else it must be visible
-    		else {
-    			
-    			// So lets hide it
-        		myAccountInfoView.hideIpUpBlock();
-        		myAccountInfoView.hideQuotaBlock();
-    		}
-
-    		
+    		myAccountInfoView.resizeAccountInfo();
     		break;
     	case R.id.account_info_rollover_period_button:
     		Toast.makeText(this, "Rollover period", Toast.LENGTH_SHORT).show();

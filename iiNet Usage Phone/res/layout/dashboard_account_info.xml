@@ -3,7 +3,7 @@
     android:id="@+id/dashboard_account_info"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/application_margin" >
+     android:padding="@dimen/application_margin" >
 
     <Button
         android:id="@+id/account_info_expand"
@@ -77,28 +77,32 @@
         style="@style/account_info_cat_title"
         android:layout_below="@+id/account_info_days_data"
         android:layout_toLeftOf="@+id/account_info_quota_slash"
-        android:text="Quota Peak" />
+        android:text="Quota Peak"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/account_info_quota_slash"
         style="@style/account_info_cat_title.alt"
         android:layout_below="@+id/account_info_days_data"
         android:layout_toLeftOf="@+id/account_info_quota_offpeak"
-        android:text=" / " />
+        android:text=" / "
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/account_info_quota_offpeak"
         style="@style/account_info_cat_title.alt"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/account_info_days_data"
-        android:text="Offpeak" />
+        android:text="Offpeak"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/account_info_quota_data"
         style="@style/account_info_stat"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/account_info_quota_offpeak"
-        android:text="50.00(Gb)" />
+        android:text="50.00(Gb)"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/account_info_rollover_period_data"
@@ -112,28 +116,32 @@
         style="@style/account_info_cat_title"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/account_info_rollover_period_data"
-        android:text="IP Address" />
+        android:text="IP Address"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/account_info_ip_up_slash"
         style="@style/account_info_cat_title.alt"
         android:layout_below="@+id/account_info_rollover_period_data"
         android:layout_toRightOf="@+id/account_info_ip"
-        android:text=" / " />
+        android:text=" / "
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/account_info_up"
         style="@style/account_info_cat_title.alt"
         android:layout_below="@+id/account_info_rollover_period_data"
         android:layout_toRightOf="@+id/account_info_ip_up_slash"
-        android:text="Up Time" />
+        android:text="Up Time"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/account_info_ip_up_data"
         style="@style/account_info_stat"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/account_info_ip"
-        android:text="156.158.15.2" />
+        android:text="156.158.15.2"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/account_info_rollover_period_button"
