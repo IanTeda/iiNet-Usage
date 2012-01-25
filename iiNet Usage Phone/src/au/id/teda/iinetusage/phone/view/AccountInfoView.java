@@ -48,31 +48,35 @@ public class AccountInfoView extends AccountHelper {
 	private final int focusColor;
 	private final int alternateColor;
 
+	/**
+	 * Class constructor
+	 * @param context
+	 */
 	public AccountInfoView(Context context) {
 		// Construct context
 		myActivityContext = context;
 		// Construct activity from context
 		myActivity = (myActivityContext instanceof Activity) ? (Activity) myActivityContext	: null;
 
-		// IP & Up Time TextView objects
+		// Set IP & Up Time TextView objects
 		myIpTitle = (TextView) myActivity.findViewById(R.id.account_info_ip);
 		myIpUpSlashTitle = (TextView) myActivity.findViewById(R.id.account_info_ip_up_slash);
 		myUpTitle = (TextView) myActivity.findViewById(R.id.account_info_up);
 		myIpUpdata = (TextView) myActivity.findViewById(R.id.account_info_ip_up_data);
 
-		// Quota TextView objects
+		// Set Quota TextView objects
 		myPeakTitle = (TextView) myActivity.findViewById(R.id.account_info_quota_peak);
 		myPeakOffpeakTitle = (TextView) myActivity.findViewById(R.id.account_info_quota_slash);
 		myOffPeakTitle = (TextView) myActivity.findViewById(R.id.account_info_quota_offpeak);
 		myPeakOffpeakData = (TextView) myActivity.findViewById(R.id.account_info_quota_data);
 		
-		// Rollover & Period TextView objects
+		// Set Rollover & Period TextView objects
 		myRolloverTitle = (TextView) myActivity.findViewById(R.id.account_info_rollover);
 		myRolloverPeriodTitle = (TextView) myActivity.findViewById(R.id.account_info_rollover_period_slash);
 		myPeriodTitle = (TextView) myActivity.findViewById(R.id.account_info_period);
 		myRolloverPeriodData = (TextView) myActivity.findViewById(R.id.account_info_rollover_period_data);
 		
-		// Days TextView objects
+		// Set Days TextView objects
 		myDaysSoFareTitle = (TextView) myActivity.findViewById(R.id.account_info_days_soFare);
 		myDaysTitle = (TextView) myActivity.findViewById(R.id.account_info_days_soFare_toGo_slash);
 		myDaysToGoTitle = (TextView) myActivity.findViewById(R.id.account_info_days_toGo);

@@ -16,6 +16,7 @@ import au.id.teda.iinetusage.phone.async.RefreshUsageAsync;
 import au.id.teda.iinetusage.phone.helper.UserPassHelper;
 import au.id.teda.iinetusage.phone.view.AccountInfoView;
 import au.id.teda.iinetusage.phone.view.AlertboxView;
+import au.id.teda.iinetusage.phone.view.PeakStatsView;
 
 public class MainActivity extends ActionbarHelperActivity {
 	
@@ -73,19 +74,49 @@ public class MainActivity extends ActionbarHelperActivity {
         }
     };
     
+    /**
+     * onClick event for peak stats include
+     * @param button
+     */
     public void onPeakStatsClick (View button){
-    	Toast.makeText(this, "onPeakStatsClick " + button, Toast.LENGTH_SHORT).show();
+    	
+    	// Object for PeakStatsView class
+    	PeakStatsView myPeakStatsView = new PeakStatsView(this);
+    	
+    	// Switch cases for button clicks
+    	switch (button.getId()) {
+    	case R.id.peak_number_button:
+    		Toast.makeText(this, "Peak Number", Toast.LENGTH_SHORT).show();
+    		break;
+    	case R.id.peak_percent_used_remaining_button:
+    		myPeakStatsView.switchFocusPercentBlock();
+    		break;
+    	case R.id.peak_average_data_used_remaining_button:
+    		myPeakStatsView.switchFocusDailyBlock();
+    		break;
+    	case R.id.peak_data_used_remaining_button:
+    		myPeakStatsView.switchFocusDataBlock();
+    		break;
+    	case R.id.peak_data_title_button:
+    		Toast.makeText(this, "Peak title", Toast.LENGTH_SHORT).show();
+    		break;
+    	default:
+    		Toast.makeText(this, "onPeakStatsClick Error", Toast.LENGTH_SHORT).show();
+    		break;
+    	}
     	
     }
     
     /**
-     * Onclick event for account info block
+     * Onclick event for account info include
      * @param button
      */
     public void onAccountInfoClick (View button){
     	
+    	// Object for AccountInfoView class
     	AccountInfoView myAccountInfoView = new AccountInfoView(this);
     	
+    	// Switch cases for button clicks
     	switch (button.getId()) {
     	case R.id.account_info_expand:
     		myAccountInfoView.resizeAccountInfo();
@@ -103,7 +134,7 @@ public class MainActivity extends ActionbarHelperActivity {
     		myAccountInfoView.switchFocusQuotaBlock();
     		break;
     	default:
-    		Toast.makeText(this, "onAccountInfoClick Error ", Toast.LENGTH_SHORT).show();
+    		Toast.makeText(this, "onAccountInfoClick Error", Toast.LENGTH_SHORT).show();
     		break;
     	}
 			
