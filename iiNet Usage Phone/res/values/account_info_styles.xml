@@ -24,7 +24,6 @@
     <!-- Alternate style for account information category titles -->
     <style name="account_info_cat_title.alt">
         <item name="android:textColor">@color/application_h2_text_alt_color</item>
-        <item name="android:textStyle">normal</item>
     </style>
 
     <!-- Statistic -->

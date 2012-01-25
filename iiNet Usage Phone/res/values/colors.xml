@@ -31,7 +31,7 @@
     <color name="application_h1_text_color">#FF5900</color>
     <color name="application_h1_background_color">#181717</color>
     <color name="application_h2_text_color">#FF5900</color>
-    <color name="application_h2_text_alt_color">#b9b9b9</color>
+    <color name="application_h2_text_alt_color">#90b9b9b9</color>
     <color name="application_text_highlight_color">#fffafa</color>
 
     <!-- Phone dashboard alert -->

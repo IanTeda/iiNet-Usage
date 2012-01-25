@@ -93,7 +93,7 @@ public class MainActivity extends ActionbarHelperActivity {
     		Toast.makeText(this, "Days", Toast.LENGTH_SHORT).show();
     		break;
     	case R.id.account_info_ip_up_button:
-    		myAccountInfoView.switchIpUpBlock();
+    		myAccountInfoView.switchFocusIpUpBlock();
     		break;
     	case R.id.account_info_quota_button:
     		Toast.makeText(this, "Quota", Toast.LENGTH_SHORT).show();

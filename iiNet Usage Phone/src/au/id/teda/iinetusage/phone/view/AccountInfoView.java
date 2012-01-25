@@ -83,18 +83,17 @@ public class AccountInfoView extends AccountHelper {
 		alternateColor = myActivity.getResources().getColor(R.color.application_h2_text_alt_color);
 	}
 
-	public void switchIpUpBlock(){
+	/**
+	 * Switch the focus of Ip Up-Time block
+	 */
+	public void switchFocusIpUpBlock(){
 		if (isIpTitleFocus()){
 			myIpTitle.setTextColor(alternateColor);
-			myIpTitle.setTypeface(null, 0);
 			myUpTitle.setTextColor(focusColor);
-			myUpTitle.setTypeface(null, 1);
 		}
 		else{
 			myIpTitle.setTextColor(focusColor);
-			myIpTitle.setTypeface(null, 1);
 			myUpTitle.setTextColor(alternateColor);
-			myUpTitle.setTypeface(null, 0);
 		}
 	}
 	
