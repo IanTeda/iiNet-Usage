@@ -78,6 +78,10 @@ public class MainActivity extends ActionbarHelperActivity {
     	
     }
     
+    /**
+     * Onclick event for account info block
+     * @param button
+     */
     public void onAccountInfoClick (View button){
     	
     	AccountInfoView myAccountInfoView = new AccountInfoView(this);
@@ -87,16 +91,16 @@ public class MainActivity extends ActionbarHelperActivity {
     		myAccountInfoView.resizeAccountInfo();
     		break;
     	case R.id.account_info_rollover_period_button:
-    		Toast.makeText(this, "Rollover", Toast.LENGTH_SHORT).show();
+    		myAccountInfoView.switchFocusRolloverPeriodBlock();
     		break;
     	case R.id.account_info_days_button:
-    		Toast.makeText(this, "Days", Toast.LENGTH_SHORT).show();
+    		myAccountInfoView.switchFocusDaysBlock();
     		break;
     	case R.id.account_info_ip_up_button:
     		myAccountInfoView.switchFocusIpUpBlock();
     		break;
     	case R.id.account_info_quota_button:
-    		Toast.makeText(this, "Quota", Toast.LENGTH_SHORT).show();
+    		myAccountInfoView.switchFocusQuotaBlock();
     		break;
     	default:
     		Toast.makeText(this, "onAccountInfoClick Error ", Toast.LENGTH_SHORT).show();

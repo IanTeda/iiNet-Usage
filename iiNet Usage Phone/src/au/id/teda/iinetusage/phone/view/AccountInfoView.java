@@ -82,7 +82,112 @@ public class AccountInfoView extends AccountHelper {
 		focusColor = myActivity.getResources().getColor(R.color.application_h2_text_color);
 		alternateColor = myActivity.getResources().getColor(R.color.application_h2_text_alt_color);
 	}
+	
+	/**
+	 * Switch the focus of Days Period block
+	 */
+	public void switchFocusDaysBlock(){
+		if (isDaysSoFareFocus()){
+			myDaysSoFareTitle.setTextColor(alternateColor);
+			myDaysToGoTitle.setTextColor(focusColor);
+		}
+		else{
+			myDaysSoFareTitle.setTextColor(focusColor);
+			myDaysToGoTitle.setTextColor(alternateColor);
+		}
+	}
+	
+	/**
+	 * Check if the Days title is in focus
+	 * 
+	 * @return true if color matches XML value
+	 */
+	public boolean isDaysSoFareFocus(){
+		// Get current color value of TextView
+		int currentColor = myDaysSoFareTitle.getCurrentTextColor();
+		
+		// Check current colour against XML defined focus color
+		if (currentColor == focusColor){
+			// Looks like current color matches stored value so return true
+			return true;
+		}
+		// Else it must be the alternate color
+		else {
+			// So return false (shaded)
+			return false;
+		}
+	}
+	
+	/**
+	 * Switch the focus of Rollover Period block
+	 */
+	public void switchFocusRolloverPeriodBlock(){
+		if (isRolloverTitleFocus()){
+			myRolloverTitle.setTextColor(alternateColor);
+			myPeriodTitle.setTextColor(focusColor);
+		}
+		else{
+			myRolloverTitle.setTextColor(focusColor);
+			myPeriodTitle.setTextColor(alternateColor);
+		}
+	}
+	
+	/**
+	 * Check if the Rollover title is in focus
+	 * 
+	 * @return true if color matches XML value
+	 */
+	public boolean isRolloverTitleFocus(){
+		// Get current color value of TextView
+		int currentColor = myRolloverTitle.getCurrentTextColor();
+		
+		// Check current colour against XML defined focus color
+		if (currentColor == focusColor){
+			// Looks like current color matches stored value so return true
+			return true;
+		}
+		// Else it must be the alternate color
+		else {
+			// So return false (shaded)
+			return false;
+		}
+	}
 
+	/**
+	 * Switch the focus of Quota block
+	 */
+	public void switchFocusQuotaBlock(){
+		if (isPeakTitleFocus()){
+			myPeakTitle.setTextColor(alternateColor);
+			myOffPeakTitle.setTextColor(focusColor);
+		}
+		else{
+			myPeakTitle.setTextColor(focusColor);
+			myOffPeakTitle.setTextColor(alternateColor);
+		}
+	}
+	
+	/**
+	 * Check if the Peak title is in focus
+	 * 
+	 * @return true if color matches XML value
+	 */
+	public boolean isPeakTitleFocus(){
+		// Get current color value of TextView
+		int currentColor = myPeakTitle.getCurrentTextColor();
+		
+		// Check current colour against XML defined focus color
+		if (currentColor == focusColor){
+			// Looks like current color matches stored value so return true
+			return true;
+		}
+		// Else it must be the alternate color
+		else {
+			// So return false (shaded)
+			return false;
+		}
+	}
+	
 	/**
 	 * Switch the focus of Ip Up-Time block
 	 */
@@ -104,10 +209,10 @@ public class AccountInfoView extends AccountHelper {
 	 */
 	public boolean isIpTitleFocus(){
 		// Get current color value of TextView
-		int ipTitleColor = myIpTitle.getCurrentTextColor();
+		int currentColor = myIpTitle.getCurrentTextColor();
 		
 		// Check current colour against XML defined focus color
-		if (ipTitleColor == focusColor){
+		if (currentColor == focusColor){
 			// Looks like current color matches stored value so return true
 			return true;
 		}
