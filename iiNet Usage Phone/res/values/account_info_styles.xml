@@ -18,11 +18,13 @@
         <item name="android:textSize">@dimen/account_info_cat_title_text_size</item>
         <item name="android:paddingTop">@dimen/account_info_cat_title_padding_top</item>
         <item name="android:textColor">@color/application_h2_text_color</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <!-- Alternate style for account information category titles -->
     <style name="account_info_cat_title.alt">
         <item name="android:textColor">@color/application_h2_text_alt_color</item>
+        <item name="android:textStyle">normal</item>
     </style>
 
     <!-- Statistic -->

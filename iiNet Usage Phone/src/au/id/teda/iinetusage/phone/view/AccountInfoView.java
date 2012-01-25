@@ -2,6 +2,9 @@ package au.id.teda.iinetusage.phone.view;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -40,6 +43,10 @@ public class AccountInfoView extends AccountHelper {
 	private final TextView myDaysTitle;
 	private final TextView myDaysToGoTitle;
 	private final TextView myDaysData;
+	
+	// Color values for focus and alternate
+	private final int focusColor;
+	private final int alternateColor;
 
 	public AccountInfoView(Context context) {
 		// Construct context
@@ -69,9 +76,49 @@ public class AccountInfoView extends AccountHelper {
 		myDaysSoFareTitle = (TextView) myActivity.findViewById(R.id.account_info_days_soFare);
 		myDaysTitle = (TextView) myActivity.findViewById(R.id.account_info_days_soFare_toGo_slash);
 		myDaysToGoTitle = (TextView) myActivity.findViewById(R.id.account_info_days_toGo);
-		myDaysData = (TextView) myActivity.findViewById(R.id.account_info_days_data);		
+		myDaysData = (TextView) myActivity.findViewById(R.id.account_info_days_data);
+		
+		// Set focus and alternate colours
+		focusColor = myActivity.getResources().getColor(R.color.application_h2_text_color);
+		alternateColor = myActivity.getResources().getColor(R.color.application_h2_text_alt_color);
 	}
 
+	public void switchIpUpBlock(){
+		if (isIpTitleFocus()){
+			myIpTitle.setTextColor(alternateColor);
+			myIpTitle.setTypeface(null, 0);
+			myUpTitle.setTextColor(focusColor);
+			myUpTitle.setTypeface(null, 1);
+		}
+		else{
+			myIpTitle.setTextColor(focusColor);
+			myIpTitle.setTypeface(null, 1);
+			myUpTitle.setTextColor(alternateColor);
+			myUpTitle.setTypeface(null, 0);
+		}
+	}
+	
+	/**
+	 * Check if the ip title is in focus
+	 * 
+	 * @return true if color matches XML value
+	 */
+	public boolean isIpTitleFocus(){
+		// Get current color value of TextView
+		int ipTitleColor = myIpTitle.getCurrentTextColor();
+		
+		// Check current colour against XML defined focus color
+		if (ipTitleColor == focusColor){
+			// Looks like current color matches stored value so return true
+			return true;
+		}
+		// Else it must be the alternate color
+		else {
+			// So return false (shaded)
+			return false;
+		}
+	}
+	
 	/**
 	 * Determine what state the account info view is in and change it between restore and minimise
 	 */
@@ -101,7 +148,6 @@ public class AccountInfoView extends AccountHelper {
 		hideQuotaBlock();
 		hideRolloverPeriodBlock();
 	}
-	
 	
 	/**
 	 * Method for maximising (showing) all blocks

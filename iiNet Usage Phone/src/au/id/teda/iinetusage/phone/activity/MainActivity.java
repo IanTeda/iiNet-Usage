@@ -33,20 +33,11 @@ public class MainActivity extends ActionbarHelperActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dashboard);
         
-        userPassCheck();
-        
 		myAlertboxButton = (Button) findViewById(R.id.alertbox_button);
 		myAlertboxView = new AlertboxView(this);
         myAlertboxView.setAlert(myAlertboxButton);
         
     }
-
-	private void userPassCheck() {
-		UserPassHelper UserPassHelper = new UserPassHelper();
-		if (!UserPassHelper.isUsernamePasswordSet()){
-		}
-		
-	}
 	
 	/**
 	 * Method for managing onClick events of the Alertbox based on current alert text
@@ -96,13 +87,13 @@ public class MainActivity extends ActionbarHelperActivity {
     		myAccountInfoView.resizeAccountInfo();
     		break;
     	case R.id.account_info_rollover_period_button:
-    		Toast.makeText(this, "Rollover period", Toast.LENGTH_SHORT).show();
+    		Toast.makeText(this, "Rollover", Toast.LENGTH_SHORT).show();
     		break;
     	case R.id.account_info_days_button:
     		Toast.makeText(this, "Days", Toast.LENGTH_SHORT).show();
     		break;
     	case R.id.account_info_ip_up_button:
-    		Toast.makeText(this, "Up IP", Toast.LENGTH_SHORT).show();
+    		myAccountInfoView.switchIpUpBlock();
     		break;
     	case R.id.account_info_quota_button:
     		Toast.makeText(this, "Quota", Toast.LENGTH_SHORT).show();
