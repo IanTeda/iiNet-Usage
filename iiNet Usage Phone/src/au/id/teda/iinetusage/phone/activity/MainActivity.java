@@ -86,7 +86,7 @@ public class MainActivity extends ActionbarHelperActivity {
     	// Switch cases for button clicks
     	switch (button.getId()) {
     	case R.id.peak_number_button:
-    		Toast.makeText(this, "Peak Number", Toast.LENGTH_SHORT).show();
+    		myPeakStatsView.switchUnitNumberBlock();
     		break;
     	case R.id.peak_percent_used_remaining_button:
     		myPeakStatsView.switchFocusPercentBlock();

@@ -63,5 +63,12 @@
     <style name="dashboard_button_overlay.peakStats">
         <item name="android:onClick">onPeakStatsClick</item>
     </style>
+    
+    <style name="peak_offpeak_number">
+        <item name="android:textSize">@dimen/stats_number_text_size</item>
+        <item name="android:typeface">serif</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
 
 </resources>

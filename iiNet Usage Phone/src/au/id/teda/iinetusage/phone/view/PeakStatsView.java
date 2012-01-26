@@ -2,6 +2,7 @@ package au.id.teda.iinetusage.phone.view;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.widget.TextView;
 import au.id.teda.iinetusage.phone.R;
 import au.id.teda.iinetusage.phone.helper.AccountHelper;
@@ -32,8 +33,11 @@ public class PeakStatsView extends AccountHelper {
 	private final TextView myPeakPercentSlashTitle;
 	private final TextView myPeakPercentRemainingTitle;
 	private final TextView myPeakNumberData;
+	private final TextView myPeakNumberUnit;
 	
-	
+	// String objects for unit in unit block
+	private final String percentUnit;
+	private final String gigabyteUnit;
 	
 	// Color values for focus and alternate
 	private final int focusColor;
@@ -58,20 +62,66 @@ public class PeakStatsView extends AccountHelper {
 		// Set Data TextView objects
 		myPeakDataUsedTitle = (TextView) myActivity.findViewById(R.id.peak_data_used);
 		myPeakDataSlashTitle = (TextView) myActivity.findViewById(R.id.peak_data_slash);
-		myPeakDataRemainingTitle = (TextView) myActivity.findViewById(R.id.peak_data_remaing);
+		myPeakDataRemainingTitle = (TextView) myActivity.findViewById(R.id.peak_data_remaining);
 		myPeakDataData = (TextView) myActivity.findViewById(R.id.peak_data_data);
 		
 		// Set Percent TextView objects
 		myPeakPercentUsedTitle = (TextView) myActivity.findViewById(R.id.peak_percent_used);
 		myPeakPercentSlashTitle = (TextView) myActivity.findViewById(R.id.peak_percent_slash);
-		myPeakPercentRemainingTitle = (TextView) myActivity.findViewById(R.id.peak_percent_remaing);
+		myPeakPercentRemainingTitle = (TextView) myActivity.findViewById(R.id.peak_percent_remaining);
 		myPeakNumberData = (TextView) myActivity.findViewById(R.id.peak_number);
-		
+		myPeakNumberUnit = (TextView) myActivity.findViewById(R.id.peak_number_unit);
 		
 		// Set focus and alternate colours
 		focusColor = myActivity.getResources().getColor(R.color.application_h2_text_color);
 		alternateColor = myActivity.getResources().getColor(R.color.application_h2_text_alt_color);
+		
+		// Set percent and Gigabyte units
+		percentUnit = myActivity.getString(R.string.peak_offpeak_percent);
+		gigabyteUnit = myActivity.getString(R.string.peak_offpeak_gigabyte);
 	}
+	
+	/**
+	 * Switch unit of number block
+	 */
+	public void switchUnitNumberBlock(){
+		
+		// Check to see if percent unit is shown
+		if (isPercentUnitShown()){
+			// It is so change to giga byte unit
+			myPeakNumberUnit.setText(gigabyteUnit);
+		}
+		// Must be gigabyte unit
+		else{
+			// So change to percent unit
+			myPeakNumberUnit.setText(percentUnit);
+		}
+	}
+	
+	/**
+	 * Check if the Percent Used title is in focus
+	 * 
+	 * @return true if color matches XML value
+	 */
+	public boolean isPercentUnitShown(){
+		
+		// Get current unit from text view
+		String currentUnit = (String) myPeakNumberUnit.getText();
+		
+		// Check if current unit string matches percent unit string stored in xml
+		if (currentUnit == percentUnit){
+			// Looks like it is so return true
+			return true;
+		}
+		// Must be Gigabyte unit
+		else {
+			// So return false
+			return false;
+		}
+		
+		
+	}
+	
 	
 	/**
 	 * Switch the focus of Percent block

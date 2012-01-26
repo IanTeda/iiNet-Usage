@@ -2,10 +2,6 @@ package au.id.teda.iinetusage.phone.view;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
-import android.graphics.Typeface;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import au.id.teda.iinetusage.phone.R;
