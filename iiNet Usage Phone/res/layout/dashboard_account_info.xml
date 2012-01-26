@@ -12,8 +12,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:drawableRight="@drawable/ic_expand"
-        android:onClick="onAccountInfoClick"
-        android:text="Naked Home-1 (adsl_home V2)" />
+        android:onClick="onAccountInfoClick" />
 
     <View
         android:id="@+id/account_info_line"
@@ -28,56 +27,71 @@
         style="@style/account_info_cat_title"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/account_info_line"
-        android:text="Roll Over" />
+        android:text="@string/account_info_rollover" />
 
     <TextView
         android:id="@+id/account_info_rollover_period_slash"
         style="@style/account_info_cat_title.alt"
         android:layout_below="@+id/account_info_line"
         android:layout_toRightOf="@+id/account_info_rollover"
-        android:text=" / " />
+        android:text="@string/account_info_slash" />
 
     <TextView
         android:id="@+id/account_info_period"
         style="@style/account_info_cat_title.alt"
         android:layout_below="@+id/account_info_line"
         android:layout_toRightOf="@+id/account_info_rollover_period_slash"
-        android:text="Data Period" />
+        android:text="@string/account_info_data_period" />
+    
+    <TextView
+        android:id="@+id/account_info_days"
+        style="@style/account_info_cat_title"
+        android:layout_below="@+id/account_info_line"
+        android:layout_toLeftOf="@+id/account_info_days_soFare"
+        android:text="@string/account_info_days" />
 
     <TextView
         android:id="@+id/account_info_days_soFare"
         style="@style/account_info_cat_title"
         android:layout_below="@+id/account_info_line"
         android:layout_toLeftOf="@+id/account_info_days_soFare_toGo_slash"
-        android:text="Days so Fare" />
+        android:text="@string/account_info_days_so_fare" />
 
     <TextView
         android:id="@+id/account_info_days_soFare_toGo_slash"
         style="@style/account_info_cat_title.alt"
         android:layout_below="@+id/account_info_line"
         android:layout_toLeftOf="@+id/account_info_days_toGo"
-        android:text=" / " />
+        android:text="@string/account_info_slash" />
 
     <TextView
         android:id="@+id/account_info_days_toGo"
         style="@style/account_info_cat_title.alt"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/account_info_line"
-        android:text="to Go" />
+        android:text="@string/account_info_days_to_go" />
 
     <TextView
         android:id="@+id/account_info_days_data"
         style="@style/account_info_stat"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/account_info_days_toGo"
-        android:text="23 Days" />
+        android:text="@string/account_days_data" />
 
+    <TextView
+        android:id="@+id/account_info_quota"
+        style="@style/account_info_cat_title"
+        android:layout_below="@+id/account_info_days_data"
+        android:layout_toLeftOf="@+id/account_info_quota_peak"
+        android:text="@string/account_quota"
+        android:visibility="gone" />
+    
     <TextView
         android:id="@+id/account_info_quota_peak"
         style="@style/account_info_cat_title"
         android:layout_below="@+id/account_info_days_data"
         android:layout_toLeftOf="@+id/account_info_quota_slash"
-        android:text="Quota Peak"
+        android:text="@string/account_quota_peak"
         android:visibility="gone" />
 
     <TextView
@@ -85,7 +99,7 @@
         style="@style/account_info_cat_title.alt"
         android:layout_below="@+id/account_info_days_data"
         android:layout_toLeftOf="@+id/account_info_quota_offpeak"
-        android:text=" / "
+        android:text="@string/account_info_slash"
         android:visibility="gone" />
 
     <TextView
@@ -93,7 +107,7 @@
         style="@style/account_info_cat_title.alt"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/account_info_days_data"
-        android:text="Offpeak"
+        android:text="@string/account_quota_offpeak"
         android:visibility="gone" />
 
     <TextView
@@ -101,7 +115,7 @@
         style="@style/account_info_stat"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/account_info_quota_offpeak"
-        android:text="50.00(Gb)"
+        android:text="@string/account_quota_data"
         android:visibility="gone" />
 
     <TextView
@@ -109,14 +123,14 @@
         style="@style/account_info_stat"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/account_info_rollover"
-        android:text="Wed, 25 Jan 2012" />
+        android:text="@string/account_info_rollover_period_data" />
 
     <TextView
         android:id="@+id/account_info_ip"
         style="@style/account_info_cat_title"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/account_info_rollover_period_data"
-        android:text="IP Address"
+        android:text="@string/account_info_ip_address"
         android:visibility="gone" />
 
     <TextView
@@ -124,7 +138,7 @@
         style="@style/account_info_cat_title.alt"
         android:layout_below="@+id/account_info_rollover_period_data"
         android:layout_toRightOf="@+id/account_info_ip"
-        android:text=" / "
+        android:text="@string/account_info_slash"
         android:visibility="gone" />
 
     <TextView
@@ -132,7 +146,7 @@
         style="@style/account_info_cat_title.alt"
         android:layout_below="@+id/account_info_rollover_period_data"
         android:layout_toRightOf="@+id/account_info_ip_up_slash"
-        android:text="Up Time"
+        android:text="@string/account_info_up_time"
         android:visibility="gone" />
 
     <TextView
@@ -140,7 +154,7 @@
         style="@style/account_info_stat"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/account_info_ip"
-        android:text="156.158.15.2"
+        android:text="@string/account_info_ip_data"
         android:visibility="gone" />
 
     <Button

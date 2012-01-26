@@ -72,7 +72,24 @@ public class AccountInfoHelper {
 	 * @return
 	 */
 	public String getPlan(){
-		return mySettings.getString(PLAN, "Plan not set");
+		return mySettings.getString(PLAN, "");
+	}
+	
+	/**
+	 * Check if plan has been set
+	 * @return true if plan string length is greater then 0
+	 */
+	public boolean isPlanSet(){
+		// Check plan string length is greater then 0
+		if (getPlan().length() > 0){
+			// Looks like it is so return true
+			return true;
+		} 
+		else {
+			// Else it must be 0 and not set so return false
+			return false;
+		}
+			
 	}
 	
 	/**
@@ -80,7 +97,25 @@ public class AccountInfoHelper {
 	 * @return
 	 */
 	public String getProduct(){
-		return mySettings.getString(PRODUCT, "Product not set");
+		return mySettings.getString(PRODUCT, "");
+	}
+	
+	
+	/**
+	 * Check if product has been set
+	 * @return true if product string length is greater then 0
+	 */
+	public boolean isProductSet(){
+		// Check product string length is greater then 0
+		if (getProduct().length() > 0){
+			// Looks like it is so return true
+			return true;
+		} 
+		else {
+			// Else it must be 0 and not set so return false
+			return false;
+		}
+			
 	}
 	
 	/**
@@ -88,7 +123,7 @@ public class AccountInfoHelper {
 	 * @return
 	 */
 	public String getOffPeakStart(){
-		return mySettings.getString(OFF_PEAK_START, "Off peak start not set");
+		return mySettings.getString(OFF_PEAK_START, "");
 	}
 	
 	/**
@@ -96,7 +131,7 @@ public class AccountInfoHelper {
 	 * @return
 	 */
 	public String getOffPeakEnd(){
-		return mySettings.getString(OFF_PEAK_END, "Off peak end not set");
+		return mySettings.getString(OFF_PEAK_END, "");
 	}
 	
 	/**

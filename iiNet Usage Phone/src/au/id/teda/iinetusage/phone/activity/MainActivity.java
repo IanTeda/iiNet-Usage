@@ -9,11 +9,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 import au.id.teda.iinetusage.phone.R;
 import au.id.teda.iinetusage.phone.async.RefreshUsageAsync;
-import au.id.teda.iinetusage.phone.helper.UserPassHelper;
 import au.id.teda.iinetusage.phone.view.AccountInfoView;
 import au.id.teda.iinetusage.phone.view.AlertboxView;
 import au.id.teda.iinetusage.phone.view.PeakStatsView;
@@ -27,6 +25,9 @@ public class MainActivity extends ActionbarHelperActivity {
 	private Button myAlertboxButton;
 	private AlertboxView myAlertboxView;
 	
+	// Object for AccountInfoView
+	private AccountInfoView myAccountInfoView;
+	
 	
     /** Called when the activity is first created. */
     @Override
@@ -37,6 +38,12 @@ public class MainActivity extends ActionbarHelperActivity {
 		myAlertboxButton = (Button) findViewById(R.id.alertbox_button);
 		myAlertboxView = new AlertboxView(this);
         myAlertboxView.setAlert(myAlertboxButton);
+        
+        // Set reference to AccountInfoView object
+        myAccountInfoView = new AccountInfoView(this);
+        
+        // Load AccountInfoView
+        myAccountInfoView.loadView();
         
     }
 	
@@ -113,9 +120,6 @@ public class MainActivity extends ActionbarHelperActivity {
      */
     public void onAccountInfoClick (View button){
     	
-    	// Object for AccountInfoView class
-    	AccountInfoView myAccountInfoView = new AccountInfoView(this);
-    	
     	// Switch cases for button clicks
     	switch (button.getId()) {
     	case R.id.account_info_expand:
@@ -166,7 +170,7 @@ public class MainActivity extends ActionbarHelperActivity {
 			startActivity(menuIntent);
 			return true;
 		case R.id.menu_refresh_button:
-			
+			new RefreshUsageAsync(this, handler).execute();
 			return true;
 		case R.id.menu_about_button:
 

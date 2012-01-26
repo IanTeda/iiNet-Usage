@@ -2,7 +2,9 @@ package au.id.teda.iinetusage.phone.view;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import au.id.teda.iinetusage.phone.R;
 import au.id.teda.iinetusage.phone.helper.AccountHelper;
@@ -15,6 +17,9 @@ public class AccountInfoView extends AccountHelper {
 
 	private final Context myActivityContext;
 	private final Activity myActivity;
+	
+	// Button for plan and product title
+	private final Button myProductPlanButton;
 
 	// TextView objects for IP & Up-time block
 	private final TextView myIpTitle;
@@ -53,6 +58,9 @@ public class AccountInfoView extends AccountHelper {
 		myActivityContext = context;
 		// Construct activity from context
 		myActivity = (myActivityContext instanceof Activity) ? (Activity) myActivityContext	: null;
+		
+		// Set reference for Product Plan button
+		myProductPlanButton = (Button) myActivity.findViewById(R.id.account_info_expand);
 
 		// Set IP & Up Time TextView objects
 		myIpTitle = (TextView) myActivity.findViewById(R.id.account_info_ip);
@@ -82,6 +90,15 @@ public class AccountInfoView extends AccountHelper {
 		focusColor = myActivity.getResources().getColor(R.color.application_h2_text_color);
 		alternateColor = myActivity.getResources().getColor(R.color.application_h2_text_alt_color);
 	}
+	
+	public void loadView(){
+		Log.d(DEBUG_TAG, "Load AccountInfoView");
+		
+		// Set Account plan and product
+		myProductPlanButton.setText(getProductPlanString());
+		
+	}
+	
 	
 	/**
 	 * Switch the focus of Days Period block

@@ -4,7 +4,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import android.content.Context;
 import android.util.Log;
+import au.id.teda.iinetusage.phone.AppGlobals;
+import au.id.teda.iinetusage.phone.R;
 
 public class AccountHelper extends AccountStatusHelper {
 
@@ -13,9 +16,10 @@ public class AccountHelper extends AccountStatusHelper {
 	private static final String INFO_TAG = AccountHelper.class.getSimpleName();
 
 	// Set data period format
-	private final SimpleDateFormat myDataPeriodFormat = new SimpleDateFormat(
-			"MMM yyyy");
+	private final SimpleDateFormat myDataPeriodFormat = new SimpleDateFormat("MMM yyyy");
 
+	private Context myApplicationContext = AppGlobals.getAppContext();
+	
 	/**
 	 * Method for checking if data period passed is the latest
 	 * 
@@ -49,6 +53,16 @@ public class AccountHelper extends AccountStatusHelper {
 			Log.v(INFO_TAG, "Error parsing date");
 			e.printStackTrace();
 			return false;
+		}
+	}
+	
+	public String getProductPlanString(){
+		if (isPlanSet() && isProductSet()){
+			String productPlanString = getPlan() + " (" + getProduct() + ")";
+			return productPlanString;
+		} 
+		else {
+			return myApplicationContext.getString(R.string.account_info_plan);
 		}
 	}
 
