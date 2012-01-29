@@ -44,11 +44,16 @@ public class MainActivity extends ActionbarHelperActivity {
         // Set reference to AccountInfoView object
         myAccountInfoView = new AccountInfoView(this);
         
-        // Load AccountInfoView
-        myAccountInfoView.loadView();
-        
     }
 	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		
+        // Load AccountInfoView
+        myAccountInfoView.loadView();
+	}
+
 	/**
 	 * Method for managing onClick events of the Alertbox based on current alert text
 	 * @param view
@@ -79,7 +84,9 @@ public class MainActivity extends ActionbarHelperActivity {
 	 */
     public Handler handler = new Handler() {
         public void handleMessage(Message msg) {
-        	//fillSummaryView();
+        	
+            // Load AccountInfoView
+            myAccountInfoView.loadView();
         }
     };
     
