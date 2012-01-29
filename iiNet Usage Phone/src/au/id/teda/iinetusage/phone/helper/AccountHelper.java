@@ -12,7 +12,7 @@ import au.id.teda.iinetusage.phone.R;
 public class AccountHelper extends AccountStatusHelper {
 
 	// Static tag strings for logging information and debug
-	private static final String DEBUG_TAG = "iiNet Usage";
+	//private static final String DEBUG_TAG = "iiNet Usage";
 	private static final String INFO_TAG = AccountHelper.class.getSimpleName();
 
 	// Set data period format
@@ -26,7 +26,7 @@ public class AccountHelper extends AccountStatusHelper {
 	 * Method for checking if data period passed is the latest
 	 * 
 	 * @param inputDataPeriod
-	 * @return
+	 * @return true if period date is greater or equal to current
 	 */
 	public boolean checkDataPeriodLatest(String inputDataPeriod) {
 		// Log.d(DEBUG_TAG, "myCheckDate: " + inputDataPeriod +
@@ -58,6 +58,10 @@ public class AccountHelper extends AccountStatusHelper {
 		}
 	}
 	
+	/**
+	 * Method for getting and formatting plan and product string
+	 * @return String value of broadband product and plan
+	 */
 	public String getProductPlanString(){
 		if (isPlanSet() && isProductSet()){
 			String productPlanString = getPlan() + " (" + getProduct() + ")";
@@ -161,13 +165,89 @@ public class AccountHelper extends AccountStatusHelper {
 		
 	}
 	
-	public String getUpTimeString(){
+	/**
+	 * Method for returning Up Time String
+	 * @return string value of up time
+	 */
+	public String getCurrentUpTimeString(){
+		// Check to see if current up time is set
 		if (isCurrentUpTimeSet()){
-			Date myUpTimeDate = null;
-			myUpTimeDate.setTime(getCurrentUpTime());
+			
+			// Retrive and load date of current up time
+			Date myUpTimeDate = new Date(getCurrentUpTime());
+			
+			// Format date value into string
+			String myUpTimeString = myRolloverDateFormat.format(myUpTimeDate);
+
+			// Return formated date string
+			return myUpTimeString; // TODO: Change to xx Days 2 Hrs
 		}
+		// Else it must not be set so return default XML string value
 		else {
 			return myApplicationContext.getString(R.string.account_info_days_data);
+		}
+	}
+	
+	/**
+	 * Method for returning current IP address string
+	 * @return string value of ip address
+	 */
+	public String getCurrentIpAddressString(){
+		// Check to see if current IP address is set
+		if (isCurrentIpSet()){
+			
+			// Return stored IP address in shared preferences
+			return getCurrentIp();
+		}
+		// Else it must not be set so return default XML string value
+		else {
+			return myApplicationContext.getString(R.string.account_info_ip_data);
+		}
+	}
+	
+	/**
+	 * Method for getting peak quota String
+	 * @return String value of peak quota formatted
+	 */
+	public String getPeakQuotaString(){
+		// Check if peak quota is set
+		if (isPeakQuotaSet()){
+			
+			// Get Long value of peak quota and convert to Gb
+			Long peakQuotaLong = getPeakQuota()/1000;
+			
+			// Format Long value into String
+			String quotaString = String.valueOf(peakQuotaLong) + " (Gb)";
+			
+			// Return formated string value
+			return quotaString;
+		}
+		// Else it must not be set so return default XML string value
+		else {
+			return myApplicationContext.getString(R.string.account_info_quota_data);
+		}
+	}
+	
+	/**
+	 * Method for getting off peak quota String
+	 * @return String value of off peak quota formatted
+	 */
+	public String getOffPeakQuotaString(){
+		// Check if off peak quota is set
+		if (isOffPeakQuotaSet()){
+			
+			// Get Long value of off peak quota and convert to Gb
+			Long offPeakQuotaLong = getOffPeakQuota()/1000;
+			
+			// Format Long value into String
+			String quotaString = String.valueOf(offPeakQuotaLong) + " (Gb)";
+			
+			// Return formated string value
+			return quotaString;
+		}
+		// Else it must not be set so return default XML string value
+		else {
+			return myApplicationContext.getString(R.string.account_info_quota_data);
 		}
 	}
 

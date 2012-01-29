@@ -1,10 +1,8 @@
 package au.id.teda.iinetusage.phone.helper;
 
-import android.util.Log;
-
 public class AccountStatusHelper extends AccountInfoHelper {
 	
-	private static final String DEBUG_TAG = "iiNet Usage"; // Debug tag for LogCat
+	//private static final String DEBUG_TAG = "iiNet Usage"; // Debug tag for LogCat
 	//private static final String INFO_TAG = AccountStatusHelper.class.getSimpleName();
 	
 	// Set static string values for preference keys
@@ -104,7 +102,7 @@ public class AccountStatusHelper extends AccountInfoHelper {
 
 	/**
 	 * Method for getting last update
-	 * @return
+	 * @return Long value of last update date
 	 */
 	public Long getLastUpdate(){
 		return mySettings.getLong(LAST_UPDATE, 0);
@@ -112,7 +110,7 @@ public class AccountStatusHelper extends AccountInfoHelper {
 	
 	/**
 	 * Method for getting current data period
-	 * @return
+	 * @return String value in shared preference
 	 */
 	public String getCurrentDataPeriod(){
 		return mySettings.getString(CURRENT_DATA_PERIOD, "");
@@ -120,7 +118,7 @@ public class AccountStatusHelper extends AccountInfoHelper {
 	
 	/**
 	 * Method for checking if current data period has been set
-	 * @return true if string is greater then 0
+	 * @return true if String length is greater then 0
 	 */
 	public boolean isCurrentDataPeriodSet(){
 		// Check Current Data Period string length is greater then 0
@@ -136,7 +134,7 @@ public class AccountStatusHelper extends AccountInfoHelper {
 
 	/**
 	 * Method for getting current roll over (anniversary) date
-	 * @return
+	 * @return Long value of anniversary date
 	 */
 	public Long getCurrentAnniversary(){
 		return mySettings.getLong(CURRENT_ANNIVERSARY, 0);
@@ -144,7 +142,7 @@ public class AccountStatusHelper extends AccountInfoHelper {
 	
 	/**
 	 * Method for checking if anniversary has been set
-	 * @return true if string is greater then 0
+	 * @return true if String length is greater then 0
 	 */
 	public boolean isCurrentAnniversarySet(){
 		// Check Current Anniversary Long is greater then 0
@@ -160,7 +158,7 @@ public class AccountStatusHelper extends AccountInfoHelper {
 	
 	/**
 	 * Method for getting current days to go
-	 * @return
+	 * @return Long value of days to go in current period
 	 */
 	public Long getCurrentDaysToGo(){
 		return mySettings.getLong(CURRENT_DAYS_TO_GO, 0);
@@ -168,7 +166,7 @@ public class AccountStatusHelper extends AccountInfoHelper {
 	
 	/**
 	 * Method for checking if days to go has been set
-	 * @return true if days is greater then 0
+	 * @return true if days Long is greater then 0
 	 */
 	public boolean isCurrentDaysToGoSet(){
 		// Check Current Days to Go is greater then 0
@@ -184,7 +182,7 @@ public class AccountStatusHelper extends AccountInfoHelper {
 
 	/**
 	 * Method for getting current days so far
-	 * @return
+	 * @return Long value of days so far in current period
 	 */
 	public Long getCurrentDaysSoFar(){
 		return mySettings.getLong(CURRENT_DAYS_SO_FAR, 0);
@@ -208,7 +206,7 @@ public class AccountStatusHelper extends AccountInfoHelper {
 
 	/**
 	 * Method for getting current peak shape speed
-	 * @return
+	 * @return int value of peak shaped
 	 */
 	public int isCurrentPeakShaped(){
 		return mySettings.getInt(CURRENT_PEAK_SHAPED, 0);
@@ -216,7 +214,7 @@ public class AccountStatusHelper extends AccountInfoHelper {
 	
 	/**
 	 * Method for checking if current off peak is shaped
-	 * @return
+	 * @return int value of off peak shaped
 	 */
 	public int isCurrentOffPeakShaped(){
 		return mySettings.getInt(CURRENT_OFF_PEAK_SHAPED, 0);
@@ -224,7 +222,7 @@ public class AccountStatusHelper extends AccountInfoHelper {
 
 	/**
 	 * Method for checking if current peak is shaped
-	 * @return
+	 * @return Long value of current peak data used
 	 */
 	public Long getCurrentPeakUsed(){
 		return mySettings.getLong(CURRENT_PEAK_USED, 0);
@@ -232,7 +230,7 @@ public class AccountStatusHelper extends AccountInfoHelper {
 	
 	/**
 	 * Method for getting current off peak data used to date
-	 * @return
+	 * @return Long value of current off peak data used
 	 */
 	public Long getCurrentOffPeakUsed(){
 		return mySettings.getLong(CURRENT_OFF_PEAK_USED, 0);
@@ -240,7 +238,7 @@ public class AccountStatusHelper extends AccountInfoHelper {
 
 	/**
 	 * Method for geting current uploaded data used to date
-	 * @return
+	 * @return Long value of current upload data used
 	 */
 	public Long getCurrentUploadUsed(){
 		return mySettings.getLong(CURRENT_UPLOAD_USED, 0);
@@ -248,7 +246,7 @@ public class AccountStatusHelper extends AccountInfoHelper {
 
 	/**
 	 * Method for getting current freezone date used to date
-	 * @return
+	 * @return Long value of current Freezone data used
 	 */
 	public Long getCurrentFreezoneUsed(){
 		return mySettings.getLong(CURRENT_FREEZONE_USED, 0);
@@ -256,7 +254,7 @@ public class AccountStatusHelper extends AccountInfoHelper {
 	
 	/**
 	 * Method for getting current peak shaped speed
-	 * @return
+	 * @return Long value of current peak shaped speed
 	 */
 	public Long getCurrentPeakShapedSpeed(){
 		return mySettings.getLong(CURRENT_PEAK_SHAPED_SPEED, 0);
@@ -264,7 +262,7 @@ public class AccountStatusHelper extends AccountInfoHelper {
 	
 	/**
 	 * Method for getting current off peak shaped speed
-	 * @return
+	 * @return Long value of current off peak shaped speed
 	 */
 	public Long getCurrentOffPeakShapedSpeed(){
 		return mySettings.getLong(CURRENT_OFF_PEAK_SHAPED_SPEED, 0);
@@ -272,7 +270,7 @@ public class AccountStatusHelper extends AccountInfoHelper {
 
 	/**
 	 * Method for getting current up time of broadband connection
-	 * @return
+	 * @return Long value of up time date
 	 */
 	public Long getCurrentUpTime(){
 		return mySettings.getLong(CURRENT_UP_TIME, 0);
@@ -296,7 +294,7 @@ public class AccountStatusHelper extends AccountInfoHelper {
 
 	/**
 	 * Method for returning current IP address of broadband connection
-	 * @return
+	 * @return String value of current IP Address
 	 */
 	public String getCurrentIp(){
 		return mySettings.getString(CURRENT_IP, "");

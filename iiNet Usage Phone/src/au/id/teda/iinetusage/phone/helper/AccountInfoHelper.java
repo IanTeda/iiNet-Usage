@@ -2,13 +2,12 @@ package au.id.teda.iinetusage.phone.helper;
 
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import au.id.teda.iinetusage.phone.AppGlobals;
 
 public class AccountInfoHelper {
 	
 	// Static strings for debug tags
-	private static final String DEBUG_TAG = "iiNet Usage";
+	//private static final String DEBUG_TAG = "iiNet Usage";
 	//private static final String INFO_TAG = AccountInfoHelper.class.getSimpleName();
 	
 	// Create instance of shared preferences based on app context
@@ -70,7 +69,7 @@ public class AccountInfoHelper {
 	
 	/**
 	 * Method for getting account plan
-	 * @return
+	 * @return shared preference string
 	 */
 	public String getPlan(){
 		return mySettings.getString(PLAN, "");
@@ -95,7 +94,7 @@ public class AccountInfoHelper {
 	
 	/**
 	 * Method for getting account product
-	 * @return
+	 * @return shared preference string
 	 */
 	public String getProduct(){
 		return mySettings.getString(PRODUCT, "");
@@ -121,7 +120,7 @@ public class AccountInfoHelper {
 	
 	/**
 	 * Method for getting off peak start time
-	 * @return
+	 * @return shared preference string
 	 */
 	public String getOffPeakStart(){
 		return mySettings.getString(OFF_PEAK_START, "");
@@ -129,7 +128,7 @@ public class AccountInfoHelper {
 	
 	/**
 	 * Method for getting off peak end time
-	 * @return
+	 * @return shared preference string
 	 */
 	public String getOffPeakEnd(){
 		return mySettings.getString(OFF_PEAK_END, "");
@@ -137,18 +136,50 @@ public class AccountInfoHelper {
 	
 	/**
 	 * Method for getting peak quota value
-	 * @return
+	 * @return shared preference Long
 	 */
 	public Long getPeakQuota(){
 		return mySettings.getLong(PEAK_QUOTA, 0);
 	}
 	
 	/**
+	 * Method for checking if peak quota has been set
+	 * @return true if long is greater then 0
+	 */
+	public boolean isPeakQuotaSet(){
+		// Check Long value length is greater then 0
+		if (getPeakQuota() > 0){
+			// Looks like it is so return true
+			return true;
+		} 
+		else {
+			// Else it must be 0 and not set so return false
+			return false;
+		}
+	}
+	
+	/**
 	 * Method for getting off peak quota vale
-	 * @return
+	 * @return shared preference Long
 	 */
 	public Long getOffPeakQuota(){
 		return mySettings.getLong(OFF_PEAK_QUOTA, 0);
+	}
+	
+	/**
+	 * Method for checking if off peak quota has been set
+	 * @return true if long is greater then 0
+	 */
+	public boolean isOffPeakQuotaSet(){
+		// Check Long value length is greater then 0
+		if (getOffPeakQuota() > 0){
+			// Looks like it is so return true
+			return true;
+		} 
+		else {
+			// Else it must be 0 and not set so return false
+			return false;
+		}
 	}
 
 }
