@@ -5,7 +5,7 @@
     <string name="account_info_rollover">Rollover</string>
     <string name="account_info_slash">/</string>
     <string name="account_info_data_period">Data Period</string>
-    <string name="account_info_days">Days</string>
+    <string name="account_info_days">Days \f</string>
     <string name="account_info_days_so_fare">so Fare</string>
     <string name="account_info_days_to_go">to Go</string>
     <string name="account_info_days_data">-- Days</string>
