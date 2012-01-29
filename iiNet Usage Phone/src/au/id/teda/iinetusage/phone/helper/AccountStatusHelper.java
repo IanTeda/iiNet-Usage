@@ -1,8 +1,10 @@
 package au.id.teda.iinetusage.phone.helper;
 
+import android.util.Log;
+
 public class AccountStatusHelper extends AccountInfoHelper {
 	
-	//private static final String DEBUG_TAG = "iiNet Usage"; // Debug tag for LogCat
+	private static final String DEBUG_TAG = "iiNet Usage"; // Debug tag for LogCat
 	//private static final String INFO_TAG = AccountStatusHelper.class.getSimpleName();
 	
 	// Set static string values for preference keys
@@ -113,7 +115,23 @@ public class AccountStatusHelper extends AccountInfoHelper {
 	 * @return
 	 */
 	public String getCurrentDataPeriod(){
-		return mySettings.getString(CURRENT_DATA_PERIOD, "Current data period not set");
+		return mySettings.getString(CURRENT_DATA_PERIOD, "");
+	}
+	
+	/**
+	 * Method for checking if current data period has been set
+	 * @return true if string is greater then 0
+	 */
+	public boolean isCurrentDataPeriodSet(){
+		// Check Current Data Period string length is greater then 0
+		if (getCurrentDataPeriod().length() > 0){
+			// Looks like it is so return true
+			return true;
+		} 
+		else {
+			// Else it must be 0 and not set so return false
+			return false;
+		}
 	}
 
 	/**
@@ -125,11 +143,43 @@ public class AccountStatusHelper extends AccountInfoHelper {
 	}
 	
 	/**
+	 * Method for checking if anniversary has been set
+	 * @return true if string is greater then 0
+	 */
+	public boolean isCurrentAnniversarySet(){
+		// Check Current Anniversary Long is greater then 0
+		if (getCurrentAnniversary() > 0){
+			// Looks like it is so return true
+			return true;
+		} 
+		else {
+			// Else it must be 0 and not set so return false
+			return false;
+		}
+	}
+	
+	/**
 	 * Method for getting current days to go
 	 * @return
 	 */
 	public Long getCurrentDaysToGo(){
 		return mySettings.getLong(CURRENT_DAYS_TO_GO, 0);
+	}
+	
+	/**
+	 * Method for checking if days to go has been set
+	 * @return true if days is greater then 0
+	 */
+	public boolean isCurrentDaysToGoSet(){
+		// Check Current Days to Go is greater then 0
+		if (getCurrentDaysToGo() > 0){
+			// Looks like it is so return true
+			return true;
+		} 
+		else {
+			// Else it must be 0 and not set so return false
+			return false;
+		}
 	}
 
 	/**
@@ -138,6 +188,22 @@ public class AccountStatusHelper extends AccountInfoHelper {
 	 */
 	public Long getCurrentDaysSoFar(){
 		return mySettings.getLong(CURRENT_DAYS_SO_FAR, 0);
+	}
+	
+	/**
+	 * Method for checking if days to go has been set
+	 * @return true if days is greater then 0
+	 */
+	public boolean isCurrentDaysSoFarSet(){
+		// Check Current Days so Far is greater then 0
+		if (getCurrentDaysSoFar() > 0){
+			// Looks like it is so return true
+			return true;
+		} 
+		else {
+			// Else it must be 0 and not set so return false
+			return false;
+		}
 	}
 
 	/**
@@ -211,12 +277,44 @@ public class AccountStatusHelper extends AccountInfoHelper {
 	public Long getCurrentUpTime(){
 		return mySettings.getLong(CURRENT_UP_TIME, 0);
 	}
+	
+	/**
+	 * Method for checking if connection up time has been set
+	 * @return true if long is greater then 0
+	 */
+	public boolean isCurrentUpTimeSet(){
+		// Check Current Data Period length is greater then 0
+		if (getCurrentUpTime() > 0){
+			// Looks like it is so return true
+			return true;
+		} 
+		else {
+			// Else it must be 0 and not set so return false
+			return false;
+		}
+	}
 
 	/**
-	 * Method for returning current ip address of broadband connection
+	 * Method for returning current IP address of broadband connection
 	 * @return
 	 */
 	public String getCurrentIp(){
-		return mySettings.getString(CURRENT_IP, "0.0.0.0.0");
+		return mySettings.getString(CURRENT_IP, "");
+	}
+	
+	/**
+	 * Method for checking if current ip has been set
+	 * @return true if string is greater then 0
+	 */
+	public boolean isCurrentIpSet(){
+		// Check Current IP string length is greater then 0
+		if (getCurrentIp().length() > 0){
+			// Looks like it is so return true
+			return true;
+		} 
+		else {
+			// Else it must be 0 and not set so return false
+			return false;
+		}
 	}
 }

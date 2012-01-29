@@ -3,19 +3,20 @@
     
     <string name="account_info_plan">--- Plan --- (--- Product ---)</string>
     <string name="account_info_rollover">Rollover</string>
-    <string name="account_info_slash"> / </string>
+    <string name="account_info_slash">/</string>
     <string name="account_info_data_period">Data Period</string>
-    <string name="account_info_days">Days</string>
-    <string name="account_info_days_so_fare"> so Fare</string>
+    <string name="account_info_days">Days&#32;</string>
+    <string name="account_info_days_so_fare">so Fare</string>
     <string name="account_info_days_to_go">to Go</string>
-    <string name="account_days_data">23 Days</string>
-    <string name="account_quota">Quota </string>
-    <string name="account_quota_peak">Peak</string>
-    <string name="account_quota_offpeak">Offpeak</string>
-    <string name="account_quota_data">50 (Gb)</string>
-    <string name="account_info_rollover_period_data">Wed, 25 Jan 2012</string>
+    <string name="account_info_days_data">-- Days</string>
+    <string name="account_info_quota">Quota </string>
+    <string name="account_info_quota_peak">Peak</string>
+    <string name="account_info_quota_offpeak">Offpeak</string>
+    <string name="account_info_quota_data">50 (Gb)</string>
+    <string name="account_info_rollover_period_data">ddd, dd mmm yyyy</string>
     <string name="account_info_ip_address">IP Address</string>
     <string name="account_info_up_time">Up Time</string>
+    <string name="account_info_up_for">--Days --Hrs</string>
     <string name="account_info_ip_data">89.158.178.2</string>
     
 </resources>

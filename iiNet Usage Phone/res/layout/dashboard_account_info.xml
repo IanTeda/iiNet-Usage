@@ -3,7 +3,7 @@
     android:id="@+id/dashboard_account_info"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-     android:padding="@dimen/application_margin" >
+    android:padding="@dimen/application_margin" >
 
     <Button
         android:id="@+id/account_info_expand"
@@ -42,56 +42,56 @@
         android:layout_below="@+id/account_info_line"
         android:layout_toRightOf="@+id/account_info_rollover_period_slash"
         android:text="@string/account_info_data_period" />
-    
+
     <TextView
         android:id="@+id/account_info_days"
         style="@style/account_info_cat_title"
         android:layout_below="@+id/account_info_line"
-        android:layout_toLeftOf="@+id/account_info_days_soFare"
+        android:layout_toLeftOf="@+id/account_info_days_toGo"
         android:text="@string/account_info_days" />
 
     <TextView
-        android:id="@+id/account_info_days_soFare"
+        android:id="@+id/account_info_days_toGo"
         style="@style/account_info_cat_title"
         android:layout_below="@+id/account_info_line"
         android:layout_toLeftOf="@+id/account_info_days_soFare_toGo_slash"
-        android:text="@string/account_info_days_so_fare" />
+        android:text="@string/account_info_days_to_go" />
 
     <TextView
         android:id="@+id/account_info_days_soFare_toGo_slash"
         style="@style/account_info_cat_title.alt"
         android:layout_below="@+id/account_info_line"
-        android:layout_toLeftOf="@+id/account_info_days_toGo"
+        android:layout_toLeftOf="@+id/account_info_days_soFare"
         android:text="@string/account_info_slash" />
 
     <TextView
-        android:id="@+id/account_info_days_toGo"
+        android:id="@+id/account_info_days_soFare"
         style="@style/account_info_cat_title.alt"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/account_info_line"
-        android:text="@string/account_info_days_to_go" />
+        android:text="@string/account_info_days_so_fare" />
 
     <TextView
         android:id="@+id/account_info_days_data"
         style="@style/account_info_stat"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/account_info_days_toGo"
-        android:text="@string/account_days_data" />
+        android:text="@string/account_info_days_data" />
 
     <TextView
         android:id="@+id/account_info_quota"
         style="@style/account_info_cat_title"
         android:layout_below="@+id/account_info_days_data"
         android:layout_toLeftOf="@+id/account_info_quota_peak"
-        android:text="@string/account_quota"
+        android:text="@string/account_info_quota"
         android:visibility="gone" />
-    
+
     <TextView
         android:id="@+id/account_info_quota_peak"
         style="@style/account_info_cat_title"
         android:layout_below="@+id/account_info_days_data"
         android:layout_toLeftOf="@+id/account_info_quota_slash"
-        android:text="@string/account_quota_peak"
+        android:text="@string/account_info_quota_peak"
         android:visibility="gone" />
 
     <TextView
@@ -107,7 +107,7 @@
         style="@style/account_info_cat_title.alt"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/account_info_days_data"
-        android:text="@string/account_quota_offpeak"
+        android:text="@string/account_info_quota_offpeak"
         android:visibility="gone" />
 
     <TextView
@@ -115,7 +115,7 @@
         style="@style/account_info_stat"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/account_info_quota_offpeak"
-        android:text="@string/account_quota_data"
+        android:text="@string/account_info_quota_data"
         android:visibility="gone" />
 
     <TextView
@@ -172,7 +172,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignRight="@+id/account_info_rollover_period_data"
         android:layout_alignTop="@+id/account_info_ip" />
-
+
     <Button
         android:id="@+id/account_info_days_button"
         style="@style/dashboard_button_overlay.accountInfo"

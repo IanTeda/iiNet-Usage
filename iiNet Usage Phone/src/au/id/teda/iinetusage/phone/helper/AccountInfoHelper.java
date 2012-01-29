@@ -2,12 +2,13 @@ package au.id.teda.iinetusage.phone.helper;
 
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import au.id.teda.iinetusage.phone.AppGlobals;
 
 public class AccountInfoHelper {
 	
 	// Static strings for debug tags
-	//private static final String DEBUG_TAG = "iiNet Usage";
+	private static final String DEBUG_TAG = "iiNet Usage";
 	//private static final String INFO_TAG = AccountInfoHelper.class.getSimpleName();
 	
 	// Create instance of shared preferences based on app context

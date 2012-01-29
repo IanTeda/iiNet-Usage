@@ -1,5 +1,7 @@
 package au.id.teda.iinetusage.phone.activity;
 
+import java.text.ParseException;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -117,8 +119,9 @@ public class MainActivity extends ActionbarHelperActivity {
     /**
      * Onclick event for account info include
      * @param button
+     * @throws ParseException 
      */
-    public void onAccountInfoClick (View button){
+    public void onAccountInfoClick (View button) throws ParseException{
     	
     	// Switch cases for button clicks
     	switch (button.getId()) {

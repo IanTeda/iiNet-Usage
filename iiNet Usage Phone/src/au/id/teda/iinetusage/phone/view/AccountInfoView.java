@@ -1,5 +1,7 @@
 package au.id.teda.iinetusage.phone.view;
 
+import java.text.ParseException;
+
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
@@ -97,6 +99,12 @@ public class AccountInfoView extends AccountHelper {
 		// Set Account plan and product
 		myProductPlanButton.setText(getProductPlanString());
 		
+		// Set Rollover text view
+		myRolloverPeriodData.setText(getCurrentAnniversaryString());
+		
+		// Set Days text view
+		myDaysData.setText(getCurrentDaysToGoString());
+		
 	}
 	
 	
@@ -104,13 +112,24 @@ public class AccountInfoView extends AccountHelper {
 	 * Switch the focus of Days Period block
 	 */
 	public void switchFocusDaysBlock(){
+		// Check to see if Days So Far has focus
 		if (isDaysSoFareFocus()){
+			
+			// Lets change text color (focus)
 			myDaysSoFareTitle.setTextColor(alternateColor);
 			myDaysToGoTitle.setTextColor(focusColor);
+			
+			// Switch text view to days to go
+			myDaysData.setText(getCurrentDaysToGoString());
 		}
+		// Else Days To Go has focus
 		else{
+			// Lets change text color (focus)
 			myDaysSoFareTitle.setTextColor(focusColor);
 			myDaysToGoTitle.setTextColor(alternateColor);
+			
+			// Switch text view to days so far
+			myDaysData.setText(getCurrentDaysSoFarString());
 		}
 	}
 	
@@ -137,15 +156,28 @@ public class AccountInfoView extends AccountHelper {
 	
 	/**
 	 * Switch the focus of Rollover Period block
+	 * @throws ParseException 
 	 */
-	public void switchFocusRolloverPeriodBlock(){
+	public void switchFocusRolloverPeriodBlock() throws ParseException{
+		// Check to see if Rollover has focus
 		if (isRolloverTitleFocus()){
+			// Switch text color of titles
 			myRolloverTitle.setTextColor(alternateColor);
 			myPeriodTitle.setTextColor(focusColor);
+			
+			// Set text view to Current Anniversary
+			myRolloverPeriodData.setText(getCurrentDataPeriodString());
+
 		}
+		// Else Period must have focus
 		else{
+			// Switch text color of titles
 			myRolloverTitle.setTextColor(focusColor);
 			myPeriodTitle.setTextColor(alternateColor);
+			
+			// Set text view to Current Anniversary
+			myRolloverPeriodData.setText(getCurrentAnniversaryString());
+
 		}
 	}
 	
@@ -209,9 +241,15 @@ public class AccountInfoView extends AccountHelper {
 	 * Switch the focus of Ip Up-Time block
 	 */
 	public void switchFocusIpUpBlock(){
+		// Check to see if ip has focus
 		if (isIpTitleFocus()){
+			
+			// Change color focus of titles
 			myIpTitle.setTextColor(alternateColor);
 			myUpTitle.setTextColor(focusColor);
+			
+			// Set textview to Up Time
+			myIpUpdata.setText(text)
 		}
 		else{
 			myIpTitle.setTextColor(focusColor);
