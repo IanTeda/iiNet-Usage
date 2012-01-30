@@ -62,7 +62,7 @@ public class UserPassHelper {
 	
 	// Get error text
 	public String getErrorTxt(){
-		return mySettings.getString(ERRORTXT, "Error retriving error text");
+		return mySettings.getString(ERRORTXT, "");
 	}
 	
 	// Check if username and password are set in the App preferences

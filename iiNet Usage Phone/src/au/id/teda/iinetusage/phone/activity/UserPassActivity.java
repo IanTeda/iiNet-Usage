@@ -41,7 +41,7 @@ public class UserPassActivity extends ActionbarHelperActivity implements
 		OnClickListener, TextWatcher {
 
 	// Static tags for logging
-	private static final String DEBUG_TAG = "iiNet Usage";
+	//private static final String DEBUG_TAG = "iiNet Usage";
 	private static final String INFO_TAG = UserPassActivity.class.getSimpleName();
 
 	// Set shared preference helper object
@@ -239,8 +239,10 @@ public class UserPassActivity extends ActionbarHelperActivity implements
 			popup(getString(R.string.user_pass_nopass));
 			check = false;
 
-			// Validate username is an email address
-		} else if (!checkEmail(myEmail)) {
+		
+		} 
+		// Validate username is an email address
+		else if (!checkEmail(myEmail)) {
 			popup(getString(R.string.user_pass_malformemail));
 			check = false;
 		}
@@ -294,7 +296,7 @@ public class UserPassActivity extends ActionbarHelperActivity implements
 					+ myPass;
 			myUrl = new URL(pathString);
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		// Log.d(DEBUG_TAG, "buildUrl() > URL: " + myUrl);
@@ -389,9 +391,11 @@ public class UserPassActivity extends ActionbarHelperActivity implements
 
 			// Flag loading edittexts
 			loadingFlag = true;
+			
 			// Load saved username password into edit texts
 			setEmailEditText();
 			setPasswordEditText();
+			
 			// Flag no longer loading edit text objects
 			loadingFlag = false;
 
@@ -415,7 +419,7 @@ public class UserPassActivity extends ActionbarHelperActivity implements
 
 			// Else we must be checking
 		} else {
-			Log.d(DEBUG_TAG, "loadView() > Userpass check");
+			Log.v(INFO_TAG, "loadView() > Userpass check");
 
 		}
 
