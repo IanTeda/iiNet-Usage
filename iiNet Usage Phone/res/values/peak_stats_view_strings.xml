@@ -3,7 +3,7 @@
     
     <string name="peak_stats_title">Peak Data</string>
     <string name="peak_offpeak_stats_period">(7am to 12pm)</string><!-- Upate to blanks -->
-    <string name="peak_offpeak_stats_number">--</string>
+    <string name="peak_offpeak_stats_number">00</string>
     <string name="peak_offpeak_percent">(%)</string>
     <string name="peak_offpeak_gigabyte">(Gb)</string>
     <string name="peak_offpeak_used_uppercase">USED</string>
