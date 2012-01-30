@@ -11,7 +11,7 @@
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
-  limitations under the License.
+  limitations under the License.
 -->
 
 <resources>
@@ -24,6 +24,8 @@
     <color name="actionbar_background_end_color">#ff8647</color>
     <color name="actionbar_menu_background_start_color">#2d2c2c</color>
     <color name="actionbar_menu_background_end_color">#545252</color>
+    <color name="actionbar_menu_press_background_start_color">#7c7a7a</color>
+    <color name="actionbar_menu_press_background_end_color">#2d2c2c</color>
 
     <!-- App Defaults -->
     <color name="application_background_color">#201f1f</color>

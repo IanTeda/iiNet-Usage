@@ -14,7 +14,7 @@
     <string name="peak_offpeak_remaining">Remaining</string>
     <string name="peak_offpeak_slash"> / </string>
     <string name="peak_offpeak_data_data">24,546 (MB)</string>
-    <string name="peak_offpeak_daily_av">Av. </string>
+    <string name="peak_offpeak_daily_av">Daily Av. \f</string>
     <string name="peak_offpeak_daily_data">1,027 (MB)</string>
     
 </resources>

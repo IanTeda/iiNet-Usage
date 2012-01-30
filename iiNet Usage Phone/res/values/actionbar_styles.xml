@@ -38,7 +38,7 @@
         <item name="android:textSize">11sp</item>
         <item name="android:gravity">center</item>
         <item name="android:singleLine">true</item>
-        <item name="android:background">@drawable/actionbar_menu_gradient_backgroud</item>
+        <item name="android:background">@drawable/actionbar_menu_button</item>
         <item name="android:padding">3dp</item>
         <item name="android:onClick">onActionbarMenuClick</item>
     </style>
@@ -48,7 +48,7 @@
         <item name="android:layout_height">fill_parent</item>
         <item name="android:layout_weight">1</item>
         <item name="android:gravity">center</item>
-        <item name="android:background">@drawable/actionbar_menu_gradient_backgroud</item>
+        <item name="android:background">@drawable/actionbar_menu_button</item>
         <item name="android:onClick">onActionbarMenuClick</item>
     </style>
 
