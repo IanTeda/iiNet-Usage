@@ -1,5 +1,7 @@
 package au.id.teda.iinetusage.phone.helper;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,7 +14,7 @@ import au.id.teda.iinetusage.phone.R;
 public class AccountHelper extends AccountStatusHelper {
 
 	// Static tag strings for logging information and debug
-	//private static final String DEBUG_TAG = "iiNet Usage";
+	private static final String DEBUG_TAG = "iiNet Usage";
 	private static final String INFO_TAG = AccountHelper.class.getSimpleName();
 
 	// Set data period format
@@ -260,15 +262,38 @@ public class AccountHelper extends AccountStatusHelper {
 		if (isCurrentPeakUsedSet() && isPeakQuotaSet()){
 			
 			// Get peak data used
-			Long peakDataUsed = getCurrentPeakUsed();
+			double dataUsed = getCurrentPeakUsed()/1000000;
 			
 			// Get peak quota
-			Long peakQuota = getPeakQuota();
+			double quota = getPeakQuota();
 			
-			Long peakPercent = peakDataUsed/peakQuota*100;
+			// Determine percentage value
+			double percent = dataUsed/quota*100;
 			
-			return String.valueOf(peakPercent);
+			// Format percentage value
+			NumberFormat percentNumberFormat = new DecimalFormat("#,#00");
+			String percentString = percentNumberFormat.format(percent);
 			
+			return percentString;
+			
+		}
+		// Else it must not be set so return default XML string value
+		else {
+			return myApplicationContext.getString(R.string.peak_offpeak_stats_number);
+		}
+	}
+	
+	public String getPeakDataUsed(){
+		if (isCurrentPeakUsedSet()){
+			
+			// Get peak data used in Gb
+			double dataUsed = getCurrentPeakUsed()/1000000/1000;
+			
+			// Format percentage value
+			NumberFormat gigabyteNumberFormat = new DecimalFormat("#,#00");
+			String gigabyteString = gigabyteNumberFormat.format(dataUsed);
+			
+			return gigabyteString;
 		}
 		// Else it must not be set so return default XML string value
 		else {

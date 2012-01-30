@@ -90,6 +90,9 @@ public class PeakStatsView extends AccountHelper {
 		if (isPercentUnitShown()){
 			// It is so change to giga byte unit
 			myPeakNumberUnit.setText(gigabyteUnit);
+			
+			// Set percent value to TextView
+			myPeakNumberData.setText(getPeakDataUsed());
 		}
 		// Must be Giga byte unit
 		else{
