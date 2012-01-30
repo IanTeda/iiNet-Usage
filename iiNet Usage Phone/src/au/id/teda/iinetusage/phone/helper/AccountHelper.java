@@ -250,6 +250,31 @@ public class AccountHelper extends AccountStatusHelper {
 			return myApplicationContext.getString(R.string.account_info_quota_data);
 		}
 	}
+	
+	/**
+	 * Method for getting peak data used as a percent value
+	 * @return string value of percentage of peak data used
+	 */
+	public String getPeakDataUsedPercent(){
+		// Check to see if peak data and quota is set
+		if (isCurrentPeakUsedSet() && isPeakQuotaSet()){
+			
+			// Get peak data used
+			Long peakDataUsed = getCurrentPeakUsed();
+			
+			// Get peak quota
+			Long peakQuota = getPeakQuota();
+			
+			Long peakPercent = peakDataUsed/peakQuota*100;
+			
+			return String.valueOf(peakPercent);
+			
+		}
+		// Else it must not be set so return default XML string value
+		else {
+			return myApplicationContext.getString(R.string.peak_offpeak_stats_number);
+		}
+	}
 
 
 }

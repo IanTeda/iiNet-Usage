@@ -229,6 +229,22 @@ public class AccountStatusHelper extends AccountInfoHelper {
 	}
 	
 	/**
+	 * Method to check if current peak data used is set
+	 * @return true if Long value is greater then 0
+	 */
+	public boolean isCurrentPeakUsedSet(){
+		// Check Current Peak Used Long is greater then 0
+		if (getCurrentPeakUsed() > 0){
+			// Looks like it is so return true
+			return true;
+		} 
+		else {
+			// Else it must be 0 and not set so return false
+			return false;
+		}
+	}
+	
+	/**
 	 * Method for getting current off peak data used to date
 	 * @return Long value of current off peak data used
 	 */

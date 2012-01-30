@@ -91,10 +91,13 @@ public class PeakStatsView extends AccountHelper {
 			// It is so change to giga byte unit
 			myPeakNumberUnit.setText(gigabyteUnit);
 		}
-		// Must be gigabyte unit
+		// Must be Giga byte unit
 		else{
 			// So change to percent unit
 			myPeakNumberUnit.setText(percentUnit);
+			
+			// Set percent value to TextView
+			myPeakNumberData.setText(getPeakDataUsedPercent());
 		}
 	}
 	
@@ -131,6 +134,7 @@ public class PeakStatsView extends AccountHelper {
 			myPeakPercentUsedTitle.setTextColor(alternateColor);
 			myPeakPercentRemainingTitle.setTextColor(focusColor);
 		}
+		// Else it must be in Gb so switch focus to percent
 		else{
 			myPeakPercentUsedTitle.setTextColor(focusColor);
 			myPeakPercentRemainingTitle.setTextColor(alternateColor);

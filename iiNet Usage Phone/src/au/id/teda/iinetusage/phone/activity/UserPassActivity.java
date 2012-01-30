@@ -27,7 +27,7 @@ import au.id.teda.iinetusage.phone.helper.PreferenceHelper;
 /**
  * Class: UserPassActivity
  * 
- * Description: Activity for setting and checking username and passwod
+ * Description: Activity for setting and checking username and password
  * 
  * @version Alpha
  * 
@@ -49,7 +49,6 @@ public class UserPassActivity extends ActionbarHelperActivity implements
 
 	// Set status strings options
 	private static final String SET = "set";
-	private static final String CHECK = "check";
 	private static final String ERROR = "error";
 	private static final String CORRECT = "correct";
 	private static final String RECHECK = "recheck";
@@ -62,7 +61,7 @@ public class UserPassActivity extends ActionbarHelperActivity implements
 	private String myEmail;
 	private String myPass;
 
-	// Set url string object
+	// Set URL string object
 	private URL myUrl;
 
 	// Loading flag
@@ -90,6 +89,9 @@ public class UserPassActivity extends ActionbarHelperActivity implements
 
 	}
 
+	/**
+	 * onPause method for activity
+	 */
 	@Override
 	protected void onPause() {
 
@@ -115,6 +117,9 @@ public class UserPassActivity extends ActionbarHelperActivity implements
 		loadView();
 	}
 
+	/**
+	 * onDestroy method for activity
+	 */
 	@Override
 	protected void onDestroy() {
 
@@ -174,8 +179,7 @@ public class UserPassActivity extends ActionbarHelperActivity implements
 		if (myButton.getText() == getString(R.string.user_pass_button_correct)) {
 
 			// Start dashboard activity
-			Intent dashboardActivityIntent = new Intent(this,
-					MainActivity.class);
+			Intent dashboardActivityIntent = new Intent(this, MainActivity.class);
 			startActivity(dashboardActivityIntent);
 
 			// Else validate input,
@@ -218,15 +222,15 @@ public class UserPassActivity extends ActionbarHelperActivity implements
 	/**
 	 * Method for validating input before submitting query
 	 * 
-	 * @return
+	 * @return true if it looks like an email and password length is greater then 1
 	 */
 	public boolean validateInput() {
 
 		boolean check = true;
 
 		// Get string values form edit text views
-		myEmail = myEmailET.getText().toString();
-		myPass = myPassET.getText().toString();
+		myEmail = getEmailEditText();
+		myPass = getPasswordEditText();
 
 		// Check for no input edit text
 		if (myEmail.length() < 1 && myPass.length() < 1) {
@@ -268,7 +272,7 @@ public class UserPassActivity extends ActionbarHelperActivity implements
 	 * Method used to check if email looks like an email address
 	 * 
 	 * @param email
-	 * @return
+	 * @return true if it looks like an email
 	 */
 	public boolean checkEmail(String email) {
 		Pattern pattern = Pattern.compile(".+@.+\\.[a-z]+");
@@ -280,13 +284,13 @@ public class UserPassActivity extends ActionbarHelperActivity implements
 	/**
 	 * Method used to build URL from username and password
 	 * 
-	 * @return
+	 * @return URL string with username and password
 	 */
 	private URL buildUrl() {
 
 		try {
-			myEmail = myEmailET.getText().toString();
-			myPass = myPassET.getText().toString();
+			myEmail = getEmailEditText();
+			myPass = getPasswordEditText();
 
 			String pathString = "https://toolbox.iinet.net.au/cgi-bin/new/volume_usage_xml.cgi?"
 					+ "username="
@@ -425,6 +429,10 @@ public class UserPassActivity extends ActionbarHelperActivity implements
 
 	}
 
+	/**
+	 * Method for displaying correct status string
+	 * @param status
+	 */
 	public void setStatusText(String status) {
 
 		// Set objects for text views
@@ -462,8 +470,7 @@ public class UserPassActivity extends ActionbarHelperActivity implements
 			myCorrectTextView.setVisibility(View.GONE);
 			myCheckTextView.setVisibility(View.VISIBLE);
 
-			myCheckTextView
-					.setText(getString(R.string.user_pass_status_recheck));
+			myCheckTextView.setText(getString(R.string.user_pass_status_recheck));
 
 			// If all else fails
 		} else {
@@ -477,6 +484,10 @@ public class UserPassActivity extends ActionbarHelperActivity implements
 		}
 	}
 
+	/**
+	 * Method for setting the text of the button
+	 * @param status
+	 */
 	public void setCheckButton(String status) {
 
 		// Set button object
@@ -505,20 +516,34 @@ public class UserPassActivity extends ActionbarHelperActivity implements
 		}
 	}
 
+	/**
+	 * Method for retrieving string in email EditText
+	 * @return string value in email EditText
+	 */
 	private String getEmailEditText() {
 		return myEmailET.getText().toString();
 	}
 
+	/**
+	 * Method for retrieving string in password for EditText
+	 * @return string value in password EditText
+	 */
 	private String getPasswordEditText() {
 		return myPassET.getText().toString();
 	}
 
+	/**
+	 * Method for setting text value of Email EditText view
+	 */
 	private void setEmailEditText() {
 		if (mySettings.isUsernameSet()) {
 			myEmailET.setText(mySettings.getUsername());
 		}
 	}
 
+	/**
+	 * Method for setting text value of Password EditText view
+	 */
 	private void setPasswordEditText() {
 		if (mySettings.isPasswordSet()) {
 			myPassET.setText(mySettings.getPassword());
