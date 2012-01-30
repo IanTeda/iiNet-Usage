@@ -72,7 +72,7 @@
                 android:layout_marginTop="@dimen/status_text_line_spacing"
                 android:onClick="onCheckBoxClick"
                 android:text="@string/user_pass_show"
-                android:textSize="@dimen/status_text_size" />
+                android:textSize="@dimen/application_h1_text_size" />
 
             <TextView
                 android:id="@+id/user_pass_status_enter"

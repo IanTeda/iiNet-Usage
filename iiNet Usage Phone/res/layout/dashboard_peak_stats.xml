@@ -129,7 +129,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/peak_daily_suggested"
         android:text="@string/peak_offpeak_daily_data" />
-
+
     <Button
         android:id="@+id/peak_data_used_remaining_button"
         style="@style/dashboard_button_overlay.peakStats"
@@ -153,7 +153,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true" />
-
+
     <Button
         android:id="@+id/peak_number_button"
         style="@style/dashboard_button_overlay.peakStats"
@@ -161,7 +161,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignRight="@+id/peak_number"
         android:layout_below="@+id/peak_title" />
-
+
     <Button
         android:id="@+id/peak_percent_used_remaining_button"
         style="@style/dashboard_button_overlay.peakStats"

@@ -28,7 +28,7 @@
                 android:summary="@string/wifi_only_summary"
                 android:title="@string/wifi_only_title" />
             <CheckBoxPreference
-                android:defaultValue="false"
+                android:defaultValue="true"
                 android:key="show_refresh_dialog"
                 android:summary="@string/show_refresh_dialog_summary"
                 android:title="@string/show_refresh_dialog_title" />

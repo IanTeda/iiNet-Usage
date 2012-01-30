@@ -4,9 +4,10 @@
     <!-- Application defaults -->
     <dimen name="application_padding">3dp</dimen>
     <dimen name="application_margin">6dp</dimen>
-    <dimen name="application_h1_text_size">20sp</dimen>
+    <dimen name="application_h1_text_size">22sp</dimen>
     <dimen name="application_h1_intent">4dp</dimen>
     <dimen name="application_h1_line_padding">5dp</dimen>
+    <dimen name="application_h2_text_size">18sp</dimen>
 
     <!-- Actionbar dimensions -->
     <dimen name="actionbar_height">55dp</dimen>
@@ -22,7 +23,6 @@
     <dimen name="alertbox_text_size">17sp</dimen>
 
     <!-- User Pass activity dimensions -->
-    <dimen name="status_text_size">25sp</dimen>
     <dimen name="status_text_line_spacing">20dp</dimen>
 
     <!-- Account information in dashboard -->
@@ -38,7 +38,7 @@
     <dimen name="stats_container_marginTop">-12dp</dimen>
     <dimen name="stats_container_marginBottom">-18dp</dimen>
     <dimen name="stats_number_text_size">130sp</dimen>
-    <dimen name="stats_number_marginLeft">-8dp</dimen>
+    <dimen name="stats_number_marginLeft">0dp</dimen>
     <dimen name="stats_number_marginTop">-22dp</dimen>
 
     <!-- Dashboard -->

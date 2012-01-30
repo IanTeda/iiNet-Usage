@@ -12,7 +12,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:drawableRight="@drawable/ic_expand"
-        android:onClick="onAccountInfoClick" />
+        android:onClick="onAccountInfoClick"
+        android:text="@string/account_info_plan" />
 
     <View
         android:id="@+id/account_info_line"
