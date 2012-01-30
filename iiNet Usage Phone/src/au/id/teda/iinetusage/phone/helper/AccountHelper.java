@@ -283,7 +283,71 @@ public class AccountHelper extends AccountStatusHelper {
 		}
 	}
 	
-	public String getPeakDataUsed(){
+	/**
+	 * Method for getting peak data remaining as a percent value
+	 * @return string value of percentage of peak data remaining
+	 */
+	public String getPeakDataRemainingPercent(){
+		// Check to see if peak data and quota is set
+		if (isCurrentPeakUsedSet() && isPeakQuotaSet()){
+			
+			// Get peak quota
+			double quota = getPeakQuota();
+
+			// Get peak data used
+			double dataUsed = quota - (getCurrentPeakUsed()/1000000);
+			
+			// Determine percentage value
+			double percent = dataUsed/quota*100;
+			
+			// Format percentage value
+			NumberFormat percentNumberFormat = new DecimalFormat("#,#00");
+			String percentString = percentNumberFormat.format(percent);
+			
+			return percentString;
+			
+		}
+		// Else it must not be set so return default XML string value
+		else {
+			return myApplicationContext.getString(R.string.peak_offpeak_stats_number);
+		}
+	}
+	
+	/**
+	 * Method for getting peak data used in Gigabytes
+	 * @return string value of peak data used to date in Gb
+	 */
+	public String getPeakDataRemainingGb(){
+		if (isCurrentPeakUsedSet()){
+			
+			// Get peak data used in Gb
+			double dataUsed = getCurrentPeakUsed()/1000000/1000;
+			
+			// Get peak quota
+			double quota = getPeakQuota()/1000;
+			
+			// Calculate remaining data
+			double dataRemining = quota - dataUsed;
+			
+			// Format percentage value
+			NumberFormat gigabyteNumberFormat = new DecimalFormat("#,#00");
+			String gigabyteString = gigabyteNumberFormat.format(dataRemining);
+			
+			return gigabyteString;
+		}
+		// Else it must not be set so return default XML string value
+		else {
+			return myApplicationContext.getString(R.string.peak_offpeak_stats_number);
+		}
+	}
+	
+	
+	
+	/**
+	 * Method for getting peak data remaining in Gigabytes
+	 * @return string value of peak data used to date in Gb
+	 */
+	public String getPeakDataUsedGb(){
 		if (isCurrentPeakUsedSet()){
 			
 			// Get peak data used in Gb
