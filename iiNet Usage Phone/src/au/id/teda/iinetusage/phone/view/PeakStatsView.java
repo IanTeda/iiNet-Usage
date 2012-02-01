@@ -81,6 +81,13 @@ public class PeakStatsView extends AccountHelper {
 		gigabyteUnit = myActivity.getString(R.string.peak_offpeak_gigabyte);
 	}
 	
+	public void loadView(){
+		
+		// Set peak data to used
+		myPeakDataData.setText(getPeakDataUsedMb());
+	}
+	
+	
 	/**
 	 * Switch unit of number block
 	 */
@@ -88,19 +95,34 @@ public class PeakStatsView extends AccountHelper {
 		
 		// Check to see if percent unit is shown
 		if (isPercentUnitShown()){
-			// It is so change to giga byte unit
+			// It is so switch to Giga byte unit
 			myPeakNumberUnit.setText(gigabyteUnit);
 			
-			// Set percent value to TextView
-			myPeakNumberData.setText(getPeakDataUsedGb());
+			// Check if it is used or remaining
+			if (isPercentUsedFocus()){
+				// Set Gb value to Used TextView
+				myPeakNumberData.setText(getPeakDataUsedGb());
+			} 
+			else {
+				// Set Gb value to TextView
+				myPeakNumberData.setText(getPeakDataRemainingGb());
+			}
+			
 		}
-		// Must be Giga byte unit
+		// Else it must be Giga byte unit
 		else{
 			// So change to percent unit
 			myPeakNumberUnit.setText(percentUnit);
 			
-			// Set percent value to TextView
-			myPeakNumberData.setText(getPeakDataUsedPercent());
+			// Check if it is used or remaining
+			if (isPercentUsedFocus()){
+				// Set Gb value to Used TextView
+				myPeakNumberData.setText(getPeakDataUsedPercent());
+			} 
+			else {
+				// Set Gb value to TextView
+				myPeakNumberData.setText(getPeakDataRemainingPercent());
+			}
 		}
 	}
 	
@@ -133,14 +155,37 @@ public class PeakStatsView extends AccountHelper {
 	 * Switch the focus of Percent block
 	 */
 	public void switchFocusPercentBlock(){
+		// Check to see if used has focus
 		if (isPercentUsedFocus()){
+			// Switch focus to remaining
 			myPeakPercentUsedTitle.setTextColor(alternateColor);
 			myPeakPercentRemainingTitle.setTextColor(focusColor);
+			
+			// Check to see if percent unit is shown
+			if (isPercentUnitShown()){
+				// Set perecent value to remaining TextView
+				myPeakNumberData.setText(getPeakDataRemainingPercent());
+			}
+			else {
+				// Set Gb value for remaining
+				myPeakNumberData.setText(getPeakDataRemainingGb());
+			}
 		}
 		// Else it must be in Gb so switch focus to percent
 		else{
+			// Switch focus to used
 			myPeakPercentUsedTitle.setTextColor(focusColor);
 			myPeakPercentRemainingTitle.setTextColor(alternateColor);
+			
+			// Check to see if percent unit is shown
+			if (isPercentUnitShown()){
+				// Set perecent value to remaining TextView
+				myPeakNumberData.setText(getPeakDataUsedPercent());
+			}
+			else {
+				// Set Gb value for remaining
+				myPeakNumberData.setText(getPeakDataUsedGb());
+			}
 		}
 	}
 	
@@ -170,13 +215,23 @@ public class PeakStatsView extends AccountHelper {
 	 * Switch the focus of Data block
 	 */
 	public void switchFocusDataBlock(){
+		// Check if used has focus
 		if (isDataUsedFocus()){
+			// Switch focus to data remaining
 			myPeakDataUsedTitle.setTextColor(alternateColor);
 			myPeakDataRemainingTitle.setTextColor(focusColor);
+			
+			// Set peak data to remaining
+			myPeakDataData.setText(getPeakDataRemainingMb());
 		}
+		// Else remaining has focus
 		else{
+			// Switch focus to used
 			myPeakDataUsedTitle.setTextColor(focusColor);
 			myPeakDataRemainingTitle.setTextColor(alternateColor);
+			
+			// Set peak data to used
+			myPeakDataData.setText(getPeakDataUsedMb());
 		}
 	}
 	

@@ -331,9 +331,9 @@ public class AccountHelper extends AccountStatusHelper {
 			
 			// Format percentage value
 			NumberFormat gigabyteNumberFormat = new DecimalFormat("#,#00");
-			String gigabyteString = gigabyteNumberFormat.format(dataRemining);
+			String gigaByteString = gigabyteNumberFormat.format(dataRemining);
 			
-			return gigabyteString;
+			return gigaByteString;
 		}
 		// Else it must not be set so return default XML string value
 		else {
@@ -341,7 +341,33 @@ public class AccountHelper extends AccountStatusHelper {
 		}
 	}
 	
-	
+	/**
+	 * Method for getting peak data used in Megabytes
+	 * @return string value of peak data used to date in Mb
+	 */
+	public String getPeakDataRemainingMb(){
+		if (isCurrentPeakUsedSet()){
+			
+			// Get peak data used in Mb
+			double dataUsed = getCurrentPeakUsed()/1000000;
+			
+			// Get peak quota
+			double quota = getPeakQuota();
+			
+			// Calculate remaining data
+			double dataRemining = quota - dataUsed;
+			
+			// Format percentage value
+			NumberFormat gigabyteNumberFormat = new DecimalFormat("#,#00");
+			String gigaByteString = gigabyteNumberFormat.format(dataRemining) + " (Mb)";
+			
+			return gigaByteString;
+		}
+		// Else it must not be set so return default XML string value
+		else {
+			return myApplicationContext.getString(R.string.peak_offpeak_data_data);
+		}
+	}
 	
 	/**
 	 * Method for getting peak data remaining in Gigabytes
@@ -355,13 +381,97 @@ public class AccountHelper extends AccountStatusHelper {
 			
 			// Format percentage value
 			NumberFormat gigabyteNumberFormat = new DecimalFormat("#,#00");
-			String gigabyteString = gigabyteNumberFormat.format(dataUsed);
+			String megaByteString = gigabyteNumberFormat.format(dataUsed);
 			
-			return gigabyteString;
+			return megaByteString;
 		}
 		// Else it must not be set so return default XML string value
 		else {
 			return myApplicationContext.getString(R.string.peak_offpeak_stats_number);
+		}
+	}
+	
+	/**
+	 * Method for getting peak data remaining in Megabytes
+	 * @return string value of peak data used to date in Mb
+	 */
+	public String getPeakDataUsedMb(){
+		if (isCurrentPeakUsedSet()){
+			
+			// Get peak data used in Mb
+			double dataUsed = getCurrentPeakUsed()/1000000;
+			
+			// Format percentage value
+			NumberFormat numberFormat = new DecimalFormat("#,#00");
+			String megaByteString = numberFormat.format(dataUsed) + " (Mb)";
+			
+			return megaByteString;
+		}
+		// Else it must not be set so return default XML string value
+		else {
+			return myApplicationContext.getString(R.string.peak_offpeak_data_data);
+		}
+	}
+	
+	/**
+	 * Method for getting peak daily data remaining in Megabytes
+	 * @return string value of peak data used to date in Mb
+	 */
+	public String getPeakDailyDataUsedMb(){
+		if (isCurrentPeakUsedSet() && isCurrentDaysSoFarSet()){
+			
+			// Get peak data used in Mb
+			double dataUsed = getCurrentPeakUsed()/1000000;
+			
+			// Get days so far
+			double daysSoFar = getCurrentDaysSoFar();
+			
+			// Calculate average daily data
+			double dailyDataUsed = dataUsed/daysSoFar;
+			
+			// Format percentage value
+			NumberFormat numberFormat = new DecimalFormat("#,#00");
+			String megaByteString = numberFormat.format(dailyDataUsed) + " (Mb)";
+			
+			return megaByteString;
+		}
+		// Else it must not be set so return default XML string value
+		else {
+			return myApplicationContext.getString(R.string.peak_offpeak_data_data);
+		}
+	}
+	
+	/**
+	 * Method for getting peak data used in Megabytes
+	 * @return string value of peak data used to date in Mb
+	 */
+	public String getPeakDailyDataremaingMb(){
+		if (isCurrentPeakUsedSet() && isCurrentDaysToGoSet()){
+			
+			// Get peak data used in Mb
+			double dataUsed = getCurrentPeakUsed()/1000000;
+			
+			// Get peak quota
+			double quota = getPeakQuota();
+			
+			// Calculate remaining data
+			double dataRemining = quota - dataUsed;
+			
+			// Get days to go
+			double daysToGo = getCurrentDaysToGo();
+			
+			// Calculate suggested daily usage
+			double suggestedDailyMb = dataRemining/daysToGo;
+			
+			// Format percentage value
+			NumberFormat numberFormat = new DecimalFormat("#,#00");
+			String megaByteString = numberFormat.format(suggestedDailyMb) + " (Mb)";
+			
+			return megaByteString;
+		}
+		// Else it must not be set so return default XML string value
+		else {
+			return myApplicationContext.getString(R.string.peak_offpeak_data_data);
 		}
 	}
 

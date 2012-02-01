@@ -30,6 +30,9 @@ public class MainActivity extends ActionbarHelperActivity {
 	// Object for AccountInfoView
 	private AccountInfoView myAccountInfoView;
 	
+	// Object for PeakStatsView
+	private PeakStatsView myPeakStatsView;
+	
 	
     /** Called when the activity is first created. */
     @Override
@@ -43,6 +46,7 @@ public class MainActivity extends ActionbarHelperActivity {
         
         // Set reference to AccountInfoView object
         myAccountInfoView = new AccountInfoView(this);
+        myPeakStatsView = new PeakStatsView(this);
         
     }
 	
@@ -52,6 +56,7 @@ public class MainActivity extends ActionbarHelperActivity {
 		
         // Load AccountInfoView
         myAccountInfoView.loadView();
+        myPeakStatsView.loadView();
 	}
 
 	/**
