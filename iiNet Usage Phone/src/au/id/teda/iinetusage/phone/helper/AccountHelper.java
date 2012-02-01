@@ -445,7 +445,7 @@ public class AccountHelper extends AccountStatusHelper {
 	 * Method for getting peak data used in Megabytes
 	 * @return string value of peak data used to date in Mb
 	 */
-	public String getPeakDailyDataremaingMb(){
+	public String getPeakDailyDataSuggestedMb(){
 		if (isCurrentPeakUsedSet() && isCurrentDaysToGoSet()){
 			
 			// Get peak data used in Mb
@@ -472,6 +472,23 @@ public class AccountHelper extends AccountStatusHelper {
 		// Else it must not be set so return default XML string value
 		else {
 			return myApplicationContext.getString(R.string.peak_offpeak_data_data);
+		}
+	}
+	
+	public String getPeakPeriod(){
+		if (isOffPeakStartSet() && isOffPeakEndSet()){
+			
+			String peakStart = getOffPeakEnd();
+			String peakEnd = getOffPeakStart();
+			
+			String period = "(" + peakStart + "am to " + peakEnd + "pm)";
+			
+			return period;
+			
+		}
+		// Else it must not be set so return default XML string value
+		else {
+			return myApplicationContext.getString(R.string.peak_offpeak_stats_period);
 		}
 	}
 

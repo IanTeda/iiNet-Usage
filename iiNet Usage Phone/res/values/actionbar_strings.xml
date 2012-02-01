@@ -15,7 +15,7 @@
     <string name="actionbar_history_title">History</string>
     
     <!-- Actionbar button text -->
-    <string name="actionbar_button_stats">STATS</string>
+    <string name="actionbar_button_stats">DASHBOARD</string>
     <string name="actionbar_button_charts">CHARTS</string>
     <string name="actionbar_button_data">DATA</string>
     <string name="actionbar_button_archive">ARCHIVE</string>

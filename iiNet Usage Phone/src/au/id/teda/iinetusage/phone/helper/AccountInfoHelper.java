@@ -127,11 +127,44 @@ public class AccountInfoHelper {
 	}
 	
 	/**
+	 * Check if off peak start time is set
+	 * @return true of string length is greater then 0
+	 */
+	public boolean isOffPeakStartSet(){
+		// Check if string length is greater then 0
+		if (getOffPeakStart().length() > 0){
+			// Looks like it is so return true
+			return true;
+		} 
+		else {
+			// Else it must be 0 and not set so return false
+			return false;
+		}
+	}
+	
+	
+	/**
 	 * Method for getting off peak end time
 	 * @return shared preference string
 	 */
 	public String getOffPeakEnd(){
 		return mySettings.getString(OFF_PEAK_END, "");
+	}
+	
+	/**
+	 * Check if off peak start time is set
+	 * @return true of string length is greater then 0
+	 */
+	public boolean isOffPeakEndSet(){
+		// Check if string length is greater then 0
+		if (getOffPeakEnd().length() > 0){
+			// Looks like it is so return true
+			return true;
+		} 
+		else {
+			// Else it must be 0 and not set so return false
+			return false;
+		}
 	}
 	
 	/**

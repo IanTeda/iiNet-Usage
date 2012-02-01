@@ -16,6 +16,9 @@ public class PeakStatsView extends AccountHelper {
 	private final Context myActivityContext;
 	private final Activity myActivity;
 	
+	// TextView objects for peak title
+	private final TextView myPeakPeriod;
+	
 	// TextView objects for Daily Average block
 	private final TextView myPeakDailyUsedTitle;
 	private final TextView myPeakDailySlashTitle;
@@ -53,6 +56,9 @@ public class PeakStatsView extends AccountHelper {
 		// Construct activity from context
 		myActivity = (myActivityContext instanceof Activity) ? (Activity) myActivityContext	: null;
 		
+		// Set peak title objects
+		myPeakPeriod = (TextView) myActivity.findViewById(R.id.peak_time);
+		
 		// Set Daily Average TextView objects
 		myPeakDailyUsedTitle = (TextView) myActivity.findViewById(R.id.peak_daily_used);
 		myPeakDailySlashTitle = (TextView) myActivity.findViewById(R.id.peak_daily_slash);
@@ -83,8 +89,17 @@ public class PeakStatsView extends AccountHelper {
 	
 	public void loadView(){
 		
+		// Set number block to percent used
+		myPeakNumberData.setText(getPeakDataUsedPercent());
+		
 		// Set peak data to used
 		myPeakDataData.setText(getPeakDataUsedMb());
+		
+		// Set text to average daily usage
+		myPeakDailyData.setText(getPeakDailyDataUsedMb());
+		
+		// Set TextView peak period
+		myPeakPeriod.setText(getPeakPeriod());
 	}
 	
 	
@@ -260,13 +275,23 @@ public class PeakStatsView extends AccountHelper {
 	 * Switch the focus of Daily Data block
 	 */
 	public void switchFocusDailyBlock(){
+		// Check if daily used has focus
 		if (isDailyUsedFocus()){
+			// Switch focus to suggested usage
 			myPeakDailyUsedTitle.setTextColor(alternateColor);
 			myPeakDailySuggestedTitle.setTextColor(focusColor);
+			
+			// Set text to suggested usage
+			myPeakDailyData.setText(getPeakDailyDataSuggestedMb());
 		}
 		else{
+			// Switch focus to av daily use
 			myPeakDailyUsedTitle.setTextColor(focusColor);
 			myPeakDailySuggestedTitle.setTextColor(alternateColor);
+			
+			// Set text to average daily usage
+			myPeakDailyData.setText(getPeakDailyDataUsedMb());
+			
 		}
 	}
 	
