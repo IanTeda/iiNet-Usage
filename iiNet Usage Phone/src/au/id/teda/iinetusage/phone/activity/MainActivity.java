@@ -56,6 +56,8 @@ public class MainActivity extends ActionbarHelperActivity {
 		
         // Load AccountInfoView
         myAccountInfoView.loadView();
+        
+        // Load PeakStatsView
         myPeakStatsView.loadView();
 	}
 

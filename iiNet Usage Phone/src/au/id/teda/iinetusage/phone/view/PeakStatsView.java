@@ -2,6 +2,8 @@ package au.id.teda.iinetusage.phone.view;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.widget.TextView;
 import au.id.teda.iinetusage.phone.R;
@@ -15,6 +17,9 @@ public class PeakStatsView extends AccountHelper {
 	
 	private final Context myActivityContext;
 	private final Activity myActivity;
+	
+	// Type face object for custom font
+	private final Typeface myFont;
 	
 	// TextView objects for peak title
 	private final TextView myPeakPeriod;
@@ -56,6 +61,9 @@ public class PeakStatsView extends AccountHelper {
 		// Construct activity from context
 		myActivity = (myActivityContext instanceof Activity) ? (Activity) myActivityContext	: null;
 		
+		// Set custom font
+		myFont = Typeface.createFromAsset(((ContextWrapper) myActivity).getAssets(), "OSP-DIN.ttf"); 
+		
 		// Set peak title objects
 		myPeakPeriod = (TextView) myActivity.findViewById(R.id.peak_time);
 		
@@ -77,6 +85,9 @@ public class PeakStatsView extends AccountHelper {
 		myPeakPercentRemainingTitle = (TextView) myActivity.findViewById(R.id.peak_percent_remaining);
 		myPeakNumberData = (TextView) myActivity.findViewById(R.id.peak_number);
 		myPeakNumberUnit = (TextView) myActivity.findViewById(R.id.peak_number_unit);
+		
+		// Set custom font to number
+		myPeakNumberData.setTypeface(myFont);
 		
 		// Set focus and alternate colours
 		focusColor = myActivity.getResources().getColor(R.color.application_h2_text_color);

@@ -39,14 +39,6 @@
         android:text="@string/peak_offpeak_stats_number" />
 
     <TextView
-        android:id="@+id/peak_number_unit"
-        style="@style/account_info_stat_used_title.alt"
-        android:layout_below="@+id/peak_data_line"
-        android:layout_marginLeft="-5dp"
-        android:layout_toRightOf="@+id/peak_number"
-        android:text="@string/peak_offpeak_percent" />
-
-    <TextView
         android:id="@+id/peak_percent_used"
         style="@style/account_info_stat_used_title"
         android:layout_below="@+id/peak_data_line"
@@ -169,5 +161,14 @@
         android:layout_alignLeft="@+id/peak_percent_used"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/peak_data_line" />
+
+    <TextView
+        android:id="@+id/peak_number_unit"
+        style="@style/account_info_stat_used_title.alt"
+        android:layout_alignTop="@+id/peak_percent_used"
+        android:layout_toLeftOf="@+id/peak_percent_used"
+        android:paddingRight="10dp"
+        android:textSize="25sp"
+        android:text="@string/peak_offpeak_percent" />
 
 </RelativeLayout>
