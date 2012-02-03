@@ -16,6 +16,7 @@ import au.id.teda.iinetusage.phone.R;
 import au.id.teda.iinetusage.phone.async.RefreshUsageAsync;
 import au.id.teda.iinetusage.phone.view.AccountInfoView;
 import au.id.teda.iinetusage.phone.view.AlertboxView;
+import au.id.teda.iinetusage.phone.view.OffpeakStatsView;
 import au.id.teda.iinetusage.phone.view.PeakStatsView;
 
 public class MainActivity extends ActionbarHelperActivity {
@@ -33,6 +34,8 @@ public class MainActivity extends ActionbarHelperActivity {
 	// Object for PeakStatsView
 	private PeakStatsView myPeakStatsView;
 	
+	// Object for OffpeakStatsView
+	private OffpeakStatsView myOffpeakStatsView;
 	
     /** Called when the activity is first created. */
     @Override
@@ -47,6 +50,7 @@ public class MainActivity extends ActionbarHelperActivity {
         // Set reference to AccountInfoView object
         myAccountInfoView = new AccountInfoView(this);
         myPeakStatsView = new PeakStatsView(this);
+        myOffpeakStatsView = new OffpeakStatsView(this);
         
     }
 	
@@ -54,11 +58,10 @@ public class MainActivity extends ActionbarHelperActivity {
 	protected void onResume() {
 		super.onResume();
 		
-        // Load AccountInfoView
+        // Load vies
         myAccountInfoView.loadView();
-        
-        // Load PeakStatsView
         myPeakStatsView.loadView();
+        myOffpeakStatsView.loadView();
 	}
 
 	/**
@@ -123,8 +126,23 @@ public class MainActivity extends ActionbarHelperActivity {
     	case R.id.peak_data_title_button:
     		Toast.makeText(this, "Peak title", Toast.LENGTH_SHORT).show();
     		break;
+    	case R.id.offpeak_number_button:
+    		myOffpeakStatsView.switchUnitNumberBlock();
+    		break;
+    	case R.id.offpeak_percent_used_remaining_button:
+    		myOffpeakStatsView.switchFocusPercentBlock();
+    		break;
+    	case R.id.offpeak_average_data_used_remaining_button:
+    		myOffpeakStatsView.switchFocusDailyBlock();
+    		break;
+    	case R.id.offpeak_data_used_remaining_button:
+    		myOffpeakStatsView.switchFocusDataBlock();
+    		break;
+    	case R.id.offpeak_data_title_button:
+    		Toast.makeText(this, "Offpeak title", Toast.LENGTH_SHORT).show();
+    		break;
     	default:
-    		Toast.makeText(this, "onPeakStatsClick Error", Toast.LENGTH_SHORT).show();
+    		Toast.makeText(this, "onClick Error", Toast.LENGTH_SHORT).show();
     		break;
     	}
     	

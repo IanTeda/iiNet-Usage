@@ -53,10 +53,10 @@ public class AccountInfoHelper {
 		// Check to see if we have all the account information stored
 		if (getPlan().length() > 0
 				&& getProduct().length() >0
-				&& getOffPeakStart().length() > 0
-				&& getOffPeakEnd().length() > 0
+				&& getOffpeakStart().length() > 0
+				&& getOffpeakEnd().length() > 0
 				&& getPeakQuota() > 0
-				&& getOffPeakQuota() > 0){
+				&& getOffpeakQuota() > 0){
 			
 			// Looks like it does so lets return true
 			return true;
@@ -122,7 +122,7 @@ public class AccountInfoHelper {
 	 * Method for getting off peak start time
 	 * @return shared preference string
 	 */
-	public String getOffPeakStart(){
+	public String getOffpeakStart(){
 		return mySettings.getString(OFF_PEAK_START, "");
 	}
 	
@@ -130,9 +130,9 @@ public class AccountInfoHelper {
 	 * Check if off peak start time is set
 	 * @return true of string length is greater then 0
 	 */
-	public boolean isOffPeakStartSet(){
+	public boolean isOffpeakStartSet(){
 		// Check if string length is greater then 0
-		if (getOffPeakStart().length() > 0){
+		if (getOffpeakStart().length() > 0){
 			// Looks like it is so return true
 			return true;
 		} 
@@ -147,7 +147,7 @@ public class AccountInfoHelper {
 	 * Method for getting off peak end time
 	 * @return shared preference string
 	 */
-	public String getOffPeakEnd(){
+	public String getOffpeakEnd(){
 		return mySettings.getString(OFF_PEAK_END, "");
 	}
 	
@@ -155,9 +155,9 @@ public class AccountInfoHelper {
 	 * Check if off peak start time is set
 	 * @return true of string length is greater then 0
 	 */
-	public boolean isOffPeakEndSet(){
+	public boolean isOffpeakEndSet(){
 		// Check if string length is greater then 0
-		if (getOffPeakEnd().length() > 0){
+		if (getOffpeakEnd().length() > 0){
 			// Looks like it is so return true
 			return true;
 		} 
@@ -195,7 +195,7 @@ public class AccountInfoHelper {
 	 * Method for getting off peak quota vale
 	 * @return shared preference Long
 	 */
-	public Long getOffPeakQuota(){
+	public Long getOffpeakQuota(){
 		return mySettings.getLong(OFF_PEAK_QUOTA, 0);
 	}
 	
@@ -203,9 +203,9 @@ public class AccountInfoHelper {
 	 * Method for checking if off peak quota has been set
 	 * @return true if long is greater then 0
 	 */
-	public boolean isOffPeakQuotaSet(){
+	public boolean isOffpeakQuotaSet(){
 		// Check Long value length is greater then 0
-		if (getOffPeakQuota() > 0){
+		if (getOffpeakQuota() > 0){
 			// Looks like it is so return true
 			return true;
 		} 

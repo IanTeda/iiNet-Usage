@@ -221,7 +221,7 @@ public class AccountInfoView extends AccountHelper {
 			myOffPeakTitle.setTextColor(focusColor);
 			
 			// Change TextView char sequence
-			myQuotaData.setText(getOffPeakQuotaString());
+			myQuotaData.setText(getOffpeakQuotaString());
 		} 
 		// Else Offpeak has focus
 		else {

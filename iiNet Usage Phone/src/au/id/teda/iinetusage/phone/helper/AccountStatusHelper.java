@@ -80,13 +80,13 @@ public class AccountStatusHelper extends AccountInfoHelper {
 				&& getCurrentDaysToGo() >= 0
 				&& getCurrentDaysSoFar() >= 0
 				&& isCurrentPeakShaped() >= 0
-				&& isCurrentOffPeakShaped() >= 0
+				&& isCurrentOffpeakShaped() >= 0
 				&& getCurrentPeakUsed() >= 0
-				&& getCurrentOffPeakUsed() >= 0
+				&& getCurrentOffpeakUsed() >= 0
 				&& getCurrentUploadUsed() >= 0
 				&& getCurrentFreezoneUsed() >= 0
 				&& getCurrentPeakShapedSpeed() >= 0
-				&& getCurrentOffPeakShapedSpeed() >= 0
+				&& getCurrentOffpeakShapedSpeed() >= 0
 				&& getCurrentUpTime() >= 0
 				&& getCurrentIp().length() > 0){
 			
@@ -216,7 +216,7 @@ public class AccountStatusHelper extends AccountInfoHelper {
 	 * Method for checking if current off peak is shaped
 	 * @return int value of off peak shaped
 	 */
-	public int isCurrentOffPeakShaped(){
+	public int isCurrentOffpeakShaped(){
 		return mySettings.getInt(CURRENT_OFF_PEAK_SHAPED, 0);
 	}
 
@@ -248,8 +248,24 @@ public class AccountStatusHelper extends AccountInfoHelper {
 	 * Method for getting current off peak data used to date
 	 * @return Long value of current off peak data used
 	 */
-	public Long getCurrentOffPeakUsed(){
+	public Long getCurrentOffpeakUsed(){
 		return mySettings.getLong(CURRENT_OFF_PEAK_USED, 0);
+	}
+	
+	/**
+	 * Method to check if current off peak data used is set
+	 * @return true if Long value is greater then 0
+	 */
+	public boolean isCurrentOffpeakUsedSet(){
+		// Check Current Peak Used Long is greater then 0
+		if (getCurrentOffpeakUsed() > 0){
+			// Looks like it is so return true
+			return true;
+		} 
+		else {
+			// Else it must be 0 and not set so return false
+			return false;
+		}
 	}
 
 	/**
@@ -280,7 +296,7 @@ public class AccountStatusHelper extends AccountInfoHelper {
 	 * Method for getting current off peak shaped speed
 	 * @return Long value of current off peak shaped speed
 	 */
-	public Long getCurrentOffPeakShapedSpeed(){
+	public Long getCurrentOffpeakShapedSpeed(){
 		return mySettings.getLong(CURRENT_OFF_PEAK_SHAPED_SPEED, 0);
 	}
 

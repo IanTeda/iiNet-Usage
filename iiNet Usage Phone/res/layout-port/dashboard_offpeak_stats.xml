@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/stats_container_marginBottom"
+    android:layout_marginTop="@dimen/stats_container_marginTop"
+    android:padding="@dimen/application_margin" >
+
+    <TextView
+        android:id="@+id/offpeak_title"
+        style="@style/account_info_title"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/offpeak_stats_title" />
+
+    <TextView
+        android:id="@+id/offpeak_time"
+        style="@style/account_info_title"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/peak_offpeak_stats_period" />
+
+    <!-- Create background layout for line -->
+
+    <View
+        android:id="@+id/offpeak_data_line"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/dashboard_line_height"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/offpeak_title"
+        android:background="#ffffff" />
+
+    <TextView
+        android:id="@+id/offpeak_number"
+        style="@style/peak_offpeak_number"
+        android:layout_below="@+id/offpeak_data_line"
+        android:layout_marginLeft="@dimen/stats_number_marginLeft"
+        android:layout_marginTop="@dimen/stats_number_marginTop"
+        android:text="@string/peak_offpeak_stats_number" />
+
+    <TextView
+        android:id="@+id/offpeak_percent_used"
+        style="@style/account_info_stat_used_title"
+        android:layout_below="@+id/offpeak_data_line"
+        android:layout_toLeftOf="@+id/offpeak_percent_slash"
+        android:text="@string/peak_offpeak_used_uppercase" />
+
+    <TextView
+        android:id="@+id/offpeak_percent_slash"
+        style="@style/account_info_stat_used_title.alt"
+        android:layout_below="@+id/offpeak_data_line"
+        android:layout_toLeftOf="@+id/offpeak_percent_remaining"
+        android:text="@string/peak_offpeak_slash" />
+
+    <TextView
+        android:id="@+id/offpeak_percent_remaining"
+        style="@style/account_info_stat_used_title.alt"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/offpeak_data_line"
+        android:text="@string/peak_offpeak_remaining_uppercase" />
+
+    <TextView
+        android:id="@+id/offpeak_data_used"
+        style="@style/account_info_cat_title"
+        android:layout_below="@+id/offpeak_percent_used"
+        android:layout_toLeftOf="@+id/offpeak_data_slash"
+        android:text="@string/peak_offpeak_used" />
+
+    <TextView
+        android:id="@+id/offpeak_data_slash"
+        style="@style/account_info_cat_title.alt"
+        android:layout_below="@+id/offpeak_percent_used"
+        android:layout_toLeftOf="@+id/offpeak_data_remaining"
+        android:text="@string/peak_offpeak_slash" />
+
+    <TextView
+        android:id="@+id/offpeak_data_remaining"
+        style="@style/account_info_cat_title.alt"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/offpeak_percent_used"
+        android:text="@string/peak_offpeak_remaining" />
+
+    <TextView
+        android:id="@+id/offpeak_data_data"
+        style="@style/account_info_stat"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/offpeak_data_remaining"
+        android:text="@string/peak_offpeak_data_data" />
+
+    <TextView
+        android:id="@+id/offpeak_daily_av"
+        style="@style/account_info_cat_title"
+        android:layout_below="@+id/offpeak_data_data"
+        android:layout_toLeftOf="@+id/offpeak_daily_used"
+        android:text="@string/peak_offpeak_daily_av" />
+
+    <TextView
+        android:id="@+id/offpeak_daily_used"
+        style="@style/account_info_cat_title"
+        android:layout_below="@+id/offpeak_data_data"
+        android:layout_toLeftOf="@+id/offpeak_daily_slash"
+        android:text="@string/peak_offpeak_data" />
+
+    <TextView
+        android:id="@+id/offpeak_daily_slash"
+        style="@style/account_info_cat_title.alt"
+        android:layout_below="@+id/offpeak_data_data"
+        android:layout_toLeftOf="@+id/offpeak_daily_suggested"
+        android:text="@string/peak_offpeak_slash" />
+
+    <TextView
+        android:id="@+id/offpeak_daily_suggested"
+        style="@style/account_info_cat_title.alt"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/offpeak_data_data"
+        android:text="@string/peak_offpeak_suggested" />
+
+    <TextView
+        android:id="@+id/offpeak_daily_data"
+        style="@style/account_info_stat"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/offpeak_daily_suggested"
+        android:text="@string/peak_offpeak_daily_data" />
+
+    <Button
+        android:id="@+id/offpeak_data_used_remaining_button"
+        style="@style/dashboard_button_overlay.peakStats"
+        android:layout_alignBottom="@+id/offpeak_data_data"
+        android:layout_alignLeft="@+id/offpeak_percent_used"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/offpeak_data_used" />
+
+    <Button
+        android:id="@+id/offpeak_average_data_used_remaining_button"
+        style="@style/dashboard_button_overlay.peakStats"
+        android:layout_alignBottom="@+id/offpeak_daily_data"
+        android:layout_alignLeft="@+id/offpeak_data_used_remaining_button"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/offpeak_data_data" />
+
+    <Button
+        android:id="@+id/offpeak_data_title_button"
+        style="@style/dashboard_button_overlay.peakStats"
+        android:layout_above="@+id/offpeak_number"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true" />
+
+    <Button
+        android:id="@+id/offpeak_number_button"
+        style="@style/dashboard_button_overlay.peakStats"
+        android:layout_alignBottom="@+id/offpeak_average_data_used_remaining_button"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/offpeak_number"
+        android:layout_below="@+id/offpeak_title" />
+
+    <Button
+        android:id="@+id/offpeak_percent_used_remaining_button"
+        style="@style/dashboard_button_overlay.peakStats"
+        android:layout_above="@+id/offpeak_data_used"
+        android:layout_alignLeft="@+id/offpeak_percent_used"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/offpeak_data_line" />
+
+    <TextView
+        android:id="@+id/offpeak_number_unit"
+        style="@style/account_info_stat_used_title.alt"
+        android:layout_alignTop="@+id/offpeak_percent_used"
+        android:layout_toLeftOf="@+id/offpeak_percent_used"
+        android:paddingRight="@dimen/stats_number_unit_paddingRight"
+        android:textSize="@dimen/stats_number_unit_text_size"
+        android:text="@string/peak_offpeak_percent" />
+
+</RelativeLayout>

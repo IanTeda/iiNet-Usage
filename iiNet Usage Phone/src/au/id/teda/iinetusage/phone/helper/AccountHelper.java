@@ -234,12 +234,12 @@ public class AccountHelper extends AccountStatusHelper {
 	 * Method for getting off peak quota String
 	 * @return String value of off peak quota formatted
 	 */
-	public String getOffPeakQuotaString(){
+	public String getOffpeakQuotaString(){
 		// Check if off peak quota is set
-		if (isOffPeakQuotaSet()){
+		if (isOffpeakQuotaSet()){
 			
 			// Get Long value of off peak quota and convert to Gb
-			Long offPeakQuotaLong = getOffPeakQuota()/1000;
+			Long offPeakQuotaLong = getOffpeakQuota()/1000;
 			
 			// Format Long value into String
 			String quotaString = String.valueOf(offPeakQuotaLong) + " (Gb)";
@@ -266,6 +266,36 @@ public class AccountHelper extends AccountStatusHelper {
 			
 			// Get peak quota
 			double quota = getPeakQuota();
+			
+			// Determine percentage value
+			double percent = dataUsed/quota*100;
+			
+			// Format percentage value
+			NumberFormat percentNumberFormat = new DecimalFormat("#,#00");
+			String percentString = percentNumberFormat.format(percent);
+			
+			return percentString;
+			
+		}
+		// Else it must not be set so return default XML string value
+		else {
+			return myApplicationContext.getString(R.string.peak_offpeak_stats_number);
+		}
+	}
+	
+	/**
+	 * Method for getting offpeak data used as a percent value
+	 * @return string value of percentage of offpeak data used
+	 */
+	public String getOffpeakDataUsedPercent(){
+		// Check to see if peak data and quota is set
+		if (isCurrentOffpeakUsedSet() && isOffpeakQuotaSet()){
+			
+			// Get peak data used
+			double dataUsed = getCurrentOffpeakUsed()/1000000;
+			
+			// Get peak quota
+			double quota = getOffpeakQuota();
 			
 			// Determine percentage value
 			double percent = dataUsed/quota*100;
@@ -314,6 +344,36 @@ public class AccountHelper extends AccountStatusHelper {
 	}
 	
 	/**
+	 * Method for getting off peak data remaining as a percent value
+	 * @return string value of percentage of off peak data remaining
+	 */
+	public String getOffpeakDataRemainingPercent(){
+		// Check to see if peak data and quota is set
+		if (isCurrentOffpeakUsedSet() && isOffpeakQuotaSet()){
+			
+			// Get peak quota
+			double quota = getOffpeakQuota();
+
+			// Get peak data used
+			double dataUsed = quota - (getCurrentOffpeakUsed()/1000000);
+			
+			// Determine percentage value
+			double percent = dataUsed/quota*100;
+			
+			// Format percentage value
+			NumberFormat percentNumberFormat = new DecimalFormat("#,#00");
+			String percentString = percentNumberFormat.format(percent);
+			
+			return percentString;
+			
+		}
+		// Else it must not be set so return default XML string value
+		else {
+			return myApplicationContext.getString(R.string.peak_offpeak_stats_number);
+		}
+	}
+	
+	/**
 	 * Method for getting peak data used in Gigabytes
 	 * @return string value of peak data used to date in Gb
 	 */
@@ -325,6 +385,34 @@ public class AccountHelper extends AccountStatusHelper {
 			
 			// Get peak quota
 			double quota = getPeakQuota()/1000;
+			
+			// Calculate remaining data
+			double dataRemining = quota - dataUsed;
+			
+			// Format percentage value
+			NumberFormat gigabyteNumberFormat = new DecimalFormat("#,#00");
+			String gigaByteString = gigabyteNumberFormat.format(dataRemining);
+			
+			return gigaByteString;
+		}
+		// Else it must not be set so return default XML string value
+		else {
+			return myApplicationContext.getString(R.string.peak_offpeak_stats_number);
+		}
+	}
+	
+	/**
+	 * Method for getting off peak data used in Gigabytes
+	 * @return string value of off peak data used to date in Gb
+	 */
+	public String getOffpeakDataRemainingGb(){
+		if (isCurrentOffpeakUsedSet()){
+			
+			// Get peak data used in Gb
+			double dataUsed = getCurrentOffpeakUsed()/1000000/1000;
+			
+			// Get peak quota
+			double quota = getOffpeakQuota()/1000;
 			
 			// Calculate remaining data
 			double dataRemining = quota - dataUsed;
@@ -370,6 +458,34 @@ public class AccountHelper extends AccountStatusHelper {
 	}
 	
 	/**
+	 * Method for getting off peak data used in Megabytes
+	 * @return string value of off peak data used to date in Mb
+	 */
+	public String getOffpeakDataRemainingMb(){
+		if (isCurrentOffpeakUsedSet()){
+			
+			// Get peak data used in Mb
+			double dataUsed = getCurrentOffpeakUsed()/1000000;
+			
+			// Get peak quota
+			double quota = getOffpeakQuota();
+			
+			// Calculate remaining data
+			double dataRemining = quota - dataUsed;
+			
+			// Format percentage value
+			NumberFormat gigabyteNumberFormat = new DecimalFormat("#,#00");
+			String gigaByteString = gigabyteNumberFormat.format(dataRemining) + " (Mb)";
+			
+			return gigaByteString;
+		}
+		// Else it must not be set so return default XML string value
+		else {
+			return myApplicationContext.getString(R.string.peak_offpeak_data_data);
+		}
+	}
+	
+	/**
 	 * Method for getting peak data remaining in Gigabytes
 	 * @return string value of peak data used to date in Gb
 	 */
@@ -378,6 +494,28 @@ public class AccountHelper extends AccountStatusHelper {
 			
 			// Get peak data used in Gb
 			double dataUsed = getCurrentPeakUsed()/1000000/1000;
+			
+			// Format percentage value
+			NumberFormat gigabyteNumberFormat = new DecimalFormat("#,#00");
+			String megaByteString = gigabyteNumberFormat.format(dataUsed);
+			
+			return megaByteString;
+		}
+		// Else it must not be set so return default XML string value
+		else {
+			return myApplicationContext.getString(R.string.peak_offpeak_stats_number);
+		}
+	}
+	
+	/**
+	 * Method for getting off peak data remaining in Gigabytes
+	 * @return string value of off peak data used to date in Gb
+	 */
+	public String getOffpeakDataUsedGb(){
+		if (isCurrentOffpeakUsedSet()){
+			
+			// Get peak data used in Gb
+			double dataUsed = getCurrentOffpeakUsed()/1000000/1000;
 			
 			// Format percentage value
 			NumberFormat gigabyteNumberFormat = new DecimalFormat("#,#00");
@@ -414,6 +552,28 @@ public class AccountHelper extends AccountStatusHelper {
 	}
 	
 	/**
+	 * Method for getting off peak data remaining in Megabytes
+	 * @return string value of off peak data used to date in Mb
+	 */
+	public String getOffpeakDataUsedMb(){
+		if (isCurrentOffpeakUsedSet()){
+			
+			// Get peak data used in Mb
+			double dataUsed = getCurrentOffpeakUsed()/1000000;
+			
+			// Format percentage value
+			NumberFormat numberFormat = new DecimalFormat("#,#00");
+			String megaByteString = numberFormat.format(dataUsed) + " (Mb)";
+			
+			return megaByteString;
+		}
+		// Else it must not be set so return default XML string value
+		else {
+			return myApplicationContext.getString(R.string.peak_offpeak_data_data);
+		}
+	}
+	
+	/**
 	 * Method for getting peak daily data remaining in Megabytes
 	 * @return string value of peak data used to date in Mb
 	 */
@@ -422,6 +582,34 @@ public class AccountHelper extends AccountStatusHelper {
 			
 			// Get peak data used in Mb
 			double dataUsed = getCurrentPeakUsed()/1000000;
+			
+			// Get days so far
+			double daysSoFar = getCurrentDaysSoFar();
+			
+			// Calculate average daily data
+			double dailyDataUsed = dataUsed/daysSoFar;
+			
+			// Format percentage value
+			NumberFormat numberFormat = new DecimalFormat("#,#00");
+			String megaByteString = numberFormat.format(dailyDataUsed) + " (Mb)";
+			
+			return megaByteString;
+		}
+		// Else it must not be set so return default XML string value
+		else {
+			return myApplicationContext.getString(R.string.peak_offpeak_data_data);
+		}
+	}
+	
+	/**
+	 * Method for getting off peak daily data remaining in Megabytes
+	 * @return string value of off peak data used to date in Mb
+	 */
+	public String getOffpeakDailyDataUsedMb(){
+		if (isCurrentOffpeakUsedSet() && isCurrentDaysSoFarSet()){
+			
+			// Get peak data used in Mb
+			double dataUsed = getCurrentOffpeakUsed()/1000000;
 			
 			// Get days so far
 			double daysSoFar = getCurrentDaysSoFar();
@@ -475,13 +663,72 @@ public class AccountHelper extends AccountStatusHelper {
 		}
 	}
 	
-	public String getPeakPeriod(){
-		if (isOffPeakStartSet() && isOffPeakEndSet()){
+	/**
+	 * Method for getting off peak data used in Megabytes
+	 * @return string value of off peak data used to date in Mb
+	 */
+	public String getOffpeakDailyDataSuggestedMb(){
+		if (isCurrentOffpeakUsedSet() && isCurrentDaysToGoSet()){
 			
-			String peakStart = getOffPeakEnd();
-			String peakEnd = getOffPeakStart();
+			// Get peak data used in Mb
+			double dataUsed = getCurrentOffpeakUsed()/1000000;
+			
+			// Get peak quota
+			double quota = getOffpeakQuota();
+			
+			// Calculate remaining data
+			double dataRemining = quota - dataUsed;
+			
+			// Get days to go
+			double daysToGo = getCurrentDaysToGo();
+			
+			// Calculate suggested daily usage
+			double suggestedDailyMb = dataRemining/daysToGo;
+			
+			// Format percentage value
+			NumberFormat numberFormat = new DecimalFormat("#,#00");
+			String megaByteString = numberFormat.format(suggestedDailyMb) + " (Mb)";
+			
+			return megaByteString;
+		}
+		// Else it must not be set so return default XML string value
+		else {
+			return myApplicationContext.getString(R.string.peak_offpeak_data_data);
+		}
+	}
+	
+	/**
+	 * Get the peak data period times
+	 * @return string value of start finish times for peak data period
+	 */
+	public String getPeakPeriod(){
+		if (isOffpeakStartSet() && isOffpeakEndSet()){
+			
+			String peakStart = getOffpeakEnd();
+			String peakEnd = getOffpeakStart();
 			
 			String period = "(" + peakStart + " to " + peakEnd + ")";
+			
+			return period;
+			
+		}
+		// Else it must not be set so return default XML string value
+		else {
+			return myApplicationContext.getString(R.string.peak_offpeak_stats_period);
+		}
+	}
+	
+	/**
+	 * Get the offpeak data period times
+	 * @return string value of start finish times for off peak data period
+	 */
+	public String getOffpeakPeriod(){
+		if (isOffpeakStartSet() && isOffpeakEndSet()){
+			
+			String offpeakStart = getOffpeakStart();
+			String offpeakEnd =  getOffpeakEnd();
+			
+			String period = "(" + offpeakStart + " to " + offpeakEnd + ")";
 			
 			return period;
 			
