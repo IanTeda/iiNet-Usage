@@ -26,7 +26,7 @@
     <dimen name="status_text_line_spacing">20dp</dimen>
 
     <!-- Account information in dashboard -->
-    <dimen name="account_info_title_text_size">18sp</dimen>
+    <dimen name="account_info_title_text_size">19sp</dimen>
     <dimen name="account_info_cat_title_text_size">13sp</dimen>
     <dimen name="account_info_cat_title_padding_top">2dp</dimen>
     <dimen name="account_info_stat_text_size">18sp</dimen>
@@ -40,6 +40,8 @@
     <dimen name="stats_number_text_size">140sp</dimen>
     <dimen name="stats_number_marginLeft">0dp</dimen>
     <dimen name="stats_number_marginTop">-10dp</dimen>
+    <dimen name="stats_number_unit_text_size">45sp</dimen>
+    <dimen name="stats_number_unit_paddingRight">7dp</dimen>
 
     <!-- Dashboard -->
     <dimen name="dashboard_line_height">2dp</dimen>

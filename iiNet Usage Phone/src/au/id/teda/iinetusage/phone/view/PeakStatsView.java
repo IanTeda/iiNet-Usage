@@ -19,7 +19,7 @@ public class PeakStatsView extends AccountHelper {
 	private final Activity myActivity;
 	
 	// Type face object for custom font
-	private final Typeface myFont;
+	private final Typeface myFontNumber;
 	
 	// TextView objects for peak title
 	private final TextView myPeakPeriod;
@@ -62,7 +62,7 @@ public class PeakStatsView extends AccountHelper {
 		myActivity = (myActivityContext instanceof Activity) ? (Activity) myActivityContext	: null;
 		
 		// Set custom font
-		myFont = Typeface.createFromAsset(((ContextWrapper) myActivity).getAssets(), "OSP-DIN.ttf"); 
+		myFontNumber = Typeface.createFromAsset(((ContextWrapper) myActivity).getAssets(), "OSP-DIN.ttf"); 
 		
 		// Set peak title objects
 		myPeakPeriod = (TextView) myActivity.findViewById(R.id.peak_time);
@@ -87,7 +87,8 @@ public class PeakStatsView extends AccountHelper {
 		myPeakNumberUnit = (TextView) myActivity.findViewById(R.id.peak_number_unit);
 		
 		// Set custom font to number
-		myPeakNumberData.setTypeface(myFont);
+		myPeakNumberData.setTypeface(myFontNumber);
+		myPeakNumberUnit.setTypeface(myFontNumber);
 		
 		// Set focus and alternate colours
 		focusColor = myActivity.getResources().getColor(R.color.application_h2_text_color);

@@ -481,7 +481,7 @@ public class AccountHelper extends AccountStatusHelper {
 			String peakStart = getOffPeakEnd();
 			String peakEnd = getOffPeakStart();
 			
-			String period = "(" + peakStart + "am to " + peakEnd + "pm)";
+			String period = "(" + peakStart + " to " + peakEnd + ")";
 			
 			return period;
 			
