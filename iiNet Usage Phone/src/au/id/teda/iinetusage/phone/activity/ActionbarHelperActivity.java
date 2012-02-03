@@ -3,13 +3,24 @@ package au.id.teda.iinetusage.phone.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import au.id.teda.iinetusage.phone.R;
+import au.id.teda.iinetusage.phone.helper.PreferenceHelper;
 
 public class ActionbarHelperActivity extends Activity {
+	
+	@Override
+	protected void onResume() {
+		
+		// Show hide phone status bar
+		setPhoneStatusBar();
+		
+		super.onResume();
+	}
 
 	public void onClickActionBarHome (View view){
 		
@@ -69,6 +80,14 @@ public class ActionbarHelperActivity extends Activity {
 		}
 	}
 	
-	
+	public void setPhoneStatusBar(){
+        PreferenceHelper mySetttings = new PreferenceHelper();
+        
+        if (mySetttings.hidePhoneStatusBar()){
+        	((Activity) this).getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        } else {
+        	((Activity) this).getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }
+	}
 
 }
