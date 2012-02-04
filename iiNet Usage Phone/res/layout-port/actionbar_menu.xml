@@ -6,9 +6,9 @@
     android:layout_below="@+id/actionbar_top" >
 
     <Button
-        android:id="@+id/actionbar_menu_stats"
+        android:id="@+id/actionbar_menu_dash"
         style="@style/actionbar_menu_button"
-        android:text="@string/actionbar_button_stats" />
+        android:text="@string/actionbar_button_dash" />
 
     <ImageView
         style="@style/actionbar_separator"

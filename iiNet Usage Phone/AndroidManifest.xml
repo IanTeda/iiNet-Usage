@@ -31,6 +31,15 @@
             </intent-filter>
         </activity>
 
+        <!-- Archive Activity -->
+        <activity android:name=".activity.ArchiveActivity" />
+
+        <!-- Daily Data Activity -->
+        <activity android:name=".activity.DailyDataActivity" />
+
+        <!-- Graph Activity -->
+        <activity android:name=".activity.GraphsActivity" />
+
         <!-- Preference activity intent -->
         <activity android:name=".activity.PreferencesActivity" />
 
@@ -38,12 +47,10 @@
         <activity android:name=".activity.UserPassActivity" >
             <intent-filter>
                 <action android:name=".activity.UserPassActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-        <!-- Preference activity -->
-        <activity android:name=".activity.PreferencesActivity" />
     </application>
 
 </manifest>

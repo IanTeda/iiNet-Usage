@@ -6,7 +6,7 @@
     android:orientation="vertical" >
 
     <ImageButton
-        android:id="@+id/actionbar_menu_stats"
+        android:id="@+id/actionbar_menu_dash"
         style="@style/actionbar_menu_image_button"
         android:src="@drawable/ic_stats"/>
     

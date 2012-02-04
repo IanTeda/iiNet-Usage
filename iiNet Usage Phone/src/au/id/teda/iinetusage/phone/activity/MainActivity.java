@@ -43,16 +43,16 @@ public class MainActivity extends ActionbarHelperActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dashboard);
         
-     // If view is in portrait load portrait views
-     		if (isPortrait()){
-     			myAlertboxButton = (Button) findViewById(R.id.alertbox_button);
-     			myAlertboxView = new AlertboxView(this);
-     	        
-     	        // Set reference to AccountInfoView object
-     	        myAccountInfoView = new AccountInfoView(this);
-     	        myPeakStatsView = new PeakStatsView(this);
-     	        myOffpeakStatsView = new OffpeakStatsView(this);
-     		}
+		// If view is in portrait set reference to objects
+		if (isPortrait()) {
+			myAlertboxButton = (Button) findViewById(R.id.alertbox_button);
+			myAlertboxView = new AlertboxView(this);
+
+			// Set reference to AccountInfoView object
+			myAccountInfoView = new AccountInfoView(this);
+			myPeakStatsView = new PeakStatsView(this);
+			myOffpeakStatsView = new OffpeakStatsView(this);
+		}
         
     }
 	

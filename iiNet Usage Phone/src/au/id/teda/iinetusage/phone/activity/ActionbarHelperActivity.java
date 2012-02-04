@@ -71,19 +71,21 @@ public class ActionbarHelperActivity extends Activity {
 	 */
 	public void onActionbarMenuClick(View button) {
 		switch (button.getId()) {
-		case R.id.actionbar_menu_stats:
-			// Intent statsIntent = new Intent(this, MainActivity.class);
-			// startActivity(statsIntent);
-			Toast.makeText(this, "Stats Activity", Toast.LENGTH_SHORT).show();
+		case R.id.actionbar_menu_dash:
+			Intent dashIntent = new Intent(this, MainActivity.class);
+			startActivity(dashIntent);
 			break;
 		case R.id.actionbar_menu_graph:
-			Toast.makeText(this, "Graph Activity", Toast.LENGTH_SHORT).show();
+			Intent graphsIntent = new Intent(this, GraphsActivity.class);
+			startActivity(graphsIntent);
 			break;
 		case R.id.actionbar_menu_data:
-			Toast.makeText(this, "Data Activity", Toast.LENGTH_SHORT).show();
+			Intent dataIntent = new Intent(this, DailyDataActivity.class);
+			startActivity(dataIntent);
 			break;
 		case R.id.actoionbar_menu_archive:
-			Toast.makeText(this, "Archive Activity", Toast.LENGTH_SHORT).show();
+			Intent archiveIntent = new Intent(this, ArchiveActivity.class);
+			startActivity(archiveIntent);
 			break;
 		default:
 			Toast.makeText(this, "Button not recognised", Toast.LENGTH_SHORT)
