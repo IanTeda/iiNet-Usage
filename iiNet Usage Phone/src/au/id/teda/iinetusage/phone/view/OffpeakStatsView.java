@@ -65,7 +65,7 @@ public class OffpeakStatsView extends AccountHelper {
 		myFontNumber = Typeface.createFromAsset(((ContextWrapper) myActivity).getAssets(), "OSP-DIN.ttf"); 
 		
 		// Set offpeak title objects
-		myOffpeakPeriod = (TextView) myActivity.findViewById(R.id.peak_time);
+		myOffpeakPeriod = (TextView) myActivity.findViewById(R.id.offpeak_time);
 		
 		// Set Daily Average TextView objects
 		myOffpeakDailyUsedTitle = (TextView) myActivity.findViewById(R.id.offpeak_daily_used);

@@ -726,7 +726,7 @@ public class AccountHelper extends AccountStatusHelper {
 		if (isOffpeakStartSet() && isOffpeakEndSet()){
 			
 			String offpeakStart = getOffpeakStart();
-			String offpeakEnd =  getOffpeakEnd();
+			String offpeakEnd = getOffpeakEnd();
 			
 			String period = "(" + offpeakStart + " to " + offpeakEnd + ")";
 			

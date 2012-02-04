@@ -43,14 +43,16 @@ public class MainActivity extends ActionbarHelperActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dashboard);
         
-		myAlertboxButton = (Button) findViewById(R.id.alertbox_button);
-		myAlertboxView = new AlertboxView(this);
-        myAlertboxView.setAlert(myAlertboxButton);
-        
-        // Set reference to AccountInfoView object
-        myAccountInfoView = new AccountInfoView(this);
-        myPeakStatsView = new PeakStatsView(this);
-        myOffpeakStatsView = new OffpeakStatsView(this);
+     // If view is in portrait load portrait views
+     		if (isPortrait()){
+     			myAlertboxButton = (Button) findViewById(R.id.alertbox_button);
+     			myAlertboxView = new AlertboxView(this);
+     	        
+     	        // Set reference to AccountInfoView object
+     	        myAccountInfoView = new AccountInfoView(this);
+     	        myPeakStatsView = new PeakStatsView(this);
+     	        myOffpeakStatsView = new OffpeakStatsView(this);
+     		}
         
     }
 	
@@ -58,10 +60,20 @@ public class MainActivity extends ActionbarHelperActivity {
 	protected void onResume() {
 		super.onResume();
 		
-        // Load vies
-        myAccountInfoView.loadView();
-        myPeakStatsView.loadView();
-        myOffpeakStatsView.loadView();
+		loadViews();
+
+	}
+	
+	public void loadViews(){
+		// If view is in portrait load portrait views
+		if (isPortrait()){
+			// Load portrait views
+	        myAlertboxView.setAlert(myAlertboxButton);
+	        myAccountInfoView.loadView();
+	        myPeakStatsView.loadView();
+	        myOffpeakStatsView.loadView();
+		}
+
 	}
 
 	/**
@@ -95,8 +107,7 @@ public class MainActivity extends ActionbarHelperActivity {
     public Handler handler = new Handler() {
         public void handleMessage(Message msg) {
         	
-            // Load AccountInfoView
-            myAccountInfoView.loadView();
+        	loadViews();
         }
     };
     
