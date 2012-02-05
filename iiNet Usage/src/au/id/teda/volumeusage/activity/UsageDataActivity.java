@@ -47,7 +47,6 @@ public class UsageDataActivity extends ListActivity implements OnClickListener {
 	private DailyDataCursorAdapter dailyDataCursorAdapter;
 	private Cursor dailyDBCursor;
 	
-	
 	/**
 	 *  Activity onCreate method.
 	 */

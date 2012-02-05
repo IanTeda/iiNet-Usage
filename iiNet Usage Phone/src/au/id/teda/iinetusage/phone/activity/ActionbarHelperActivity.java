@@ -3,8 +3,6 @@ package au.id.teda.iinetusage.phone.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.util.Log;
-import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
@@ -17,8 +15,8 @@ import au.id.teda.iinetusage.phone.helper.PreferenceHelper;
 public class ActionbarHelperActivity extends Activity {
 	
 	// Static strings for debug tags
-	private static final String DEBUG_TAG = "iiNet Usage";
-	private static final String INFO_TAG = ActionbarHelperActivity.class.getSimpleName();
+	//private static final String DEBUG_TAG = "iiNet Usage";
+	//private static final String INFO_TAG = ActionbarHelperActivity.class.getSimpleName();
 
 	@Override
 	protected void onResume() {
@@ -29,6 +27,10 @@ public class ActionbarHelperActivity extends Activity {
 		super.onResume();
 	}
 
+	/**
+	 * Handle onClick events from the actionbar
+	 * @param view
+	 */
 	public void onClickActionBarHome(View view) {
 
 		// Start dashboard activity
@@ -36,6 +38,9 @@ public class ActionbarHelperActivity extends Activity {
 		startActivity(dashboardActivityIntent);
 	}
 
+	/**
+	 * Hide actionbar home icon
+	 */
 	public void hideActionbarHomeIcon() {
 		ImageButton myHomeImageButton = (ImageButton) findViewById(R.id.actionbar_home_button);
 		ImageView mySeparatorImage = (ImageView) findViewById(R.id.actionbar_separator_1);
@@ -43,6 +48,9 @@ public class ActionbarHelperActivity extends Activity {
 		mySeparatorImage.setVisibility(View.GONE);
 	}
 
+	/**
+	 * Show actionbar home icon
+	 */
 	public void showActionbarHomeIcon() {
 		ImageButton myHomeImageButton = (ImageButton) findViewById(R.id.actionbar_home_button);
 		ImageView mySeparatorImage = (ImageView) findViewById(R.id.actionbar_separator_1);
@@ -50,16 +58,26 @@ public class ActionbarHelperActivity extends Activity {
 		mySeparatorImage.setVisibility(View.VISIBLE);
 	}
 
+	/**
+	 * Set the actionbar title with actionbarTitle string
+	 * @param actionbarTitle
+	 */
 	public void setActionbarTitle(String actionbarTitle) {
 		TextView myActionbarTitle = (TextView) findViewById(R.id.actionbar_title);
 		myActionbarTitle.setText(actionbarTitle);
 	}
 
+	/**
+	 * Hide actionbar refresh icon
+	 */
 	public void hideActionbarRefersh() {
 		ImageButton myRefereshImageButton = (ImageButton) findViewById(R.id.actionbar_refresh_button);
 		myRefereshImageButton.setVisibility(View.GONE);
 	}
 
+	/**
+	 * Show actionbar refresh icon
+	 */
 	public void showActionbarRefersh() {
 		ImageButton myRefereshImageButton = (ImageButton) findViewById(R.id.actionbar_refresh_button);
 		myRefereshImageButton.setVisibility(View.VISIBLE);

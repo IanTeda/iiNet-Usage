@@ -1,8 +1,5 @@
 package au.id.teda.iinetusage.phone.helper;
 
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-
 /**
  * Method for getting and setting application preferences
  * @author Ian
@@ -13,6 +10,7 @@ public class PreferenceHelper extends ConnectivityHelper {
 	// Preference keys
 	private static final String SHOW_REFRESH_DIALOG = "show_refresh_dialog";
 	private static final String HIDE_STATUS_BAR = "hide_status_bar";
+	private static final String SHOW_DECIMAL = "show_decimal";
 	
 	
 	public boolean showRefreshDialog(){
