@@ -10,13 +10,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
-import au.id.teda.iinetusage.phone.activity.DailyDataActivity;
+import au.id.teda.iinetusage.phone.R;
 import au.id.teda.iinetusage.phone.database.DailyDataDBAdapter;
 import au.id.teda.iinetusage.phone.helper.PreferenceHelper;
 
@@ -61,6 +60,7 @@ public class DailyDataCursorAdapter extends CursorAdapter {
 		long freezoneUsageLong = cursor.getLong(cursor.getColumnIndex(DailyDataDBAdapter.FREEZONE)); // Pull upload usage from cursor
 		long totalUsageLong = (peakUsageLong + offpeakUsageLong); // Add up the total for the day
 		
+
 		// Set text for dates
 		//TextView tv1 = (TextView) view.findViewById(R.id.list_col_date_row_day_tv);
 		//tv1.setText(LongDateToString(longDate, "dayOfWeek")); // Day of the week
@@ -87,7 +87,7 @@ public class DailyDataCursorAdapter extends CursorAdapter {
 	public View newView(Context context, Cursor cursor, ViewGroup parent) {
 		// Inflate the listview with the changes above
 		//Log.d(DEBUG_TAG, "DailyDataCursorAdapter > newView() > Inflate");
-		View view = mInflater.inflate(R.layout.usage_data_list_row, parent, false);
+		View view = mInflater.inflate(R.layout.data_row, parent, false);
 		return view;
 		//if (showFuture == false && System.currentTimeMillis() > dateLong ){ }
 
