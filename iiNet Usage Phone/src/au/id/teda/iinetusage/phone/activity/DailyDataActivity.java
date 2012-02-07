@@ -1,12 +1,15 @@
 package au.id.teda.iinetusage.phone.activity;
 
+import android.app.Activity;
 import android.app.ListActivity;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.WindowManager;
 import au.id.teda.iinetusage.phone.R;
 import au.id.teda.iinetusage.phone.cursor.DailyDataCursorAdapter;
 import au.id.teda.iinetusage.phone.database.DailyDataDBAdapter;
 import au.id.teda.iinetusage.phone.helper.AccountHelper;
+import au.id.teda.iinetusage.phone.helper.PreferenceHelper;
 
 public class DailyDataActivity extends ListActivity {
 
@@ -19,11 +22,10 @@ public class DailyDataActivity extends ListActivity {
 	private Cursor myDailyDBCursor;
 	private AccountHelper myAccount;
 	
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-        setContentView(R.layout.data);
+        setContentView(R.layout.daily_data);
         
         // Set Database adapter
         myDailyDataDB = new DailyDataDBAdapter();
@@ -61,6 +63,21 @@ public class DailyDataActivity extends ListActivity {
 		
 		// Close database
 		myDailyDataDB.close();
+	}
+	
+	/**
+	 * Show hide phone status based on preference setting
+	 */
+	public void setPhoneStatusBar() {
+		PreferenceHelper mySetttings = new PreferenceHelper();
+
+		if (mySetttings.hidePhoneStatusBar()) {
+			((Activity) this).getWindow().addFlags(
+					WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		} else {
+			((Activity) this).getWindow().clearFlags(
+					WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		}
 	}
 	
 

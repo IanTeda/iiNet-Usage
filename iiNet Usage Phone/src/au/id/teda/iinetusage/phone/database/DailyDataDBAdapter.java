@@ -102,7 +102,6 @@ public class DailyDataDBAdapter {
 	
 	// Return a cursor for a given period
 	public Cursor fetchPeriodUsage (String period) throws SQLException {
-		Log.d(DEBUG_TAG, "DailyDataDBAdapter > fetchPeriodUsage(): " + period);
 		String dbQuery = "SELECT * FROM " + DATABASE_TABLE
 				+ " WHERE " + PERIOD
 				+ " = '" + period +"';";

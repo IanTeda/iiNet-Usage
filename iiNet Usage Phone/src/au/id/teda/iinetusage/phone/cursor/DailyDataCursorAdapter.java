@@ -1,19 +1,19 @@
 package au.id.teda.iinetusage.phone.cursor;
 
-import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
+import java.util.Calendar;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import au.id.teda.iinetusage.phone.R;
 import au.id.teda.iinetusage.phone.database.DailyDataDBAdapter;
@@ -27,13 +27,24 @@ public class DailyDataCursorAdapter extends CursorAdapter {
 	private static final String DEBUG_TAG = "iiNet Usage";
 	private static final String INFO_TAG = DailyDataCursorAdapter.class.getSimpleName();
 	
+	// Set objects for TextViews
+	private LinearLayout myRow;
+	private TextView myDate;
+	private TextView myPeak;
+	private TextView myOffpeak;
+	private TextView myUpload;
+	private TextView myFreezone;
+	private TextView myTotal;
+	
 	// Load object for preferences
 	private final PreferenceHelper mySettings;
 	
     private final LayoutInflater mInflater;
     boolean showDecimal = false;
     boolean showFuture = false;
-    private long dateLong;
+    
+    // Integer used to determine row number and background color
+    private int rowNum = 0;
 	
 	public DailyDataCursorAdapter(Context context, Cursor cursor) {
 		super(context, cursor, true);
@@ -49,66 +60,82 @@ public class DailyDataCursorAdapter extends CursorAdapter {
     
 	@Override
 	public void bindView(View view, Context context, Cursor cursor) {
-		//Log.d(DEBUG_TAG, "DailyDataCursorAdapter > bindView");
 		
-		// Set variables and pull data from database cursor
+		// Increase row number by one
+		++rowNum;
+		
+		// Set reference to TextViews
+		myDate = (TextView) view.findViewById(R.id.daily_data_row_date);
+		myPeak = (TextView) view.findViewById(R.id.daily_data_row_peak);
+		myOffpeak = (TextView) view.findViewById(R.id.daily_data_row_offpeak);
+		myUpload = (TextView) view.findViewById(R.id.daily_data_row_upload);
+		myFreezone = (TextView) view.findViewById(R.id.daily_data_row_freezone);
+		myTotal =(TextView) view.findViewById(R.id.daily_data_row_total);
+		myRow = (LinearLayout) view.findViewById(R.id.daily_data_row);
+		
+		
+		// Get long values from database cursor
 		// TODO: Change DailyDataDBAdapter to dailyDataDBHelper???
-		long dateLong = cursor.getLong(cursor.getColumnIndex(DailyDataDBAdapter.DATE)); // Pull date time stamp from cursor
-		long peakUsageLong = cursor.getLong(cursor.getColumnIndex(DailyDataDBAdapter.PEAK)); // Pull peak usage from cursor
-		long offpeakUsageLong = cursor.getLong(cursor.getColumnIndex(DailyDataDBAdapter.OFFPEAK)); // Pull offpeak usage from cursor
-		long uploadUsageLong = cursor.getLong(cursor.getColumnIndex(DailyDataDBAdapter.UPLOAD)); // Pull upload usage from cursor
-		long freezoneUsageLong = cursor.getLong(cursor.getColumnIndex(DailyDataDBAdapter.FREEZONE)); // Pull upload usage from cursor
-		long totalUsageLong = (peakUsageLong + offpeakUsageLong); // Add up the total for the day
+		long dateLong = cursor.getLong(cursor.getColumnIndex(DailyDataDBAdapter.DATE));
+		long peakLong = cursor.getLong(cursor.getColumnIndex(DailyDataDBAdapter.PEAK));
+		long offpeakLong = cursor.getLong(cursor.getColumnIndex(DailyDataDBAdapter.OFFPEAK));
+		long uploadLong = cursor.getLong(cursor.getColumnIndex(DailyDataDBAdapter.UPLOAD));
+		long freezoneLong = cursor.getLong(cursor.getColumnIndex(DailyDataDBAdapter.FREEZONE));
+		long totalLong = (peakLong + offpeakLong);
 		
-
-		// Set text for dates
-		//TextView tv1 = (TextView) view.findViewById(R.id.list_col_date_row_day_tv);
-		//tv1.setText(LongDateToString(longDate, "dayOfWeek")); // Day of the week
-		TextView dateTV = (TextView) view.findViewById(R.id.listview_date_tv);
-		dateTV.setText(LongDateToString(dateLong, "dateOfMouth")); // Day of the mouth
-		//TextView tv3 = (TextView) view.findViewById(R.id.list_col_date_row_mth_tv);
-		//tv3.setText(LongDateToString(longDate, "mouthOfYear")); // Mouth of the year
+		// Set TextView string values
+		myDate.setText(String.valueOf(getDayOfMonth(dateLong)));
+		myPeak.setText(getUsageString(peakLong));
+		myOffpeak.setText(getUsageString(offpeakLong));
+		myUpload.setText(getUsageString(uploadLong));
+		myFreezone.setText(getUsageString(freezoneLong));
+		myTotal.setText(getUsageString(totalLong));
 		
-		// Set usage textviews
-		TextView peakTV = (TextView) view.findViewById(R.id.listview_peak_tv);
-		peakTV.setText(IntUsageToString(peakUsageLong)); // Peak usage
-		TextView offpeakTV = (TextView) view.findViewById(R.id.listview_offpeak_tv);
-		offpeakTV.setText(IntUsageToString(offpeakUsageLong)); // Offpeak usage
-		TextView uploadTV = (TextView) view.findViewById(R.id.listview_upload_tv);
-		uploadTV.setText(IntUsageToString(uploadUsageLong)); // Upload usage
-		TextView freezoneTV = (TextView) view.findViewById(R.id.listview_freezone_tv);
-		freezoneTV.setText(IntUsageToString(freezoneUsageLong)); // Freezone usage
-		TextView totalTV = (TextView) view.findViewById(R.id.listview_total_tv);
-		totalTV.setText(IntUsageToString(totalUsageLong)); // Freezone usage
-
+		// Set row background color based on row number
+		if (isRowEven(rowNum)){
+			// Looks like it is an even row number so set background color
+			myRow.setBackgroundResource(R.color.application_background_color);
+		} 
+		// Else it must be an odd number
+		else {
+			// Looks like it is an odd row number so set alternate background color
+			myRow.setBackgroundResource(R.color.application_background_alt_color);
+		}
 	}
 
 	@Override
 	public View newView(Context context, Cursor cursor, ViewGroup parent) {
 		// Inflate the listview with the changes above
-		//Log.d(DEBUG_TAG, "DailyDataCursorAdapter > newView() > Inflate");
-		View view = mInflater.inflate(R.layout.data_row, parent, false);
+		View view = mInflater.inflate(R.layout.daily_data_row, parent, false);
 		return view;
-		//if (showFuture == false && System.currentTimeMillis() > dateLong ){ }
-
 	}
 	
-	// Return string values for date long millisec stored in db
-	private String LongDateToString(long millisecs, String convertTo) {
-		DateFormat date_format = null;
-		if (convertTo == "dayOfWeek") {
-			date_format = new SimpleDateFormat("EEE");
-		} else if (convertTo == "dateOfMouth"){
-			date_format = new SimpleDateFormat("dd");
-		} else if (convertTo == "mouthOfYear"){
-			date_format = new SimpleDateFormat("MMM");
+	private boolean isRowEven(int row){
+		// Check if number is even
+		if (row % 2 == 0) {
+			// Looks even to me
+			return true;
 		}
-		Date resultdate = new Date(millisecs);
-		return date_format.format(resultdate);
+		// Else it must be odd
+		else {
+			//Looks odd
+			return false;
+		}
+	}
+	
+	private int getDayOfMonth(long milliSec){
+		// Create instance of calendar
+		Calendar date = Calendar.getInstance();
+		
+		// Set date of calendar
+		date.setTimeInMillis(milliSec);
+		
+		// return day of the week from calendar
+		return date.get(Calendar.DAY_OF_MONTH);
 	}
 	
 	// Return formated string value for int stored in db
-	private String IntUsageToString (long usageLong){
+	private String getUsageString (long usageLong){
 		if (showDecimal){
 			NumberFormat numberFormat = new DecimalFormat("#,###.00");
 			Double usage = (double)usageLong/1000000;

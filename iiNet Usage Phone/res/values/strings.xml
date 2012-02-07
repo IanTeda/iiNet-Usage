@@ -5,7 +5,7 @@
     <string name="app_name">iiNet Usage</string>
     <string name="no_internet">There appears to be no internet connection</string>
     <string name="refresh_progress_dialog_title">Please wait</string>
-    <string name="refresh_progress_dialog_description">Retrieving &amp; loading data...</string>
+    <string name="refresh_progress_dialog_description">Retrieving &amp; loading data &#8230;</string>
 
     <!-- No list data -->
     <string name="no_daily_data">No usage data present</string>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <!-- String values for daily data rows pre-inflating -->
+    <string name="daily_data_row_date">30</string>
+    <string name="daily_data_row_peak">320</string>
+    <string name="daily_data_row_offpeak">1,220</string>
+    <string name="daily_data_row_upload">287</string>
+    <string name="daily_data_row_freezone">893</string>
+    <string name="daily_data_row_total">1,540</string>
+    
+    <string name="daily_data_row_date_header">Date</string>
+    <string name="daily_data_row_peak_header">Peak</string>
+    <string name="daily_data_row_offpeak_header">Offpeak</string>
+    <string name="daily_data_row_upload_header">Upload</string>
+    <string name="daily_data_row_freezone_header">Freezone</string>
+    <string name="daily_data_row_total_header">Total</string>
+    
+    
+    
+</resources>

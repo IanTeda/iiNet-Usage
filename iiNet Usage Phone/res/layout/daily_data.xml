@@ -21,30 +21,30 @@
         android:paddingBottom="1dp" >
 
         <TextView
-            style="@style/listview_header"
+            style="@style/daily_data_header"
             android:layout_width="33dp"
             android:layout_weight="0"
-            android:text="Date" />
+            android:text="@string/daily_data_row_date_header" />
 
         <TextView
-            style="@style/listview_header"
-            android:text="Peak" />
+            style="@style/daily_data_header"
+            android:text="@string/daily_data_row_peak_header" />
 
         <TextView
-            style="@style/listview_header"
-            android:text="Offpeak" />
+            style="@style/daily_data_header"
+            android:text="@string/daily_data_row_offpeak_header" />
 
         <TextView
-            style="@style/listview_header"
-            android:text="Upload" />
+            style="@style/daily_data_header"
+            android:text="@string/daily_data_row_upload_header" />
 
         <TextView
-            style="@style/listview_header"
-            android:text="Freezone" />
+            style="@style/daily_data_header"
+            android:text="@string/daily_data_row_freezone_header" />
 
         <TextView
-            style="@style/listview_header"
-            android:text="Total" />
+            style="@style/daily_data_header"
+            android:text="@string/daily_data_row_total_header" />
     </LinearLayout>
 
     <ListView
