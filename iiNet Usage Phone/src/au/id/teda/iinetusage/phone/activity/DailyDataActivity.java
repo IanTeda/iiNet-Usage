@@ -1,10 +1,16 @@
 package au.id.teda.iinetusage.phone.activity;
 
+import java.text.ParseException;
+
 import android.app.Activity;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
+import android.widget.Toast;
 import au.id.teda.iinetusage.phone.R;
 import au.id.teda.iinetusage.phone.cursor.DailyDataCursorAdapter;
 import au.id.teda.iinetusage.phone.database.DailyDataDBAdapter;
@@ -22,6 +28,9 @@ public class DailyDataActivity extends ListActivity {
 	private Cursor myDailyDBCursor;
 	private AccountHelper myAccount;
 	
+	// Set TextView Objects
+	private TextView myTitle;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -32,6 +41,9 @@ public class DailyDataActivity extends ListActivity {
         
         // Set AccountHelper
         myAccount = new AccountHelper();
+        
+        // Set reference to TextViews
+        myTitle = (TextView) findViewById(R.id.daily_data_title);
 	}
 	
 	
@@ -39,12 +51,17 @@ public class DailyDataActivity extends ListActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		loadData();
+		try {
+			loadData();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 
 
-	private void loadData(){
+	private void loadData() throws ParseException{
 		
 		// Get string value of current data period
 		String dataPeriod = myAccount.getCurrentDataPeriod();
@@ -63,6 +80,9 @@ public class DailyDataActivity extends ListActivity {
 		
 		// Close database
 		myDailyDataDB.close();
+		
+		// Set title text
+		myTitle.setText(myAccount.getCurrentDataPeriodString());
 	}
 	
 	/**
@@ -77,6 +97,35 @@ public class DailyDataActivity extends ListActivity {
 		} else {
 			((Activity) this).getWindow().clearFlags(
 					WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		}
+	}
+	
+	/**
+	 * Action bar menu onClick method
+	 * @param button
+	 */
+	public void onActionbarMenuClick(View button) {
+		switch (button.getId()) {
+		case R.id.actionbar_menu_dash:
+			Intent dashIntent = new Intent(this, MainActivity.class);
+			startActivity(dashIntent);
+			break;
+		case R.id.actionbar_menu_graph:
+			Intent graphsIntent = new Intent(this, GraphsActivity.class);
+			startActivity(graphsIntent);
+			break;
+		case R.id.actionbar_menu_data:
+			Intent dataIntent = new Intent(this, DailyDataActivity.class);
+			startActivity(dataIntent);
+			break;
+		case R.id.actoionbar_menu_archive:
+			Intent archiveIntent = new Intent(this, ArchiveActivity.class);
+			startActivity(archiveIntent);
+			break;
+		default:
+			Toast.makeText(this, "Button not recognised", Toast.LENGTH_SHORT)
+					.show();
+
 		}
 	}
 	

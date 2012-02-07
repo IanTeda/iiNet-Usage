@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="@color/application_background_color" >
 
     <include
         android:id="@+id/actionbar"
@@ -13,19 +14,15 @@
         layout="@layout/actionbar_menu" />
 
     <TextView
-        android:id="@+id/offpeak_title"
+        android:id="@+id/daily_data_title"
         style="@style/account_info_title"
         android:layout_width="fill_parent"
-        android:gravity="center_horizontal"
-        android:text="@string/offpeak_stats_title" />
+        android:gravity="center_horizontal" />
 
     <View
-        android:id="@+id/offpeak_data_line"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/dashboard_line_height"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/offpeak_title"
-        android:background="#ffffff" />
+        android:background="@drawable/line" />
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
