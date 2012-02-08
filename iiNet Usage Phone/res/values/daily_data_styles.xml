@@ -1,26 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  
-  <!-- Styles for data usage list view -->
-  <style name="daily_data_header">
-  	<item name="android:layout_height">fill_parent</item>
-		<item name="android:layout_width">0dp</item>
-		<item name="android:layout_weight">0.2</item>
-  	<item name="android:gravity">center</item>
-  	<item name="android:textStyle">bold</item>
-  	<item name="android:textSize">14sp</item>
-		<item name="android:singleLine">true</item>
-  </style>
-  
-  <style name="daily_data_row">
-  	<item name="android:layout_height">wrap_content</item>
-  	<item name="android:layout_width">0dip</item>
-  	<item name="android:layout_weight">0.2</item>
-  	<item name="android:gravity">right</item>
-		<item name="android:textSize">14sp</item>
-  	<item name="android:paddingRight">5dip</item>
-  	<item name="android:paddingTop">2dip</item>
-  	<item name="android:paddingBottom">2dip</item>
-		<item name="android:singleLine">true</item>
-	</style>
+
+    <!-- Styles for data usage list view -->
+    <style name="daily_data_header">
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">0.2</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="daily_data_row">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">0dip</item>
+        <item name="android:layout_weight">0.2</item>
+        <item name="android:gravity">right</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:paddingRight">5dip</item>
+        <item name="android:paddingTop">2dip</item>
+        <item name="android:paddingBottom">2dip</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="daily_data_period">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/application_h1_text_size</item>
+        <item name="android:paddingLeft">@dimen/application_h1_intent</item>
+        <item name="android:paddingTop">@dimen/application_h1_line_padding</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/application_h1_text_color</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:capitalize">characters</item>
+        <item name="android:gravity">left</item>
+    </style>
+
 </resources>

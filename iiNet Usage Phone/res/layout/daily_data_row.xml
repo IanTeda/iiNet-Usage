@@ -10,7 +10,7 @@
 		android:id="@+id/daily_data_row_date"
 		style="@style/daily_data_row"
 		android:text="@string/daily_data_row_date" 
-		android:layout_width="33dp"
+		android:layout_width="@dimen/daily_data_date_width"
 		android:layout_weight="0"
 		android:gravity="center_horizontal" />
     
@@ -28,11 +28,6 @@
 		android:id="@+id/daily_data_row_upload"
 		style="@style/daily_data_row"
 		android:text="@string/daily_data_row_upload" />
-    
-	<TextView
-		android:id="@+id/daily_data_row_freezone"
-		style="@style/daily_data_row"
-		android:text="@string/daily_data_row_freezone" />
 
 	<TextView
 		android:id="@+id/daily_data_row_total"

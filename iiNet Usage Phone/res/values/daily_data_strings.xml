@@ -9,6 +9,8 @@
     <string name="daily_data_row_freezone">893</string>
     <string name="daily_data_row_total">1,540</string>
     
+    <string name="daily_data_period_title">Data Period</string>
+    
     <string name="daily_data_row_date_header">Date</string>
     <string name="daily_data_row_peak_header">Peak</string>
     <string name="daily_data_row_offpeak_header">Offpeak</string>

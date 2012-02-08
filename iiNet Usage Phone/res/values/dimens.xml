@@ -45,5 +45,8 @@
 
     <!-- Dashboard -->
     <dimen name="dashboard_line_height">2dp</dimen>
+    
+    <!-- Daily Data Table -->
+    <dimen name="daily_data_date_width">40dp</dimen>
 
 </resources>

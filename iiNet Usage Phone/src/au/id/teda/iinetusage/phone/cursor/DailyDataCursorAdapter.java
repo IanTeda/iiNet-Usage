@@ -69,7 +69,7 @@ public class DailyDataCursorAdapter extends CursorAdapter {
 		myPeak = (TextView) view.findViewById(R.id.daily_data_row_peak);
 		myOffpeak = (TextView) view.findViewById(R.id.daily_data_row_offpeak);
 		myUpload = (TextView) view.findViewById(R.id.daily_data_row_upload);
-		myFreezone = (TextView) view.findViewById(R.id.daily_data_row_freezone);
+		//myFreezone = (TextView) view.findViewById(R.id.daily_data_row_freezone);
 		myTotal =(TextView) view.findViewById(R.id.daily_data_row_total);
 		myRow = (LinearLayout) view.findViewById(R.id.daily_data_row);
 		
@@ -88,7 +88,7 @@ public class DailyDataCursorAdapter extends CursorAdapter {
 		myPeak.setText(getUsageString(peakLong));
 		myOffpeak.setText(getUsageString(offpeakLong));
 		myUpload.setText(getUsageString(uploadLong));
-		myFreezone.setText(getUsageString(freezoneLong));
+		//myFreezone.setText(getUsageString(freezoneLong));
 		myTotal.setText(getUsageString(totalLong));
 		
 		// Set row background color based on row number
