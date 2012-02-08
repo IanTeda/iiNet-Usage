@@ -17,6 +17,7 @@
     <string name="daily_data_row_upload_header">Upload</string>
     <string name="daily_data_row_freezone_header">Freezone</string>
     <string name="daily_data_row_total_header">Total</string>
+    <string name="daily_data_row_accum_header">Accum</string>
     
     
     

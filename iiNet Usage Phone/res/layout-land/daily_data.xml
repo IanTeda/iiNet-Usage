@@ -5,43 +5,46 @@
     android:background="@color/application_background_color"
     android:orientation="vertical" >
 
+    <include layout="@layout/actionbar" />
+
     <include
-        android:id="@+id/actionbar"
-        layout="@layout/actionbar" />
-    
-        <include
-        android:id="@+id/actionbar_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/actionbar"
         layout="@layout/actionbar_menu" />
 
-    <TextView
-        android:id="@+id/daily_data_title"
-        style="@style/daily_data_period"
-        android:text="@string/daily_data_period_title" />
-
-    <include layout="@layout/line" />
-
-    <ListView
-        android:id="@android:id/list"
+    <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="0dip"
-        android:layout_weight="1.0"
-        android:background="@color/application_background_alt_color"
-        android:orientation="vertical" />
-
-    <TextView
-        android:id="@android:id/empty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/no_daily_data" />
-
-
-
-    <include
-        android:layout_alignParentLeft="true"
+        android:layout_height="fill_parent"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/actionbar"
-        android:layout_marginTop="20dp"
-        layout="@layout/daily_data_row_header" />
+        android:layout_toRightOf="@+id/actionbar_menu"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/daily_data_title"
+            style="@style/daily_data_period"
+            android:text="@string/daily_data_period_title" />
+
+        <include layout="@layout/line" />
+
+        <include layout="@layout/daily_data_row_header" />
+
+        <ListView
+            android:id="@android:id/list"
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1.0"
+            android:background="@color/application_background_alt_color"
+            android:orientation="vertical" >
+        </ListView>
+
+        <TextView
+            android:id="@android:id/empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_daily_data" />
+    </LinearLayout>
 
 </RelativeLayout>

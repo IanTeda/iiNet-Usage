@@ -36,6 +36,7 @@ public class DailyDataCursorAdapter extends CursorAdapter {
 	private TextView myUpload;
 	private TextView myFreezone;
 	private TextView myTotal;
+	private TextView myAccum;
 	
 	// Load object for preferences
 	private final PreferenceHelper mySettings;
@@ -49,6 +50,9 @@ public class DailyDataCursorAdapter extends CursorAdapter {
     
     // Integer used to determine row number and background color
     private int rowNum = 0;
+    
+    // Integer for accumulative total
+    private long accumLong = 0;
 	
 	public DailyDataCursorAdapter(Context context, Cursor cursor) {
 		super(context, cursor, true);
@@ -93,16 +97,23 @@ public class DailyDataCursorAdapter extends CursorAdapter {
 		myPeak.setText(getUsageString(peakLong));
 		myOffpeak.setText(getUsageString(offpeakLong));
 		myUpload.setText(getUsageString(uploadLong));
-		//myFreezone.setText(getUsageString(freezoneLong));
 		myTotal.setText(getUsageString(totalLong));
 		
 		setRowBackground();
 		
-		if (isPortrait()){
+		if (!isPortrait()){
+		
 			// Set reference to TextViews
-			//myFreezone = (TextView) view.findViewById(R.id.daily_data_row_freezone);
+			myFreezone = (TextView) view.findViewById(R.id.daily_data_row_freezone);
+			myAccum = (TextView) view.findViewById(R.id.daily_data_row_accum);
 			
-			//long freezoneLong = cursor.getLong(cursor.getColumnIndex(DailyDataDBAdapter.FREEZONE));
+			// Get long values from database cursor
+			long freezoneLong = cursor.getLong(cursor.getColumnIndex(DailyDataDBAdapter.FREEZONE));
+			accumLong = accumLong + totalLong;
+			
+			// Set TextView string values
+			myFreezone.setText(getUsageString(freezoneLong));
+			myAccum.setText(getUsageString(accumLong));
 		}
 	}
 

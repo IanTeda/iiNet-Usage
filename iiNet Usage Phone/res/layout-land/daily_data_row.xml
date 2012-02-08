@@ -28,9 +28,20 @@
 		android:id="@+id/daily_data_row_upload"
 		style="@style/daily_data_row"
 		android:text="@string/daily_data_row_upload" />
+	
+		<TextView
+		android:id="@+id/daily_data_row_freezone"
+		style="@style/daily_data_row"
+		android:text="@string/daily_data_row_freezone" />
 
 	<TextView
 		android:id="@+id/daily_data_row_total"
+		style="@style/daily_data_row"
+		android:textStyle="bold"
+		android:text="@string/daily_data_row_total" />
+	
+		<TextView
+		android:id="@+id/daily_data_row_accum"
 		style="@style/daily_data_row"
 		android:textStyle="bold"
 		android:text="@string/daily_data_row_total" />

@@ -42,6 +42,22 @@
 
     <TextView
         style="@style/daily_data_header"
+        android:text="@string/daily_data_row_freezone_header" />
+
+    <ImageView
+        style="@style/actionbar_separator"
+        android:contentDescription="@string/actionbar_separator_description" />
+
+    <TextView
+        style="@style/daily_data_header"
         android:text="@string/daily_data_row_total_header" />
+
+    <ImageView
+        style="@style/actionbar_separator"
+        android:contentDescription="@string/actionbar_separator_description" />
+
+    <TextView
+        style="@style/daily_data_header"
+        android:text="@string/daily_data_row_accum_header" />
 
 </LinearLayout>
