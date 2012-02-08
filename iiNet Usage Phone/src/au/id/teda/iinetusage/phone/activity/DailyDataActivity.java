@@ -83,6 +83,8 @@ public class DailyDataActivity extends ListActivity {
 		
 		// Set title text
 		myTitle.setText(myAccount.getCurrentDataPeriodString());
+		
+		setPhoneStatusBar();
 	}
 	
 	/**
