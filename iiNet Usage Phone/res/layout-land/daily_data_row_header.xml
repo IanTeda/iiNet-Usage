@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="30dp"
+    android:layout_marginTop="5dp"
+    android:background="@drawable/actionbar_menu_button"
+    android:orientation="horizontal" >
+
+    <TextView
+        style="@style/daily_data_header"
+        android:layout_width="@dimen/daily_data_date_width"
+        android:layout_weight="0"
+        android:text="@string/daily_data_row_date_header" />
+
+    <ImageView
+        style="@style/actionbar_separator"
+        android:contentDescription="@string/actionbar_separator_description" />
+
+    <TextView
+        style="@style/daily_data_header"
+        android:text="@string/daily_data_row_peak_header" />
+
+    <ImageView
+        style="@style/actionbar_separator"
+        android:contentDescription="@string/actionbar_separator_description" />
+
+    <TextView
+        style="@style/daily_data_header"
+        android:text="@string/daily_data_row_offpeak_header" />
+
+    <ImageView
+        style="@style/actionbar_separator"
+        android:contentDescription="@string/actionbar_separator_description" />
+
+    <TextView
+        style="@style/daily_data_header"
+        android:text="@string/daily_data_row_upload_header" />
+
+    <ImageView
+        style="@style/actionbar_separator"
+        android:contentDescription="@string/actionbar_separator_description" />
+
+    <TextView
+        style="@style/daily_data_header"
+        android:text="@string/daily_data_row_total_header" />
+
+</LinearLayout>

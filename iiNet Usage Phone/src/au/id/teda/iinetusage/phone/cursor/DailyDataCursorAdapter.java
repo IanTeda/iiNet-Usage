@@ -5,6 +5,7 @@ import java.text.NumberFormat;
 import java.util.Calendar;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
@@ -39,6 +40,9 @@ public class DailyDataCursorAdapter extends CursorAdapter {
 	// Load object for preferences
 	private final PreferenceHelper mySettings;
 	
+	// Context
+	private final Context myActivityContext;
+	
     private final LayoutInflater mInflater;
     boolean showDecimal = false;
     boolean showFuture = false;
@@ -52,6 +56,9 @@ public class DailyDataCursorAdapter extends CursorAdapter {
 		
 		// Set preferences object
 		mySettings = new PreferenceHelper();
+		
+		// Set context
+		myActivityContext = context;
 		
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
 		showDecimal = settings.getBoolean("show_decimal", false);
@@ -69,7 +76,6 @@ public class DailyDataCursorAdapter extends CursorAdapter {
 		myPeak = (TextView) view.findViewById(R.id.daily_data_row_peak);
 		myOffpeak = (TextView) view.findViewById(R.id.daily_data_row_offpeak);
 		myUpload = (TextView) view.findViewById(R.id.daily_data_row_upload);
-		//myFreezone = (TextView) view.findViewById(R.id.daily_data_row_freezone);
 		myTotal =(TextView) view.findViewById(R.id.daily_data_row_total);
 		myRow = (LinearLayout) view.findViewById(R.id.daily_data_row);
 		
@@ -80,7 +86,6 @@ public class DailyDataCursorAdapter extends CursorAdapter {
 		long peakLong = cursor.getLong(cursor.getColumnIndex(DailyDataDBAdapter.PEAK));
 		long offpeakLong = cursor.getLong(cursor.getColumnIndex(DailyDataDBAdapter.OFFPEAK));
 		long uploadLong = cursor.getLong(cursor.getColumnIndex(DailyDataDBAdapter.UPLOAD));
-		long freezoneLong = cursor.getLong(cursor.getColumnIndex(DailyDataDBAdapter.FREEZONE));
 		long totalLong = (peakLong + offpeakLong);
 		
 		// Set TextView string values
@@ -91,6 +96,20 @@ public class DailyDataCursorAdapter extends CursorAdapter {
 		//myFreezone.setText(getUsageString(freezoneLong));
 		myTotal.setText(getUsageString(totalLong));
 		
+		setRowBackground();
+		
+		if (isPortrait()){
+			// Set reference to TextViews
+			//myFreezone = (TextView) view.findViewById(R.id.daily_data_row_freezone);
+			
+			//long freezoneLong = cursor.getLong(cursor.getColumnIndex(DailyDataDBAdapter.FREEZONE));
+		}
+	}
+
+	/**
+	 * Set row background based on row number
+	 */
+	private void setRowBackground() {
 		// Set row background color based on row number
 		if (isRowEven(rowNum)){
 			// Looks like it is an even row number so set background color
@@ -146,6 +165,29 @@ public class DailyDataCursorAdapter extends CursorAdapter {
 			return numberFormat.format(usage);
 		}
 		
+	}
+	
+	/**
+	 * Get int value of screen orientation
+	 * @return int
+	 */
+	public int getScreenOrientation() {
+	        return myActivityContext.getResources().getConfiguration().orientation;
+	}
+	
+	/**
+	 * Check if in portrait mode
+	 * @return true if device is in portrait
+	 */
+	public boolean isPortrait() {
+		 if(getScreenOrientation() == Configuration.ORIENTATION_PORTRAIT) {
+			 //App is in Portrait mode
+			 return true;
+		 }
+		 else{
+		     //App is in LandScape mode
+			 return false;
+		}
 	}
 
 }
