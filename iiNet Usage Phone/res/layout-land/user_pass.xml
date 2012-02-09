@@ -32,12 +32,12 @@
 
                 <TextView
                     android:id="@+id/user_pass_email_tv"
-                    style="@style/user_pass_h1.land"
+                    style="@style/h1.user_pass.land"
                     android:text="@string/user_pass_email" />
 
                 <TextView
                     android:id="@+id/user_pass_password_tv"
-                    style="@style/user_pass_h1.land"
+                    style="@style/h1.user_pass.land"
                     android:paddingLeft="@dimen/application_padding"
                     android:text="@string/user_pass_password" />
             </LinearLayout>

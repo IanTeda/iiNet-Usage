@@ -26,7 +26,7 @@
             <!-- Email Label -->
 
             <TextView
-                style="@style/user_pass_h1"
+                style="@style/h1.user_pass"
                 android:text="@string/user_pass_email" />
 
             <!-- Username/Email Edit Text -->
@@ -44,7 +44,7 @@
             <!-- Password Label -->
 
             <TextView
-                style="@style/user_pass_h1"
+                style="@style/h1.user_pass"
                 android:text="@string/user_pass_password" />
 
             <!-- Password Edit Text -->

@@ -5,19 +5,11 @@
 
 
     <!-- Edit Text Titles -->
-    <style name="user_pass_h1">
-        <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">@dimen/application_h1_text_size</item>
-        <item name="android:paddingLeft">@dimen/application_h1_intent</item>
-        <item name="android:paddingTop">@dimen/application_h1_line_padding</item>
-        <item name="android:textStyle">bold</item>
+    <style name="h1.user_pass">
         <item name="android:textColor">@color/application_h1_text_color</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:capitalize">characters</item>
     </style>
 
-    <style name="user_pass_h1.land">
+    <style name="h1.user_pass.land">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
     </style>

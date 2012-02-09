@@ -2,9 +2,9 @@
 <resources>
 
     <!-- Username Password Activity Strings -->
-    <string name="user_pass_email">Email/Username</string>
+    <string name="user_pass_email">Email/Username:</string>
     <string name="user_pass_email_hint">username@iinet.net.au</string>
-    <string name="user_pass_password">Account Password</string>
+    <string name="user_pass_password">Account Password:</string>
     <string name="user_pass_password_hint">Password</string>
     <string name="user_pass_show">Show password</string>
     <string name="user_pass_button_check">Check Credentials</string>
