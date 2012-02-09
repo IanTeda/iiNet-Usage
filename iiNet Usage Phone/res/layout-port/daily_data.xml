@@ -29,8 +29,7 @@
         android:layout_width="fill_parent"
         android:layout_height="@dimen/dashboard_line_height"
         android:background="@color/white"
-        android:paddingLeft="@dimen/application_padding"
-        android:paddingRight="@dimen/application_padding" />
+        android:paddingLeft="@dimen/application_padding" />
 
     <include layout="@layout/daily_data_row_header" />
 

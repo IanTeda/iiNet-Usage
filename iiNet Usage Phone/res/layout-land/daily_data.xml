@@ -17,19 +17,22 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:paddingLeft="@dimen/application_padding"
-        android:paddingRight="@dimen/application_padding"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/actionbar"
         android:layout_toRightOf="@+id/actionbar_menu"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/application_padding" >
 
         <TextView
             android:id="@+id/daily_data_title"
             style="@style/daily_data_period"
             android:text="@string/daily_data_period_title" />
 
-        <include layout="@layout/line" />
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/dashboard_line_height"
+            android:background="@color/white"
+            android:paddingLeft="@dimen/application_padding" />
 
         <include layout="@layout/daily_data_row_header" />
 

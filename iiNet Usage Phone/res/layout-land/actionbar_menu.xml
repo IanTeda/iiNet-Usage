@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/actionbar_menu"
     android:layout_width="wrap_content"
@@ -8,22 +7,47 @@
 
     <ImageButton
         android:id="@+id/actionbar_menu_dash"
-        style="@style/actionbar_menu_button.landscape"
-        android:src="@drawable/ic_stats"/>
-    
+        style="@style/actionbar_menu_image_button"
+        android:contentDescription="Dashboard"
+        android:src="@drawable/ic_stats" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:background="@color/actionbar_menu_background_end_color" />
+
     <ImageButton
         android:id="@+id/actionbar_menu_graph"
-        style="@style/actionbar_menu_button.landscape"
-        android:src="@drawable/ic_charts"/>
+        style="@style/actionbar_menu_image_button"
+        android:contentDescription="Charts"
+        android:src="@drawable/ic_charts" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:background="@color/actionbar_menu_background_end_color" />
 
     <ImageButton
         android:id="@+id/actionbar_menu_data"
-        style="@style/actionbar_menu_button.landscape"
+        style="@style/actionbar_menu_image_button"
+        android:contentDescription="Daily Data"
         android:src="@drawable/ic_data" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:background="@color/actionbar_menu_background_end_color" />
 
     <ImageButton
         android:id="@+id/actoionbar_menu_archive"
-        style="@style/actionbar_menu_button.landscape"
+        style="@style/actionbar_menu_image_button"
+        android:contentDescription="Archive"
         android:src="@drawable/ic_archive" />
 
 </LinearLayout>
