@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import au.id.teda.iinetusage.phone.R;
 import au.id.teda.iinetusage.phone.database.DailyDataDBAdapter;
+import au.id.teda.iinetusage.phone.helper.AccountHelper;
 import au.id.teda.iinetusage.phone.helper.PreferenceHelper;
 
 public class DailyDataCursorAdapter extends CursorAdapter {
@@ -41,6 +42,9 @@ public class DailyDataCursorAdapter extends CursorAdapter {
 	// Load object for preferences
 	private final PreferenceHelper mySettings;
 	
+	// Account
+	private final AccountHelper myAccount;
+	
 	// Context
 	private final Context myActivityContext;
 	
@@ -49,10 +53,14 @@ public class DailyDataCursorAdapter extends CursorAdapter {
     boolean showFuture = false;
     
     // Integer used to determine row number and background color
-    private int rowNum = 0;
+    private int rowNum;
+    private int oldRowNum;
     
     // Integer for accumulative total
     private long accumLong = 0;
+    
+    // Multidimensional array
+    private long[] accumArray;
 	
 	public DailyDataCursorAdapter(Context context, Cursor cursor) {
 		super(context, cursor, true);
@@ -64,16 +72,19 @@ public class DailyDataCursorAdapter extends CursorAdapter {
 		// Set context
 		myActivityContext = context;
 		
-		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
-		showDecimal = settings.getBoolean("show_decimal", false);
-		showFuture = settings.getBoolean("show_future", false);
+		// Set myAccount reference
+		myAccount = new AccountHelper();
+		
+		// Intialise array
+		int days = (int) (myAccount.getCurrentDaysToGo() + myAccount.getCurrentDaysSoFar());
+		accumArray = new long[days];
 	}
     
 	@Override
 	public void bindView(View view, Context context, Cursor cursor) {
 		
 		// Increase row number by one
-		++rowNum;
+		rowNum = cursor.getPosition();
 		
 		// Set reference to TextViews
 		myDate = (TextView) view.findViewById(R.id.daily_data_row_date);
@@ -109,11 +120,25 @@ public class DailyDataCursorAdapter extends CursorAdapter {
 			
 			// Get long values from database cursor
 			long freezoneLong = cursor.getLong(cursor.getColumnIndex(DailyDataDBAdapter.FREEZONE));
-			accumLong = accumLong + totalLong;
+			
+			// Need to use an array to store accumulative values because views are destroyed
+			// Check to see if rows are increasing
+			if (oldRowNum < rowNum || rowNum == 0){
+				// Check to see if row number in array does not have a value
+				if (accumArray[rowNum] == 0){
+					// Add new total to accumulative total
+					accumLong = accumLong + totalLong;
+					// Add accumulative total to array based on position
+					accumArray[rowNum] = accumLong;
+				}
+			}
 			
 			// Set TextView string values
 			myFreezone.setText(getUsageString(freezoneLong));
-			myAccum.setText(getUsageString(accumLong));
+			myAccum.setText(getUsageString(accumArray[rowNum]));
+			
+			// Change old row number to new
+			oldRowNum = rowNum;
 		}
 	}
 
