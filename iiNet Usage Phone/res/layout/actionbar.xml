@@ -3,7 +3,7 @@
     android:id="@+id/actionbar"
     android:layout_width="fill_parent"
     android:layout_height="@dimen/actionbar_height"
-    android:background="@drawable/actionbar_gradient_backgroud" >
+    android:background="@color/actionbar_menu_background_end_color" >
 
     <ImageButton
         android:id="@+id/actionbar_refresh_button"
@@ -14,23 +14,24 @@
         android:src="@drawable/ic_actionbar_refresh" />
 
     <ImageButton
-        android:id="@+id/actionbar_home_button"
+        android:id="@+id/actionbar_logo"
         style="@style/actionbar_image_button"
         android:layout_alignParentLeft="true"
         android:contentDescription="@string/actionbar_home_button_description"
         android:onClick="onClickActionBarHome"
-        android:src="@drawable/ic_actionbar_home" />
-
-    <ImageView
-        android:id="@+id/actionbar_separator_1"
-        style="@style/actionbar_separator"
-        android:layout_toRightOf="@+id/actionbar_home_button"
-        android:contentDescription="@string/actionbar_separator_description" />
+        android:src="@drawable/ic_launcher" />
 
     <TextView
         android:id="@+id/actionbar_title"
         style="@style/actionbar_title_text"
-        android:layout_toRightOf="@+id/actionbar_separator_1"
-        android:text="@string/actionbar_default_title" />
+        android:layout_toRightOf="@+id/actionbar_logo"
+        android:text="@string/actionbar_title_default" />
+    
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/application_line_1_height"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        layout="@layout/line" />
 
 </RelativeLayout>

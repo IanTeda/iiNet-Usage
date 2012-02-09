@@ -7,15 +7,15 @@
     <string name="actionbar_separator_description">Separator image</string>
 
     <!-- Actionbar titles -->
-    <string name="actionbar_default_title">iiNet Usage</string>
-    <string name="actionbar_user_pass_title">Credential Check</string>
-    <string name="actionbar_summary_view_title">Summary</string>
-    <string name="actionbar_usage_graph_view_title">Usage Graph</string>
-    <string name="actionbar_usage_data_view_title">Daily Usage (MB)</string>
-    <string name="actionbar_history_title">History</string>
+    <string name="actionbar_title_default">iiNet Usage</string>
+    <string name="actionbar_title_user_pass">Credential Check</string>
+    <string name="actionbar_title_dashboard">Dashboard</string>
+    <string name="actionbar_title_graphs">Usage Graph</string>
+    <string name="actionbar_title_daily_data">Daily Usage</string>
+    <string name="actionbar_title_archive">Archive</string>
     
     <!-- Actionbar button text -->
-    <string name="actionbar_button_dash">DASHBOARD</string>
+    <string name="actionbar_button_dash">DASH</string>
     <string name="actionbar_button_charts">CHARTS</string>
     <string name="actionbar_button_data">DATA</string>
     <string name="actionbar_button_archive">ARCHIVE</string>

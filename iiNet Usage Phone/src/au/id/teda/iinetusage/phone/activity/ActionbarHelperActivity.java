@@ -1,8 +1,12 @@
 package au.id.teda.iinetusage.phone.activity;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Typeface;
+import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
@@ -42,20 +46,20 @@ public class ActionbarHelperActivity extends Activity {
 	 * Hide actionbar home icon
 	 */
 	public void hideActionbarHomeIcon() {
-		ImageButton myHomeImageButton = (ImageButton) findViewById(R.id.actionbar_home_button);
-		ImageView mySeparatorImage = (ImageView) findViewById(R.id.actionbar_separator_1);
+		ImageButton myHomeImageButton = (ImageButton) findViewById(R.id.actionbar_logo);
+		//ImageView mySeparatorImage = (ImageView) findViewById(R.id.actionbar_separator_1);
 		myHomeImageButton.setVisibility(View.GONE);
-		mySeparatorImage.setVisibility(View.GONE);
+		//mySeparatorImage.setVisibility(View.GONE);
 	}
 
 	/**
 	 * Show actionbar home icon
 	 */
 	public void showActionbarHomeIcon() {
-		ImageButton myHomeImageButton = (ImageButton) findViewById(R.id.actionbar_home_button);
-		ImageView mySeparatorImage = (ImageView) findViewById(R.id.actionbar_separator_1);
+		ImageButton myHomeImageButton = (ImageButton) findViewById(R.id.actionbar_logo);
+		//ImageView mySeparatorImage = (ImageView) findViewById(R.id.actionbar_separator_1);
 		myHomeImageButton.setVisibility(View.VISIBLE);
-		mySeparatorImage.setVisibility(View.VISIBLE);
+		//mySeparatorImage.setVisibility(View.VISIBLE);
 	}
 
 	/**
@@ -63,8 +67,17 @@ public class ActionbarHelperActivity extends Activity {
 	 * @param actionbarTitle
 	 */
 	public void setActionbarTitle(String actionbarTitle) {
+		// Set custom font
+		//Typeface myCustomFont = Typeface.createFromAsset(getAssets(), "OSP-DIN.ttf");
+		
+		// Set TextView Reference
 		TextView myActionbarTitle = (TextView) findViewById(R.id.actionbar_title);
+		
+		// Set TextView text
 		myActionbarTitle.setText(actionbarTitle);
+		
+		// Set TextView custom font
+		//myActionbarTitle.setTypeface(myCustomFont);
 	}
 
 	/**

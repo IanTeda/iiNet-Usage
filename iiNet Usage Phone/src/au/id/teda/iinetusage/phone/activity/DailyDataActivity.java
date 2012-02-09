@@ -47,12 +47,26 @@ public class DailyDataActivity extends ListActivity {
 	}
 	
 	
+	/**
+	 * Set the actionbar title with actionbarTitle string
+	 * @param actionbarTitle
+	 */
+	public void setActionbarTitle(String actionbarTitle) {
+		// Set TextView Reference
+		TextView myActionbarTitle = (TextView) findViewById(R.id.actionbar_title);
+		
+		// Set TextView text
+		myActionbarTitle.setText(actionbarTitle);
+	}
+	
 	
 	@Override
 	protected void onResume() {
 		super.onResume();
 		try {
 			loadData();
+			String actionbarTitle = getString(R.string.actionbar_title_daily_data);
+			setActionbarTitle(actionbarTitle);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

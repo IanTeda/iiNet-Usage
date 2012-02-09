@@ -150,7 +150,7 @@ public class UserPassActivity extends ActionbarHelperActivity implements
 		hideActionbarRefersh();
 
 		// Set action bar title
-		setActionbarTitle(this.getString(R.string.actionbar_user_pass_title));
+		setActionbarTitle(this.getString(R.string.actionbar_title_user_pass));
 
 	}
 

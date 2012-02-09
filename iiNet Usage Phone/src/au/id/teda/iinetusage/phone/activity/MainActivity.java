@@ -61,6 +61,8 @@ public class MainActivity extends ActionbarHelperActivity {
 		super.onResume();
 		
 		loadViews();
+		
+		setActionbarTitle(getString(R.string.actionbar_title_dashboard));
 
 	}
 	

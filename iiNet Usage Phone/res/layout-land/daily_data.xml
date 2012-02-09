@@ -17,6 +17,8 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:paddingLeft="@dimen/application_padding"
+        android:paddingRight="@dimen/application_padding"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/actionbar"
         android:layout_toRightOf="@+id/actionbar_menu"

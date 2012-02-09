@@ -13,6 +13,11 @@
         android:id="@+id/actionbar_menu"
         layout="@layout/actionbar_menu" />
 
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/application_line_2_height"
+        layout="@layout/line" />
+
     <Button
         android:id="@+id/alertbox_button"
         style="@style/dashboard_alertbox_style"
@@ -39,12 +44,10 @@
             <include
                 android:id="@+id/dashboard_peak_include"
                 layout="@layout/dashboard_peak_stats" />
-            
+
             <include
                 android:id="@+id/dashboard_offpeak_include"
                 layout="@layout/dashboard_offpeak_stats" />
-
-            
         </LinearLayout>
     </ScrollView>
 
