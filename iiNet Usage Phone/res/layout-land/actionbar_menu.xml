@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/actionbar_menu"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
+    android:background="@color/actionbar_menu_press_background_end_color"
     android:orientation="vertical" >
 
     <ImageButton
         android:id="@+id/actionbar_menu_dash"
-        style="@style/actionbar_menu_image_button"
+        style="@style/actionbar_menu_button.landscape"
         android:src="@drawable/ic_stats"/>
     
     <ImageButton
         android:id="@+id/actionbar_menu_graph"
-        style="@style/actionbar_menu_image_button"
+        style="@style/actionbar_menu_button.landscape"
         android:src="@drawable/ic_charts"/>
 
     <ImageButton
         android:id="@+id/actionbar_menu_data"
-        style="@style/actionbar_menu_image_button"
+        style="@style/actionbar_menu_button.landscape"
         android:src="@drawable/ic_data" />
 
     <ImageButton
         android:id="@+id/actoionbar_menu_archive"
-        style="@style/actionbar_menu_image_button"
+        style="@style/actionbar_menu_button.landscape"
         android:src="@drawable/ic_archive" />
 
 </LinearLayout>

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="30dp"
     android:layout_marginTop="5dp"
-    android:background="@drawable/actionbar_menu_button"
+    android:background="@drawable/actionbar_button_background"
     android:orientation="horizontal" >
 
     <TextView
