@@ -7,15 +7,34 @@
     <include
         android:id="@+id/actionbar_menu"
         layout="@layout/actionbar_menu" />
-    
-            <include
-        layout="@layout/line2_vert" />
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Graphs"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+    <include layout="@layout/line2_vert" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:paddingLeft="@dimen/application_padding"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/chart_title"
+            style="@style/h1"
+            android:gravity="center"
+            android:text="@string/chart_title" />
+
+        <View
+            android:id="@+id/peak_data_line"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/application_line_1_height"
+            android:background="#ffffff" />
+
+        <LinearLayout
+            android:id="@+id/chart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal" />
+    </LinearLayout>
 
 </LinearLayout>

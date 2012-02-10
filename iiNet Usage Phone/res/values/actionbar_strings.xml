@@ -16,7 +16,7 @@
     
     <!-- Actionbar button text -->
     <string name="actionbar_button_dash">DASH</string>
-    <string name="actionbar_button_charts">CHARTS</string>
+    <string name="actionbar_button_charts">CHART</string>
     <string name="actionbar_button_data">DATA</string>
     <string name="actionbar_button_archive">ARCHIVE</string>
 
