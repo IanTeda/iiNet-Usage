@@ -1,9 +1,16 @@
 package au.id.teda.iinetusage.phone.activity;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 
 import org.achartengine.GraphicalView;
 
+import android.gesture.Gesture;
+import android.gesture.GestureLibraries;
+import android.gesture.GestureLibrary;
+import android.gesture.GestureOverlayView;
+import android.gesture.GestureOverlayView.OnGesturePerformedListener;
+import android.gesture.Prediction;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -11,16 +18,18 @@ import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 import au.id.teda.iinetusage.phone.R;
 import au.id.teda.iinetusage.phone.chart.StackedBarChart;
 import au.id.teda.iinetusage.phone.helper.AccountHelper;
 
-public class ChartActivity extends ActionbarHelperActivity {
+public class ChartActivity extends ActionbarHelperActivity implements OnGesturePerformedListener {
 
 	// Static tags for debugging
 	private static final String DEBUG_TAG = "iiNet Usage";
@@ -38,31 +47,44 @@ public class ChartActivity extends ActionbarHelperActivity {
 	private Animation slideLeftOut;
 	private Animation slideRightIn;
 	private Animation slideRightOut;
+	private LinearLayout chartLayout;
+	private GestureLibrary myGestureLibrary;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.chart);
+		//setContentView(R.layout.chart);
 
 		myViewFlipper = (ViewFlipper) findViewById(R.id.flipper);
 		slideLeftIn = AnimationUtils.loadAnimation(this, R.anim.slide_left_in);
 		slideLeftOut = AnimationUtils.loadAnimation(this, R.anim.slide_left_out);
 		slideRightIn = AnimationUtils.loadAnimation(this, R.anim.slide_right_in);
 		slideRightOut = AnimationUtils.loadAnimation(this, R.anim.slide_right_out);
+		chartLayout = (LinearLayout) findViewById(R.id.stacked_bar_chart);
 
 		// Set reference to gesture detector
 		myGestureDetector = new GestureDetector(new MyGestureDetector());
 
 		// Set the touch listener for the main view to be our custom gesture
 		// listener
-		gestureListener = new View.OnTouchListener() {
+		/**gestureListener = new View.OnTouchListener() {
 			public boolean onTouch(View v, MotionEvent event) {
 				if (myGestureDetector.onTouchEvent(event)) {
 					return true;
 				}
 				return false;
 			}
-		};
+		};**/
+		
+		GestureOverlayView gestureOverlayView = new GestureOverlayView(this);
+		View inflate = getLayoutInflater().inflate(R.layout.chart, null);
+		gestureOverlayView.addView(inflate);
+		gestureOverlayView.addOnGesturePerformedListener(this);
+		myGestureLibrary = GestureLibraries.fromRawResource(this, R.raw.gestures);
+		if (!myGestureLibrary.load()) {
+			finish();
+		}
+		setContentView(gestureOverlayView);
 		
 		loadChart();
 	}
@@ -97,7 +119,7 @@ public class ChartActivity extends ActionbarHelperActivity {
 
 	public void loadChart() {
 		if (myChart == null) {
-			LinearLayout chartLayout = (LinearLayout) findViewById(R.id.stacked_bar_chart);
+			
 			StackedBarChart stackedBarChart = new StackedBarChart(this);
 			myChart = (GraphicalView) stackedBarChart.getBarChartView();
 			chartLayout.addView(myChart);
@@ -156,6 +178,17 @@ public class ChartActivity extends ActionbarHelperActivity {
 			return true;
 		}
 
+	}
+
+	@Override
+	public void onGesturePerformed(GestureOverlayView overlay, Gesture gesture) {
+		ArrayList<Prediction> predictions = myGestureLibrary.recognize(gesture);
+		for (Prediction prediction : predictions) {
+			if (prediction.score > 1.0) {
+				Toast.makeText(this, prediction.name, Toast.LENGTH_SHORT)
+						.show();
+			}
+		}
 	}
 
 }
