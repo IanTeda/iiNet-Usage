@@ -30,12 +30,28 @@
             android:layout_height="@dimen/application_line_1_height"
             android:background="#ffffff" />
 
+    <ViewFlipper
+        android:id="@+id/flipper"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="view 1" />
+
         <LinearLayout
-            android:id="@+id/chart"
+            android:id="@+id/stacked_bar_chart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="horizontal" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="view 3" />
+    </ViewFlipper>
     </LinearLayout>
 
 </LinearLayout>

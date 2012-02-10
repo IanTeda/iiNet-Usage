@@ -40,10 +40,12 @@
             android:layout_height="fill_parent"
             android:text="view 1" />
 
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:text="view 2" />
+        <LinearLayout
+            android:id="@+id/stacked_bar_chart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal" />
 
         <TextView
             android:layout_width="fill_parent"

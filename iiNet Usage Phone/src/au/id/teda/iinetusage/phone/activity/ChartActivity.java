@@ -33,6 +33,7 @@ public class ChartActivity extends ActionbarHelperActivity {
 	private static final int SWIPE_MAX_OFF_PATH = 250;
 	private static final int SWIPE_THRESHOLD_VELOCITY = 200;
 	private GestureDetector myGestureDetector;
+	private View.OnTouchListener gestureListener;
 	private Animation slideLeftIn;
 	private Animation slideLeftOut;
 	private Animation slideRightIn;
@@ -42,8 +43,6 @@ public class ChartActivity extends ActionbarHelperActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.chart);
-
-		// loadChart();
 
 		myViewFlipper = (ViewFlipper) findViewById(R.id.flipper);
 		slideLeftIn = AnimationUtils.loadAnimation(this, R.anim.slide_left_in);
@@ -56,14 +55,16 @@ public class ChartActivity extends ActionbarHelperActivity {
 
 		// Set the touch listener for the main view to be our custom gesture
 		// listener
-		myViewFlipper.setOnTouchListener(new View.OnTouchListener() {
+		gestureListener = new View.OnTouchListener() {
 			public boolean onTouch(View v, MotionEvent event) {
 				if (myGestureDetector.onTouchEvent(event)) {
 					return true;
 				}
 				return false;
 			}
-		});
+		};
+		
+		loadChart();
 	}
 
 	@Override
@@ -96,7 +97,7 @@ public class ChartActivity extends ActionbarHelperActivity {
 
 	public void loadChart() {
 		if (myChart == null) {
-			LinearLayout chartLayout = (LinearLayout) findViewById(R.id.chart);
+			LinearLayout chartLayout = (LinearLayout) findViewById(R.id.stacked_bar_chart);
 			StackedBarChart stackedBarChart = new StackedBarChart(this);
 			myChart = (GraphicalView) stackedBarChart.getBarChartView();
 			chartLayout.addView(myChart);
