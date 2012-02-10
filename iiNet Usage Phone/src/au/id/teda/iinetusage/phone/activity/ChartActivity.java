@@ -17,7 +17,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 import au.id.teda.iinetusage.phone.R;
-import au.id.teda.iinetusage.phone.animation.ViewFlipperAnimation;
 import au.id.teda.iinetusage.phone.chart.StackedBarChart;
 import au.id.teda.iinetusage.phone.helper.AccountHelper;
 
@@ -29,19 +28,15 @@ public class ChartActivity extends ActionbarHelperActivity {
 
 	private GraphicalView myChart;
 	private ViewFlipper myViewFlipper;
-	private float oldTouchValue;
-	private ViewFlipperAnimation myFlipperAnimation;
 
 	private static final int SWIPE_MIN_DISTANCE = 120;
 	private static final int SWIPE_MAX_OFF_PATH = 250;
 	private static final int SWIPE_THRESHOLD_VELOCITY = 200;
-	private GestureDetector gestureDetector;
-	private View.OnTouchListener gestureListener;
+	private GestureDetector myGestureDetector;
 	private Animation slideLeftIn;
 	private Animation slideLeftOut;
 	private Animation slideRightIn;
 	private Animation slideRightOut;
-	private ViewFlipper viewFlipper;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,32 +44,36 @@ public class ChartActivity extends ActionbarHelperActivity {
 		setContentView(R.layout.chart);
 
 		// loadChart();
-		
-		viewFlipper = (ViewFlipper)findViewById(R.id.flipper);
-        slideLeftIn = AnimationUtils.loadAnimation(this, R.anim.left_in);
-        slideLeftOut = AnimationUtils.loadAnimation(this, R.anim.left_out);
-        slideRightIn = AnimationUtils.loadAnimation(this, R.anim.right_in);
-        slideRightOut = AnimationUtils.loadAnimation(this, R.anim.right_out);
-        
-        gestureDetector = new GestureDetector(new MyGestureDetector());
-        gestureListener = new View.OnTouchListener() {
-            public boolean onTouch(View v, MotionEvent event) {
-                if (gestureDetector.onTouchEvent(event)) {
-                    return true;
-                }
-                return false;
-            }
-        };
+
+		myViewFlipper = (ViewFlipper) findViewById(R.id.flipper);
+		slideLeftIn = AnimationUtils.loadAnimation(this, R.anim.slide_left_in);
+		slideLeftOut = AnimationUtils.loadAnimation(this, R.anim.slide_left_out);
+		slideRightIn = AnimationUtils.loadAnimation(this, R.anim.slide_right_in);
+		slideRightOut = AnimationUtils.loadAnimation(this, R.anim.slide_right_out);
+
+		// Set reference to gesture detector
+		myGestureDetector = new GestureDetector(new MyGestureDetector());
+
+		// Set the touch listener for the main view to be our custom gesture
+		// listener
+		myViewFlipper.setOnTouchListener(new View.OnTouchListener() {
+			public boolean onTouch(View v, MotionEvent event) {
+				if (myGestureDetector.onTouchEvent(event)) {
+					return true;
+				}
+				return false;
+			}
+		});
 	}
 
 	@Override
-    public boolean onTouchEvent(MotionEvent event) {
-        if (gestureDetector.onTouchEvent(event))
-         return true;
-     else
-      return false;
-    }
-	
+	public boolean onTouchEvent(MotionEvent event) {
+		if (myGestureDetector.onTouchEvent(event))
+			return true;
+		else
+			return false;
+	}
+
 	/**
 	 * Activity onResume method.
 	 */
@@ -120,28 +119,42 @@ public class ChartActivity extends ActionbarHelperActivity {
 			// TODO: how do i use this??
 		}
 	};
-	
+
 	class MyGestureDetector extends SimpleOnGestureListener {
-        @Override
-        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            try {
-                if (Math.abs(e1.getY() - e2.getY()) > SWIPE_MAX_OFF_PATH)
-                    return false;
-                // right to left swipe
-                if(e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                 viewFlipper.setInAnimation(slideLeftIn);
-                    viewFlipper.setOutAnimation(slideLeftOut);
-                 viewFlipper.showNext();
-                }  else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                 viewFlipper.setInAnimation(slideRightIn);
-                    viewFlipper.setOutAnimation(slideRightOut);
-                 viewFlipper.showPrevious();
-                }
-            } catch (Exception e) {
-                // nothing
-            }
-            return false;
-        }
-    }
+		@Override
+		public boolean onFling(MotionEvent motionEvent1,
+				MotionEvent motionEvent2, float velocityX, float velocityY) {
+			try {
+				// Check to see if swipe is to short
+				if (Math.abs(motionEvent1.getY() - motionEvent2.getY()) > SWIPE_MAX_OFF_PATH) {
+					return false;
+				}
+				// Check if it is a right to left swipe
+				if (motionEvent1.getX() - motionEvent2.getX() > SWIPE_MIN_DISTANCE
+						&& Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+					myViewFlipper.setInAnimation(slideLeftIn);
+					myViewFlipper.setOutAnimation(slideLeftOut);
+					myViewFlipper.showNext();
+				}
+				// Else check if it is a left to right swipe
+				else if (motionEvent2.getX() - motionEvent1.getX() > SWIPE_MIN_DISTANCE
+						&& Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+					myViewFlipper.setInAnimation(slideRightIn);
+					myViewFlipper.setOutAnimation(slideRightOut);
+					myViewFlipper.showPrevious();
+				}
+			} catch (Exception e) {
+				// nothing
+			}
+			return false;
+		}
+
+		// It is necessary to return true from onDown for the onFling event to register
+		@Override
+		public boolean onDown(MotionEvent e) {
+			return true;
+		}
+
+	}
 
 }
