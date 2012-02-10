@@ -16,7 +16,7 @@
     <include
         android:layout_width="fill_parent"
         android:layout_height="@dimen/application_line_2_height"
-        layout="@layout/line" />
+        layout="@layout/line2_horz" />
 
     <TextView
         android:id="@+id/daily_data_title"

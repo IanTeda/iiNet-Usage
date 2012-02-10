@@ -65,8 +65,8 @@ public class DailyDataActivity extends ListActivity {
 		super.onResume();
 		try {
 			loadData();
-			String actionbarTitle = getString(R.string.actionbar_title_daily_data);
-			setActionbarTitle(actionbarTitle);
+			//String actionbarTitle = getString(R.string.actionbar_title_daily_data);
+			//setActionbarTitle(actionbarTitle);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

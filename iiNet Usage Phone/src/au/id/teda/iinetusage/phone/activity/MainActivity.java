@@ -62,7 +62,11 @@ public class MainActivity extends ActionbarHelperActivity {
 		
 		loadViews();
 		
-		setActionbarTitle(getString(R.string.actionbar_title_dashboard));
+		// We only have an action bar in portrait
+		if (isPortrait()){
+			setActionbarTitle(getString(R.string.actionbar_title_dashboard));
+		}
+		
 
 	}
 	

@@ -9,6 +9,19 @@
         android:id="@+id/actionbar_menu_dash"
         style="@style/actionbar_menu_image_button"
         android:contentDescription="Dashboard"
+        android:src="@drawable/ic_launcher" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:background="@color/actionbar_menu_background_end_color" />
+
+    <ImageButton
+        android:id="@+id/actionbar_menu_dash"
+        style="@style/actionbar_menu_image_button"
+        android:contentDescription="Dashboard"
         android:src="@drawable/ic_stats" />
 
     <View
