@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_below="@+id/actionbar_top"
-    android:background="@color/actionbar_menu_background_start_color" >
+    android:background="@color/actionbar_menu_background" >
 
     <Button
         android:id="@+id/actionbar_menu_dash"

@@ -3,7 +3,7 @@
     android:id="@+id/actionbar"
     android:layout_width="fill_parent"
     android:layout_height="@dimen/actionbar_height"
-    android:background="@color/actionbar_menu_background_end_color" >
+    android:background="@color/actionbar_background" >
 
     <ImageButton
         android:id="@+id/actionbar_refresh_button"

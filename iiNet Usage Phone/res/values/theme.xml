@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <style name="application_theme" parent="android:style/Theme.Black.NoTitleBar">
-        <item name="android:panelFullBackground">@drawable/actionbar_gradient_backgroud</item>
-    </style>
-    
-    
-</resources>

@@ -2,65 +2,45 @@
     android:id="@+id/actionbar_menu"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:background="@color/actionbar_menu_press_background_end_color"
+    android:background="@color/actionbar_menu_background"
     android:orientation="vertical" >
 
     <ImageButton
-        android:id="@+id/actionbar_menu_dash"
+        android:id="@+id/actionbar_menu_logo"
         style="@style/actionbar_menu_image_button"
-        android:contentDescription="Dashboard"
+        android:contentDescription="@string/actionbar_title_default"
         android:src="@drawable/ic_launcher" />
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"
-        android:background="@color/actionbar_menu_background_end_color" />
+    <View style="@style/actionbar_menu_line" />
 
     <ImageButton
         android:id="@+id/actionbar_menu_dash"
         style="@style/actionbar_menu_image_button"
-        android:contentDescription="Dashboard"
+        android:contentDescription="@string/actionbar_title_dashboard"
         android:src="@drawable/ic_stats" />
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"
-        android:background="@color/actionbar_menu_background_end_color" />
+    <View style="@style/actionbar_menu_line" />
 
     <ImageButton
         android:id="@+id/actionbar_menu_graph"
         style="@style/actionbar_menu_image_button"
-        android:contentDescription="Charts"
+        android:contentDescription="@string/actionbar_title_graphs"
         android:src="@drawable/ic_charts" />
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"
-        android:background="@color/actionbar_menu_background_end_color" />
+    <View style="@style/actionbar_menu_line" />
 
     <ImageButton
         android:id="@+id/actionbar_menu_data"
         style="@style/actionbar_menu_image_button"
-        android:contentDescription="Daily Data"
+        android:contentDescription="@string/actionbar_title_daily_data"
         android:src="@drawable/ic_data" />
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"
-        android:background="@color/actionbar_menu_background_end_color" />
+    <View style="@style/actionbar_menu_line" />
 
     <ImageButton
         android:id="@+id/actoionbar_menu_archive"
         style="@style/actionbar_menu_image_button"
-        android:contentDescription="Archive"
+        android:contentDescription="@string/actionbar_title_archive"
         android:src="@drawable/ic_archive" />
 
 </LinearLayout>

@@ -1,31 +1,15 @@
-<!--
-  Copyright 2011 The Android Open Source Project
-
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
-
-      http://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
--->
-
 <resources>
 
-    <color name="actionbar_backgroud_color">#ff5800</color>
+    <!-- Actionbar colors -->
+    <color name="actionbar_background">#545252</color>
+    <color name="actionbar_menu_background">#2d2c2c</color>
+    <color name="actionbar_menu_line">#545252</color>
+    <color name="actionbar_menu_press_background">#7c7a7a</color>
     <color name="actionbar_title_color">#ffffff</color>
 
-    <!-- Actionbar gradient colors -->
-    <color name="actionbar_background_start_color">#ff5800</color>
-    <color name="actionbar_background_end_color">#ff8647</color>
-    <color name="actionbar_menu_background_start_color">#2d2c2c</color>
-    <color name="actionbar_menu_background_end_color">#545252</color>
-    <color name="actionbar_menu_press_background_start_color">#7c7a7a</color>
-    <color name="actionbar_menu_press_background_end_color">#2d2c2c</color>
+    <!-- Table Header -->
+    <color name="table_header_start_color">#2d2c2c</color>
+    <color name="table_header_end_color">#545252</color>
 
     <!-- App Defaults -->
     <color name="application_background_color">#201f1f</color>
@@ -35,7 +19,7 @@
     <color name="application_h2_text_color">#FF5900</color>
     <color name="application_h2_text_alt_color">#90b9b9b9</color>
     <color name="application_text_highlight_color">#fffafa</color>
-    
+
     <!-- Phone dashboard alert -->
     <color name="alertbox_border_color">#CC3333</color>
     <color name="alertbox_text_color">#CC3333</color>
