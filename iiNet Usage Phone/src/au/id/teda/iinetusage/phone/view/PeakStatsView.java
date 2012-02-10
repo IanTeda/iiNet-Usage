@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.widget.TextView;
 import au.id.teda.iinetusage.phone.R;
 import au.id.teda.iinetusage.phone.helper.AccountHelper;
@@ -12,8 +11,8 @@ import au.id.teda.iinetusage.phone.helper.AccountHelper;
 public class PeakStatsView extends AccountHelper {
 	
 	// Static strings for debug tags
-	private static final String DEBUG_TAG = "iiNet Usage";
-	private static final String INFO_TAG = PeakStatsView.class.getSimpleName();
+	//private static final String DEBUG_TAG = "iiNet Usage";
+	//private static final String INFO_TAG = PeakStatsView.class.getSimpleName();
 	
 	private final Context myActivityContext;
 	private final Activity myActivity;
@@ -26,19 +25,16 @@ public class PeakStatsView extends AccountHelper {
 	
 	// TextView objects for Daily Average block
 	private final TextView myPeakDailyUsedTitle;
-	private final TextView myPeakDailySlashTitle;
 	private final TextView myPeakDailySuggestedTitle;
 	private final TextView myPeakDailyData;
 	
 	// TextView objects for Data block
 	private final TextView myPeakDataUsedTitle;
-	private final TextView myPeakDataSlashTitle;
 	private final TextView myPeakDataRemainingTitle;
 	private final TextView myPeakDataData;
 	
 	// TextView objects for Percent Used block
 	private final TextView myPeakPercentUsedTitle;
-	private final TextView myPeakPercentSlashTitle;
 	private final TextView myPeakPercentRemainingTitle;
 	private final TextView myPeakNumberData;
 	private final TextView myPeakNumberUnit;
@@ -69,19 +65,16 @@ public class PeakStatsView extends AccountHelper {
 		
 		// Set Daily Average TextView objects
 		myPeakDailyUsedTitle = (TextView) myActivity.findViewById(R.id.peak_daily_used);
-		myPeakDailySlashTitle = (TextView) myActivity.findViewById(R.id.peak_daily_slash);
 		myPeakDailySuggestedTitle = (TextView) myActivity.findViewById(R.id.peak_daily_suggested);
 		myPeakDailyData = (TextView) myActivity.findViewById(R.id.peak_daily_data);
 
 		// Set Data TextView objects
 		myPeakDataUsedTitle = (TextView) myActivity.findViewById(R.id.peak_data_used);
-		myPeakDataSlashTitle = (TextView) myActivity.findViewById(R.id.peak_data_slash);
 		myPeakDataRemainingTitle = (TextView) myActivity.findViewById(R.id.peak_data_remaining);
 		myPeakDataData = (TextView) myActivity.findViewById(R.id.peak_data_data);
 		
 		// Set Percent TextView objects
 		myPeakPercentUsedTitle = (TextView) myActivity.findViewById(R.id.peak_percent_used);
-		myPeakPercentSlashTitle = (TextView) myActivity.findViewById(R.id.peak_percent_slash);
 		myPeakPercentRemainingTitle = (TextView) myActivity.findViewById(R.id.peak_percent_remaining);
 		myPeakNumberData = (TextView) myActivity.findViewById(R.id.peak_number);
 		myPeakNumberUnit = (TextView) myActivity.findViewById(R.id.peak_number_unit);

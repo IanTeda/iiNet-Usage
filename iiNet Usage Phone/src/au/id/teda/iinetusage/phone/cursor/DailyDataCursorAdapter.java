@@ -4,12 +4,8 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Calendar;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.database.Cursor;
-import android.graphics.Color;
-import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,8 +22,8 @@ public class DailyDataCursorAdapter extends CursorAdapter {
 	// TODO: Update layout for better scrolling
 	// TODO: Add onclick hourly data
 	
-	private static final String DEBUG_TAG = "iiNet Usage";
-	private static final String INFO_TAG = DailyDataCursorAdapter.class.getSimpleName();
+	//private static final String DEBUG_TAG = "iiNet Usage";
+	//private static final String INFO_TAG = DailyDataCursorAdapter.class.getSimpleName();
 	
 	// Set objects for TextViews
 	private LinearLayout myRow;

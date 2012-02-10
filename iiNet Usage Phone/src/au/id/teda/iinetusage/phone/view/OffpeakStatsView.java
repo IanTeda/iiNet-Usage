@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.widget.TextView;
 import au.id.teda.iinetusage.phone.R;
 import au.id.teda.iinetusage.phone.helper.AccountHelper;
@@ -12,8 +11,8 @@ import au.id.teda.iinetusage.phone.helper.AccountHelper;
 public class OffpeakStatsView extends AccountHelper {
 	
 	// Static strings for debug tags
-	private static final String DEBUG_TAG = "iiNet Usage";
-	private static final String INFO_TAG = OffpeakStatsView.class.getSimpleName();
+	//private static final String DEBUG_TAG = "iiNet Usage";
+	//private static final String INFO_TAG = OffpeakStatsView.class.getSimpleName();
 	
 	private final Context myActivityContext;
 	private final Activity myActivity;
@@ -26,19 +25,16 @@ public class OffpeakStatsView extends AccountHelper {
 	
 	// TextView objects for Daily Average block
 	private final TextView myOffpeakDailyUsedTitle;
-	private final TextView myOffpeakDailySlashTitle;
 	private final TextView myOffpeakDailySuggestedTitle;
 	private final TextView myOffpeakDailyData;
 	
 	// TextView objects for Data block
 	private final TextView myOffpeakDataUsedTitle;
-	private final TextView myOffpeakDataSlashTitle;
 	private final TextView myOffpeakDataRemainingTitle;
 	private final TextView myOffpeakDataData;
 	
 	// TextView objects for Percent Used block
 	private final TextView myOffpeakPercentUsedTitle;
-	private final TextView myOffpeakPercentSlashTitle;
 	private final TextView myOffpeakPercentRemainingTitle;
 	private final TextView myOffpeakNumberData;
 	private final TextView myOffpeakNumberUnit;
@@ -69,19 +65,16 @@ public class OffpeakStatsView extends AccountHelper {
 		
 		// Set Daily Average TextView objects
 		myOffpeakDailyUsedTitle = (TextView) myActivity.findViewById(R.id.offpeak_daily_used);
-		myOffpeakDailySlashTitle = (TextView) myActivity.findViewById(R.id.offpeak_daily_slash);
 		myOffpeakDailySuggestedTitle = (TextView) myActivity.findViewById(R.id.offpeak_daily_suggested);
 		myOffpeakDailyData = (TextView) myActivity.findViewById(R.id.offpeak_daily_data);
 
 		// Set Data TextView objects
 		myOffpeakDataUsedTitle = (TextView) myActivity.findViewById(R.id.offpeak_data_used);
-		myOffpeakDataSlashTitle = (TextView) myActivity.findViewById(R.id.offpeak_data_slash);
 		myOffpeakDataRemainingTitle = (TextView) myActivity.findViewById(R.id.offpeak_data_remaining);
 		myOffpeakDataData = (TextView) myActivity.findViewById(R.id.offpeak_data_data);
 		
 		// Set Percent TextView objects
 		myOffpeakPercentUsedTitle = (TextView) myActivity.findViewById(R.id.offpeak_percent_used);
-		myOffpeakPercentSlashTitle = (TextView) myActivity.findViewById(R.id.offpeak_percent_slash);
 		myOffpeakPercentRemainingTitle = (TextView) myActivity.findViewById(R.id.offpeak_percent_remaining);
 		myOffpeakNumberData = (TextView) myActivity.findViewById(R.id.offpeak_number);
 		myOffpeakNumberUnit = (TextView) myActivity.findViewById(R.id.offpeak_number_unit);

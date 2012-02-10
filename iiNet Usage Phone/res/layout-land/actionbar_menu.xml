@@ -6,18 +6,10 @@
     android:orientation="vertical" >
 
     <ImageButton
-        android:id="@+id/actionbar_menu_logo"
+        android:id="@+id/actionbar_menu_dash"
         style="@style/actionbar_menu_image_button"
         android:contentDescription="@string/actionbar_title_default"
         android:src="@drawable/ic_launcher" />
-
-    <View style="@style/actionbar_menu_line" />
-
-    <ImageButton
-        android:id="@+id/actionbar_menu_dash"
-        style="@style/actionbar_menu_image_button"
-        android:contentDescription="@string/actionbar_title_dashboard"
-        android:src="@drawable/ic_stats" />
 
     <View style="@style/actionbar_menu_line" />
 
@@ -42,5 +34,14 @@
         style="@style/actionbar_menu_image_button"
         android:contentDescription="@string/actionbar_title_archive"
         android:src="@drawable/ic_archive" />
+
+    <View style="@style/actionbar_menu_line" />
+
+    <ImageButton
+        android:id="@+id/actionbar_refresh_button"
+        style="@style/actionbar_menu_image_button"
+        android:contentDescription="@string/actionbar_title_dashboard"
+        android:src="@drawable/ic_stats"
+        android:onClick="onClickActionbarRefresh" />
 
 </LinearLayout>

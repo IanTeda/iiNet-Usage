@@ -10,7 +10,6 @@ public class PreferenceHelper extends ConnectivityHelper {
 	// Preference keys
 	private static final String SHOW_REFRESH_DIALOG = "show_refresh_dialog";
 	private static final String HIDE_STATUS_BAR = "hide_status_bar";
-	private static final String SHOW_DECIMAL = "show_decimal";
 	
 	
 	public boolean showRefreshDialog(){

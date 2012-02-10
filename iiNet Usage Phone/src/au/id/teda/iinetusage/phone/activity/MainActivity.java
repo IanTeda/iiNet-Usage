@@ -204,7 +204,7 @@ public class MainActivity extends ActionbarHelperActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
 		
-		// Menu inflator object
+		// Menu inflater object
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.menu, menu);
 		return true;

@@ -25,74 +25,7 @@
             android:onClick="onClickAlertboxButton"
             android:text="@string/alertbox_default" />
 
-        <RelativeLayout
-            android:id="@+id/relativeLayout1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" >
-
-            <TextView
-                android:id="@+id/textView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="16dp"
-                android:text="%"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="25sp" />
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:gravity="center"
-                android:text="PEAK"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/application_h1_text_color"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/relativeLayout2"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" >
-
-            <TextView
-                android:id="@+id/dashboard_offpeak_number"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="49"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="80sp" />
-
-            <TextView
-                android:id="@+id/TextView01"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignRight="@+id/dashboard_offpeak_number"
-                android:layout_below="@+id/dashboard_offpeak_number"
-                android:gravity="center"
-                android:text="OFFPEAK"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/application_h1_text_color"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/TextView02"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="14dp"
-                android:layout_toRightOf="@+id/dashboard_offpeak_number"
-                android:text="%"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="25sp" />
-        </RelativeLayout>
+        
     </LinearLayout>
 
 </LinearLayout>

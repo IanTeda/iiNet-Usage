@@ -7,15 +7,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.content.Context;
-import android.util.Log;
 import au.id.teda.iinetusage.phone.AppGlobals;
 import au.id.teda.iinetusage.phone.R;
 
 public class AccountHelper extends AccountStatusHelper {
 
 	// Static tag strings for logging information and debug
-	private static final String DEBUG_TAG = "iiNet Usage";
-	private static final String INFO_TAG = AccountHelper.class.getSimpleName();
+	//private static final String DEBUG_TAG = "iiNet Usage";
+	//private static final String INFO_TAG = AccountHelper.class.getSimpleName();
 
 	// Set data period format
 	private final SimpleDateFormat myDataPeriodFormat = new SimpleDateFormat("MMM yyyy");
@@ -54,7 +53,6 @@ public class AccountHelper extends AccountStatusHelper {
 
 		} catch (ParseException e) {
 			// Opps error in parsing date so pass false
-			Log.v(INFO_TAG, "Error parsing date");
 			e.printStackTrace();
 			return false;
 		}

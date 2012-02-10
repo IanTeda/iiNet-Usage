@@ -20,8 +20,8 @@ import au.id.teda.iinetusage.phone.helper.PreferenceHelper;
 public class DailyDataActivity extends ListActivity {
 
 	//Static strings for debugging 
-	private static final String DEBUG_TAG = "iiNet Usage";
-	private static final String INFO_TAG = DailyDataActivity.class.getSimpleName();
+	//private static final String DEBUG_TAG = "iiNet Usage";
+	//private static final String INFO_TAG = DailyDataActivity.class.getSimpleName();
 	
 	// Set list objects
 	private DailyDataDBAdapter myDailyDataDB;
