@@ -38,7 +38,7 @@
         <activity android:name=".activity.DailyDataActivity" />
 
         <!-- Graph Activity -->
-        <activity android:name=".activity.GraphsActivity" />
+        <activity android:name=".activity.ChartActivity" />
 
         <!-- Preference activity intent -->
         <activity android:name=".activity.PreferencesActivity" />

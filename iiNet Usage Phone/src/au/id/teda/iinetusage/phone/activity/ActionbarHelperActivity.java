@@ -102,7 +102,7 @@ public class ActionbarHelperActivity extends Activity {
 			startActivity(dashIntent);
 			break;
 		case R.id.actionbar_menu_graph:
-			Intent graphsIntent = new Intent(this, GraphsActivity.class);
+			Intent graphsIntent = new Intent(this, ChartActivity.class);
 			startActivity(graphsIntent);
 			break;
 		case R.id.actionbar_menu_data:

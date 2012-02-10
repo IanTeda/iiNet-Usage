@@ -10,7 +10,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Paint.Align;
-import android.util.Log;
 import android.view.View;
 import au.id.teda.iinetusage.phone.database.DailyDataDBAdapter;
 import au.id.teda.iinetusage.phone.helper.AccountHelper;
@@ -18,9 +17,7 @@ import au.id.teda.iinetusage.phone.helper.AccountHelper;
 
 public class StackedBarChart extends ChartBuilder {
 
-	/**
-	 *  Static tag strings for loging information and debug
-	 */
+	//Static tag strings for loging information and debug
 	private static final String DEBUG_TAG = "iiNet Usage"; // Debug tag for LogCat
 	private static final String INFO_TAG = StackedBarChart.class.getSimpleName();
 	
