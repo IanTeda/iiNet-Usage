@@ -14,6 +14,7 @@ import android.gesture.Prediction;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
@@ -35,58 +36,64 @@ public class ChartActivity extends ActionbarHelperActivity implements OnGestureP
 	private static final String DEBUG_TAG = "iiNet Usage";
 	private static final String INFO_TAG = ChartActivity.class.getSimpleName();
 
+	// Chart objects
 	private GraphicalView myChart;
-	private ViewFlipper myViewFlipper;
+	private StackedBarChart myStackedBarChart;
+	private LinearLayout chartLayout;
+	private LinearLayout myContainer;
 
+	// Gesture objects
 	private static final int SWIPE_MIN_DISTANCE = 120;
 	private static final int SWIPE_MAX_OFF_PATH = 250;
 	private static final int SWIPE_THRESHOLD_VELOCITY = 200;
 	private GestureDetector myGestureDetector;
-	private View.OnTouchListener gestureListener;
 	private Animation slideLeftIn;
 	private Animation slideLeftOut;
 	private Animation slideRightIn;
 	private Animation slideRightOut;
-	private LinearLayout chartLayout;
 	private GestureLibrary myGestureLibrary;
+	private ViewFlipper myViewFlipper;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//setContentView(R.layout.chart);
+		setContentView(R.layout.chart);
 
 		myViewFlipper = (ViewFlipper) findViewById(R.id.flipper);
+
+		chartLayout = (LinearLayout) findViewById(R.id.stacked_bar_chart);
+		
+		// Set reference for stacked bar chart object
+		myStackedBarChart = new StackedBarChart(this);
+
+		loadGestures();
+		
+		loadChart();
+	}
+
+	private void loadGestures() {
+		// Set reference to gesture detector
+		myGestureDetector = new GestureDetector(new MyGestureDetector());
+		
+		// Set main container reference
+		myContainer = (LinearLayout) findViewById(R.id.chart_container);
+		
+		// Set animation references
 		slideLeftIn = AnimationUtils.loadAnimation(this, R.anim.slide_left_in);
 		slideLeftOut = AnimationUtils.loadAnimation(this, R.anim.slide_left_out);
 		slideRightIn = AnimationUtils.loadAnimation(this, R.anim.slide_right_in);
 		slideRightOut = AnimationUtils.loadAnimation(this, R.anim.slide_right_out);
-		chartLayout = (LinearLayout) findViewById(R.id.stacked_bar_chart);
 
-		// Set reference to gesture detector
-		myGestureDetector = new GestureDetector(new MyGestureDetector());
-
-		// Set the touch listener for the main view to be our custom gesture
-		// listener
-		/**gestureListener = new View.OnTouchListener() {
+		// Set the touch listener for the main view to be our custom gesture listener
+		myContainer.setOnTouchListener(new OnTouchListener() {
+			@Override
 			public boolean onTouch(View v, MotionEvent event) {
-				if (myGestureDetector.onTouchEvent(event)) {
-					return true;
-				}
+				Log.d(DEBUG_TAG, "onTouch Container");
+				myGestureDetector.onTouchEvent(event);
 				return false;
-			}
-		};**/
-		
-		GestureOverlayView gestureOverlayView = new GestureOverlayView(this);
-		View inflate = getLayoutInflater().inflate(R.layout.chart, null);
-		gestureOverlayView.addView(inflate);
-		gestureOverlayView.addOnGesturePerformedListener(this);
-		myGestureLibrary = GestureLibraries.fromRawResource(this, R.raw.gestures);
-		if (!myGestureLibrary.load()) {
-			finish();
-		}
-		setContentView(gestureOverlayView);
-		
-		loadChart();
+				}
+			});
 	}
 
 	@Override
@@ -119,13 +126,22 @@ public class ChartActivity extends ActionbarHelperActivity implements OnGestureP
 
 	public void loadChart() {
 		if (myChart == null) {
-			
-			StackedBarChart stackedBarChart = new StackedBarChart(this);
-			myChart = (GraphicalView) stackedBarChart.getBarChartView();
+			myChart = (GraphicalView) myStackedBarChart.getBarChartView();
 			chartLayout.addView(myChart);
+			
 		} else {
 			// use this whenever data has changed and you want to redraw
 		}
+		
+		// Set the touch listener for chart
+		myChart.setOnTouchListener(new OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				Log.d(DEBUG_TAG, "onTouch myChart");
+				myGestureDetector.onTouchEvent(event);
+				return false;
+				}
+			});
 	}
 
 	public void setChartTitle() throws ParseException {
@@ -147,6 +163,7 @@ public class ChartActivity extends ActionbarHelperActivity implements OnGestureP
 		@Override
 		public boolean onFling(MotionEvent motionEvent1,
 				MotionEvent motionEvent2, float velocityX, float velocityY) {
+			Log.d(DEBUG_TAG, "onFling");
 			try {
 				// Check to see if swipe is to short
 				if (Math.abs(motionEvent1.getY() - motionEvent2.getY()) > SWIPE_MAX_OFF_PATH) {
