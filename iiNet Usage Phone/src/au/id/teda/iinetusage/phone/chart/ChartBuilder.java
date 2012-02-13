@@ -37,6 +37,7 @@ public class ChartBuilder {
 	private final int peakFillColor;
 	private final int offpeakColor;
 	private final int offpeakFillColor;
+	private final int remainingColor;
 	private final int axesColor;
 	private final int labelColor;
 	private final int backgroundColor;
@@ -52,6 +53,7 @@ public class ChartBuilder {
     	peakFillColor = context.getResources().getColor(R.color.chart_peak_fill_color);
     	offpeakColor = context.getResources().getColor(R.color.chart_offpeak_color);
     	offpeakFillColor = context.getResources().getColor(R.color.chart_offpeak_fill_color);
+    	remainingColor = context.getResources().getColor(R.color.chart_remaining_color);
     	axesColor = context.getResources().getColor(R.color.chart_axes_color);
     	labelColor = context.getResources().getColor(R.color.chart_label_color);
     	backgroundColor = context.getResources().getColor(R.color.application_background_color);
@@ -91,6 +93,11 @@ public class ChartBuilder {
     public String getXAxes(){
     	return xAxes;
     }
+    
+    public int getRemainingColor(){
+    	return remainingColor;
+    }
+    
     		
 	
 	  /**
@@ -214,28 +221,26 @@ public class ChartBuilder {
 	    return renderer;
 	  }
 	  
-	  /**
-	   * Builds a category series using the provided values.
-	   * 
-	   * @param titles the series titles
-	   * @param values the values
-	   * @return the category series
-	   */
-	  protected CategorySeries buildCategoryDataset(String title, double[] values) {
-	    CategorySeries series = new CategorySeries(title);
-	    int k = 0;
-	    for (double value : values) {
-	      series.add("Project " + ++k, value);
-	    }
-
-	    return series;
-	  }
 	  
 	  protected CategorySeries getCategoryDataSet(){
 		  
-		  double[] values = new double[] { 12, 14, 11, 10, 19 };
+		  AccountHelper myStatus = new AccountHelper();
 		  
-		  return buildCategoryDataset("Project budget", values);
+		  long peak = myStatus.getCurrentPeakUsed()/1000000000;
+		  long offpeak = myStatus.getCurrentOffpeakUsed()/1000000000;
+		  long peakQuota = myStatus.getPeakQuota()/1000;
+		  long offpeakQuota = myStatus.getPeakQuota()/1000;
+		  long remaining = peakQuota + offpeakQuota - peak - offpeak;
+		  
+		  //double[] values = new double[] { 12, 14, 11, 10, 19 };
+		  
+		  CategorySeries series = new CategorySeries("Usage");
+		  
+		  series.add("Peak", peak);
+		  series.add("Offpeak", offpeak);
+		  series.add("Remaining", remaining);
+		  
+		  return series;
 		  
 	  }
 	  
@@ -350,7 +355,7 @@ public class ChartBuilder {
 	        	// Get offpeak data usage from current cursor position
 	        	long offpeakUsageLong = dailyDBCursor.getLong(dailyDBCursor.getColumnIndex(DailyDataDBAdapter.OFFPEAK))/1000000000;
 	        	accumOffpeak = accumOffpeak + offpeakUsageLong;
-	        	Log.d(DEBUG_TAG, "accumPeak: " + accumPeak + " | accumOffpeak: " + accumOffpeak);
+	        	//Log.d(DEBUG_TAG, "accumPeak: " + accumPeak + " | accumOffpeak: " + accumOffpeak);
 	        	
 	    		// Make data stacked (achartengine does not do it by default).
 	        	accumPeakStacked = accumPeak + accumOffpeak;

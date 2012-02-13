@@ -28,10 +28,17 @@ public class PieChart extends ChartBuilder {
 	
 	
 	private DefaultRenderer getChartRenderer() {
-		int[] colors = new int[] { Color.BLUE, Color.GREEN, Color.MAGENTA, Color.YELLOW, Color.CYAN };
+		int[] colors = new int[] { getPeakColor(), getOffpeakColor(), getRemainingColor() };
 	    DefaultRenderer renderer = buildCategoryRenderer(colors);
-	    renderer.setZoomButtonsVisible(true);
-	    renderer.setZoomEnabled(true);
+	    renderer.setApplyBackgroundColor(true);
+	    renderer.setBackgroundColor(Color.TRANSPARENT);
+	    renderer.setAxesColor(getBackgroundColor());
+	    renderer.setPanEnabled(false);
+	    renderer.setFitLegend(true);
+	    renderer.setLabelsTextSize(18);
+	    renderer.setLegendTextSize(22);
+	    renderer.setAxesColor(getLabelColor());
+	    renderer.setAntialiasing(true);
 	    renderer.setChartTitleTextSize(20);
 	    
 	    return renderer;
