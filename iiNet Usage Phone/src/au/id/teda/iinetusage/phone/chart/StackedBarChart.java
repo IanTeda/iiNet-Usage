@@ -12,7 +12,7 @@ import android.view.View;
 public class StackedBarChart extends ChartBuilder {
 
 	//Static tag strings for logging information and debug
-	//private static final String DEBUG_TAG = "iiNet Usage"; // Debug tag for LogCat
+	//private static final String DEBUG_TAG = "iiNet Usage";
 	//private static final String INFO_TAG = StackedBarChart.class.getSimpleName();
 	
 	private static final String NOT_USED = "Not Used";

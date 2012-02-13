@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 import au.id.teda.iinetusage.phone.R;
+import au.id.teda.iinetusage.phone.chart.PieChart;
 import au.id.teda.iinetusage.phone.chart.StackedBarChart;
 import au.id.teda.iinetusage.phone.chart.StackedLineChart;
 import au.id.teda.iinetusage.phone.helper.AccountHelper;
@@ -30,10 +31,13 @@ public class ChartActivity extends ActionbarHelperActivity {
 	// Chart objects
 	private GraphicalView myBarChartView;
 	private GraphicalView myLineChartView;
+	private GraphicalView myPieChartView;
 	private StackedBarChart myStackedBarChart;
 	private StackedLineChart myStackedLineChart;
+	private PieChart myPieChart;
 	private LinearLayout myBarChartLayout;
 	private LinearLayout myLineChartLayout;
+	private LinearLayout myPieChartLayout;
 
 	// Gesture static int values to detect fling
 	private static final int SWIPE_MIN_DISTANCE = 120;
@@ -59,6 +63,8 @@ public class ChartActivity extends ActionbarHelperActivity {
 		loadStackedLineChart();
 		
 		loadStackedBarChart();
+		
+		loadPieChart();
 	}
 
 	/**
@@ -115,8 +121,45 @@ public class ChartActivity extends ActionbarHelperActivity {
 		if (myLineChartView != null) {
 			myLineChartView.repaint();
 		}
+		
+		if (myPieChartView != null) {
+			myPieChartView.repaint();
+		}
 	}
 
+	/**
+	 * Method for loading stacked chart into view
+	 */
+	public void loadPieChart() {
+		// Set reference for stacked layout
+		myPieChartLayout = (LinearLayout) findViewById(R.id.pie_chart);
+		
+		// Set reference for stacked line chart object
+		myPieChart = new PieChart(this);
+		
+		// Check if the chart doesn't already exist
+		if (myPieChartView == null) {
+			
+			// Get chart view from library
+			myPieChartView = (GraphicalView) myPieChart.getPieChartView();
+			
+			// Add chart view to layout view
+			myPieChartLayout.addView(myPieChartView);
+			
+		} else {
+			// use this whenever data has changed and you want to redraw
+		}
+		
+		// Setup the touch listener for chart
+		myPieChartView.setOnTouchListener(new OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				myGestureDetector.onTouchEvent(event);
+				return false;
+				}
+			});
+	}
+	
 	/**
 	 * Method for loading stacked chart into view
 	 */

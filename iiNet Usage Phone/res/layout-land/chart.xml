@@ -31,28 +31,29 @@
             android:layout_height="@dimen/application_line_1_height"
             android:background="#ffffff" />
 
-    <ViewFlipper
-        android:id="@+id/flipper"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
-
-        <LinearLayout
-            android:id="@+id/stacked_line_chart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" />
-
-        <LinearLayout
-            android:id="@+id/stacked_bar_chart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" />
-
-        <TextView
+        <ViewFlipper
+            android:id="@+id/flipper"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:text="view 3" />
-    </ViewFlipper>
+            android:layout_height="fill_parent" >
+
+            <LinearLayout
+                android:id="@+id/stacked_line_chart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
+
+            <LinearLayout
+                android:id="@+id/stacked_bar_chart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
+
+            <LinearLayout
+                android:id="@+id/pie_chart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
+        </ViewFlipper>
     </LinearLayout>
 
 </LinearLayout>

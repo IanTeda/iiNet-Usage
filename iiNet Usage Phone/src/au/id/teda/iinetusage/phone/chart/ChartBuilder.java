@@ -5,6 +5,7 @@ import java.util.List;
 import org.achartengine.chart.PointStyle;
 import org.achartengine.model.CategorySeries;
 import org.achartengine.model.XYMultipleSeriesDataset;
+import org.achartengine.renderer.DefaultRenderer;
 import org.achartengine.renderer.SimpleSeriesRenderer;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
@@ -24,6 +25,7 @@ public class ChartBuilder {
     
 	private static final String PEAK = "Peak";
 	private static final String OFFPEAK = "Offpeak";
+	private static final String REMAINING = "Remaining";
 	
 	private double maxDataUsage = 0;
 	long accumPeak;
@@ -191,6 +193,50 @@ public class ChartBuilder {
 	      dataset.addSeries(series.toXYSeries());
 	    }
 	    return dataset;
+	  }
+	  
+	  /**
+	   * Builds a category renderer to use the provided colors.
+	   * 
+	   * @param colors the colors
+	   * @return the category renderer
+	   */
+	  protected DefaultRenderer buildCategoryRenderer(int[] colors) {
+	    DefaultRenderer renderer = new DefaultRenderer();
+	    renderer.setLabelsTextSize(15);
+	    renderer.setLegendTextSize(15);
+	    renderer.setMargins(new int[] { 20, 30, 15, 0 });
+	    for (int color : colors) {
+	      SimpleSeriesRenderer r = new SimpleSeriesRenderer();
+	      r.setColor(color);
+	      renderer.addSeriesRenderer(r);
+	    }
+	    return renderer;
+	  }
+	  
+	  /**
+	   * Builds a category series using the provided values.
+	   * 
+	   * @param titles the series titles
+	   * @param values the values
+	   * @return the category series
+	   */
+	  protected CategorySeries buildCategoryDataset(String title, double[] values) {
+	    CategorySeries series = new CategorySeries(title);
+	    int k = 0;
+	    for (double value : values) {
+	      series.add("Project " + ++k, value);
+	    }
+
+	    return series;
+	  }
+	  
+	  protected CategorySeries getCategoryDataSet(){
+		  
+		  double[] values = new double[] { 12, 14, 11, 10, 19 };
+		  
+		  return buildCategoryDataset("Project budget", values);
+		  
 	  }
 	  
 		/**

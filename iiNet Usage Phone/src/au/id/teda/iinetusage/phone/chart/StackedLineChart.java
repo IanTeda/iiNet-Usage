@@ -12,7 +12,7 @@ import android.view.View;
 public class StackedLineChart extends ChartBuilder {
 	
 	//Static tag strings for logging information and debug
-	//private static final String DEBUG_TAG = "iiNet Usage"; // Debug tag for LogCat
+	//private static final String DEBUG_TAG = "iiNet Usage";
 	//private static final String INFO_TAG = StackedLineChart.class.getSimpleName();
 	
     private Context context;
