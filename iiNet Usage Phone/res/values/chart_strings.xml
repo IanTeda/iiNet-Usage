@@ -2,5 +2,6 @@
 <resources>
     
     <string name="chart_title">Usage Chart</string>
+    <string name="chart_x_title">Data Used (Gb)</string>
     
 </resources>

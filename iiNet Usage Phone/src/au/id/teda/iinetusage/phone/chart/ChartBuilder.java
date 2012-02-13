@@ -12,6 +12,7 @@ import org.achartengine.renderer.XYSeriesRenderer;
 import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
+import au.id.teda.iinetusage.phone.R;
 import au.id.teda.iinetusage.phone.database.DailyDataDBAdapter;
 import au.id.teda.iinetusage.phone.helper.AccountHelper;
 
@@ -28,11 +29,67 @@ public class ChartBuilder {
 	long accumPeak;
 	long accumPeakStacked;
 	long accumOffpeak = 0;
+	
+	// Color values for focus and alternate
+	private final int peakColor;
+	private final int peakFillColor;
+	private final int offpeakColor;
+	private final int offpeakFillColor;
+	private final int axesColor;
+	private final int labelColor;
+	private final int backgroundColor;
+	
+	private final String xAxes;
 
 	// Constructor - takes the context to allow the database to be opened/created
     public ChartBuilder(Context context) {
     	this.context = context;
+    	
+		// Set focus and alternate colours
+    	peakColor = context.getResources().getColor(R.color.chart_peak_color);
+    	peakFillColor = context.getResources().getColor(R.color.chart_peak_fill_color);
+    	offpeakColor = context.getResources().getColor(R.color.chart_offpeak_color);
+    	offpeakFillColor = context.getResources().getColor(R.color.chart_offpeak_fill_color);
+    	axesColor = context.getResources().getColor(R.color.chart_axes_color);
+    	labelColor = context.getResources().getColor(R.color.chart_label_color);
+    	backgroundColor = context.getResources().getColor(R.color.application_background_color);
+    	
+    	xAxes = context.getResources().getString(R.string.chart_x_title);
+    	
     }
+    
+    public int getPeakColor(){
+    	return peakColor;
+    }
+    
+    public int getOffpeakColor(){
+    	return offpeakColor;
+    }
+    
+    public int getAxesColor(){
+    	return axesColor;
+    }
+    
+    public int getLabelColor(){
+    	return labelColor;
+    }
+    
+    public int getBackgroundColor(){
+    	return backgroundColor;
+    }
+    
+    public int getPeakFillColor(){
+    	return peakFillColor;
+    }
+    
+    public int getOffpeakFillColor(){
+    	return offpeakFillColor;
+    }
+    
+    public String getXAxes(){
+    	return xAxes;
+    }
+    		
 	
 	  /**
 	   * Builds a bar multiple series renderer to use the provided colors.
@@ -179,10 +236,10 @@ public class ChartBuilder {
 			while (dailyDBCursor.isAfterLast() == false) {
 				
 				// Get peak data usage from current cursor position 
-	        	long peakUsageLong = dailyDBCursor.getLong(dailyDBCursor.getColumnIndex(DailyDataDBAdapter.PEAK))/1000000;
+	        	long peakUsageLong = dailyDBCursor.getLong(dailyDBCursor.getColumnIndex(DailyDataDBAdapter.PEAK))/1000000000;
 	        	
 	        	// Get offpeak data usage from current cursor position
-	        	long offpeakUsageLong = dailyDBCursor.getLong(dailyDBCursor.getColumnIndex(DailyDataDBAdapter.OFFPEAK))/1000000;
+	        	long offpeakUsageLong = dailyDBCursor.getLong(dailyDBCursor.getColumnIndex(DailyDataDBAdapter.OFFPEAK))/1000000000;
 	        	
 	    		// Make data stacked (achartengine does not do it by default).
 	    		if (peakUsageLong > offpeakUsageLong){
@@ -241,11 +298,11 @@ public class ChartBuilder {
 			while (dailyDBCursor.isAfterLast() == false) {
 				
 				// Get peak data usage from current cursor position 
-	        	long peakUsageLong = dailyDBCursor.getLong(dailyDBCursor.getColumnIndex(DailyDataDBAdapter.PEAK))/1000000;
+	        	long peakUsageLong = dailyDBCursor.getLong(dailyDBCursor.getColumnIndex(DailyDataDBAdapter.PEAK))/1000000000;
 	        	accumPeak = accumPeak + peakUsageLong;
 	        	
 	        	// Get offpeak data usage from current cursor position
-	        	long offpeakUsageLong = dailyDBCursor.getLong(dailyDBCursor.getColumnIndex(DailyDataDBAdapter.OFFPEAK))/1000000;
+	        	long offpeakUsageLong = dailyDBCursor.getLong(dailyDBCursor.getColumnIndex(DailyDataDBAdapter.OFFPEAK))/1000000000;
 	        	accumOffpeak = accumOffpeak + offpeakUsageLong;
 	        	Log.d(DEBUG_TAG, "accumPeak: " + accumPeak + " | accumOffpeak: " + accumOffpeak);
 	        	
