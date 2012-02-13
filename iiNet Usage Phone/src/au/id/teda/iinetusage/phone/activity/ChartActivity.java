@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.ViewFlipper;
 import au.id.teda.iinetusage.phone.R;
 import au.id.teda.iinetusage.phone.chart.StackedBarChart;
+import au.id.teda.iinetusage.phone.chart.StackedLineChart;
 import au.id.teda.iinetusage.phone.helper.AccountHelper;
 
 public class ChartActivity extends ActionbarHelperActivity {
@@ -27,9 +28,12 @@ public class ChartActivity extends ActionbarHelperActivity {
 	private static final String INFO_TAG = ChartActivity.class.getSimpleName();
 
 	// Chart objects
-	private GraphicalView myStackedChart;
+	private GraphicalView myBarChartView;
+	private GraphicalView myLineChartView;
 	private StackedBarChart myStackedBarChart;
-	private LinearLayout myStackedLayout;
+	private StackedLineChart myStackedLineChart;
+	private LinearLayout myBarChartLayout;
+	private LinearLayout myLineChartLayout;
 
 	// Gesture static int values to detect fling
 	private static final int SWIPE_MIN_DISTANCE = 120;
@@ -52,7 +56,9 @@ public class ChartActivity extends ActionbarHelperActivity {
 
 		loadGestures();
 		
-		loadStackedChart();
+		loadStackedLineChart();
+		
+		loadStackedBarChart();
 	}
 
 	/**
@@ -102,36 +108,73 @@ public class ChartActivity extends ActionbarHelperActivity {
 		// Set chart title based on current period
 		setChartTitle();
 
-		if (myStackedChart != null) {
-			myStackedChart.repaint();
+		if (myBarChartView != null) {
+			myBarChartView.repaint();
+		}
+		
+		if (myLineChartView != null) {
+			myLineChartView.repaint();
 		}
 	}
 
 	/**
 	 * Method for loading stacked chart into view
 	 */
-	public void loadStackedChart() {
+	public void loadStackedLineChart() {
 		// Set reference for stacked layout
-		myStackedLayout = (LinearLayout) findViewById(R.id.stacked_bar_chart);
+		myLineChartLayout = (LinearLayout) findViewById(R.id.stacked_line_chart);
 		
-		// Set reference for stacked bar chart object
-		myStackedBarChart = new StackedBarChart(this);
+		// Set reference for stacked line chart object
+		myStackedLineChart = new StackedLineChart(this);
 		
 		// Check if the chart doesn't already exist
-		if (myStackedChart == null) {
+		if (myLineChartView == null) {
 			
 			// Get chart view from library
-			myStackedChart = (GraphicalView) myStackedBarChart.getBarChartView();
+			myLineChartView = (GraphicalView) myStackedLineChart.getStackedLineChartView();
 			
 			// Add chart view to layout view
-			myStackedLayout.addView(myStackedChart);
+			myLineChartLayout.addView(myLineChartView);
 			
 		} else {
 			// use this whenever data has changed and you want to redraw
 		}
 		
 		// Setup the touch listener for chart
-		myStackedChart.setOnTouchListener(new OnTouchListener() {
+		myLineChartView.setOnTouchListener(new OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				myGestureDetector.onTouchEvent(event);
+				return false;
+				}
+			});
+	}
+	
+	/**
+	 * Method for loading stacked chart into view
+	 */
+	public void loadStackedBarChart() {
+		// Set reference for stacked layout
+		myBarChartLayout = (LinearLayout) findViewById(R.id.stacked_bar_chart);
+		
+		// Set reference for stacked bar chart object
+		myStackedBarChart = new StackedBarChart(this);
+		
+		// Check if the chart doesn't already exist
+		if (myBarChartView == null) {
+			
+			// Get chart view from library
+			myBarChartView = (GraphicalView) myStackedBarChart.getBarChartView();
+			
+			// Add chart view to layout view
+			myBarChartLayout.addView(myBarChartView);
+			
+		} else {
+			// use this whenever data has changed and you want to redraw
+		}
+		
+		// Setup the touch listener for chart
+		myBarChartView.setOnTouchListener(new OnTouchListener() {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				myGestureDetector.onTouchEvent(event);
