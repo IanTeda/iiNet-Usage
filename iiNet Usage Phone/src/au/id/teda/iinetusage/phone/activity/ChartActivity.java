@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 import au.id.teda.iinetusage.phone.R;
+import au.id.teda.iinetusage.phone.chart.DoughnutChart;
 import au.id.teda.iinetusage.phone.chart.PieChart;
 import au.id.teda.iinetusage.phone.chart.StackedBarChart;
 import au.id.teda.iinetusage.phone.chart.StackedLineChart;
@@ -32,12 +33,15 @@ public class ChartActivity extends ActionbarHelperActivity {
 	private GraphicalView myBarChartView;
 	private GraphicalView myLineChartView;
 	private GraphicalView myPieChartView;
+	private GraphicalView myDoughnutChartView;
 	private StackedBarChart myStackedBarChart;
 	private StackedLineChart myStackedLineChart;
 	private PieChart myPieChart;
+	private DoughnutChart myDoughnutChart;
 	private LinearLayout myBarChartLayout;
 	private LinearLayout myLineChartLayout;
 	private LinearLayout myPieChartLayout;
+	private LinearLayout myDoughnutChartLayout;
 
 	// Gesture static int values to detect fling
 	private static final int SWIPE_MIN_DISTANCE = 120;
@@ -65,6 +69,8 @@ public class ChartActivity extends ActionbarHelperActivity {
 		loadStackedBarChart();
 		
 		loadPieChart();
+		
+		loadDoughnutChart();
 	}
 
 	/**
@@ -125,8 +131,45 @@ public class ChartActivity extends ActionbarHelperActivity {
 		if (myPieChartView != null) {
 			myPieChartView.repaint();
 		}
+		
+		if (myDoughnutChartView != null) {
+			myDoughnutChartView.repaint();
+		}
 	}
 
+	/**
+	 * Method for loading doughnut into view
+	 */
+	public void loadDoughnutChart() {
+		// Set reference for stacked layout
+		myDoughnutChartLayout = (LinearLayout) findViewById(R.id.doughnut_chart);
+		
+		// Set reference for stacked line chart object
+		myDoughnutChart = new DoughnutChart(this);
+		
+		// Check if the chart doesn't already exist
+		if (myDoughnutChartView == null) {
+			
+			// Get chart view from library
+			myDoughnutChartView = (GraphicalView) myDoughnutChart.getDoughnutChartView();
+			
+			// Add chart view to layout view
+			myDoughnutChartLayout.addView(myDoughnutChartView);
+			
+		} else {
+			// use this whenever data has changed and you want to redraw
+		}
+		
+		// Setup the touch listener for chart
+		myDoughnutChartView.setOnTouchListener(new OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				myGestureDetector.onTouchEvent(event);
+				return false;
+				}
+			});
+	}
+	
 	/**
 	 * Method for loading stacked chart into view
 	 */

@@ -270,27 +270,6 @@ public class ChartBuilder {
 		return renderer;
 	}
 
-	protected CategorySeries getCategoryDataSet() {
-
-		AccountHelper myStatus = new AccountHelper();
-
-		long peak = myStatus.getCurrentPeakUsed() / 1000000000;
-		long offpeak = myStatus.getCurrentOffpeakUsed() / 1000000000;
-		long peakQuota = myStatus.getPeakQuota() / 1000;
-		long offpeakQuota = myStatus.getPeakQuota() / 1000;
-		long remaining = peakQuota + offpeakQuota - peak - offpeak;
-
-		// double[] values = new double[] { 12, 14, 11, 10, 19 };
-
-		CategorySeries series = new CategorySeries(TITLE);
-
-		series.add(PEAK, peak);
-		series.add(OFFPEAK, offpeak);
-		series.add(REMAINING, remaining);
-
-		return series;
-
-	}
 
 	/**
 	 * Method for returning the number of calendar days for this period
