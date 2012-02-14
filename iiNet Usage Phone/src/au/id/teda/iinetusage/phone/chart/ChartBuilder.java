@@ -41,6 +41,7 @@ public class ChartBuilder {
 	private final int offpeakColor;
 	private final int offpeakFillColor;
 	private final int remainingColor;
+	private final int remainingFillColor;
 	private final int axesColor;
 	private final int labelColor;
 	private final int backgroundColor;
@@ -57,6 +58,7 @@ public class ChartBuilder {
 		offpeakColor = myActivityContext.getResources().getColor(R.color.chart_offpeak_color);
 		offpeakFillColor = myActivityContext.getResources().getColor(R.color.chart_offpeak_fill_color);
 		remainingColor = myActivityContext.getResources().getColor(R.color.chart_remaining_color);
+		remainingFillColor = myActivityContext.getResources().getColor(R.color.chart_remaining_fill_color);
 		axesColor = myActivityContext.getResources().getColor(R.color.chart_axes_color);
 		labelColor = myActivityContext.getResources().getColor(R.color.chart_label_color);
 		backgroundColor = myActivityContext.getResources().getColor(R.color.application_background_color);
@@ -146,6 +148,15 @@ public class ChartBuilder {
 	public int getRemainingColor() {
 		return remainingColor;
 	}
+	
+	/**
+	 * Get remaining fill color from XML
+	 * 
+	 * @return int color value
+	 */
+	public int getRemainingFillColor() {
+		return remainingFillColor;
+	}
 
 	/**
 	 * Builds a bar multiple series renderer to use the provided colors.
@@ -200,35 +211,6 @@ public class ChartBuilder {
 	}
 
 	/**
-	 * Sets a few of the series renderer settings.
-	 * 
-	 * @param renderer the renderer to set the properties to
-	 * @param title the chart title
-	 * @param xTitle the title for the X axis
-	 * @param yTitle the title for the Y axis
-	 * @param xMin the minimum value on the X axis
-	 * @param xMax the maximum value on the X axis
-	 * @param yMin the minimum value on the Y axis
-	 * @param yMax the maximum value on the Y axis
-	 * @param axesColor the axes color
-	 * @param labelsColor the labels color
-	 */
-	protected void setChartSettings(XYMultipleSeriesRenderer renderer,
-			String title, String xTitle, String yTitle, double xMin,
-			double xMax, double yMin, double yMax, int axesColor,
-			int labelsColor) {
-		// renderer.setChartTitle(title);
-		// renderer.setXTitle(xTitle);
-		// renderer.setYTitle(yTitle);
-		renderer.setXAxisMin(xMin);
-		renderer.setXAxisMax(xMax);
-		renderer.setYAxisMin(yMin);
-		renderer.setYAxisMax(yMax);
-		renderer.setAxesColor(axesColor);
-		renderer.setLabelsColor(labelsColor);
-	}
-
-	/**
 	 * Builds a bar multiple series dataset using the provided values.
 	 * 
 	 * @param titles the series titles
@@ -259,9 +241,6 @@ public class ChartBuilder {
 	 */
 	protected DefaultRenderer buildCategoryRenderer(int[] colors) {
 		DefaultRenderer renderer = new DefaultRenderer();
-		renderer.setLabelsTextSize(15);
-		renderer.setLegendTextSize(15);
-		renderer.setMargins(new int[] { 20, 30, 15, 0 });
 		for (int color : colors) {
 			SimpleSeriesRenderer r = new SimpleSeriesRenderer();
 			r.setColor(color);
@@ -287,146 +266,6 @@ public class ChartBuilder {
 		return chartDays;
 	}
 
-	/**
-	 * Method for getting stacked data set
-	 * 
-	 * @return XYMultipleSeriesDataset from database
-	 */
-	protected XYMultipleSeriesDataset getStackedDataSet() {
-
-		// Open Database
-		DailyDataDBAdapter dailyDataDB = new DailyDataDBAdapter();
-		dailyDataDB.open();
-
-		// Get current data period
-		AccountHelper accountHelper = new AccountHelper();
-		String dataPeriod = accountHelper.getCurrentDataPeriod();
-
-		// Retrieve cursor for given data period
-		Cursor dailyDBCursor = dailyDataDB.fetchPeriodUsage(dataPeriod);
-
-		// Set String value categories for graph
-		CategorySeries peakSeries = new CategorySeries(PEAK);
-		CategorySeries offpeakSeries = new CategorySeries(OFFPEAK);
-
-		// Move to first cursor entry
-		dailyDBCursor.moveToFirst();
-
-		// And start adding to array
-		while (dailyDBCursor.isAfterLast() == false) {
-
-			// Get peak data usage from current cursor position
-			long peakUsageLong = dailyDBCursor.getLong(dailyDBCursor
-					.getColumnIndex(DailyDataDBAdapter.PEAK)) / 1000000000;
-
-			// Get offpeak data usage from current cursor position
-			long offpeakUsageLong = dailyDBCursor.getLong(dailyDBCursor
-					.getColumnIndex(DailyDataDBAdapter.OFFPEAK)) / 1000000000;
-
-			// Make data stacked (achartengine does not do it by default).
-			if (peakUsageLong > offpeakUsageLong) {
-				peakUsageLong = peakUsageLong + offpeakUsageLong;
-			} else {
-				offpeakUsageLong = offpeakUsageLong + peakUsageLong;
-			}
-
-			// Add current cursor values to data series
-			peakSeries.add(peakUsageLong);
-			offpeakSeries.add(offpeakUsageLong);
-
-			// Set max data usage for rendering graph
-			if (maxDataUsage < peakUsageLong + offpeakUsageLong) {
-				maxDataUsage = peakUsageLong + offpeakUsageLong;
-			}
-
-			//
-			dailyDBCursor.moveToNext();
-		}
-
-		dailyDBCursor.close();
-		dailyDataDB.close();
-
-		XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
-		dataset.addSeries(peakSeries.toXYSeries());
-		dataset.addSeries(offpeakSeries.toXYSeries());
-		return dataset;
-	}
-
-	/**
-	 * Method for getting stacked data set
-	 * 
-	 * @return XYMultipleSeriesDataset from database
-	 */
-	protected XYMultipleSeriesDataset getStackedAccumDataSet() {
-
-		// Open Database
-		DailyDataDBAdapter dailyDataDB = new DailyDataDBAdapter();
-		dailyDataDB.open();
-
-		// Get current data period
-		AccountHelper accountHelper = new AccountHelper();
-		String dataPeriod = accountHelper.getCurrentDataPeriod();
-
-		// Retrieve cursor for given data period
-		Cursor dailyDBCursor = dailyDataDB.fetchPeriodUsage(dataPeriod);
-
-		// Set String value categories for graph
-		CategorySeries peakSeries = new CategorySeries(PEAK);
-		CategorySeries offpeakSeries = new CategorySeries(OFFPEAK);
-
-		// Move to first cursor entry
-		dailyDBCursor.moveToFirst();
-
-		// And start adding to array
-		while (dailyDBCursor.isAfterLast() == false) {
-
-			// Get peak data usage from current cursor position
-			long peakUsageLong = dailyDBCursor.getLong(dailyDBCursor
-					.getColumnIndex(DailyDataDBAdapter.PEAK)) / 1000000000;
-			accumPeak = accumPeak + peakUsageLong;
-
-			// Get offpeak data usage from current cursor position
-			long offpeakUsageLong = dailyDBCursor.getLong(dailyDBCursor
-					.getColumnIndex(DailyDataDBAdapter.OFFPEAK)) / 1000000000;
-			accumOffpeak = accumOffpeak + offpeakUsageLong;
-			// Log.d(DEBUG_TAG, "accumPeak: " + accumPeak + " | accumOffpeak: "
-			// + accumOffpeak);
-
-			// Make data stacked (achartengine does not do it by default).
-			accumPeakStacked = accumPeak + accumOffpeak;
-			/**
-			 * if (accumPeak > accumOffpeak){ accumPeak = accumPeak +
-			 * accumOffpeak; } else { accumOffpeak = accumOffpeak + accumPeak; }
-			 **/
-
-			// Add current cursor values to data series
-			peakSeries.add(accumPeakStacked);
-			offpeakSeries.add(accumOffpeak);
-
-			// Set max data usage for rendering graph
-			if (maxDataUsage < accumPeak + accumOffpeak) {
-				maxDataUsage = accumPeak + accumOffpeak;
-			}
-
-			//
-			dailyDBCursor.moveToNext();
-		}
-		dailyDBCursor.close();
-		dailyDataDB.close();
-
-		XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
-		dataset.addSeries(peakSeries.toXYSeries());
-		dataset.addSeries(offpeakSeries.toXYSeries());
-		return dataset;
-	}
-
-	/**
-	 * Method for retrieving max data used [set in getStackedDataSet()]
-	 * 
-	 * @return double of max data used
-	 */
-	public double getMaxDataUsage() {
-		return maxDataUsage;
-	}
+	
 
 }

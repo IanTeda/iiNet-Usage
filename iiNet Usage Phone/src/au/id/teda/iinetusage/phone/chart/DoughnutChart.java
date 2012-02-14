@@ -3,6 +3,7 @@ package au.id.teda.iinetusage.phone.chart;
 import org.achartengine.ChartFactory;
 import org.achartengine.model.MultipleCategorySeries;
 import org.achartengine.renderer.DefaultRenderer;
+import org.achartengine.renderer.SimpleSeriesRenderer;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -26,6 +27,8 @@ public class DoughnutChart extends ChartBuilder {
 	private static final String USED = "Used";
 	private static final String REMAINING = "Remaining";
 	private static final String TITLE = "Data Usage";
+	private static final String DAYS_SO_FARE = "Days So Fare";
+	private static final String DAYS_TO_GO = "Days to Go";
 
 	// Activity context
 	private Context context;
@@ -63,26 +66,26 @@ public class DoughnutChart extends ChartBuilder {
 		long peakQuota = myStatus.getPeakQuota() / 1000;
 		long peakRemaining = peakQuota - peak;
 		double[] peakDouble = { peak, peakRemaining }; 
-		String[] peakTitle = { USED, REMAINING };
+		String[] peakCats = { USED, REMAINING };
 		
 		// Offpeak data
 		long offpeak = myStatus.getCurrentOffpeakUsed() / 1000000000;
 		long offpeakQuota = myStatus.getPeakQuota() / 1000;
 		long offpeakRemaining = offpeakQuota - offpeak;
 		double[] offpeakDouble = { offpeak, offpeakRemaining };
-		String[] offpeakTitle = { USED, REMAINING };
+		String[] offpeakCats = { USED, REMAINING };
 		
 		// Days
 		long daysSoFare = myStatus.getCurrentDaysSoFar();
 		long daysToGo = myStatus.getCurrentDaysToGo();
 		double[] daysDouble = { daysSoFare, daysToGo };
-		String[] daysTitle = { "So Fare", "To Go" };
+		String[] dayCats = { DAYS_SO_FARE, DAYS_TO_GO };
 
 		// Data series and initialise
 		MultipleCategorySeries series = new MultipleCategorySeries(TITLE);
-		series.add(REMAINING, daysTitle, daysDouble);
-		series.add(PEAK, peakTitle, peakDouble );
-		series.add(OFFPEAK, offpeakTitle, offpeakDouble);
+		series.add(REMAINING, dayCats, daysDouble);
+		series.add(PEAK, peakCats, peakDouble );
+		series.add(OFFPEAK, offpeakCats, offpeakDouble);
 		
 		// Return data series
 		return series;
@@ -93,18 +96,29 @@ public class DoughnutChart extends ChartBuilder {
 	 * @return chart renderer
 	 */
 	private DefaultRenderer getDoughnutChartRenderer() {
-		int[] colors = new int[] { getPeakColor(), getRemainingColor() };
-	    DefaultRenderer renderer = buildCategoryRenderer(colors);
-	    renderer.setApplyBackgroundColor(true);
-	    renderer.setBackgroundColor(Color.TRANSPARENT);
-	    renderer.setAxesColor(getBackgroundColor());
+
+	    DefaultRenderer renderer = new DefaultRenderer();
+	    
+	    SimpleSeriesRenderer r = new SimpleSeriesRenderer();
+	    r.setColor(getPeakColor());
+		renderer.addSeriesRenderer(r);
+	    
+		r = new SimpleSeriesRenderer();
+		r.setColor(getPeakFillColor());
+		renderer.addSeriesRenderer(r);
+		
+	    //renderer.setMargins(new int[] { 20, 30, 15, 0 });
+	    //renderer.setApplyBackgroundColor(true);
+	    //renderer.setBackgroundColor(Color.TRANSPARENT);
+	    //renderer.setAxesColor(Color.TRANSPARENT);
+	    //renderer.setLabelsColor(Color.TRANSPARENT);
+	    //renderer.setShowAxes(true);
 	    renderer.setPanEnabled(false);
 	    renderer.setFitLegend(true);
-	    renderer.setLabelsTextSize(18);
-	    renderer.setLegendTextSize(22);
-	    renderer.setAxesColor(getLabelColor());
-	    renderer.setAntialiasing(true);
-	    renderer.setChartTitleTextSize(20);
+	    //renderer.setLabelsTextSize(18);
+	    //renderer.setLegendTextSize(22);
+	    //renderer.setShowLabels(true);
+	    //renderer.setAntialiasing(true);
 	    
 	    return renderer;
 	}
