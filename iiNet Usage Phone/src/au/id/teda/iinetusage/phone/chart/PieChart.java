@@ -74,18 +74,16 @@ public class PieChart extends ChartBuilder {
 	 * @return pie chart renderer
 	 */
 	private DefaultRenderer getPieChartRenderer() {
-		int[] colors = new int[] { getPeakColor(), getOffpeakColor(), getRemainingColor() };
+		int[] colors = new int[] { getPeakColor(), getOffpeakColor(), getRemainingFillColor() };
 	    DefaultRenderer renderer = buildCategoryRenderer(colors);
 	    renderer.setApplyBackgroundColor(true);
 	    renderer.setBackgroundColor(Color.TRANSPARENT);
 	    renderer.setAxesColor(getBackgroundColor());
 	    renderer.setPanEnabled(false);
 	    renderer.setFitLegend(true);
-	    renderer.setLabelsTextSize(18);
+	    renderer.setShowLabels(false);
 	    renderer.setLegendTextSize(22);
-	    renderer.setAxesColor(getLabelColor());
 	    renderer.setAntialiasing(true);
-	    renderer.setChartTitleTextSize(20);
 	    
 	    return renderer;
 	}
