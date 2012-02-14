@@ -56,6 +56,8 @@ public class ChartActivity extends ActionbarHelperActivity {
 	private Animation slideRightIn;
 	private Animation slideRightOut;
 	private ViewFlipper myViewFlipper;
+	
+	private static final String TAB_NUMBER = "tab_number";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +74,11 @@ public class ChartActivity extends ActionbarHelperActivity {
 
 		loadDoughnutChart();
 		
+		// If orientation has changed
 		if (savedInstanceState != null) {
-	        int flipperPosition = savedInstanceState.getInt("TAB_NUMBER");
+			
+			// Restore ViewFlipper position
+	        int flipperPosition = savedInstanceState.getInt(TAB_NUMBER);
 	        myViewFlipper.setDisplayedChild(flipperPosition);
 	    }
 
@@ -148,8 +153,10 @@ public class ChartActivity extends ActionbarHelperActivity {
 	
 	@Override
 	public void onSaveInstanceState(Bundle savedInstanceState) {
+		
+		// Remember ViewFliper tab position during orientation change
 	    int position = myViewFlipper.getDisplayedChild();
-	    savedInstanceState.putInt("TAB_NUMBER", position);
+	    savedInstanceState.putInt(TAB_NUMBER, position);
 	}
 
 	/**
