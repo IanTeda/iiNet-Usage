@@ -20,7 +20,6 @@
         <TextView
             android:id="@+id/chart_title"
             style="@style/h1"
-            android:gravity="center"
             android:text="@string/chart_title" />
 
         <View
