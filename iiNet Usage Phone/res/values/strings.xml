@@ -3,11 +3,15 @@
 
     <string name="hello">Hello World, MainActivity!</string>
     <string name="app_name">iiNet Usage</string>
-    <string name="no_internet">There appears to be no internet connection</string>
     <string name="refresh_progress_dialog_title">Please wait</string>
-    <string name="refresh_progress_dialog_description">Retrieving &amp; loading data &#8230;</string>
+    <string name="refresh_progress_dialog_description">Retrieving &amp; loading data …</string>
 
     <!-- No list data -->
     <string name="no_daily_data">No usage data present</string>
+
+    <!-- Refresh AsyncTask -->
+    <string name="no_internet">There appears to be no internet connection</string>
+    <string name="no_username_password">There appears to be no username and/or password</string>
+    <string name="usage_data_updated">Usage data has been updated</string>
 
 </resources>
