@@ -145,7 +145,7 @@ public class MainActivity extends ActionbarHelperActivity {
     		myPeakStatsView.switchFocusDataBlock();
     		break;
     	case R.id.peak_data_title_button:
-    		Toast.makeText(this, "Peak title", Toast.LENGTH_SHORT).show();
+    		myPeakStatsView.switchPeakView();
     		break;
     	case R.id.offpeak_number_button:
     		myOffpeakStatsView.switchUnitNumberBlock();
@@ -160,7 +160,7 @@ public class MainActivity extends ActionbarHelperActivity {
     		myOffpeakStatsView.switchFocusDataBlock();
     		break;
     	case R.id.offpeak_data_title_button:
-    		Toast.makeText(this, "Offpeak title", Toast.LENGTH_SHORT).show();
+    		myOffpeakStatsView.switchOffpeakView();
     		break;
     	default:
     		Toast.makeText(this, "onClick Error", Toast.LENGTH_SHORT).show();

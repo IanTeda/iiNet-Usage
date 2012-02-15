@@ -107,6 +107,41 @@ public class OffpeakStatsView extends AccountHelper {
 		myOffpeakPeriod.setText(getOffpeakPeriod());
 	}
 	
+	/**
+	 * Switch focus of the peak view
+	 */
+	public void switchOffpeakView(){
+		
+		// Check if data focus is on used
+		if(isDataUsedFocus()){
+			// Switch focus to remaining
+			setOffpeakRemaining();
+		}
+		// Else data focus is on remaining
+		else {
+			// Switch focus to used
+			setOffpeakUsed();
+		}
+	}
+	
+	/**
+	 * Set focus of peak view to remaining
+	 */
+	private void setOffpeakRemaining(){
+		setPercentRemaining();
+		setDataRemaining();
+		setDailySuggested();
+	}
+	
+	/**
+	 * Set focus of peak view to used
+	 */
+	private void setOffpeakUsed(){
+		setPercentUsed();
+		setDataUsed();
+		setDailyUsed();
+	}
+	
 	
 	/**
 	 * Switch unit of number block
@@ -116,33 +151,47 @@ public class OffpeakStatsView extends AccountHelper {
 		// Check to see if percent unit is shown
 		if (isPercentUnitShown()){
 			// It is so switch to Giga byte unit
-			myOffpeakNumberUnit.setText(gigabyteUnit);
-			
-			// Check if it is used or remaining
-			if (isPercentUsedFocus()){
-				// Set Gb value to Used TextView
-				myOffpeakNumberData.setText(getOffpeakDataUsedGb());
-			} 
-			else {
-				// Set Gb value to TextView
-				myOffpeakNumberData.setText(getOffpeakDataRemainingGb());
-			}
+			setGigaByteUnit();
 			
 		}
 		// Else it must be Giga byte unit
 		else{
 			// So change to percent unit
-			myOffpeakNumberUnit.setText(percentUnit);
-			
-			// Check if it is used or remaining
-			if (isPercentUsedFocus()){
-				// Set Gb value to Used TextView
-				myOffpeakNumberData.setText(getOffpeakDataUsedPercent());
-			} 
-			else {
-				// Set Gb value to TextView
-				myOffpeakNumberData.setText(getOffpeakDataRemainingPercent());
-			}
+			setPercentUnit();
+		}
+	}
+
+	/**
+	 * Set focus of unit block to percent
+	 */
+	private void setPercentUnit() {
+		myOffpeakNumberUnit.setText(percentUnit);
+		
+		// Check if it is used or remaining
+		if (isPercentUsedFocus()){
+			// Set Gb value to Used TextView
+			myOffpeakNumberData.setText(getOffpeakDataUsedPercent());
+		} 
+		else {
+			// Set Gb value to TextView
+			myOffpeakNumberData.setText(getOffpeakDataRemainingPercent());
+		}
+	}
+
+	/**
+	 * Set focus of unit block to Giga Byte
+	 */
+	private void setGigaByteUnit() {
+		myOffpeakNumberUnit.setText(gigabyteUnit);
+		
+		// Check if it is used or remaining
+		if (isPercentUsedFocus()){
+			// Set Gb value to Used TextView
+			myOffpeakNumberData.setText(getOffpeakDataUsedGb());
+		} 
+		else {
+			// Set Gb value to TextView
+			myOffpeakNumberData.setText(getOffpeakDataRemainingGb());
 		}
 	}
 	
@@ -178,34 +227,48 @@ public class OffpeakStatsView extends AccountHelper {
 		// Check to see if used has focus
 		if (isPercentUsedFocus()){
 			// Switch focus to remaining
-			myOffpeakPercentUsedTitle.setTextColor(alternateColor);
-			myOffpeakPercentRemainingTitle.setTextColor(focusColor);
-			
-			// Check to see if percent unit is shown
-			if (isPercentUnitShown()){
-				// Set perecent value to remaining TextView
-				myOffpeakNumberData.setText(getOffpeakDataRemainingPercent());
-			}
-			else {
-				// Set Gb value for remaining
-				myOffpeakNumberData.setText(getOffpeakDataRemainingGb());
-			}
+			setPercentRemaining();
 		}
 		// Else it must be in Gb so switch focus to percent
 		else{
 			// Switch focus to used
-			myOffpeakPercentUsedTitle.setTextColor(focusColor);
-			myOffpeakPercentRemainingTitle.setTextColor(alternateColor);
-			
-			// Check to see if percent unit is shown
-			if (isPercentUnitShown()){
-				// Set perecent value to remaining TextView
-				myOffpeakNumberData.setText(getOffpeakDataUsedPercent());
-			}
-			else {
-				// Set Gb value for remaining
-				myOffpeakNumberData.setText(getOffpeakDataUsedGb());
-			}
+			setPercentUsed();
+		}
+	}
+
+	/**
+	 * Set percent block to used
+	 */
+	private void setPercentUsed() {
+		myOffpeakPercentUsedTitle.setTextColor(focusColor);
+		myOffpeakPercentRemainingTitle.setTextColor(alternateColor);
+		
+		// Check to see if percent unit is shown
+		if (isPercentUnitShown()){
+			// Set perecent value to remaining TextView
+			myOffpeakNumberData.setText(getOffpeakDataUsedPercent());
+		}
+		else {
+			// Set Gb value for remaining
+			myOffpeakNumberData.setText(getOffpeakDataUsedGb());
+		}
+	}
+
+	/**
+	 * Set percent block to remaining
+	 */
+	private void setPercentRemaining() {
+		myOffpeakPercentUsedTitle.setTextColor(alternateColor);
+		myOffpeakPercentRemainingTitle.setTextColor(focusColor);
+		
+		// Check to see if percent unit is shown
+		if (isPercentUnitShown()){
+			// Set perecent value to remaining TextView
+			myOffpeakNumberData.setText(getOffpeakDataRemainingPercent());
+		}
+		else {
+			// Set Gb value for remaining
+			myOffpeakNumberData.setText(getOffpeakDataRemainingGb());
 		}
 	}
 	
@@ -238,21 +301,35 @@ public class OffpeakStatsView extends AccountHelper {
 		// Check if used has focus
 		if (isDataUsedFocus()){
 			// Switch focus to data remaining
-			myOffpeakDataUsedTitle.setTextColor(alternateColor);
-			myOffpeakDataRemainingTitle.setTextColor(focusColor);
-			
-			// Set offpeak data to remaining
-			myOffpeakDataData.setText(getOffpeakDataRemainingMb());
+			setDataRemaining();
 		}
 		// Else remaining has focus
 		else{
 			// Switch focus to used
-			myOffpeakDataUsedTitle.setTextColor(focusColor);
-			myOffpeakDataRemainingTitle.setTextColor(alternateColor);
-			
-			// Set offpeak data to used
-			myOffpeakDataData.setText(getOffpeakDataUsedMb());
+			setDataUsed();
 		}
+	}
+
+	/**
+	 * Set data block to used
+	 */
+	private void setDataUsed() {
+		myOffpeakDataUsedTitle.setTextColor(focusColor);
+		myOffpeakDataRemainingTitle.setTextColor(alternateColor);
+		
+		// Set offpeak data to used
+		myOffpeakDataData.setText(getOffpeakDataUsedMb());
+	}
+
+	/**
+	 * Set data block to remaining
+	 */
+	private void setDataRemaining() {
+		myOffpeakDataUsedTitle.setTextColor(alternateColor);
+		myOffpeakDataRemainingTitle.setTextColor(focusColor);
+		
+		// Set offpeak data to remaining
+		myOffpeakDataData.setText(getOffpeakDataRemainingMb());
 	}
 	
 	/**
@@ -283,21 +360,35 @@ public class OffpeakStatsView extends AccountHelper {
 		// Check if daily used has focus
 		if (isDailyUsedFocus()){
 			// Switch focus to suggested usage
-			myOffpeakDailyUsedTitle.setTextColor(alternateColor);
-			myOffpeakDailySuggestedTitle.setTextColor(focusColor);
-			
-			// Set text to suggested usage
-			myOffpeakDailyData.setText(getOffpeakDailyDataSuggestedMb());
+			setDailySuggested();
 		}
 		else{
 			// Switch focus to av daily use
-			myOffpeakDailyUsedTitle.setTextColor(focusColor);
-			myOffpeakDailySuggestedTitle.setTextColor(alternateColor);
-			
-			// Set text to average daily usage
-			myOffpeakDailyData.setText(getOffpeakDailyDataUsedMb());
+			setDailyUsed();
 			
 		}
+	}
+
+	/**
+	 * Set daily block to used
+	 */
+	private void setDailyUsed() {
+		myOffpeakDailyUsedTitle.setTextColor(focusColor);
+		myOffpeakDailySuggestedTitle.setTextColor(alternateColor);
+		
+		// Set text to average daily usage
+		myOffpeakDailyData.setText(getOffpeakDailyDataUsedMb());
+	}
+
+	/**
+	 * Set daily block to suggested
+	 */
+	private void setDailySuggested() {
+		myOffpeakDailyUsedTitle.setTextColor(alternateColor);
+		myOffpeakDailySuggestedTitle.setTextColor(focusColor);
+		
+		// Set text to suggested usage
+		myOffpeakDailyData.setText(getOffpeakDailyDataSuggestedMb());
 	}
 	
 	/**
