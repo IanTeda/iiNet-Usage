@@ -52,7 +52,7 @@
     </style>
 
     <style name="actionbar_menu_image_button">
-        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">0dp</item>
         <item name="android:padding">5dp</item>
         <item name="android:layout_weight">1</item>
