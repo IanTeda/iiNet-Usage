@@ -5,12 +5,9 @@
     android:background="@color/application_background_color"
     android:orientation="horizontal" >
 
-    <include
-        android:id="@+id/actionbar_menu"
-        layout="@layout/actionbar_menu" />
+    <include layout="@layout/actionbar_menu" />
 
-    <include
-        layout="@layout/line2_vert" />
+    <include layout="@layout/line2_vert" />
 
     <LinearLayout
         android:id="@+id/linearLayout1"

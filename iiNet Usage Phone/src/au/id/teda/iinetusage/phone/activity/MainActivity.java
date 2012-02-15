@@ -103,6 +103,10 @@ public class MainActivity extends ActionbarHelperActivity {
 		
 	}
 	
+	/**
+	 * Method for calling refresh async task
+	 * @param view
+	 */
 	public void onClickActionbarRefresh (View view){
 		new RefreshUsageAsync(this, handler).execute();
 	}

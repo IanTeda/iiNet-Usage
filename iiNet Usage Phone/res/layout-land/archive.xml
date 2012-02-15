@@ -4,9 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal" >
 
-    <include
-        android:id="@+id/actionbar_menu"
-        layout="@layout/actionbar_menu" />
+    <include layout="@layout/actionbar_menu" />
 
     <include layout="@layout/line2_vert" />
 

@@ -7,11 +7,14 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 import au.id.teda.iinetusage.phone.R;
+import au.id.teda.iinetusage.phone.async.RefreshUsageAsync;
 import au.id.teda.iinetusage.phone.cursor.DailyDataCursorAdapter;
 import au.id.teda.iinetusage.phone.database.DailyDataDBAdapter;
 import au.id.teda.iinetusage.phone.helper.AccountHelper;
@@ -45,6 +48,29 @@ public class DailyDataActivity extends ListActivity {
         // Set reference to TextViews
         myTitle = (TextView) findViewById(R.id.daily_data_title);
 	}
+	
+	/**
+	 * Method for calling refresh async task
+	 * @param view
+	 */
+	public void onClickActionbarRefresh (View view){
+		new RefreshUsageAsync(this, handler).execute();
+	}
+	
+	/**
+	 *  Handler for passing messages from other classes
+	 */
+    public Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
+        	
+        	try {
+				loadData();
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }
+    };
 	
 	
 	/**
@@ -141,7 +167,6 @@ public class DailyDataActivity extends ListActivity {
 		default:
 			Toast.makeText(this, "Button not recognised", Toast.LENGTH_SHORT)
 					.show();
-
 		}
 	}
 	

@@ -6,7 +6,6 @@ import org.achartengine.GraphicalView;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
@@ -18,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 import au.id.teda.iinetusage.phone.R;
+import au.id.teda.iinetusage.phone.async.RefreshUsageAsync;
 import au.id.teda.iinetusage.phone.chart.DoughnutChart;
 import au.id.teda.iinetusage.phone.chart.PieChart;
 import au.id.teda.iinetusage.phone.chart.StackedBarChart;
@@ -27,8 +27,8 @@ import au.id.teda.iinetusage.phone.helper.AccountHelper;
 public class ChartActivity extends ActionbarHelperActivity {
 
 	// Static tags for debugging
-	private static final String DEBUG_TAG = "iiNet Usage";
-	private static final String INFO_TAG = ChartActivity.class.getSimpleName();
+	//private static final String DEBUG_TAG = "iiNet Usage";
+	//private static final String INFO_TAG = ChartActivity.class.getSimpleName();
 
 	// Chart objects
 	private GraphicalView myBarChartView;
@@ -66,13 +66,7 @@ public class ChartActivity extends ActionbarHelperActivity {
 
 		loadGestures();
 
-		loadStackedLineChart();
-
-		loadStackedBarChart();
-
-		loadPieChart();
-
-		loadDoughnutChart();
+		loadCharts();
 		
 		// If orientation has changed
 		if (savedInstanceState != null) {
@@ -84,6 +78,31 @@ public class ChartActivity extends ActionbarHelperActivity {
 
 	}
 
+	/**
+	 * Load charts
+	 */
+	private void loadCharts() {
+		// Load stacked line chart
+		loadStackedLineChart();
+
+		// Load stacked bar chart
+		loadStackedBarChart();
+
+		// Load pie chart
+		loadPieChart();
+
+		// Load doughnut chart
+		loadDoughnutChart();
+	}
+	
+	/**
+	 * Method for calling refresh of data
+	 * @param view
+	 */
+	public void onClickActionbarRefresh (View view){
+		new RefreshUsageAsync(this, handler).execute();
+	}
+	
 	/**
 	 * Load gesture, animation and set touch listener for ViewFlipper
 	 */
@@ -315,7 +334,7 @@ public class ChartActivity extends ActionbarHelperActivity {
 	 */
 	public Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
-			// TODO: how do i use this??
+			loadCharts();
 		}
 	};
 

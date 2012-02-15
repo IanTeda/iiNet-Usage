@@ -4,13 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <include
-        android:id="@+id/actionbar"
-        layout="@layout/actionbar" />
+    <include layout="@layout/actionbar" />
 
-    <include
-        android:id="@+id/actionbar_menu"
-        layout="@layout/actionbar_menu" />
+    <include layout="@layout/actionbar_menu" />
+    
+    <include layout="@layout/line2_horz" />
 
     <TextView
         android:id="@+id/textView1"
