@@ -24,79 +24,35 @@
             android:onClick="onClickAlertboxButton"
             android:text="@string/alertbox_default"
             android:visibility="gone" />
-
+
         <LinearLayout
-            android:id="@+id/linearLayout1"
+            android:id="@+id/dashboard_landscape_data_container"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent" >
 
-            <View
+            <LinearLayout
+                android:id="@+id/dashboard_landscape_peak_container"
                 android:layout_width="0dp"
-                android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:background="@android:color/transparent" />
-
-            <include layout="@layout/dashboard_peak_number" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:background="@android:color/transparent" />
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+            </LinearLayout>
 
             <View
                 android:layout_width="@dimen/application_line_2_height"
                 android:layout_height="fill_parent"
                 android:background="#40ffffff" />
 
-            <View
+            <LinearLayout
+                android:id="@+id/dashboard_landscape_offpeak_container"
                 android:layout_width="0dp"
-                android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:background="@android:color/transparent" />
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+            </LinearLayout>
 
-            <RelativeLayout
-                android:id="@+id/peak"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingRight="@dimen/application_padding" >
-
-                <TextView
-                    android:id="@+id/otextView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
-                    android:marginTop="-20dp"
-                    android:text="40"
-                    android:textSize="100sp" />
-
-                <TextView
-                    android:id="@+id/otextView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_toRightOf="@+id/otextView1"
-                    android:text="/50"
-                    android:textSize="50sp" />
-
-                <TextView
-                    android:id="@+id/oTextView01"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/otextView1"
-                    android:layout_alignBottom="@+id/otextView1"
-                    android:layout_toRightOf="@+id/otextView1"
-                    android:text="(Gb)"
-                    android:textSize="40sp" />
-            </RelativeLayout>
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:background="@android:color/transparent" />
         </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>
