@@ -87,11 +87,7 @@
 
             <TextView
                 android:id="@+id/dashboard_landscape_peak_suggested_remaining_data"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="left"
-                android:paddingLeft="2dp"
+                style="@style/dashboard_data.land"
                 android:text="1,223 (Mb)" />
         </TableRow>
 
@@ -107,11 +103,7 @@
 
             <TextView
                 android:id="@+id/dashboard_landscape_peak_status_data"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="left"
-                android:paddingLeft="2dp"
+                style="@style/dashboard_data.land"
                 android:text="Unshaped" />
         </TableRow>
 
@@ -127,11 +119,7 @@
 
             <TextView
                 android:id="@+id/dashboard_landscape_peak_period_data"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="left"
-                android:paddingLeft="2dp"
+								style="@style/dashboard_data.land"
                 android:text="2am to 8am" />
         </TableRow>
     </TableLayout>
