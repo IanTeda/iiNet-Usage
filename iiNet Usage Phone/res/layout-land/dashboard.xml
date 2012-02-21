@@ -18,41 +18,34 @@
 
         <Button
             android:id="@+id/alertbox_button"
-            style="@style/dashboard_alertbox_style"
+            style="@style/dashboard_alertbox"
             android:layout_margin="5dp"
             android:background="@drawable/dashboard_alertbox"
             android:onClick="onClickAlertboxButton"
-            android:text="@string/alertbox_default"
-            android:visibility="gone" />
-
+            android:text="@string/alertbox_default" />
+
         <LinearLayout
             android:id="@+id/dashboard_landscape_data_container"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent" >
 
-            <LinearLayout
-                android:id="@+id/dashboard_landscape_peak_container"
+            <include
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:orientation="vertical" >
-            </LinearLayout>
+                android:layout_weight="1"
+                layout="@layout/dashboard_peak" />
 
             <View
                 android:layout_width="@dimen/application_line_2_height"
                 android:layout_height="fill_parent"
                 android:background="#40ffffff" />
 
-            <LinearLayout
-                android:id="@+id/dashboard_landscape_offpeak_container"
+            <include
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:orientation="vertical" >
-            </LinearLayout>
-
+                android:layout_weight="1"
+                layout="@layout/dashboard_peak" />
         </LinearLayout>
-
     </LinearLayout>
 
 </LinearLayout>

@@ -2,7 +2,7 @@
 <resources>
 
     <!-- Alertbox styling -->
-    <style name="dashboard_alertbox_style">
+    <style name="dashboard_alertbox">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">fill_parent</item>
         <item name="android:padding">@dimen/alertbox_padding</item>
@@ -12,6 +12,84 @@
         <item name="android:layout_gravity">center</item>
         <item name="android:textSize">@dimen/alertbox_text_size</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Dashboard heading 1 -->
+    <style name="dashboard_h1">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/account_info_title_text_size</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">left</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Statistic Data -->
+    <style name="dashboard_data">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/account_info_stat_text_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:typeface">sans</item>
+        <item name="android:textColor">@color/application_text_highlight_color</item>
+        <item name="android:layout_marginTop">@dimen/account_info_stat_text_marginTop</item>
+    </style>
+
+    <!-- Statistic data heading 1 -->
+    <style name="dashboard_data_h1">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">@dimen/account_info_stat_used_title_paddingTop</item>
+        <item name="android:textColor">@color/application_h1_text_color</item>
+        <item name="android:textSize">@dimen/account_info_stat_used_title_textSize</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="dashboard_data_h1.alt">
+        <item name="android:textColor">@color/application_h2_text_alt_color</item>
+    </style>
+
+    <!-- Statistic data heading 2 -->
+    <style name="dashboard_data_h2">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/account_info_cat_title_text_size</item>
+        <item name="android:paddingTop">@dimen/account_info_cat_title_padding_top</item>
+        <item name="android:textColor">@color/application_h2_text_color</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    
+    <!-- Statistic data heading 2 landscape -->
+		<style name="dashboard_data_h2.land">
+        <item name="android:gravity">right</item>
+        <item name="android:width">0dp</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <!-- Alternate style for account information category titles -->
+    <style name="dashboard_data_h2.alt">
+        <item name="android:textColor">@color/application_h2_text_alt_color</item>
+    </style>
+
+    <style name="dashboard_button_overlay">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="dashboard_button_overlay.accountInfo">
+        <item name="android:onClick">onAccountInfoClick</item>
+    </style>
+
+    <style name="dashboard_button_overlay.peakStats">
+        <item name="android:onClick">onPeakStatsClick</item>
+    </style>
+
+    <style name="dashboard_peak_offpeak_number">
+        <item name="android:textSize">@dimen/stats_number_text_size</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
     </style>
 
 </resources>
