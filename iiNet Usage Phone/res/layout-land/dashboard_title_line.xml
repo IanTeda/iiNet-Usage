@@ -6,6 +6,6 @@
     android:layout_marginLeft="@dimen/application_padding"
     android:layout_marginRight="@dimen/application_padding"
     android:layout_weight="1"
-    android:background="@color/white" >
+    android:background="@color/red" >
 
 </View>
