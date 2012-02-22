@@ -26,7 +26,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:text="40"
-                android:textSize="100sp" />
+                android:textSize="125sp" />
 
             <TextView
                 android:id="@+id/dashboard_landscape_peak_unit"
@@ -34,8 +34,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/dashboard_landscape_peak_data"
                 android:layout_toRightOf="@+id/dashboard_landscape_peak_data"
+                android:layout_marginLeft="5dp"
                 android:text="(Gb)"
-                android:textSize="40sp" />
+                android:textSize="35sp" />
 
             <TextView
                 android:id="@+id/dashboard_landscape_peak_quota"
@@ -43,9 +44,10 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="14dp"
+                android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@+id/dashboard_landscape_peak_data"
-                android:text="/50"
-                android:textSize="50sp" />
+                android:text="/ 50"
+                android:textSize="45sp" />
 
         </RelativeLayout>
 

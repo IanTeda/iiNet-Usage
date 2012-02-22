@@ -17,6 +17,7 @@ import au.id.teda.iinetusage.phone.async.RefreshUsageAsync;
 import au.id.teda.iinetusage.phone.view.AccountInfoView;
 import au.id.teda.iinetusage.phone.view.AlertboxView;
 import au.id.teda.iinetusage.phone.view.OffpeakStatsView;
+import au.id.teda.iinetusage.phone.view.PeakStatsViewLand;
 import au.id.teda.iinetusage.phone.view.PeakStatsViewPort;
 
 public class MainActivity extends ActionbarHelperActivity {
@@ -32,7 +33,8 @@ public class MainActivity extends ActionbarHelperActivity {
 	private AccountInfoView myAccountInfoView;
 	
 	// Object for PeakStatsView
-	private PeakStatsViewPort myPeakStatsView;
+	private PeakStatsViewPort myPeakStatsViewPort;
+	private PeakStatsViewLand myPeakStatsViewLand;
 	
 	// Object for OffpeakStatsView
 	private OffpeakStatsView myOffpeakStatsView;
@@ -48,10 +50,16 @@ public class MainActivity extends ActionbarHelperActivity {
 			myAlertboxButton = (Button) findViewById(R.id.alertbox_button);
 			myAlertboxView = new AlertboxView(this);
 
-			// Set reference to AccountInfoView object
+			// Initialise views
 			myAccountInfoView = new AccountInfoView(this);
-			myPeakStatsView = new PeakStatsViewPort(this);
+			myPeakStatsViewPort = new PeakStatsViewPort(this);
 			myOffpeakStatsView = new OffpeakStatsView(this);
+		}
+		// Else we must be in landscape
+		else {
+			// Initialise views
+			myPeakStatsViewLand = new PeakStatsViewLand(this);
+			
 		}
         
     }
@@ -76,7 +84,7 @@ public class MainActivity extends ActionbarHelperActivity {
 			// Load portrait views
 	        myAlertboxView.setAlert(myAlertboxButton);
 	        myAccountInfoView.loadView();
-	        myPeakStatsView.loadView();
+	        myPeakStatsViewPort.loadView();
 	        myOffpeakStatsView.loadView();
 		}
 

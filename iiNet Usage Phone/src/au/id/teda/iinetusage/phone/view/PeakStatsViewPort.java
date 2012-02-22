@@ -82,10 +82,6 @@ public class PeakStatsViewPort extends AccountHelper {
 		myPeakNumberData = (TextView) myActivity.findViewById(R.id.peak_number);
 		myPeakNumberUnit = (TextView) myActivity.findViewById(R.id.peak_number_unit);
 		
-		// Initialise custom font to number
-		myPeakNumberData.setTypeface(myFontNumber);
-		myPeakNumberUnit.setTypeface(myFontNumber);
-		
 		// Initialise focus and alternate colours
 		focusColor = myActivity.getResources().getColor(R.color.application_h2_text_color);
 		alternateColor = myActivity.getResources().getColor(R.color.application_h2_text_alt_color);
@@ -93,6 +89,10 @@ public class PeakStatsViewPort extends AccountHelper {
 		// Initialise percent and Gigabyte units
 		percentUnit = myActivity.getString(R.string.peak_offpeak_percent);
 		gigabyteUnit = myActivity.getString(R.string.peak_offpeak_gigabyte);
+		
+		// Set type face custom font to number
+		myPeakNumberData.setTypeface(myFontNumber);
+		myPeakNumberUnit.setTypeface(myFontNumber);
 	}
 	
 	public void loadView(){
