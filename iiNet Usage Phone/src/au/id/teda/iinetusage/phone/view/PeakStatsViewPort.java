@@ -9,11 +9,11 @@ import android.widget.TextView;
 import au.id.teda.iinetusage.phone.R;
 import au.id.teda.iinetusage.phone.helper.AccountHelper;
 
-public class PeakStatsView extends AccountHelper {
+public class PeakStatsViewPort extends AccountHelper {
 	
 	// Static strings for debug tags
 	private static final String DEBUG_TAG = "iiNet Usage";
-	//private static final String INFO_TAG = PeakStatsView.class.getSimpleName();
+	//private static final String INFO_TAG = PeakStatsViewPort.class.getSimpleName();
 	
 	private final Context myActivityContext;
 	private final Activity myActivity;
@@ -52,43 +52,45 @@ public class PeakStatsView extends AccountHelper {
 	 * Class constructor
 	 * @param context
 	 */
-	public PeakStatsView (Context context){
-		// Construct context
+	public PeakStatsViewPort (Context context){
+		
+		// Initialise activity context
 		myActivityContext = context;
-		// Construct activity from context
+		
+		// Initialise activity from context
 		myActivity = (myActivityContext instanceof Activity) ? (Activity) myActivityContext	: null;
 		
-		// Set custom font
+		// Initialise custom number font
 		myFontNumber = Typeface.createFromAsset(((ContextWrapper) myActivity).getAssets(), "OSP-DIN.ttf"); 
 		
-		// Set peak title objects
+		// Initialise peak title objects
 		myPeakPeriod = (TextView) myActivity.findViewById(R.id.peak_time);
 		
-		// Set Daily Average TextView objects
+		// Initialise Daily Average TextView objects
 		myPeakDailyUsedTitle = (TextView) myActivity.findViewById(R.id.peak_daily_used);
 		myPeakDailySuggestedTitle = (TextView) myActivity.findViewById(R.id.peak_daily_suggested);
 		myPeakDailyData = (TextView) myActivity.findViewById(R.id.peak_daily_data);
 
-		// Set Data TextView objects
+		// Initialise Data TextView objects
 		myPeakDataUsedTitle = (TextView) myActivity.findViewById(R.id.peak_data_used);
 		myPeakDataRemainingTitle = (TextView) myActivity.findViewById(R.id.peak_data_remaining);
 		myPeakDataData = (TextView) myActivity.findViewById(R.id.peak_data_data);
 		
-		// Set Percent TextView objects
+		// Initialise Percent TextView objects
 		myPeakPercentUsedTitle = (TextView) myActivity.findViewById(R.id.peak_percent_used);
 		myPeakPercentRemainingTitle = (TextView) myActivity.findViewById(R.id.peak_percent_remaining);
 		myPeakNumberData = (TextView) myActivity.findViewById(R.id.peak_number);
 		myPeakNumberUnit = (TextView) myActivity.findViewById(R.id.peak_number_unit);
 		
-		// Set custom font to number
+		// Initialise custom font to number
 		myPeakNumberData.setTypeface(myFontNumber);
 		myPeakNumberUnit.setTypeface(myFontNumber);
 		
-		// Set focus and alternate colours
+		// Initialise focus and alternate colours
 		focusColor = myActivity.getResources().getColor(R.color.application_h2_text_color);
 		alternateColor = myActivity.getResources().getColor(R.color.application_h2_text_alt_color);
 		
-		// Set percent and Gigabyte units
+		// Initialise percent and Gigabyte units
 		percentUnit = myActivity.getString(R.string.peak_offpeak_percent);
 		gigabyteUnit = myActivity.getString(R.string.peak_offpeak_gigabyte);
 	}

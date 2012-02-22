@@ -17,7 +17,7 @@ import au.id.teda.iinetusage.phone.async.RefreshUsageAsync;
 import au.id.teda.iinetusage.phone.view.AccountInfoView;
 import au.id.teda.iinetusage.phone.view.AlertboxView;
 import au.id.teda.iinetusage.phone.view.OffpeakStatsView;
-import au.id.teda.iinetusage.phone.view.PeakStatsView;
+import au.id.teda.iinetusage.phone.view.PeakStatsViewPort;
 
 public class MainActivity extends ActionbarHelperActivity {
 	
@@ -32,7 +32,7 @@ public class MainActivity extends ActionbarHelperActivity {
 	private AccountInfoView myAccountInfoView;
 	
 	// Object for PeakStatsView
-	private PeakStatsView myPeakStatsView;
+	private PeakStatsViewPort myPeakStatsView;
 	
 	// Object for OffpeakStatsView
 	private OffpeakStatsView myOffpeakStatsView;
@@ -50,7 +50,7 @@ public class MainActivity extends ActionbarHelperActivity {
 
 			// Set reference to AccountInfoView object
 			myAccountInfoView = new AccountInfoView(this);
-			myPeakStatsView = new PeakStatsView(this);
+			myPeakStatsView = new PeakStatsViewPort(this);
 			myOffpeakStatsView = new OffpeakStatsView(this);
 		}
         
@@ -128,7 +128,7 @@ public class MainActivity extends ActionbarHelperActivity {
     public void onPeakStatsClick (View button){
     	
     	// Object for PeakStatsView class
-    	PeakStatsView myPeakStatsView = new PeakStatsView(this);
+    	PeakStatsViewPort myPeakStatsView = new PeakStatsViewPort(this);
     	
     	// Switch cases for button clicks
     	switch (button.getId()) {
