@@ -1,4 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Account Info Strings -->
+    <string name="account_info_plan">--- Plan --- (--- Product ---)</string>
+    <string name="account_info_rollover">Rollover</string>
+    <string name="account_info_slash">/</string>
+    <string name="account_info_data_period">Data Period</string>
+    <string name="account_info_days">Days \f</string>
+    <string name="account_info_days_so_fare">so Fare</string>
+    <string name="account_info_days_to_go">to Go</string>
+    <string name="account_info_days_data">-- Days</string>
+    <string name="account_info_quota">Quota </string>
+    <string name="account_info_quota_peak">Peak</string>
+    <string name="account_info_quota_offpeak">Offpeak</string>
+    <string name="account_info_quota_data">-- (Gb)</string>
+    <string name="account_info_rollover_period_data">ddd, dd mmm yyyy</string>
+    <string name="account_info_ip_address">IP Address</string>
+    <string name="account_info_up_time">Up Time</string>
+    <string name="account_info_up_for">--Days --Hrs</string>
+    <string name="account_info_ip_data">---.---.---.---</string>
+
+    <!-- Peak / Offpeak Strings -->
+    <string name="peak_stats_title">Peak Data</string>
+    <string name="offpeak_stats_title">Offpeak Data</string>
+    <string name="peak_offpeak_stats_period">(- -:- - to - -:- -)</string>
+    <string name="peak_offpeak_stats_number">00</string>
+    <string name="peak_offpeak_percent">(%)</string>
+    <string name="peak_offpeak_gigabyte">(Gb)</string>
+    <string name="peak_offpeak_used_uppercase">USED</string>
+    <string name="peak_offpeak_remaining_uppercase">REMAINING</string>
+    <string name="peak_offpeak_data">Data</string>
+    <string name="peak_offpeak_used">Used</string>
+    <string name="peak_offpeak_suggested">Suggested</string>
+    <string name="peak_offpeak_remaining">Remaining</string>
+    <string name="peak_offpeak_slash"> / </string>
+    <string name="peak_offpeak_data_data">- -,- - - (MB)</string>
+    <string name="peak_offpeak_daily_av">Daily Av. \f</string>
+    <string name="peak_offpeak_daily_data">-,- - - (MB)</string>
+
 </resources>
