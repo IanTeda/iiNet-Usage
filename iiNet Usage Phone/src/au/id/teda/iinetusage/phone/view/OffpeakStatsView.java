@@ -88,8 +88,8 @@ public class OffpeakStatsView extends AccountHelper {
 		alternateColor = myActivity.getResources().getColor(R.color.application_h2_text_alt_color);
 		
 		// Set percent and Gigabyte units
-		percentUnit = myActivity.getString(R.string.peak_offpeak_percent);
-		gigabyteUnit = myActivity.getString(R.string.peak_offpeak_gigabyte);
+		percentUnit = myActivity.getString(R.string.peak_offpeak_unit_percent);
+		gigabyteUnit = myActivity.getString(R.string.peak_offpeak_unit_gigabyte);
 	}
 	
 	public void loadView(){

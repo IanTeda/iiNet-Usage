@@ -169,6 +169,6 @@
         android:layout_toLeftOf="@+id/peak_percent_used"
         android:paddingRight="@dimen/stats_number_unit_paddingRight"
         android:textSize="@dimen/stats_number_unit_text_size"
-        android:text="@string/peak_offpeak_percent" />
+        android:text="@string/peak_offpeak_unit_percent" />
 
 </RelativeLayout>

@@ -22,20 +22,31 @@
 
     <!-- Peak / Offpeak Strings -->
     <string name="peak_stats_title">Peak Data</string>
+    <string name="peak_land_toGo">Peak to Go</string>
+    <string name="peak_land_soFare">Peak so Fare</string>
     <string name="offpeak_stats_title">Offpeak Data</string>
     <string name="peak_offpeak_stats_period">(- -:- - to - -:- -)</string>
+    <string name="peak_offpeak_land_period_data">- -am to - -am</string>
     <string name="peak_offpeak_stats_number">00</string>
-    <string name="peak_offpeak_percent">(%)</string>
-    <string name="peak_offpeak_gigabyte">(Gb)</string>
+    <string name="peak_offpeak_stats_qutoa"> / 00</string>
+    <string name="peak_offpeak_unit_percent">(%)</string>
+    <string name="peak_offpeak_unit_gigabyte">(Gb)</string>
     <string name="peak_offpeak_used_uppercase">USED</string>
     <string name="peak_offpeak_remaining_uppercase">REMAINING</string>
     <string name="peak_offpeak_data">Data</string>
     <string name="peak_offpeak_used">Used</string>
+    <string name="peak_offpeak_land_used">Used: </string>
     <string name="peak_offpeak_suggested">Suggested</string>
+    <string name="peak_offpeak_land_suggested">Suggested :</string>
     <string name="peak_offpeak_remaining">Remaining</string>
+    <string name="peak_offpeak_land_remaining">Remaining :</string>
+    <string name="peak_offpeak_land_period">Period :</string>
     <string name="peak_offpeak_slash"> / </string>
     <string name="peak_offpeak_data_data">- -,- - - (MB)</string>
     <string name="peak_offpeak_daily_av">Daily Av. \f</string>
     <string name="peak_offpeak_daily_data">-,- - - (MB)</string>
+    <string name="peak_offpeak_status">Status :</string>
+    <string name="peak_offpeak_status_unshaped">Unshaped</string>
+    <string name="peak_offpeak_status_shaped">Shaped</string>
 
 </resources>

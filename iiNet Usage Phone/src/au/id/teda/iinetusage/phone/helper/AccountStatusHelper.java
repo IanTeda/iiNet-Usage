@@ -79,8 +79,8 @@ public class AccountStatusHelper extends AccountInfoHelper {
 				&& getCurrentAnniversary() >= 0
 				&& getCurrentDaysToGo() >= 0
 				&& getCurrentDaysSoFar() >= 0
-				&& isCurrentPeakShaped() >= 0
-				&& isCurrentOffpeakShaped() >= 0
+				&& getCurrentPeakShaped() >= 0
+				&& getCurrentOffpeakShaped() >= 0
 				&& getCurrentPeakUsed() >= 0
 				&& getCurrentOffpeakUsed() >= 0
 				&& getCurrentUploadUsed() >= 0
@@ -208,16 +208,52 @@ public class AccountStatusHelper extends AccountInfoHelper {
 	 * Method for getting current peak shape speed
 	 * @return int value of peak shaped
 	 */
-	public int isCurrentPeakShaped(){
+	public int getCurrentPeakShaped(){
 		return mySettings.getInt(CURRENT_PEAK_SHAPED, 0);
+	}
+	
+	/**
+	 * Method for checking if peak period is shaped
+	 * @return true if currently shaped
+	 */
+	public boolean isCurrentPeakShaped(){
+		// Check Int value for peak shaped
+		if (getCurrentPeakShaped() == 0){
+			// Int value is 0 therefore un-shaped so return false
+			return false;
+		}
+		// Else Int value is 1
+		else {
+			// Therefore we are shaped so return true
+			return true;
+		}
+		
 	}
 	
 	/**
 	 * Method for checking if current off peak is shaped
 	 * @return int value of off peak shaped
 	 */
-	public int isCurrentOffpeakShaped(){
+	public int getCurrentOffpeakShaped(){
 		return mySettings.getInt(CURRENT_OFF_PEAK_SHAPED, 0);
+	}
+	
+	/**
+	 * Method for checking if peak period is shaped
+	 * @return true if currently shaped
+	 */
+	public boolean isCurrentOffpeakShaped(){
+		// Check Int value for offpeak shaped
+		if (getCurrentOffpeakShaped() == 0){
+			// Int value is 0 therefore un-shaped so return false
+			return false;
+		}
+		// Else Int value is 1
+		else {
+			// Therefore we are shaped so return true
+			return true;
+		}
+		
 	}
 
 	/**
@@ -347,4 +383,5 @@ public class AccountStatusHelper extends AccountInfoHelper {
 			return false;
 		}
 	}
+	
 }

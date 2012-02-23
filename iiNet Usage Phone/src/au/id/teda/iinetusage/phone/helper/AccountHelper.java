@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import android.content.Context;
@@ -20,6 +21,8 @@ public class AccountHelper extends AccountStatusHelper {
 	private final SimpleDateFormat myDataPeriodFormat = new SimpleDateFormat("MMM yyyy");
 	private final SimpleDateFormat myRolloverDateFormat = new SimpleDateFormat("E, dd MMM yyyy");
 	private final SimpleDateFormat myPeriodDateFormat = new SimpleDateFormat("MMMM yyyy");
+	
+	NumberFormat myNumberFormat = new DecimalFormat("#,#00");
 
 	private Context myApplicationContext = AppGlobals.getAppContext();
 	
@@ -209,7 +212,7 @@ public class AccountHelper extends AccountStatusHelper {
 	 * Method for getting peak quota String
 	 * @return String value of peak quota formatted
 	 */
-	public String getPeakQuotaString(){
+	public String getPeakQuotaStringGB(){
 		// Check if peak quota is set
 		if (isPeakQuotaSet()){
 			
@@ -218,6 +221,29 @@ public class AccountHelper extends AccountStatusHelper {
 			
 			// Format Long value into String
 			String quotaString = String.valueOf(peakQuotaLong) + " (Gb)";
+			
+			// Return formated string value
+			return quotaString;
+		}
+		// Else it must not be set so return default XML string value
+		else {
+			return myApplicationContext.getString(R.string.account_info_quota_data);
+		}
+	}
+	
+	/**
+	 * Method for getting peak quota String
+	 * @return String value of peak quota formatted
+	 */
+	public String getPeakQuotaStringGBLand(){
+		// Check if peak quota is set
+		if (isPeakQuotaSet()){
+			
+			// Get Long value of peak quota and convert to Gb
+			Long peakQuotaLong = getPeakQuota()/1000;
+			
+			// Format Long value into String
+			String quotaString = "/ " + String.valueOf(peakQuotaLong);
 			
 			// Return formated string value
 			return quotaString;
@@ -299,8 +325,7 @@ public class AccountHelper extends AccountStatusHelper {
 			double percent = dataUsed/quota*100;
 			
 			// Format percentage value
-			NumberFormat percentNumberFormat = new DecimalFormat("#,#00");
-			String percentString = percentNumberFormat.format(percent);
+			String percentString = myNumberFormat.format(percent);
 			
 			return percentString;
 			
@@ -329,8 +354,7 @@ public class AccountHelper extends AccountStatusHelper {
 			double percent = dataUsed/quota*100;
 			
 			// Format percentage value
-			NumberFormat percentNumberFormat = new DecimalFormat("#,#00");
-			String percentString = percentNumberFormat.format(percent);
+			String percentString = myNumberFormat.format(percent);
 			
 			return percentString;
 			
@@ -359,8 +383,7 @@ public class AccountHelper extends AccountStatusHelper {
 			double percent = dataUsed/quota*100;
 			
 			// Format percentage value
-			NumberFormat percentNumberFormat = new DecimalFormat("#,#00");
-			String percentString = percentNumberFormat.format(percent);
+			String percentString = myNumberFormat.format(percent);
 			
 			return percentString;
 			
@@ -387,9 +410,8 @@ public class AccountHelper extends AccountStatusHelper {
 			// Calculate remaining data
 			double dataRemining = quota - dataUsed;
 			
-			// Format percentage value
-			NumberFormat gigabyteNumberFormat = new DecimalFormat("#,#00");
-			String gigaByteString = gigabyteNumberFormat.format(dataRemining);
+			// Format Giga Byte value
+			String gigaByteString = myNumberFormat.format(dataRemining);
 			
 			return gigaByteString;
 		}
@@ -415,9 +437,8 @@ public class AccountHelper extends AccountStatusHelper {
 			// Calculate remaining data
 			double dataRemining = quota - dataUsed;
 			
-			// Format percentage value
-			NumberFormat gigabyteNumberFormat = new DecimalFormat("#,#00");
-			String gigaByteString = gigabyteNumberFormat.format(dataRemining);
+			// Format Giga Byte value
+			String gigaByteString = myNumberFormat.format(dataRemining);
 			
 			return gigaByteString;
 		}
@@ -443,9 +464,8 @@ public class AccountHelper extends AccountStatusHelper {
 			// Calculate remaining data
 			double dataRemining = quota - dataUsed;
 			
-			// Format percentage value
-			NumberFormat gigabyteNumberFormat = new DecimalFormat("#,#00");
-			String gigaByteString = gigabyteNumberFormat.format(dataRemining) + " (Mb)";
+			// Format Giga Byte value
+			String gigaByteString = myNumberFormat.format(dataRemining) + " (Mb)";
 			
 			return gigaByteString;
 		}
@@ -471,9 +491,8 @@ public class AccountHelper extends AccountStatusHelper {
 			// Calculate remaining data
 			double dataRemining = quota - dataUsed;
 			
-			// Format percentage value
-			NumberFormat gigabyteNumberFormat = new DecimalFormat("#,#00");
-			String gigaByteString = gigabyteNumberFormat.format(dataRemining) + " (Mb)";
+			// Format Giga Byte value
+			String gigaByteString = myNumberFormat.format(dataRemining) + " (Mb)";
 			
 			return gigaByteString;
 		}
@@ -493,9 +512,8 @@ public class AccountHelper extends AccountStatusHelper {
 			// Get peak data used in Gb
 			double dataUsed = getCurrentPeakUsed()/1000000/1000;
 			
-			// Format percentage value
-			NumberFormat gigabyteNumberFormat = new DecimalFormat("#,#00");
-			String megaByteString = gigabyteNumberFormat.format(dataUsed);
+			// Format Mega Byte value
+			String megaByteString = myNumberFormat.format(dataUsed);
 			
 			return megaByteString;
 		}
@@ -516,8 +534,7 @@ public class AccountHelper extends AccountStatusHelper {
 			double dataUsed = getCurrentOffpeakUsed()/1000000/1000;
 			
 			// Format percentage value
-			NumberFormat gigabyteNumberFormat = new DecimalFormat("#,#00");
-			String megaByteString = gigabyteNumberFormat.format(dataUsed);
+			String megaByteString = myNumberFormat.format(dataUsed);
 			
 			return megaByteString;
 		}
@@ -538,8 +555,7 @@ public class AccountHelper extends AccountStatusHelper {
 			double dataUsed = getCurrentPeakUsed()/1000000;
 			
 			// Format percentage value
-			NumberFormat numberFormat = new DecimalFormat("#,#00");
-			String megaByteString = numberFormat.format(dataUsed) + " (Mb)";
+			String megaByteString = myNumberFormat.format(dataUsed) + " (Mb)";
 			
 			return megaByteString;
 		}
@@ -560,8 +576,7 @@ public class AccountHelper extends AccountStatusHelper {
 			double dataUsed = getCurrentOffpeakUsed()/1000000;
 			
 			// Format percentage value
-			NumberFormat numberFormat = new DecimalFormat("#,#00");
-			String megaByteString = numberFormat.format(dataUsed) + " (Mb)";
+			String megaByteString = myNumberFormat.format(dataUsed) + " (Mb)";
 			
 			return megaByteString;
 		}
@@ -588,8 +603,7 @@ public class AccountHelper extends AccountStatusHelper {
 			double dailyDataUsed = dataUsed/daysSoFar;
 			
 			// Format percentage value
-			NumberFormat numberFormat = new DecimalFormat("#,#00");
-			String megaByteString = numberFormat.format(dailyDataUsed) + " (Mb)";
+			String megaByteString = myNumberFormat.format(dailyDataUsed) + " (Mb)";
 			
 			return megaByteString;
 		}
@@ -616,8 +630,7 @@ public class AccountHelper extends AccountStatusHelper {
 			double dailyDataUsed = dataUsed/daysSoFar;
 			
 			// Format percentage value
-			NumberFormat numberFormat = new DecimalFormat("#,#00");
-			String megaByteString = numberFormat.format(dailyDataUsed) + " (Mb)";
+			String megaByteString = myNumberFormat.format(dailyDataUsed) + " (Mb)";
 			
 			return megaByteString;
 		}
@@ -650,8 +663,7 @@ public class AccountHelper extends AccountStatusHelper {
 			double suggestedDailyMb = dataRemining/daysToGo;
 			
 			// Format percentage value
-			NumberFormat numberFormat = new DecimalFormat("#,#00");
-			String megaByteString = numberFormat.format(suggestedDailyMb) + " (Mb)";
+			String megaByteString = myNumberFormat.format(suggestedDailyMb) + " (Mb)";
 			
 			return megaByteString;
 		}
@@ -684,8 +696,7 @@ public class AccountHelper extends AccountStatusHelper {
 			double suggestedDailyMb = dataRemining/daysToGo;
 			
 			// Format percentage value
-			NumberFormat numberFormat = new DecimalFormat("#,#00");
-			String megaByteString = numberFormat.format(suggestedDailyMb) + " (Mb)";
+			String megaByteString = myNumberFormat.format(suggestedDailyMb) + " (Mb)";
 			
 			return megaByteString;
 		}
@@ -700,6 +711,7 @@ public class AccountHelper extends AccountStatusHelper {
 	 * @return string value of start finish times for peak data period
 	 */
 	public String getPeakPeriod(){
+		// Check to see if peak start and end is set
 		if (isOffpeakStartSet() && isOffpeakEndSet()){
 			
 			String peakStart = getOffpeakEnd();
@@ -714,6 +726,61 @@ public class AccountHelper extends AccountStatusHelper {
 		else {
 			return myApplicationContext.getString(R.string.peak_offpeak_stats_period);
 		}
+	}
+	
+	/**
+	 * Get the plans peak period string for landscape view
+	 * @return string value of peak the plans peak period
+	 */
+	public String getPeakPeriodLand(){
+		// Check to see if peak start and end is set
+		if (isOffpeakStartSet() && isOffpeakEndSet()){
+			String peakStart = getOffpeakEnd().substring(0, (getOffpeakEnd().length() - 3));
+			String peakEnd = getOffpeakStart().substring(0, (getOffpeakEnd().length() - 3));
+			
+			String period = removeZeros(peakStart) + getAmPm(peakStart) + " to " + removeZeros(peakEnd) + getAmPm(peakEnd);
+			
+			return period;
+		}
+		// Else it must not be set so return default XML string value
+		else {
+			return myApplicationContext.getString(R.string.peak_offpeak_stats_period);
+		}
+		
+	}
+	
+	/**
+	 * Get 'am' or 'pm' based on hour of the day
+	 * @param hourString
+	 * @return am or pm based on hour of day
+	 */
+	public String getAmPm(String hourString){
+		int hour = Integer.parseInt(hourString);
+		
+		if (hour >= 12 ){
+			return "pm";
+		}
+		else{
+			return "am";
+		}
+		
+	}
+	
+	/**
+	 * Remove zero characters from string value passed to method
+	 * @param s = string value to remove zeros from
+	 * @return s with zero's removed
+	 */
+	public static String removeZeros(String s) {
+	
+	   String r = "";
+	   char zero = '0';
+	
+	   for (int i = 0; i < s.length(); i ++) {
+	      if (s.charAt(i) != zero) r += s.charAt(i);
+	   }
+	
+	   return r;
 	}
 	
 	/**

@@ -110,7 +110,7 @@ public class AccountInfoView extends AccountHelper {
 		myIpUpdata.setText(getCurrentIpAddressString());
 		
 		// Set peak quota TextView
-		myQuotaData.setText(getPeakQuotaString());
+		myQuotaData.setText(getPeakQuotaStringGB());
 		
 
 	}
@@ -230,7 +230,7 @@ public class AccountInfoView extends AccountHelper {
 			myOffPeakTitle.setTextColor(alternateColor);
 			
 			// Change TextView char sequence
-			myQuotaData.setText(getPeakQuotaString());
+			myQuotaData.setText(getPeakQuotaStringGB());
 		}
 	}
 

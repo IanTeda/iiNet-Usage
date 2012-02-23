@@ -33,7 +33,15 @@ public class PeakStatsViewLand extends AccountHelper {
 	private final TextView myPeakQuota;
 	private final TextView myPeakUnit;
 	
+	// TextView objects for peak number
+	private final TextView myPeakDaily;
+	private final TextView myPeakDailyData;
 	
+	// TextView object for peak status
+	private final TextView myStatus;
+	
+	// TextView object for peak period
+	private final TextView myPeakPeriod;
 	
 	/**
 	 * Class constructor
@@ -51,17 +59,27 @@ public class PeakStatsViewLand extends AccountHelper {
 		myFontNumber = Typeface.createFromAsset(((ContextWrapper) myActivity).getAssets(), "OSP-DIN.ttf"); 
 	
 		// Initialise percent and Gigabyte units
-		percentUnit = myActivity.getString(R.string.peak_offpeak_percent);
-		gigabyteUnit = myActivity.getString(R.string.peak_offpeak_gigabyte);
+		percentUnit = myActivity.getString(R.string.peak_offpeak_unit_percent);
+		gigabyteUnit = myActivity.getString(R.string.peak_offpeak_unit_gigabyte);
 		
 		// Initialise focus and alternate colours
 		focusColor = myActivity.getResources().getColor(R.color.application_h2_text_color);
 		alternateColor = myActivity.getResources().getColor(R.color.application_h2_text_alt_color);
 	
-		// Initialise Daily Average TextView objects
+		// Initialise Peak Data TextView objects
 		myPeakData = (TextView) myActivity.findViewById(R.id.dashboard_landscape_peak_data);
 		myPeakQuota = (TextView) myActivity.findViewById(R.id.dashboard_landscape_peak_quota);
 		myPeakUnit = (TextView) myActivity.findViewById(R.id.dashboard_landscape_peak_unit);
+		
+		// Initialise Daily Average TextView objects
+		myPeakDaily = (TextView) myActivity.findViewById(R.id.dashboard_landscape_peak_suggested_remaining);
+		myPeakDailyData = (TextView) myActivity.findViewById(R.id.dashboard_landscape_peak_suggested_remaining_data);
+		
+		// Initialise status TextView objects
+		myStatus = (TextView) myActivity.findViewById(R.id.dashboard_landscape_peak_status_data);
+		
+		// Initialise peak period TextView objects
+		myPeakPeriod = (TextView) myActivity.findViewById(R.id.dashboard_landscape_peak_period_data);
 		
 		// Set type face custom font to number
 		myPeakData.setTypeface(myFontNumber);
@@ -71,6 +89,48 @@ public class PeakStatsViewLand extends AccountHelper {
 	
 	public void loadView(){
 		
+		// Set peak GB used
+		myPeakData.setText(getPeakDataUsedGb());
+		
+		// Set peak GB quota
+		myPeakQuota.setText(getPeakQuotaStringGBLand());
+		
+		// Set peak view
+		setPeakRemaining();
+		
+	}
+	
+	private void setPeakRemaining(){
+		setPeakDailySuggested();
+		setStatus();
+		setPeakPeriod();
+	}
+	
+	private void setPeakDailySuggested(){
+		myPeakDaily.setText(myActivity.getString(R.string.peak_offpeak_land_suggested));
+		myPeakDailyData.setText(getPeakDailyDataSuggestedMb());
+	}
+	
+	private void setPeakDailyUsed(){
+		myPeakDaily.setText(myActivity.getString(R.string.peak_offpeak_land_used));
+		myPeakDailyData.setText(getPeakDailyDataUsedMb());
+	}
+	
+	private void setStatus(){
+		// Check if peak is shaped
+		if (isCurrentPeakShaped()){
+			// It is so set shaped
+			myStatus.setText(myActivity.getString(R.string.peak_offpeak_status_shaped));
+		}
+		// Else we are unshaped
+		else {
+			// So set status unshaped
+			myStatus.setText(myActivity.getString(R.string.peak_offpeak_status_unshaped));
+		}
+	}
+	
+	private void setPeakPeriod(){
+		myPeakPeriod.setText(getPeakPeriodLand());
 	}
 
 }

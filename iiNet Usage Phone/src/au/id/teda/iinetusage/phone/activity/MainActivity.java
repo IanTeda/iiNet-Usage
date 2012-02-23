@@ -87,6 +87,10 @@ public class MainActivity extends ActionbarHelperActivity {
 	        myPeakStatsViewPort.loadView();
 	        myOffpeakStatsView.loadView();
 		}
+		// Else we are in landscape
+		else {
+			myPeakStatsViewLand.loadView();
+		}
 
 	}
 
@@ -135,25 +139,22 @@ public class MainActivity extends ActionbarHelperActivity {
      */
     public void onPeakStatsClick (View button){
     	
-    	// Object for PeakStatsView class
-    	PeakStatsViewPort myPeakStatsView = new PeakStatsViewPort(this);
-    	
     	// Switch cases for button clicks
     	switch (button.getId()) {
     	case R.id.peak_number_button:
-    		myPeakStatsView.switchUnitNumberBlock();
+    		myPeakStatsViewPort.switchUnitNumberBlock();
     		break;
     	case R.id.peak_percent_used_remaining_button:
-    		myPeakStatsView.switchFocusPercentBlock();
+    		myPeakStatsViewPort.switchFocusPercentBlock();
     		break;
     	case R.id.peak_average_data_used_remaining_button:
-    		myPeakStatsView.switchFocusDailyBlock();
+    		myPeakStatsViewPort.switchFocusDailyBlock();
     		break;
     	case R.id.peak_data_used_remaining_button:
-    		myPeakStatsView.switchFocusDataBlock();
+    		myPeakStatsViewPort.switchFocusDataBlock();
     		break;
     	case R.id.peak_data_title_button:
-    		myPeakStatsView.switchPeakView();
+    		myPeakStatsViewPort.switchPeakView();
     		break;
     	case R.id.offpeak_number_button:
     		myOffpeakStatsView.switchUnitNumberBlock();
@@ -171,11 +172,32 @@ public class MainActivity extends ActionbarHelperActivity {
     		myOffpeakStatsView.switchOffpeakView();
     		break;
     	default:
-    		Toast.makeText(this, "onClick Error", Toast.LENGTH_SHORT).show();
+    		Toast.makeText(this, "onPeakStatsClick", Toast.LENGTH_SHORT).show();
     		break;
     	}
     	
     }
+    
+	public void onPeakLandStatsClick (View button){
+		// Object for PeakStatsView class
+    	PeakStatsViewLand myPeakStatsViewLand = new PeakStatsViewLand(this);
+    	
+    	// Switch cases for button clicks
+    	switch (button.getId()) {
+    	case R.id.dashboard_landscape_peak_data_button:
+    		Toast.makeText(this, "Peak Data", Toast.LENGTH_SHORT).show();
+    		break;
+    	case R.id.dashboard_landscape_peak_unit_button:
+    		Toast.makeText(this, "Peak Unit", Toast.LENGTH_SHORT).show();
+    		break;
+    	case R.id.dashboard_landscape_peak_title_button:
+    		Toast.makeText(this, "Peak Title", Toast.LENGTH_SHORT).show();
+    		break;
+    	default:
+    		Toast.makeText(this, "onPeakLandStatsClick Error", Toast.LENGTH_SHORT).show();
+    		break;
+    	}
+	}
     
     /**
      * Onclick event for account info include
