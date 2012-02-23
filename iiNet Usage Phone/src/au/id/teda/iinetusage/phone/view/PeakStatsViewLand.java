@@ -12,8 +12,8 @@ import au.id.teda.iinetusage.phone.helper.AccountHelper;
 public class PeakStatsViewLand extends AccountHelper {
 	
 	// Static strings for debug tags
-	private static final String DEBUG_TAG = "iiNet Usage";
-	private static final String INFO_TAG = PeakStatsViewLand.class.getSimpleName();
+	//private static final String DEBUG_TAG = "iiNet Usage";
+	//private static final String INFO_TAG = PeakStatsViewLand.class.getSimpleName();
 	
 	private final Context myActivityContext;
 	private final Activity myActivity;
@@ -25,9 +25,7 @@ public class PeakStatsViewLand extends AccountHelper {
 	private final String percentUnit;
 	private final String gigabyteUnit;
 	
-	// Color values for focus and alternate
-	private final int focusColor;
-	private final int alternateColor;
+	// Color values for status shaped/unshaped
 	private final int alertColor;
 	private final int normalColor;
 	
@@ -37,7 +35,6 @@ public class PeakStatsViewLand extends AccountHelper {
 	private final TextView myPeakUnit;
 	
 	// TextView objects for peak number
-	private final TextView myPeakDaily;
 	private final TextView myPeakDailyData;
 	
 	// TextView object for peak status
@@ -48,6 +45,8 @@ public class PeakStatsViewLand extends AccountHelper {
 	
 	// TextView object for peak title
 	private final TextView myPeakTitle;
+	
+	// String object for peak title
 	private final String peakToGoTitle;
 	private final String peakSoFarTitle;
 	
@@ -72,8 +71,6 @@ public class PeakStatsViewLand extends AccountHelper {
 		gigabyteUnit = myActivity.getString(R.string.peak_offpeak_unit_gigabyte);
 		
 		// Initialise focus and alternate colours
-		focusColor = myActivity.getResources().getColor(R.color.application_h2_text_color);
-		alternateColor = myActivity.getResources().getColor(R.color.application_h2_text_alt_color);
 		alertColor = myActivity.getResources().getColor(R.color.red);
 		normalColor = myActivity.getResources().getColor(R.color.white);
 	
@@ -83,7 +80,6 @@ public class PeakStatsViewLand extends AccountHelper {
 		myPeakUnit = (TextView) myActivity.findViewById(R.id.dashboard_landscape_peak_unit);
 		
 		// Initialise Daily Average TextView objects
-		myPeakDaily = (TextView) myActivity.findViewById(R.id.dashboard_landscape_peak_suggested_remaining);
 		myPeakDailyData = (TextView) myActivity.findViewById(R.id.dashboard_landscape_peak_suggested_remaining_data);
 		
 		// Initialise status TextView objects
@@ -103,13 +99,18 @@ public class PeakStatsViewLand extends AccountHelper {
 		myPeakUnit.setTypeface(myFontNumber);
 	}
 	
+	/**
+	 * Load PeakStatsViewLand view
+	 */
 	public void loadView(){
 		
 		// Set peak GB used
 		setPeakGb();
 		
+		// Set current peak status
 		setStatus();
 		
+		// Set peak period
 		setPeakPeriod();
 		
 		// Set peak view
@@ -117,6 +118,9 @@ public class PeakStatsViewLand extends AccountHelper {
 		
 	}
 	
+	/**
+	 * Switch between Days So Far and Days To Go
+	 */
 	public void switchPeakData(){
 		// Check if to go is set
 		if (isToGoSet()){
@@ -145,6 +149,9 @@ public class PeakStatsViewLand extends AccountHelper {
 		}
 	}
 	
+	/**
+	 * Switch between percent and Giga Byte
+	 */
 	public void switchPeakUnit(){
 		// Check if Giga Byte unit is shown
 		if (isPeakGbSet()){
@@ -158,6 +165,10 @@ public class PeakStatsViewLand extends AccountHelper {
 		}
 	}
 	
+	/**
+	 * Check to see if days to go is set
+	 * @return true if set
+	 */
 	private boolean isToGoSet(){
 		// Get current peak title from text view
 		String currentTitle = (String) myPeakTitle.getText();
@@ -174,6 +185,10 @@ public class PeakStatsViewLand extends AccountHelper {
 		}
 	}
 	
+	/**
+	 * Check to see if Giga Bytes is set
+	 * @return true if it is
+	 */
 	private boolean isPeakGbSet(){
 			
 		// Get current unit from text view
@@ -191,6 +206,9 @@ public class PeakStatsViewLand extends AccountHelper {
 		}
 	}
 	
+	/**
+	 * Set peak data to Giga Bytes
+	 */
 	private void setPeakGb(){
 		
 		myPeakQuota.setVisibility(View.VISIBLE);
@@ -212,6 +230,9 @@ public class PeakStatsViewLand extends AccountHelper {
 		
 	}
 	
+	/**
+	 * Set peak data to percent
+	 */
 	private void setPeakPercent(){
 		myPeakQuota.setVisibility(View.GONE);
 		myPeakUnit.setText(percentUnit);
@@ -228,14 +249,23 @@ public class PeakStatsViewLand extends AccountHelper {
 		}
 	}
 	
+	/**
+	 * Set peak daily data as Days To Go
+	 */
 	private void setPeakDailyToGo(){
 		myPeakDailyData.setText(getPeakDailyDataSuggestedMb());
 	}
 	
+	/**
+	 * Set peak daily data as Days So Far
+	 */
 	private void setPeakDailySoFar(){
 		myPeakDailyData.setText(getPeakDailyDataUsedMb());
 	}
 	
+	/**
+	 * Set current peak status
+	 */
 	private void setStatus(){
 		// Check if peak is shaped
 		if (isCurrentPeakShaped()){
@@ -251,6 +281,9 @@ public class PeakStatsViewLand extends AccountHelper {
 		}
 	}
 	
+	/**
+	 * Set peak period times
+	 */
 	private void setPeakPeriod(){
 		myPeakPeriod.setText(getPeakPeriodLand());
 	}
