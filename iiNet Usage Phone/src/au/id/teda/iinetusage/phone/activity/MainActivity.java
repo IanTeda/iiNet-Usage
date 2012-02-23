@@ -185,13 +185,13 @@ public class MainActivity extends ActionbarHelperActivity {
     	// Switch cases for button clicks
     	switch (button.getId()) {
     	case R.id.dashboard_landscape_peak_data_button:
-    		Toast.makeText(this, "Peak Data", Toast.LENGTH_SHORT).show();
+    		myPeakStatsViewLand.switchPeakUnit();
     		break;
     	case R.id.dashboard_landscape_peak_unit_button:
     		Toast.makeText(this, "Peak Unit", Toast.LENGTH_SHORT).show();
     		break;
     	case R.id.dashboard_landscape_peak_title_button:
-    		Toast.makeText(this, "Peak Title", Toast.LENGTH_SHORT).show();
+    		myPeakStatsViewLand.switchPeakData();
     		break;
     	default:
     		Toast.makeText(this, "onPeakLandStatsClick Error", Toast.LENGTH_SHORT).show();

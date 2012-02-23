@@ -116,7 +116,7 @@
             <TextView
                 android:id="@+id/dashboard_landscape_peak_suggested_remaining"
                 style="@style/dashboard_data_h2.land"
-                android:text="@string/peak_offpeak_land_suggested" />
+                android:text="@string/peak_offpeak_land_daily" />
 
             <TextView
                 android:id="@+id/dashboard_landscape_peak_suggested_remaining_data"
