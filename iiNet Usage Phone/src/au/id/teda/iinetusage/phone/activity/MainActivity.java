@@ -188,7 +188,7 @@ public class MainActivity extends ActionbarHelperActivity {
     		myPeakStatsViewLand.switchPeakUnit();
     		break;
     	case R.id.dashboard_landscape_peak_unit_button:
-    		Toast.makeText(this, "Peak Unit", Toast.LENGTH_SHORT).show();
+    		myPeakStatsViewLand.switchPeakUnit();
     		break;
     	case R.id.dashboard_landscape_peak_title_button:
     		myPeakStatsViewLand.switchPeakData();
