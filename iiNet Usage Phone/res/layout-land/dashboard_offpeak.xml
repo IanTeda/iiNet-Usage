@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dashboard_landscape_offpeak_container"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/dashboard_vert_spacer_view" />
+
+    <LinearLayout
+        android:id="@+id/dashboard_landscape_offpeak_number_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <include layout="@layout/dashboard_horz_spacer_view" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="@dimen/application_padding" >
+
+            <TextView
+                android:id="@+id/dashboard_landscape_offpeak_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:text="@string/peak_offpeak_stats_number"
+                android:textSize="125sp" />
+
+            <TextView
+                android:id="@+id/dashboard_landscape_offpeak_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/dashboard_landscape_offpeak_data"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/dashboard_landscape_offpeak_data"
+                android:text="@string/peak_offpeak_unit_gigabyte"
+                android:textSize="35sp" />
+
+            <TextView
+                android:id="@+id/dashboard_landscape_offpeak_quota"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="14dp"
+                android:layout_toRightOf="@+id/dashboard_landscape_offpeak_data"
+                android:text="@string/peak_offpeak_stats_qutoa"
+                android:textSize="45sp" />
+
+            <Button
+                android:id="@+id/dashboard_landscape_offpeak_data_button"
+                style="@style/dashboard_button_overlay.offpeakLandStats"
+                android:layout_height="95dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignRight="@+id/dashboard_landscape_offpeak_data"
+                android:layout_marginTop="25dp" />
+
+            <Button
+                android:id="@+id/dashboard_landscape_offpeak_unit_button"
+                style="@style/dashboard_button_overlay.offpeakLandStats"
+                android:layout_height="35dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignRight="@+id/dashboard_landscape_offpeak_unit"
+                android:layout_marginTop="80dp"
+                android:layout_toRightOf="@+id/dashboard_landscape_offpeak_data_button" />
+        </RelativeLayout>
+
+        <include layout="@layout/dashboard_horz_spacer_view" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="-10dp" >
+
+        <LinearLayout
+            android:id="@+id/dashboard_landscape_offpeak_titleBar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <include layout="@layout/dashboard_title_line" />
+
+            <TextView
+                android:id="@+id/dashboard_landscape_offpeak_title"
+                style="@style/dashboard_h1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/offpeak_land_toGo" />
+
+            <include layout="@layout/dashboard_title_line" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/dashboard_landscape_offpeak_title_button"
+            style="@style/dashboard_button_overlay.offpeakLandStats"
+            android:layout_height="30dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true" />
+    </RelativeLayout>
+
+    <TableLayout
+        android:id="@+id/dashboard_landscape_offpeak_tableLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TableRow
+            android:id="@+id/dashboard_landscape_offpeak_tableRow1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/dashboard_landscape_offpeak_suggested_remaining"
+                style="@style/dashboard_data_h2.land"
+                android:text="@string/peak_offpeak_land_daily" />
+
+            <TextView
+                android:id="@+id/dashboard_landscape_offpeak_suggested_remaining_data"
+                style="@style/dashboard_data.land"
+                android:text="@string/peak_offpeak_data_data" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/dashboard_landscape_offpeak_tableRow2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/dashboard_landscape_offpeak_status"
+                style="@style/dashboard_data_h2.land"
+                android:text="@string/peak_offpeak_status" />
+
+            <TextView
+                android:id="@+id/dashboard_landscape_offpeak_status_data"
+                style="@style/dashboard_data.land"
+                android:text="@string/peak_offpeak_status_unshaped" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/dashboard_landscape_offpeak_tableRow3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/dashboard_landscape_offpeak_period"
+                style="@style/dashboard_data_h2.land"
+                android:text="@string/peak_offpeak_land_period" />
+
+            <TextView
+                android:id="@+id/dashboard_landscape_offpeak_period_data"
+                style="@style/dashboard_data.land"
+                android:text="@string/peak_offpeak_land_period_data" />
+        </TableRow>
+    </TableLayout>
+
+    <include layout="@layout/dashboard_vert_spacer_view" />
+
+</LinearLayout>

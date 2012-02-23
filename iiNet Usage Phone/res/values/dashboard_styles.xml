@@ -98,6 +98,10 @@
     <style name="dashboard_button_overlay.peakLandStats">
         <item name="android:onClick">onPeakLandStatsClick</item>
     </style>
+    
+    <style name="dashboard_button_overlay.offpeakLandStats">
+        <item name="android:onClick">onOffpeakLandStatsClick</item>
+    </style>
 
     <style name="dashboard_peak_offpeak_number">
         <item name="android:textSize">@dimen/stats_number_text_size</item>

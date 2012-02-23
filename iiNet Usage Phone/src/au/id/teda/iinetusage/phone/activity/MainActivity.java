@@ -16,7 +16,8 @@ import au.id.teda.iinetusage.phone.R;
 import au.id.teda.iinetusage.phone.async.RefreshUsageAsync;
 import au.id.teda.iinetusage.phone.view.AccountInfoView;
 import au.id.teda.iinetusage.phone.view.AlertboxView;
-import au.id.teda.iinetusage.phone.view.OffpeakStatsView;
+import au.id.teda.iinetusage.phone.view.OffpeakStatsViewLand;
+import au.id.teda.iinetusage.phone.view.OffpeakStatsViewPort;
 import au.id.teda.iinetusage.phone.view.PeakStatsViewLand;
 import au.id.teda.iinetusage.phone.view.PeakStatsViewPort;
 
@@ -37,7 +38,8 @@ public class MainActivity extends ActionbarHelperActivity {
 	private PeakStatsViewLand myPeakStatsViewLand;
 	
 	// Object for OffpeakStatsView
-	private OffpeakStatsView myOffpeakStatsView;
+	private OffpeakStatsViewPort myOffpeakStatsViewPort;
+	private OffpeakStatsViewLand myOffpeakStatsViewLand;
 	
     /** Called when the activity is first created. */
     @Override
@@ -53,13 +55,13 @@ public class MainActivity extends ActionbarHelperActivity {
 			// Initialise views
 			myAccountInfoView = new AccountInfoView(this);
 			myPeakStatsViewPort = new PeakStatsViewPort(this);
-			myOffpeakStatsView = new OffpeakStatsView(this);
+			myOffpeakStatsViewPort = new OffpeakStatsViewPort(this);
 		}
 		// Else we must be in landscape
 		else {
 			// Initialise views
 			myPeakStatsViewLand = new PeakStatsViewLand(this);
-			
+			myOffpeakStatsViewLand = new OffpeakStatsViewLand(this);
 		}
         
     }
@@ -85,11 +87,12 @@ public class MainActivity extends ActionbarHelperActivity {
 	        myAlertboxView.setAlert(myAlertboxButton);
 	        myAccountInfoView.loadView();
 	        myPeakStatsViewPort.loadView();
-	        myOffpeakStatsView.loadView();
+	        myOffpeakStatsViewPort.loadView();
 		}
 		// Else we are in landscape
 		else {
 			myPeakStatsViewLand.loadView();
+			myOffpeakStatsViewLand.loadView();
 		}
 
 	}
@@ -157,19 +160,19 @@ public class MainActivity extends ActionbarHelperActivity {
     		myPeakStatsViewPort.switchPeakView();
     		break;
     	case R.id.offpeak_number_button:
-    		myOffpeakStatsView.switchUnitNumberBlock();
+    		myOffpeakStatsViewPort.switchUnitNumberBlock();
     		break;
     	case R.id.offpeak_percent_used_remaining_button:
-    		myOffpeakStatsView.switchFocusPercentBlock();
+    		myOffpeakStatsViewPort.switchFocusPercentBlock();
     		break;
     	case R.id.offpeak_average_data_used_remaining_button:
-    		myOffpeakStatsView.switchFocusDailyBlock();
+    		myOffpeakStatsViewPort.switchFocusDailyBlock();
     		break;
     	case R.id.offpeak_data_used_remaining_button:
-    		myOffpeakStatsView.switchFocusDataBlock();
+    		myOffpeakStatsViewPort.switchFocusDataBlock();
     		break;
     	case R.id.offpeak_data_title_button:
-    		myOffpeakStatsView.switchOffpeakView();
+    		myOffpeakStatsViewPort.switchOffpeakView();
     		break;
     	default:
     		Toast.makeText(this, "onPeakStatsClick", Toast.LENGTH_SHORT).show();
@@ -179,8 +182,6 @@ public class MainActivity extends ActionbarHelperActivity {
     }
     
 	public void onPeakLandStatsClick (View button){
-		// Object for PeakStatsView class
-    	PeakStatsViewLand myPeakStatsViewLand = new PeakStatsViewLand(this);
     	
     	// Switch cases for button clicks
     	switch (button.getId()) {
@@ -195,6 +196,25 @@ public class MainActivity extends ActionbarHelperActivity {
     		break;
     	default:
     		Toast.makeText(this, "onPeakLandStatsClick Error", Toast.LENGTH_SHORT).show();
+    		break;
+    	}
+	}
+	
+	public void onOffpeakLandStatsClick (View button){
+    	
+    	// Switch cases for button clicks
+    	switch (button.getId()) {
+    	case R.id.dashboard_landscape_offpeak_data_button:
+    		myOffpeakStatsViewLand.switchOffpeakUnit();
+    		break;
+    	case R.id.dashboard_landscape_offpeak_unit_button:
+    		myOffpeakStatsViewLand.switchOffpeakUnit();
+    		break;
+    	case R.id.dashboard_landscape_offpeak_title_button:
+    		myOffpeakStatsViewLand.switchOffpeakData();
+    		break;
+    	default:
+    		Toast.makeText(this, "onOffpeakLandStatsClick Error", Toast.LENGTH_SHORT).show();
     		break;
     	}
 	}

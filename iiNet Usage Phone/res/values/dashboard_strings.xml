@@ -24,6 +24,8 @@
     <string name="peak_stats_title">Peak Data</string>
     <string name="peak_land_toGo">Peak to Go</string>
     <string name="peak_land_soFar">Peak so Far</string>
+    <string name="offpeak_land_toGo">Offpeak to Go</string>
+    <string name="offpeak_land_soFar">Offpeak so Far</string>
     <string name="offpeak_stats_title">Offpeak Data</string>
     <string name="peak_offpeak_stats_period">(- -:- - to - -:- -)</string>
     <string name="peak_offpeak_land_period_data">- -am to - -am</string>

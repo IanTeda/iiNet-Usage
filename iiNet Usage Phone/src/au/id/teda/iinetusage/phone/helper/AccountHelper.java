@@ -278,6 +278,29 @@ public class AccountHelper extends AccountStatusHelper {
 	}
 	
 	/**
+	 * Method for getting peak quota String
+	 * @return String value of peak quota formatted
+	 */
+	public String getOffpeakQuotaStringGBLand(){
+		// Check if peak quota is set
+		if (isOffpeakQuotaSet()){
+			
+			// Get Long value of peak quota and convert to Gb
+			Long offpeakQuotaLong = getOffpeakQuota()/1000;
+			
+			// Format Long value into String
+			String quotaString = "/ " + String.valueOf(offpeakQuotaLong);
+			
+			// Return formated string value
+			return quotaString;
+		}
+		// Else it must not be set so return default XML string value
+		else {
+			return myApplicationContext.getString(R.string.account_info_quota_data);
+		}
+	}
+	
+	/**
 	 * Method for getting peak data used as a percent value
 	 * @return string value of percentage of peak data used
 	 */
@@ -802,6 +825,27 @@ public class AccountHelper extends AccountStatusHelper {
 		else {
 			return myApplicationContext.getString(R.string.peak_offpeak_stats_period);
 		}
+	}
+	
+	/**
+	 * Get the plans offpeak period string for landscape view
+	 * @return string value of offpeak the plans peak period
+	 */
+	public String getOffpeakPeriodLand(){
+		// Check to see if peak start and end is set
+		if (isOffpeakStartSet() && isOffpeakEndSet()){
+			String peakStart = getOffpeakEnd().substring(0, (getOffpeakEnd().length() - 3));
+			String peakEnd = getOffpeakStart().substring(0, (getOffpeakEnd().length() - 3));
+			
+			String period = removeZeros(peakEnd) + getAmPm(peakEnd) + " to " + removeZeros(peakStart) + getAmPm(peakStart);
+			
+			return period;
+		}
+		// Else it must not be set so return default XML string value
+		else {
+			return myApplicationContext.getString(R.string.peak_offpeak_stats_period);
+		}
+		
 	}
 
 

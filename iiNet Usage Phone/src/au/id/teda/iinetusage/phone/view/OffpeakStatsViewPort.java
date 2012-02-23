@@ -8,7 +8,7 @@ import android.widget.TextView;
 import au.id.teda.iinetusage.phone.R;
 import au.id.teda.iinetusage.phone.helper.AccountHelper;
 
-public class OffpeakStatsView extends AccountHelper {
+public class OffpeakStatsViewPort extends AccountHelper {
 	
 	// Static strings for debug tags
 	//private static final String DEBUG_TAG = "iiNet Usage";
@@ -51,7 +51,7 @@ public class OffpeakStatsView extends AccountHelper {
 	 * Class constructor
 	 * @param context
 	 */
-	public OffpeakStatsView (Context context){
+	public OffpeakStatsViewPort (Context context){
 		// Construct context
 		myActivityContext = context;
 		// Construct activity from context
