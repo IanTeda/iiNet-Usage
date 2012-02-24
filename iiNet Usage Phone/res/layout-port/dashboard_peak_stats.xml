@@ -3,19 +3,20 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/stats_container_marginBottom"
-    android:layout_marginTop="@dimen/stats_container_marginTop"
+    android:layout_marginTop="-33dp"
     android:padding="@dimen/application_margin" >
 
     <TextView
         android:id="@+id/peak_title"
-        style="@style/dashboard_h1"
+        style="@style/h1"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:text="@string/peak_stats_title" />
 
     <TextView
         android:id="@+id/peak_time"
-        style="@style/dashboard_h1"
+        style="@style/h1"
+        android:gravity="right"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:text="@string/peak_offpeak_stats_period" />

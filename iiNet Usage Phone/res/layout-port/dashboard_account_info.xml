@@ -7,7 +7,7 @@
 
     <Button
         android:id="@+id/account_info_expand"
-        style="@style/dashboard_h1"
+        style="@style/h1.dashboard_button"
         android:layout_width="fill_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"

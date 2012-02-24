@@ -8,14 +8,15 @@
 
     <TextView
         android:id="@+id/offpeak_title"
-        style="@style/dashboard_h1"
+        style="@style/h2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:text="@string/offpeak_stats_title" />
 
     <TextView
         android:id="@+id/offpeak_time"
-        style="@style/dashboard_h1"
+        style="@style/h2"
+        android:gravity="right"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:text="@string/peak_offpeak_stats_period" />

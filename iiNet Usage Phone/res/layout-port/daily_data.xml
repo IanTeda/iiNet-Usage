@@ -20,7 +20,7 @@
 
     <TextView
         android:id="@+id/daily_data_title"
-        style="@style/daily_data_period"
+        style="@style/h1"
         android:paddingLeft="@dimen/application_padding"
         android:paddingRight="@dimen/application_padding"
         android:text="@string/daily_data_period_title" />

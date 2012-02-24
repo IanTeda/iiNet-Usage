@@ -9,10 +9,10 @@
 
     <!-- Application Text Sizes -->
     <dimen name="application_h0_text_size">30sp</dimen>
-    <dimen name="application_h1_text_size">22sp</dimen>
+    <dimen name="application_h1_text_size">19sp</dimen>
     <dimen name="application_h1_intent">4dp</dimen>
     <dimen name="application_h1_line_padding">5dp</dimen>
-    <dimen name="application_h2_text_size">18sp</dimen>
+    <dimen name="application_h2_text_size">16sp</dimen>
     <dimen name="application_h3_text_size">14sp</dimen>
     <dimen name="application_text_size">12sp</dimen>
 

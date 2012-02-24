@@ -86,7 +86,7 @@
 
             <TextView
                 android:id="@+id/dashboard_landscape_peak_title"
-                style="@style/dashboard_h1"
+                style="@style/h2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/peak_land_toGo" />
