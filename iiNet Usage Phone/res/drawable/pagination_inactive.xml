@@ -2,8 +2,8 @@
 <layer-list	xmlns:android="http://schemas.android.com/apk/res/android" >
 	<item>
 		<shape android:shape="rectangle" >
-			<corners android:radius="@dimen/alertbox_border_radius" />
-			<solid android:color="@color/chart_peak_fill_color" />
+			<corners android:radius="3dip" />
+			<solid android:color="@color/border_background" />
  			<stroke android:width="@dimen/alertbox_border_width" android:color="@color/chart_peak_color" />
 		</shape>
 	</item>

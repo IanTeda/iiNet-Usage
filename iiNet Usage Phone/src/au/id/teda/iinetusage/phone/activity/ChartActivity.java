@@ -3,9 +3,11 @@ package au.id.teda.iinetusage.phone.activity;
 import java.text.ParseException;
 import org.achartengine.GraphicalView;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
@@ -23,11 +25,12 @@ import au.id.teda.iinetusage.phone.chart.PieChart;
 import au.id.teda.iinetusage.phone.chart.StackedBarChart;
 import au.id.teda.iinetusage.phone.chart.StackedLineChart;
 import au.id.teda.iinetusage.phone.helper.AccountHelper;
+import au.id.teda.iinetusage.phone.view.ChartPaginationView;
 
 public class ChartActivity extends ActionbarHelperActivity {
 
 	// Static tags for debugging
-	//private static final String DEBUG_TAG = "iiNet Usage";
+	private static final String DEBUG_TAG = "iiNet Usage";
 	//private static final String INFO_TAG = ChartActivity.class.getSimpleName();
 
 	// Chart objects
@@ -58,7 +61,9 @@ public class ChartActivity extends ActionbarHelperActivity {
 	private ViewFlipper myViewFlipper;
 	
 	private static final String TAB_NUMBER = "tab_number";
-
+	
+	private ChartPaginationView myChartPaginationView;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -75,6 +80,8 @@ public class ChartActivity extends ActionbarHelperActivity {
 	        int flipperPosition = savedInstanceState.getInt(TAB_NUMBER);
 	        myViewFlipper.setDisplayedChild(flipperPosition);
 	    }
+		
+		myChartPaginationView = new ChartPaginationView(this);
 
 	}
 
@@ -356,6 +363,8 @@ public class ChartActivity extends ActionbarHelperActivity {
 					myViewFlipper.setInAnimation(slideLeftIn);
 					myViewFlipper.setOutAnimation(slideLeftOut);
 					myViewFlipper.showNext();
+					setPageNation();
+					return true;
 				}
 				// Else check if it is a left to right swipe
 				else if (motionEvent2.getX() - motionEvent1.getX() > SWIPE_MIN_DISTANCE
@@ -363,12 +372,16 @@ public class ChartActivity extends ActionbarHelperActivity {
 					myViewFlipper.setInAnimation(slideRightIn);
 					myViewFlipper.setOutAnimation(slideRightOut);
 					myViewFlipper.showPrevious();
+					setPageNation();
+					return true;
 				}
 			} catch (Exception e) {
 				// nothing
 			}
 			return false;
 		}
+		
+		
 
 		// It is necessary to return true from onDown for the onFling event to
 		// register
@@ -377,5 +390,11 @@ public class ChartActivity extends ActionbarHelperActivity {
 			return true;
 		}
 
+	}
+	
+	public void setPageNation(){
+		int position = myViewFlipper.getDisplayedChild();
+		
+		myChartPaginationView.setActive(position);
 	}
 }

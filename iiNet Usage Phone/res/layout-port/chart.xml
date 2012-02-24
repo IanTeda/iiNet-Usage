@@ -33,7 +33,8 @@
     <ViewFlipper
         android:id="@+id/flipper"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_height="0dp"
+        android:layout_weight="1" >
 
         <LinearLayout
             android:id="@+id/stacked_line_chart"
@@ -59,5 +60,42 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal" />
     </ViewFlipper>
+    
+    <LinearLayout
+        android:id="@+id/chart_footer" 
+        android:orientation="horizontal"
+        android:layout_height="35dp"
+        android:layout_width="fill_parent"
+        android:background="@color/application_background_alt_color"
+        android:gravity="center">
+        
+        <View 
+            android:id="@+id/chart_footer_line"
+            android:layout_height="12dp"
+            android:layout_width="12dp"
+            android:background="@drawable/pagination_active"
+            android:layout_marginRight="5dp"/>
+        
+        <View 
+            android:id="@+id/chart_footer_bar"
+            android:layout_height="12dp"
+            android:layout_width="12dp"
+            android:background="@drawable/pagination_inactive"
+            android:layout_marginRight="5dp"/>
+        
+        <View 
+            android:id="@+id/chart_footer_pie"
+            android:layout_height="12dp"
+            android:layout_width="12dp"
+            android:background="@drawable/pagination_inactive"
+            android:layout_marginRight="5dp"/>
+        
+        <View 
+            android:id="@+id/chart_footer_doughnut"
+            android:layout_height="12dp"
+            android:layout_width="12dp"
+            android:background="@drawable/pagination_inactive"/>
+        
+    </LinearLayout>
 
 </LinearLayout>
