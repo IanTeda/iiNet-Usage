@@ -28,7 +28,7 @@ import au.id.teda.iinetusage.phone.view.ChartPaginationView;
 public class ChartActivity extends ActionbarHelperActivity {
 
 	// Static tags for debugging
-	private static final String DEBUG_TAG = "iiNet Usage";
+	//private static final String DEBUG_TAG = "iiNet Usage";
 	//private static final String INFO_TAG = ChartActivity.class.getSimpleName();
 
 	// Chart objects
@@ -58,7 +58,7 @@ public class ChartActivity extends ActionbarHelperActivity {
 	private Animation slideRightOut;
 	private ViewFlipper myViewFlipper;
 	
-	private static final String TAB_NUMBER = "tab_number";
+	private String TAB_NUMBER = "tab_number";
 	
 	private ChartPaginationView myChartPaginationView;
 	
@@ -71,15 +71,16 @@ public class ChartActivity extends ActionbarHelperActivity {
 
 		loadCharts();
 		
+		myChartPaginationView = new ChartPaginationView(this);
+
 		// If orientation has changed
 		if (savedInstanceState != null) {
 			
 			// Restore ViewFlipper position
 	        int flipperPosition = savedInstanceState.getInt(TAB_NUMBER);
 	        myViewFlipper.setDisplayedChild(flipperPosition);
+			setPageNation();
 	    }
-		
-		myChartPaginationView = new ChartPaginationView(this);
 
 	}
 
@@ -156,8 +157,6 @@ public class ChartActivity extends ActionbarHelperActivity {
 
 		// Set chart title based on current period
 		setChartTitle();
-		
-		setPageNation();
 
 	}
 	
