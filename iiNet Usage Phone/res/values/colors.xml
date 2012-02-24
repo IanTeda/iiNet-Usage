@@ -34,6 +34,9 @@
     <color name="chart_remaining_fill_color">#40CC3333</color>
     <color name="chart_axes_color">#75b9b9b9</color>
     <color name="chart_label_color">#b9b9b9</color>
+    <color name="chart_pagination_border">#95FF5900</color>
+    <color name="chart_pagination_fill">#40FF5900</color>
+    
 
     <!-- Standard border -->
     <color name="border_color">#000000</color>

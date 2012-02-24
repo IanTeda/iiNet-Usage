@@ -3,11 +3,9 @@ package au.id.teda.iinetusage.phone.activity;
 import java.text.ParseException;
 import org.achartengine.GraphicalView;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
@@ -100,6 +98,7 @@ public class ChartActivity extends ActionbarHelperActivity {
 
 		// Load doughnut chart
 		loadDoughnutChart();
+		
 	}
 	
 	/**
@@ -157,24 +156,9 @@ public class ChartActivity extends ActionbarHelperActivity {
 
 		// Set chart title based on current period
 		setChartTitle();
+		
+		setPageNation();
 
-		/**
-		if (myBarChartView != null) {
-			myBarChartView.repaint();
-		}
-
-		if (myLineChartView != null) {
-			myLineChartView.repaint();
-		}
-
-		if (myPieChartView != null) {
-			myPieChartView.repaint();
-		}
-
-		if (myDoughnutChartView != null) {
-			myDoughnutChartView.repaint();
-		}
-		**/
 	}
 	
 	@Override

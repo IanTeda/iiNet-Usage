@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/chart_pagination"
+    android:layout_width="match_parent"
+    android:layout_height="35dp"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:background="@color/application_background_alt_color" >
+
+    <View
+        android:id="@+id/chart_footer_line"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/pagination_active" />
+
+    <View
+        android:id="@+id/chart_footer_bar"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/pagination_inactive" />
+
+    <View
+        android:id="@+id/chart_footer_pie"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/pagination_inactive" />
+
+    <View
+        android:id="@+id/chart_footer_doughnut"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:background="@drawable/pagination_inactive" />
+
+</LinearLayout>
