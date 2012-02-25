@@ -58,7 +58,7 @@ public class ChartActivity extends ActionbarHelperActivity {
 	private Animation slideRightOut;
 	private ViewFlipper myViewFlipper;
 	
-	private String TAB_NUMBER = "tab_number";
+	private String TAB = "tab_number";
 	
 	private ChartPaginationView myChartPaginationView;
 	
@@ -71,16 +71,19 @@ public class ChartActivity extends ActionbarHelperActivity {
 
 		loadCharts();
 		
+		/**
 		myChartPaginationView = new ChartPaginationView(this);
 
+		setPageNation();
+		
 		// If orientation has changed
 		if (savedInstanceState != null) {
 			
 			// Restore ViewFlipper position
-	        int flipperPosition = savedInstanceState.getInt(TAB_NUMBER);
+	        int flipperPosition = savedInstanceState.getInt(TAB);
 	        myViewFlipper.setDisplayedChild(flipperPosition);
-			setPageNation();
 	    }
+	    **/
 
 	}
 
@@ -160,13 +163,16 @@ public class ChartActivity extends ActionbarHelperActivity {
 
 	}
 	
+	
+	/**
 	@Override
 	public void onSaveInstanceState(Bundle savedInstanceState) {
 		
 		// Remember ViewFliper tab position during orientation change
 	    int position = myViewFlipper.getDisplayedChild();
-	    savedInstanceState.putInt(TAB_NUMBER, position);
+	    savedInstanceState.putInt(TAB, position);
 	}
+	**/
 
 	/**
 	 * Method for loading doughnut into view
@@ -346,8 +352,8 @@ public class ChartActivity extends ActionbarHelperActivity {
 					myViewFlipper.setInAnimation(slideLeftIn);
 					myViewFlipper.setOutAnimation(slideLeftOut);
 					myViewFlipper.showNext();
-					setPageNation();
-					return true;
+					//setPageNation();
+					//return true;
 				}
 				// Else check if it is a left to right swipe
 				else if (motionEvent2.getX() - motionEvent1.getX() > SWIPE_MIN_DISTANCE
@@ -355,8 +361,8 @@ public class ChartActivity extends ActionbarHelperActivity {
 					myViewFlipper.setInAnimation(slideRightIn);
 					myViewFlipper.setOutAnimation(slideRightOut);
 					myViewFlipper.showPrevious();
-					setPageNation();
-					return true;
+					//setPageNation();
+					//return true;
 				}
 			} catch (Exception e) {
 				// nothing
