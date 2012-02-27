@@ -33,7 +33,8 @@
     <au.id.teda.iinetusage.phone.view.SafeViewFlipper
         android:id="@+id/flipper"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_height="0dp"
+        android:layout_weight="1" >
 
         <LinearLayout
             android:id="@+id/stacked_line_chart"
@@ -52,12 +53,48 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal" />
-        
+
         <LinearLayout
             android:id="@+id/doughnut_chart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal" />
     </au.id.teda.iinetusage.phone.view.SafeViewFlipper>
+
+    <LinearLayout
+        android:id="@+id/chart_pagination"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="@color/application_background_alt_color"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <View
+            android:id="@+id/chart_footer_line"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/pagination_active" />
+
+        <View
+            android:id="@+id/chart_footer_bar"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/pagination_inactive" />
+
+        <View
+            android:id="@+id/chart_footer_pie"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/pagination_inactive" />
+
+        <View
+            android:id="@+id/chart_footer_doughnut"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:background="@drawable/pagination_inactive" />
+    </LinearLayout>
 
 </LinearLayout>

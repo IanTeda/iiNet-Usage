@@ -23,6 +23,7 @@ import au.id.teda.iinetusage.phone.chart.PieChart;
 import au.id.teda.iinetusage.phone.chart.StackedBarChart;
 import au.id.teda.iinetusage.phone.chart.StackedLineChart;
 import au.id.teda.iinetusage.phone.helper.AccountHelper;
+import au.id.teda.iinetusage.phone.view.ChartPaginationView;
 
 public class ChartActivity extends ActionbarHelperActivity {
 
@@ -58,6 +59,8 @@ public class ChartActivity extends ActionbarHelperActivity {
 	private ViewFlipper myViewFlipper;
 	
 	private static final String TAB_NUMBER = "tab_number";
+	
+	private ChartPaginationView myChartPaginationView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +71,8 @@ public class ChartActivity extends ActionbarHelperActivity {
 
 		loadCharts();
 		
+		myChartPaginationView = new ChartPaginationView(this);
+		
 		// If orientation has changed
 		if (savedInstanceState != null) {
 			
@@ -75,6 +80,8 @@ public class ChartActivity extends ActionbarHelperActivity {
 	        int flipperPosition = savedInstanceState.getInt(TAB_NUMBER);
 	        myViewFlipper.setDisplayedChild(flipperPosition);
 	    }
+		
+		setPageNation();
 
 	}
 
@@ -356,6 +363,8 @@ public class ChartActivity extends ActionbarHelperActivity {
 					myViewFlipper.setInAnimation(slideLeftIn);
 					myViewFlipper.setOutAnimation(slideLeftOut);
 					myViewFlipper.showNext();
+					setPageNation();
+					return true;
 				}
 				// Else check if it is a left to right swipe
 				else if (motionEvent2.getX() - motionEvent1.getX() > SWIPE_MIN_DISTANCE
@@ -363,6 +372,8 @@ public class ChartActivity extends ActionbarHelperActivity {
 					myViewFlipper.setInAnimation(slideRightIn);
 					myViewFlipper.setOutAnimation(slideRightOut);
 					myViewFlipper.showPrevious();
+					setPageNation();
+					return true;
 				}
 			} catch (Exception e) {
 				// nothing
@@ -377,5 +388,11 @@ public class ChartActivity extends ActionbarHelperActivity {
 			return true;
 		}
 
+	}
+	
+	public void setPageNation(){
+		int position = myViewFlipper.getDisplayedChild();
+
+		myChartPaginationView.setActive(position);
 	}
 }
