@@ -12,7 +12,8 @@ public class AppGlobals extends Application {
 	private static Context myContext;
      
 	public void onCreate(){
-              
+	    super.onCreate();
+
 		// Get application context for globals
 		myContext = getApplicationContext();
 	}

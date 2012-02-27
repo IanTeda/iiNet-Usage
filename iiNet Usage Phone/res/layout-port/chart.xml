@@ -30,7 +30,7 @@
         android:layout_height="@dimen/application_line_1_height"
         android:background="#ffffff" />
 
-    <ViewFlipper
+    <au.id.teda.iinetusage.phone.view.SafeViewFlipper
         android:id="@+id/flipper"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >
@@ -58,6 +58,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal" />
-    </ViewFlipper>
+    </au.id.teda.iinetusage.phone.view.SafeViewFlipper>
 
 </LinearLayout>
