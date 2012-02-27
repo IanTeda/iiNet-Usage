@@ -189,18 +189,17 @@ public class ChartActivity extends ActionbarHelperActivity {
 	 * Method for loading doughnut into view
 	 */
 	public void loadDoughnutChart() {
-		// Set reference for stacked layout
+		// Initialise layout for chart
 		myDoughnutChartLayout = (LinearLayout) findViewById(R.id.doughnut_chart);
 
-		// Set reference for stacked line chart object
+		// Initialise chart class
 		myDoughnutChart = new DoughnutChart(this);
 
 		// Check if the chart doesn't already exist
 		if (myDoughnutChartView == null) {
 
 			// Get chart view from library
-			myDoughnutChartView = (GraphicalView) myDoughnutChart
-					.getDoughnutChartView();
+			myDoughnutChartView = (GraphicalView) myDoughnutChart.getDoughnutChartView();
 
 			// Add chart view to layout view
 			myDoughnutChartLayout.addView(myDoughnutChartView);
@@ -220,13 +219,13 @@ public class ChartActivity extends ActionbarHelperActivity {
 	}
 
 	/**
-	 * Method for loading stacked chart into view
+	 * Method for loading pie chart into view
 	 */
 	public void loadPieChart() {
-		// Set reference for stacked layout
+		// Initialise layout for chart
 		myPieChartLayout = (LinearLayout) findViewById(R.id.pie_chart);
 
-		// Set reference for stacked line chart object
+		// Initialise chart class
 		myPieChart = new PieChart(this);
 
 		// Check if the chart doesn't already exist
@@ -256,18 +255,17 @@ public class ChartActivity extends ActionbarHelperActivity {
 	 * Method for loading stacked chart into view
 	 */
 	public void loadStackedLineChart() {
-		// Set reference for stacked layout
+		// Initialise layout for chart
 		myLineChartLayout = (LinearLayout) findViewById(R.id.stacked_line_chart);
 
-		// Set reference for stacked line chart object
+		// Initialise chart class
 		myStackedLineChart = new StackedLineChart(this);
 
 		// Check if the chart doesn't already exist
 		if (myLineChartView == null) {
 
 			// Get chart view from library
-			myLineChartView = (GraphicalView) myStackedLineChart
-					.getStackedLineChartView();
+			myLineChartView = (GraphicalView) myStackedLineChart.getStackedLineChartView();
 
 			// Add chart view to layout view
 			myLineChartLayout.addView(myLineChartView);
@@ -290,18 +288,17 @@ public class ChartActivity extends ActionbarHelperActivity {
 	 * Method for loading stacked chart into view
 	 */
 	public void loadStackedBarChart() {
-		// Set reference for stacked layout
+		// Initialise layout for chart
 		myBarChartLayout = (LinearLayout) findViewById(R.id.stacked_bar_chart);
 
-		// Set reference for stacked bar chart object
+		// Initialise chart class
 		myStackedBarChart = new StackedBarChart(this);
 
 		// Check if the chart doesn't already exist
 		if (myBarChartView == null) {
 
 			// Get chart view from library
-			myBarChartView = (GraphicalView) myStackedBarChart
-					.getBarChartView();
+			myBarChartView = (GraphicalView) myStackedBarChart.getBarChartView();
 
 			// Add chart view to layout view
 			myBarChartLayout.addView(myBarChartView);
@@ -326,14 +323,47 @@ public class ChartActivity extends ActionbarHelperActivity {
 	 * @throws ParseException
 	 */
 	public void setChartTitle() {
+		
+		// Set account object and initialise
 		AccountHelper myAccount = new AccountHelper();
-		TextView upRollOverTV = (TextView) findViewById(R.id.chart_title);
+		
+		// Set title TextView object and initialise
+		TextView chartTitle = (TextView) findViewById(R.id.chart_title);
+		
+		// String object for chart data period
+		String chartPeriod = "Month";
+		
+		// Try and get data period from myAccount
 		try {
-			upRollOverTV.setText(myAccount.getCurrentDataPeriodString());
+			chartPeriod = myAccount.getCurrentDataPeriodString();
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		// String object for chart type
+		String chartType;
+		
+		// Check if ViewFlipper tab is at 1 (Bar Chart)
+		if (getViewFlipperTab() == 1){
+			chartType = getResources().getString(R.string.chart_title_bar);
+		}
+		// Else check if ViewFilipper is at 2 (Pie Chart)
+		else if (getViewFlipperTab() == 2){
+			chartType = getResources().getString(R.string.chart_title_pie);
+		}
+		// Else check if ViewFilipper is at 3 (Doughtnut Chart)
+		else if (getViewFlipperTab() == 3){
+			chartType = getResources().getString(R.string.chart_title_doughnut);
+		}
+		// Else ViewFilipper must be at 0 default (Line Chart)
+		else {
+			chartType = getResources().getString(R.string.chart_title_line);
+		}
+		
+		// Set title of chart
+		chartTitle.setText(chartType + " (" + chartPeriod + ")");
+		
 	}
 
 	/**
@@ -364,6 +394,7 @@ public class ChartActivity extends ActionbarHelperActivity {
 					myViewFlipper.setOutAnimation(slideLeftOut);
 					myViewFlipper.showNext();
 					setPageNation();
+					setChartTitle();
 					return true;
 				}
 				// Else check if it is a left to right swipe
@@ -373,6 +404,7 @@ public class ChartActivity extends ActionbarHelperActivity {
 					myViewFlipper.setOutAnimation(slideRightOut);
 					myViewFlipper.showPrevious();
 					setPageNation();
+					setChartTitle();
 					return true;
 				}
 			} catch (Exception e) {
@@ -391,8 +423,10 @@ public class ChartActivity extends ActionbarHelperActivity {
 	}
 	
 	public void setPageNation(){
-		int position = myViewFlipper.getDisplayedChild();
-
-		myChartPaginationView.setActive(position);
+		myChartPaginationView.setActive(getViewFlipperTab());
+	}
+	
+	public int getViewFlipperTab(){
+		return myViewFlipper.getDisplayedChild();
 	}
 }

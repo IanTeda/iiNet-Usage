@@ -1,11 +1,16 @@
 package au.id.teda.iinetusage.phone.chart;
 
 import org.achartengine.ChartFactory;
+import org.achartengine.GraphicalView;
 import org.achartengine.model.CategorySeries;
 import org.achartengine.renderer.DefaultRenderer;
 import android.content.Context;
 import android.graphics.Color;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
+import android.widget.LinearLayout;
+import au.id.teda.iinetusage.phone.R;
 import au.id.teda.iinetusage.phone.helper.AccountHelper;
 
 public class PieChart extends ChartBuilder {
@@ -20,7 +25,8 @@ public class PieChart extends ChartBuilder {
 	private static final String REMAINING = "Remaining";
 	private static final String TITLE = "Data Usage";
 
-	private Context context;
+	// Context for class
+	private Context myActivity;
 
 	/**
 	 * PieChart constructor
@@ -28,7 +34,7 @@ public class PieChart extends ChartBuilder {
 	 */
 	public PieChart(Context context) {
 		super(context);
-		this.context = context;
+		myActivity = context;
 	}
 	
 	/**
@@ -36,7 +42,7 @@ public class PieChart extends ChartBuilder {
 	 * @return pie chart view
 	 */
 	public View getPieChartView() {
-		return ChartFactory.getPieChartView(context, 
+		return ChartFactory.getPieChartView(myActivity, 
 				getPieChartDataSet(),
 				getPieChartRenderer());
 	}

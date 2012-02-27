@@ -4,4 +4,9 @@
     <string name="chart_title">Usage Chart</string>
     <string name="chart_x_title">Data Used (Gb)</string>
     
+    <string name="chart_title_line">Stacked Line</string>
+    <string name="chart_title_bar">Stacked Daily Bar</string>
+    <string name="chart_title_pie">Data Pie</string>
+    <string name="chart_title_doughnut">Data Doughnut</string>
+    
 </resources>
