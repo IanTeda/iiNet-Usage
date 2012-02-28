@@ -18,7 +18,7 @@ import au.id.teda.iinetusage.phone.helper.AccountHelper;
 public class StackedLineChart extends ChartBuilder {
 	
 	//Static tag strings for logging information and debug
-	private static final String DEBUG_TAG = "iiNet Usage";
+	//private static final String DEBUG_TAG = "iiNet Usage";
 	//private static final String INFO_TAG = StackedLineChart.class.getSimpleName();
 	
     private Context context;
@@ -142,7 +142,6 @@ public class StackedLineChart extends ChartBuilder {
 	    
 	    // Peak series render settings
 	    r.setColor(getPeakColor());
-	    r.setPointStyle(PointStyle.SQUARE);
 	    r.setFillBelowLine(true);
 	    r.setFillBelowLineColor(getPeakFillColor());
 	    r.setFillPoints(false);
@@ -152,7 +151,6 @@ public class StackedLineChart extends ChartBuilder {
 	    // Offpeak series render settings
 	    r = new XYSeriesRenderer();
 	    r.setColor(getOffpeakColor());
-	    r.setPointStyle(PointStyle.CIRCLE);
 	    r.setFillBelowLine(true);
 	    r.setFillBelowLineColor(getOffpeakFillColor());
 	    r.setFillPoints(false);
