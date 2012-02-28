@@ -20,14 +20,12 @@ public class StackedBarChart extends ChartBuilder {
 	//private static final String DEBUG_TAG = "iiNet Usage";
 	//private static final String INFO_TAG = StackedBarChart.class.getSimpleName();
 	
-    private Context context;
+	// Activity context for views
+    private Context myActivityContext;
     
+    // Series string values
 	private static final String PEAK = "Peak";
 	private static final String OFFPEAK = "Offpeak";
-	private static final String REMAINING = "Remaining";
-	private static final String TITLE = "Data Usage";
-    
-    private static final String NOT_USED = "Not Used";
     
     private double maxDataUsage = 0;;
 	
@@ -36,7 +34,7 @@ public class StackedBarChart extends ChartBuilder {
 	 */
 	public StackedBarChart(Context context) {
 		super(context);
-		this.context = context;
+		myActivityContext = context;
 	}
 	
 	/**
@@ -45,7 +43,7 @@ public class StackedBarChart extends ChartBuilder {
 	 *  @return bar chart view from ChartFactory
 	 */
 	public View getBarChartView (){
-		return ChartFactory.getBarChartView(context, 
+		return ChartFactory.getBarChartView(myActivityContext, 
 				getStackedBarChartDataSet(), 
 				getStackedBarChartRenderer(), 
 				Type.STACKED);
@@ -80,12 +78,10 @@ public class StackedBarChart extends ChartBuilder {
 		while (dailyDBCursor.isAfterLast() == false) {
 
 			// Get peak data usage from current cursor position
-			long peakUsageLong = dailyDBCursor.getLong(dailyDBCursor
-					.getColumnIndex(DailyDataDBAdapter.PEAK)) / 1000000000;
+			long peakUsageLong = dailyDBCursor.getLong(dailyDBCursor.getColumnIndex(DailyDataDBAdapter.PEAK)) / 1000000000;
 
 			// Get offpeak data usage from current cursor position
-			long offpeakUsageLong = dailyDBCursor.getLong(dailyDBCursor
-					.getColumnIndex(DailyDataDBAdapter.OFFPEAK)) / 1000000000;
+			long offpeakUsageLong = dailyDBCursor.getLong(dailyDBCursor.getColumnIndex(DailyDataDBAdapter.OFFPEAK)) / 1000000000;
 
 			// Make data stacked (achartengine does not do it by default).
 			if (peakUsageLong > offpeakUsageLong) {
@@ -131,6 +127,7 @@ public class StackedBarChart extends ChartBuilder {
 	    
 	    // Load and initialise render objects
 	    XYMultipleSeriesRenderer renderer = buildBarRenderer(colors);
+	    //TODO: Add individual series renders
 	    
 	    renderer.setXAxisMin(0);
 		renderer.setXAxisMax(getChartDays());
