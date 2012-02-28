@@ -21,7 +21,7 @@ public class StackedBarChart extends ChartBuilder {
 	//private static final String INFO_TAG = StackedBarChart.class.getSimpleName();
 	
 	// Activity context for views
-    private Context myActivityContext;
+    private Context myActivity;
     
     // Series string values
 	private static final String PEAK = "Peak";
@@ -34,7 +34,7 @@ public class StackedBarChart extends ChartBuilder {
 	 */
 	public StackedBarChart(Context context) {
 		super(context);
-		myActivityContext = context;
+		myActivity = context;
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class StackedBarChart extends ChartBuilder {
 	 *  @return bar chart view from ChartFactory
 	 */
 	public View getBarChartView (){
-		return ChartFactory.getBarChartView(myActivityContext, 
+		return ChartFactory.getBarChartView(myActivity, 
 				getStackedBarChartDataSet(), 
 				getStackedBarChartRenderer(), 
 				Type.STACKED);
@@ -141,8 +141,8 @@ public class StackedBarChart extends ChartBuilder {
 	    renderer.setMarginsColor(getBackgroundColor());
 	    renderer.setPanEnabled(false, false);
 	    renderer.setFitLegend(true);
-	    renderer.setLabelsTextSize(18);
-	    renderer.setLegendTextSize(22);
+	    renderer.setLabelsTextSize(getLabelsTextSize());
+	    renderer.setLegendTextSize(getLegendTextSize());
 	    renderer.setAxesColor(getLabelColor());
 	    renderer.setAntialiasing(true);
 	    renderer.setBarSpacing(0.5f);

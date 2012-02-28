@@ -21,7 +21,7 @@ public class StackedLineChart extends ChartBuilder {
 	//private static final String DEBUG_TAG = "iiNet Usage";
 	//private static final String INFO_TAG = StackedLineChart.class.getSimpleName();
 	
-    private Context context;
+    private Context myActivity;
     
 	private static final String PEAK = "Peak";
 	private static final String PEAK_QUOTA = "Peak Quota";
@@ -32,11 +32,11 @@ public class StackedLineChart extends ChartBuilder {
     
 	public StackedLineChart(Context context) {
 		super(context);
-		this.context = context;
+		myActivity = context;
 	}
 
 	public View getStackedLineChartView() {
-		return ChartFactory.getLineChartView(context, 
+		return ChartFactory.getLineChartView(myActivity, 
 				getStackedLineChartDataSet(),
 				getStackedLineChartRenderer());
 	}
@@ -180,8 +180,8 @@ public class StackedLineChart extends ChartBuilder {
 	    renderer.setPanEnabled(false, false);
 	    renderer.setShowLegend(true);
 	    renderer.setFitLegend(true);
-	    renderer.setLabelsTextSize(18);
-	    renderer.setLegendTextSize(18);
+	    renderer.setLabelsTextSize(getLabelsTextSize());
+	    renderer.setLegendTextSize(getLegendTextSize());
 	    renderer.setAxesColor(getLabelColor());
 	    renderer.setAntialiasing(true);
 	    renderer.setXAxisMin(0);

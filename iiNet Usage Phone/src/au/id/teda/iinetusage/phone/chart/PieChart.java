@@ -1,16 +1,11 @@
 package au.id.teda.iinetusage.phone.chart;
 
 import org.achartengine.ChartFactory;
-import org.achartengine.GraphicalView;
 import org.achartengine.model.CategorySeries;
 import org.achartengine.renderer.DefaultRenderer;
 import android.content.Context;
 import android.graphics.Color;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
-import android.widget.LinearLayout;
-import au.id.teda.iinetusage.phone.R;
 import au.id.teda.iinetusage.phone.helper.AccountHelper;
 
 public class PieChart extends ChartBuilder {
@@ -88,7 +83,8 @@ public class PieChart extends ChartBuilder {
 	    renderer.setPanEnabled(false);
 	    renderer.setFitLegend(true);
 	    renderer.setShowLabels(false);
-	    renderer.setLegendTextSize(22);
+	    renderer.setLabelsTextSize(getLabelsTextSize());
+	    renderer.setLegendTextSize(getLegendTextSize());
 	    renderer.setAntialiasing(true);
 	    
 	    return renderer;

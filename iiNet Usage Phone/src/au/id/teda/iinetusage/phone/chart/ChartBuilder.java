@@ -23,7 +23,7 @@ public class ChartBuilder {
 	// private static final String INFO_TAG =
 	// ChartBuilder.class.getSimpleName();
 
-	private Context myActivityContext;
+	private Context myActivity;
 
 	private static final String PEAK = "Peak";
 	private static final String OFFPEAK = "Offpeak";
@@ -49,28 +49,51 @@ public class ChartBuilder {
 	private final int backgroundColor;
 
 	private final String xAxes;
+	
+	private final static int legendTextSize = 18;
+	private final static int labelsTextSize = 12;
 
 	// Chart builder constructor
 	public ChartBuilder(Context context) {
-		myActivityContext = context;
+		myActivity = context;
 
 		// Chart colours
-		peakColor = myActivityContext.getResources().getColor(R.color.chart_peak_color);
-		peakFillColor = myActivityContext.getResources().getColor(R.color.chart_peak_fill_color);
-		peakTrendColor = myActivityContext.getResources().getColor(R.color.chart_peak_trend_color);
-		offpeakColor = myActivityContext.getResources().getColor(R.color.chart_offpeak_color);
-		offpeakFillColor = myActivityContext.getResources().getColor(R.color.chart_offpeak_fill_color);
-		offpeakTrendColor = myActivityContext.getResources().getColor(R.color.chart_offpeak_trend_color);
-		remainingColor = myActivityContext.getResources().getColor(R.color.chart_remaining_color);
-		remainingFillColor = myActivityContext.getResources().getColor(R.color.chart_remaining_fill_color);
-		axesColor = myActivityContext.getResources().getColor(R.color.chart_axes_color);
-		labelColor = myActivityContext.getResources().getColor(R.color.chart_label_color);
-		backgroundColor = myActivityContext.getResources().getColor(R.color.application_background_color);
+		peakColor = myActivity.getResources().getColor(R.color.chart_peak_color);
+		peakFillColor = myActivity.getResources().getColor(R.color.chart_peak_fill_color);
+		peakTrendColor = myActivity.getResources().getColor(R.color.chart_peak_trend_color);
+		offpeakColor = myActivity.getResources().getColor(R.color.chart_offpeak_color);
+		offpeakFillColor = myActivity.getResources().getColor(R.color.chart_offpeak_fill_color);
+		offpeakTrendColor = myActivity.getResources().getColor(R.color.chart_offpeak_trend_color);
+		remainingColor = myActivity.getResources().getColor(R.color.chart_remaining_color);
+		remainingFillColor = myActivity.getResources().getColor(R.color.chart_remaining_fill_color);
+		axesColor = myActivity.getResources().getColor(R.color.chart_axes_color);
+		labelColor = myActivity.getResources().getColor(R.color.chart_label_color);
+		backgroundColor = myActivity.getResources().getColor(R.color.application_background_color);
 
 		// Chart strings
-		xAxes = myActivityContext.getResources().getString(R.string.chart_x_title);
+		xAxes = myActivity.getResources().getString(R.string.chart_x_title);
 
 	}
+	
+	/**
+	 * Calculate pixel value for dip
+	 * @param dip value to be converted
+	 * @return pixel value of dip for current screen density
+	 */
+	protected int getPixelDip(int dip){
+		final float scale = myActivity.getResources().getDisplayMetrics().density;
+		int pixels = (int) (dip * scale + 0.5f);
+		return pixels;
+	}
+	
+	public int getLegendTextSize(){
+		return getPixelDip(legendTextSize);
+	}
+	
+	public int getLabelsTextSize(){
+		return getPixelDip(labelsTextSize);
+	}
+
 
 	/**
 	 * Get peak color from XML
