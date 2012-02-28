@@ -38,8 +38,10 @@ public class ChartBuilder {
 	// Color values for focus and alternate
 	private final int peakColor;
 	private final int peakFillColor;
+	private final int peakTrendColor;
 	private final int offpeakColor;
 	private final int offpeakFillColor;
+	private final int offpeakTrendColor;
 	private final int remainingColor;
 	private final int remainingFillColor;
 	private final int axesColor;
@@ -55,8 +57,10 @@ public class ChartBuilder {
 		// Chart colours
 		peakColor = myActivityContext.getResources().getColor(R.color.chart_peak_color);
 		peakFillColor = myActivityContext.getResources().getColor(R.color.chart_peak_fill_color);
+		peakTrendColor = myActivityContext.getResources().getColor(R.color.chart_peak_trend_color);
 		offpeakColor = myActivityContext.getResources().getColor(R.color.chart_offpeak_color);
 		offpeakFillColor = myActivityContext.getResources().getColor(R.color.chart_offpeak_fill_color);
+		offpeakTrendColor = myActivityContext.getResources().getColor(R.color.chart_offpeak_trend_color);
 		remainingColor = myActivityContext.getResources().getColor(R.color.chart_remaining_color);
 		remainingFillColor = myActivityContext.getResources().getColor(R.color.chart_remaining_fill_color);
 		axesColor = myActivityContext.getResources().getColor(R.color.chart_axes_color);
@@ -75,6 +79,14 @@ public class ChartBuilder {
 	 */
 	public int getPeakColor() {
 		return peakColor;
+	}
+	
+	public int getPeakTrendColor(){
+		return peakTrendColor;
+	}
+	
+	public int getOffpeakTrendColor(){
+		return offpeakTrendColor;
 	}
 
 	/**

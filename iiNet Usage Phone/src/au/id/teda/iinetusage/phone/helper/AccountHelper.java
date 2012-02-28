@@ -8,13 +8,14 @@ import java.util.Calendar;
 import java.util.Date;
 
 import android.content.Context;
+import android.util.Log;
 import au.id.teda.iinetusage.phone.AppGlobals;
 import au.id.teda.iinetusage.phone.R;
 
 public class AccountHelper extends AccountStatusHelper {
 
 	// Static tag strings for logging information and debug
-	//private static final String DEBUG_TAG = "iiNet Usage";
+	private static final String DEBUG_TAG = "iiNet Usage";
 	//private static final String INFO_TAG = AccountHelper.class.getSimpleName();
 
 	// Set data period format
@@ -228,6 +229,56 @@ public class AccountHelper extends AccountStatusHelper {
 		// Else it must not be set so return default XML string value
 		else {
 			return myApplicationContext.getString(R.string.account_info_quota_data);
+		}
+	}
+	
+	/**
+	 * Get the peak daily quota in Mb
+	 * @return int value of peak daily quota in Mb
+	 */
+	public double getPeakDailyQuotaMb(){
+		// Check if peak quota is set
+		if (isPeakQuotaSet()){
+			
+			// Get Long value of peak quota and convert to Mb
+			Long quotaLong = getPeakQuota();
+			
+			// Get number of days in period
+			Long durationDays = getCurrentDaysToGo() + getCurrentDaysSoFar();
+			
+			double daily = quotaLong/durationDays;
+			
+			// Return daily av. suggested use
+			return daily;
+		}
+		// Else it must not be set so return default XML string value
+		else {
+			return 10;
+		}
+	}
+	
+	/**
+	 * Get the offpeak daily quota in Mb
+	 * @return int value of offpeak daily quota in Mb
+	 */
+	public double getOffpeakDailyQuotaMb(){
+		// Check if peak quota is set
+		if (isPeakQuotaSet()){
+			
+			// Get Long value of peak quota and convert to Mb
+			Long quotaLong = getOffpeakQuota();
+			
+			// Get number of days in period
+			Long durationDays = getCurrentDaysToGo() + getCurrentDaysSoFar();
+			
+			double daily = quotaLong/durationDays;
+			
+			// Return daily av. suggested use
+			return daily;
+		}
+		// Else it must not be set so return default XML string value
+		else {
+			return 10;
 		}
 	}
 	
