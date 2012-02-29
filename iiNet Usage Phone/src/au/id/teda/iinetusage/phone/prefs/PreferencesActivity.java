@@ -1,4 +1,4 @@
-package au.id.teda.iinetusage.phone.activity;
+package au.id.teda.iinetusage.phone.prefs;
 
 import android.app.Activity;
 import android.content.SharedPreferences;

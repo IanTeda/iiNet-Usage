@@ -41,7 +41,7 @@
         <activity android:name=".activity.ChartActivity" />
 
         <!-- Preference activity intent -->
-        <activity android:name=".activity.PreferencesActivity" />
+        <activity android:name=".prefs.PreferencesActivity" />
 
         <!-- Username password activity intent -->
         <activity android:name=".activity.UserPassActivity" >

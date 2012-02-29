@@ -13,11 +13,11 @@ public class PreferenceHelper extends ConnectivityHelper {
 	
 	
 	public boolean showRefreshDialog(){
-		return mySettings.getBoolean(SHOW_REFRESH_DIALOG, false);
+		return mySettings.getBoolean(SHOW_REFRESH_DIALOG, true);
 	}
 	
 	public boolean hidePhoneStatusBar(){
-		return mySettings.getBoolean(HIDE_STATUS_BAR, false);
+		return mySettings.getBoolean(HIDE_STATUS_BAR, true);
 	}
 	
 }
