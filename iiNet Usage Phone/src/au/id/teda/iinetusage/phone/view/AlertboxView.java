@@ -1,5 +1,6 @@
 package au.id.teda.iinetusage.phone.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.widget.Button;
@@ -11,42 +12,60 @@ public class AlertboxView extends PreferenceHelper {
 	//private final String DEBUG_TAG = "iiNet Usage"; // Debug tag for LogCat
 	//private static final String INFO_TAG = AlertboxView.class.getSimpleName();
 	
-	private Context myActivityContext;
+	private final Context myActivityContext;
+	private final Activity myActivity;
 	
-	public AlertboxView(Context activityContext) {
-		super();
+	private Button myAlertboxButton;
+	
+	public AlertboxView(Context context) {
 		
-		myActivityContext = activityContext;
+		// Construct context
+		myActivityContext = context;
+		
+		// Construct activity from context
+		myActivity = (myActivityContext instanceof Activity) ? (Activity) myActivityContext	: null;
+		
+		// Initialise alert button
+		myAlertboxButton = (Button) myActivity.findViewById(R.id.alertbox_button);
 	}
 
-	public void setAlert(Button alertboxButton) {
+	/**
+	 * Get the string value of the current alreat box
+	 * @return string value of button text
+	 */
+	public String getAlert(){
+		String myAlert = (String) myAlertboxButton.getText();
+		return myAlert;
+	}
+	
+	public void setAlert() {
         
 		// TODO: Make an alert string builder
 		
 		// Missing password and username
 		if (!isUsernamePasswordSet()){
-			showAlertbox(alertboxButton);
-			alertboxButton.setText(myActivityContext.getString(R.string.alertbox_no_userpass));
+			showAlertbox();
+			myAlertboxButton.setText(myActivity.getString(R.string.alertbox_no_userpass));
         	
         // Missing password
 		} else if (!isPasswordSet()){
-			showAlertbox(alertboxButton);
-			alertboxButton.setText(myActivityContext.getString(R.string.alertbox_no_pass));
+			showAlertbox();
+			myAlertboxButton.setText(myActivity.getString(R.string.alertbox_no_pass));
         	
 		// Missing username
 		} else if (!isUsernameSet()){
-			showAlertbox(alertboxButton);
-			alertboxButton.setText(myActivityContext.getString(R.string.alertbox_no_user));
+			showAlertbox();
+			myAlertboxButton.setText(myActivity.getString(R.string.alertbox_no_user));
 
 		}
 	}
 	
-	public void hideAlertbox(Button alertboxButton){
-		alertboxButton.setVisibility(View.GONE);
+	public void hideAlertbox(){
+		myAlertboxButton.setVisibility(View.GONE);
 	}
 	
-	public void showAlertbox(Button alertboxButton){
-		alertboxButton.setVisibility(View.VISIBLE);
+	public void showAlertbox(){
+		myAlertboxButton.setVisibility(View.VISIBLE);
 	}
 
 }

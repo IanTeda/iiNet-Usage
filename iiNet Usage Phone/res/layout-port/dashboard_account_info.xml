@@ -3,6 +3,7 @@
     android:id="@+id/dashboard_account_info"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="-12dp"
     android:padding="@dimen/application_margin" >
 
     <Button

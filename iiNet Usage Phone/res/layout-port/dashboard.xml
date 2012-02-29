@@ -17,8 +17,7 @@
         android:layout_margin="5dp"
         android:background="@drawable/dashboard_alertbox"
         android:onClick="onClickAlertboxButton"
-        android:text="@string/alertbox_default"
-        android:visibility="gone" />
+        android:text="@string/alertbox_default" />
 
     <ScrollView
         android:id="@+id/main_container"

@@ -27,7 +27,6 @@ public class MainActivity extends ActionbarHelperActivity {
 	//private static final String DEBUG_TAG = "iiNet Usage";
 	//private static final String INFO_TAG = MainActivity.class.getSimpleName();
 	
-	private Button myAlertboxButton;
 	private AlertboxView myAlertboxView;
 	
 	// Object for AccountInfoView
@@ -46,12 +45,12 @@ public class MainActivity extends ActionbarHelperActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dashboard);
+
+        // Initialise common views
+		myAlertboxView = new AlertboxView(this);
         
 		// If view is in portrait set reference to objects
 		if (isPortrait()) {
-			myAlertboxButton = (Button) findViewById(R.id.alertbox_button);
-			myAlertboxView = new AlertboxView(this);
-
 			// Initialise views
 			myAccountInfoView = new AccountInfoView(this);
 			myPeakStatsViewPort = new PeakStatsViewPort(this);
@@ -81,10 +80,12 @@ public class MainActivity extends ActionbarHelperActivity {
 	}
 	
 	public void loadViews(){
+		// Set AlertBoxView
+        myAlertboxView.setAlert();
+		
 		// If view is in portrait load portrait views
 		if (isPortrait()){
 			// Load portrait views
-	        myAlertboxView.setAlert(myAlertboxButton);
 	        myAccountInfoView.loadView();
 	        myPeakStatsViewPort.loadView();
 	        myOffpeakStatsViewPort.loadView();
@@ -103,15 +104,15 @@ public class MainActivity extends ActionbarHelperActivity {
 	 */
 	public void onClickAlertboxButton (View view){
 		// Get current string value of the alert box
-		String alertboxButtonText =  (String) myAlertboxButton.getText();
+		String alert = myAlertboxView.getAlert();
 		
 		// Set action based on value of alertbox string
-    	if ( alertboxButtonText == this.getString(R.string.alertbox_no_data)){
+    	if ( alert == this.getString(R.string.alertbox_no_data)){
     		Toast.makeText(this, "Refersh data", Toast.LENGTH_SHORT).show();
     		
-    	} else if (alertboxButtonText == this.getString(R.string.alertbox_no_userpass)
-    			|| alertboxButtonText == this.getString(R.string.alertbox_no_user)
-    			|| alertboxButtonText == this.getString(R.string.alertbox_no_pass)){
+    	} else if (alert == this.getString(R.string.alertbox_no_userpass)
+    			|| alert == this.getString(R.string.alertbox_no_user)
+    			|| alert == this.getString(R.string.alertbox_no_pass)){
     		Intent myUserPassIntent = new Intent(MainActivity.this, UserPassActivity.class);
 			startActivity(myUserPassIntent);
     	}
