@@ -18,7 +18,7 @@
 
         <TextView
             android:id="@+id/daily_data_title"
-            style="@style/daily_data_period"
+            style="@style/h1"
             android:text="@string/daily_data_period_title" />
 
         <View

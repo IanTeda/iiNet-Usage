@@ -8,20 +8,18 @@
 
     <TextView
         android:id="@+id/offpeak_title"
-        style="@style/h2"
+        style="@style/h1"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:text="@string/offpeak_stats_title" />
 
     <TextView
         android:id="@+id/offpeak_time"
-        style="@style/h2"
+        style="@style/h1"
         android:gravity="right"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:text="@string/peak_offpeak_stats_period" />
-
-    <!-- Create background layout for line -->
 
     <View
         android:id="@+id/offpeak_data_line"
