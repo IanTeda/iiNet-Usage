@@ -15,6 +15,8 @@ public class PreferencesActivity extends PreferenceActivity implements OnSharedP
 	//private final String DEBUG_TAG = "iiNet Usage"; // Debug tag for LogCat
 	//private static final String INFO_TAG = PreferencesActivity.class.getSimpleName();
 	
+	//TODO: Style preference activity
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

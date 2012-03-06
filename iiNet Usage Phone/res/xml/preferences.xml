@@ -4,18 +4,20 @@
 
 	<!-- Parent Category for username & Password -->
 	<PreferenceCategory
-		android:title="@string/username_password_preferences_category_title">
+		android:title="@string/username_password_preference_category">
 
 		<!-- Launch Username / Password Activity -->
-		<Preference android:summary="@string/user_pass_summary"
-			android:title="@string/user_pass_title">
+		<Preference android:summary="@string/username_password_summary"
+			android:title="@string/username_password_title">
 			<intent android:action=".activity.UserPassActivity" />
 		</Preference>
 	</PreferenceCategory>
 
-	<!-- Application Behaviour Parent Category -->
-	<PreferenceCategory android:title="Category">
-		<PreferenceScreen android:title="@string/application_behaviour_category_title">
+	<!-- Application appearance and behaviour category -->
+	<PreferenceCategory android:title="@string/appearance_behaviour_preference_category">
+
+		<!-- Application behaviour -->
+		<PreferenceScreen android:title="@string/behaviour_preference_screen">
 			<CheckBoxPreference android:defaultValue="true"
 				android:key="hide_status_bar" android:summary="@string/hide_status_bar_summary"
 				android:title="@string/hide_status_bar_title" />
@@ -28,7 +30,7 @@
 		</PreferenceScreen>
 
 		<!-- Custom seekbar for setting alert level -->
-		<PreferenceScreen android:title="Set Alerts">
+		<PreferenceScreen android:title="@string/alert_preference_screen">
 			<au.id.teda.iinetusage.phone.prefs.SeekBarPreference
 				android:key="peak_usage_alert" android:title="@string/peak_usage_alert_title"
 				android:dialogTitle="@string/peak_usage_alert_dialog_title"

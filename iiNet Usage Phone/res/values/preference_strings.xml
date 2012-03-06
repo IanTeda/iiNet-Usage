@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Categories -->
+    <string name="username_password_preference_category">Username &amp; Password</string>
+    <string name="appearance_behaviour_preference_category">Application Appearance &amp; Behaviours</string>
+    <string name="behaviour_preference_category">Application Behaviours</string>
+    
+    <!-- Screens -->
+    <string name="behaviour_preference_screen">Application Behaviour</string>
+    <string name="alert_preference_screen">Usage Alerts</string>
+        
+    
+    <!-- Username Password-->
+    <string name="username_password_title">Username &amp; Password</string>
+    <string name="username_password_summary">Set iiNet username &amp; password</string>
+
+    <!-- Status bar -->
+    <string name="hide_status_bar_title">Hide Status Bar</string>
+    <string name="hide_status_bar_summary">Hide phone status bar</string>
+    
+    <!-- Connectivity -->
+    <string name="wifi_only_title">Update Wifi Only</string>
+    <string name="wifi_only_summary">Update when connect to wifi only</string>
+
+    <!-- Refresh popup dialog -->
+    <string name="show_refresh_dialog_title">Show Refresh Dialog</string>
+    <string name="show_refresh_dialog_summary">Show refresh dialog</string>
+
+    <!-- Data usage seekbar strings -->
+    <string name="peak_usage_alert_title">Peak Usage Alert</string>
+    <string name="peak_usage_alert_dialog_title">Set Peak Usage Alert</string>
+    <string name="peak_usage_alert_summary">Current peak alert: %1$d</string>
+    <string name="offpeak_usage_alert_title">Offpeak Usage Alert</string>
+    <string name="offpeak_usage_alert_dialog_title">Set Offpeak Usage Alert</string>
+    <string name="offpeak_usage_alert_summary">Current offpeak alert: %1$d</string>
+
+</resources>
