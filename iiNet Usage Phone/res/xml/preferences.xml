@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:example="http://schemas.android.com/apk/res/au.id.teda.volumeusage.phone"
-	xmlns:intPref="http://schemas.android.com/apk/res/au.id.teda.volumeusage.phone">
+	xmlns:example="http://schemas.android.com/apk/res/au.id.teda.iinetusage.phone"
+	xmlns:intPref="http://schemas.android.com/apk/res/au.id.teda.iinetusage.phone">
 
 	<!-- Parent Category for username & Password -->
 	<PreferenceCategory
@@ -27,7 +27,7 @@
 				android:key="show_refresh_dialog" android:summary="@string/show_refresh_dialog_summary"
 				android:title="@string/show_refresh_dialog_title" />
 		</PreferenceScreen>
-<!-- 
+
 		<PreferenceScreen android:title="Set Alerts">
 			<au.id.teda.iinetusage.phone.prefs.SeekBarPreference
 				android:key="peak_usage_alert" android:title="@string/peak_usage_alert_title"
@@ -42,8 +42,6 @@
 				android:persistent="true" android:defaultValue="75"
 				example:minValue="0" example:maxValue="100" />
 		</PreferenceScreen>
-		
-		 -->
 
 	</PreferenceCategory>
 
