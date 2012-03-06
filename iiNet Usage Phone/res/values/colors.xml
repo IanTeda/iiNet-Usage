@@ -19,6 +19,7 @@
     <color name="application_h2_text_color">#FF5900</color>
     <color name="application_h2_text_alt_color">#90b9b9b9</color>
     <color name="application_text_highlight_color">#fffafa</color>
+    <color name="application_text_color">#ffffff</color>
 
     <!-- Phone dashboard alert -->
     <color name="alertbox_border_color">#CC3333</color>
@@ -41,6 +42,10 @@
     <color name="border_color">#000000</color>
     <color name="border_background">#201f1f</color>
 
+    <!-- Usage alert colors -->
+    <color name="usage_alert_color">#70CC3333</color>
+    <color name="usage_over_color">#CC3333</color>
+    
     <!-- Standard Colors -->
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>

@@ -24,6 +24,8 @@ public class AccountHelper extends AccountStatusHelper {
 	private final SimpleDateFormat myPeriodDateFormat = new SimpleDateFormat("MMMM yyyy");
 	
 	NumberFormat myNumberFormat = new DecimalFormat("#,#00");
+	
+	private final static PreferenceHelper myPrefs = new PreferenceHelper();
 
 	private Context myApplicationContext = AppGlobals.getAppContext();
 	
@@ -897,6 +899,54 @@ public class AccountHelper extends AccountStatusHelper {
 			return myApplicationContext.getString(R.string.peak_offpeak_stats_period);
 		}
 		
+	}
+	
+	/**
+	 * Check if peak usage is over the alert value
+	 * @return true if peak value is over the alert value
+	 */
+	public boolean isPeakUsageOver(){
+		
+		// Get alert usage alert int 
+		int usageAlert = myPrefs.getPeakUsageAlertValue();
+		
+		// Get current usage data
+		Long currentUsage = getCurrentPeakUsed()/1000000000;
+		
+		// Check if current usage is above usage alert
+		if (currentUsage > usageAlert){
+			// If it is return true
+			return true;
+		}
+		// Else it must be under
+		else {
+			// So return false
+			return false;
+		}
+	}
+	
+	/**
+	 * Check if offpeak usage is over the alert value
+	 * @return true if offpeak value is over the alert value
+	 */
+	public boolean isOffpeakUsageOver(){
+		
+		// Get alert usage alert int 
+		int usageAlert = myPrefs.getOffpeakUsageAlertValue();
+		
+		// Get current usage data
+		Long currentUsage = getCurrentOffpeakUsed()/1000000000;
+		
+		// Check if current usage is above usage alert
+		if (currentUsage > usageAlert){
+			// If it is return true
+			return true;
+		}
+		// Else it must be under
+		else {
+			// So return false
+			return false;
+		}
 	}
 
 

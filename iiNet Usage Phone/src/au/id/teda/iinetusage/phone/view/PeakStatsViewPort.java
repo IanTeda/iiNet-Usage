@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.TextView;
 import au.id.teda.iinetusage.phone.R;
 import au.id.teda.iinetusage.phone.helper.AccountHelper;
+import au.id.teda.iinetusage.phone.helper.PreferenceHelper;
 
 public class PeakStatsViewPort extends AccountHelper {
 	
@@ -47,6 +48,11 @@ public class PeakStatsViewPort extends AccountHelper {
 	// Color values for focus and alternate
 	private final int focusColor;
 	private final int alternateColor;
+	private final int usageAlertColor;
+	private final int usageOverColor;
+	private final int textColor;
+	
+	private static final PreferenceHelper mySettings = new PreferenceHelper();
 	
 	/**
 	 * Class constructor
@@ -85,6 +91,10 @@ public class PeakStatsViewPort extends AccountHelper {
 		// Initialise focus and alternate colours
 		focusColor = myActivity.getResources().getColor(R.color.application_h2_text_color);
 		alternateColor = myActivity.getResources().getColor(R.color.application_h2_text_alt_color);
+		usageAlertColor = myActivity.getResources().getColor(R.color.usage_alert_color);
+		usageOverColor = myActivity.getResources().getColor(R.color.usage_over_color);
+		textColor = myActivity.getResources().getColor(R.color.application_text_color);
+
 		
 		// Initialise percent and Gigabyte units
 		percentUnit = myActivity.getString(R.string.peak_offpeak_unit_percent);
@@ -255,6 +265,15 @@ public class PeakStatsViewPort extends AccountHelper {
 			// Set Gb value for remaining
 			myPeakNumberData.setText(getPeakDataUsedGb());
 		}
+		
+		// Set text color based on alert
+		if (isPeakUsageOver()){
+			myPeakNumberData.setTextColor(usageAlertColor);
+		}
+		else {
+			myPeakNumberData.setTextColor(textColor);
+
+		}
 	}
 
 	/**
@@ -273,6 +292,7 @@ public class PeakStatsViewPort extends AccountHelper {
 			// Set Gb value for remaining
 			myPeakNumberData.setText(getPeakDataRemainingGb());
 		}
+		
 	}
 	
 	/**
