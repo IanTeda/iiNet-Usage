@@ -355,7 +355,11 @@ public class OffpeakStatsViewPort extends AccountHelper {
 		 */
 		private void setNumberColor() {
 			// Set text color based on alert
-			if (isOffpeakUsageOver()){
+			if (isCurrentOffpeakShaped()){
+				myOffpeakNumberData.setTextColor(usageOverColor);
+				myOffpeakNumberUnit.setTextColor(usageOverColor);
+			}
+			else if (isOffpeakUsageOver()){
 				myOffpeakNumberData.setTextColor(usageAlertColor);
 				myOffpeakNumberUnit.setTextColor(usageAlertColor);
 			}

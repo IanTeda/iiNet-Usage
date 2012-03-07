@@ -387,7 +387,12 @@ public class PeakStatsViewLand extends AccountHelper {
 	 */
 	private void setNumberColor() {
 		// Set text color based on alert
-		if (isPeakUsageOver()){
+		if (isCurrentPeakShaped()){
+			myPeakData.setTextColor(usageOverColor);
+			myPeakQuota.setTextColor(usageOverColor);
+			myPeakUnit.setTextColor(usageOverColor);
+		}
+		else if (isPeakUsageOver()){
 			myPeakData.setTextColor(usageAlertColor);
 			myPeakQuota.setTextColor(usageAlertColor);
 			myPeakUnit.setTextColor(usageAlertColor);

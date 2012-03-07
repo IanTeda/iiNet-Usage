@@ -13,7 +13,7 @@ public class OffpeakStatsViewLand extends AccountHelper {
 	
 	// Static strings for debug tags
 	//private static final String DEBUG_TAG = "iiNet Usage";
-	//private static final String INFO_TAG = PeakStatsViewLand.class.getSimpleName();
+	//private static final String INFO_TAG = OffpeakStatsViewLand.class.getSimpleName();
 	
 	private final Context myActivityContext;
 	private final Activity myActivity;
@@ -29,26 +29,31 @@ public class OffpeakStatsViewLand extends AccountHelper {
 	private final int alertColor;
 	private final int normalColor;
 	
-	// TextView objects for peak number
+	// TextView objects for offpeak number
 	private final TextView myOffpeakData;
 	private final TextView myOffpeakQuota;
 	private final TextView myOffpeakUnit;
 	
-	// TextView objects for peak number
+	// TextView objects for offpeak number
 	private final TextView myOffpeakDailyData;
 	
-	// TextView object for peak status
+	// TextView object for offpeak status
 	private final TextView myStatus;
 	
-	// TextView object for peak period
+	// TextView object for offpeak period
 	private final TextView myOffpeakPeriod;
 	
-	// TextView object for peak title
+	// TextView object for offpeak title
 	private final TextView myOffpeakTitle;
 	
-	// String object for peak title
-	private final String offpeakToGoTitle;
-	private final String offpeakSoFarTitle;
+	// String object for offpeak title
+	private final String offpeakTitleToGo;
+	private final String offpeakTitleSoFar;
+	
+	// Color values for usage alerts
+	private final int usageAlertColor;
+	private final int usageOverColor;
+	private final int textColor;
 	
 	
 	/**
@@ -74,7 +79,7 @@ public class OffpeakStatsViewLand extends AccountHelper {
 		alertColor = myActivity.getResources().getColor(R.color.red);
 		normalColor = myActivity.getResources().getColor(R.color.white);
 	
-		// Initialise Peak Data TextView objects
+		// Initialise Offpeak Data TextView objects
 		myOffpeakData = (TextView) myActivity.findViewById(R.id.dashboard_landscape_offpeak_data);
 		myOffpeakQuota = (TextView) myActivity.findViewById(R.id.dashboard_landscape_offpeak_quota);
 		myOffpeakUnit = (TextView) myActivity.findViewById(R.id.dashboard_landscape_offpeak_unit);
@@ -85,13 +90,18 @@ public class OffpeakStatsViewLand extends AccountHelper {
 		// Initialise status TextView objects
 		myStatus = (TextView) myActivity.findViewById(R.id.dashboard_landscape_offpeak_status_data);
 		
-		// Initialise peak period TextView objects
+		// Initialise offpeak period TextView objects
 		myOffpeakPeriod = (TextView) myActivity.findViewById(R.id.dashboard_landscape_offpeak_period_data);
 		
-		// Initialise peak title TextView objects
+		// Initialise offpeak title TextView objects
 		myOffpeakTitle = (TextView) myActivity.findViewById(R.id.dashboard_landscape_offpeak_title);
-		offpeakToGoTitle = myActivity.getString(R.string.offpeak_land_toGo);
-		offpeakSoFarTitle = myActivity.getString(R.string.offpeak_land_soFar);;
+		offpeakTitleToGo = myActivity.getString(R.string.offpeak_land_toGo);
+		offpeakTitleSoFar = myActivity.getString(R.string.offpeak_land_soFar);
+		
+		// Initialise colours
+		usageAlertColor = myActivity.getResources().getColor(R.color.usage_alert_color);
+		usageOverColor = myActivity.getResources().getColor(R.color.usage_over_color);
+		textColor = myActivity.getResources().getColor(R.color.application_text_color);
 		
 		// Set type face custom font to number
 		myOffpeakData.setTypeface(myFontNumber);
@@ -100,21 +110,21 @@ public class OffpeakStatsViewLand extends AccountHelper {
 	}
 	
 	/**
-	 * Load PeakStatsViewLand view
+	 * Load OffpeakStatsViewLand view
 	 */
 	public void loadView(){
 		
-		// Set peak GB used
+		// Set offpeak GB used
 		setOffpeakGb();
 		
-		// Set current peak status
+		// Set current offpeak status
 		setStatus();
 		
-		// Set peak period
+		// Set offpeak period
 		setOffpeakPeriod();
 		
-		// Set peak view
-		setOffpeakDailyToGo();
+		// Set offpeak view
+		setDailyToGo();
 		
 	}
 	
@@ -125,15 +135,15 @@ public class OffpeakStatsViewLand extends AccountHelper {
 		// Check if to go is set
 		if (isToGoSet()){
 			// Switch to so far
-			myOffpeakTitle.setText(offpeakSoFarTitle);
-			setOffpeakDailySoFar();
+			setTitleSoFar();
+			setDailySoFar();
 			
 		}
 		// Else so far must be set
 		else {
 			// Switch to to go
-			myOffpeakTitle.setText(offpeakToGoTitle);
-			setOffpeakDailyToGo();
+			setTitleToGo();
+			setDailyToGo();
 			
 		}
 		
@@ -148,7 +158,7 @@ public class OffpeakStatsViewLand extends AccountHelper {
 			setOffpeakPercent();
 		}
 	}
-	
+
 	/**
 	 * Switch between percent and Giga Byte
 	 */
@@ -170,11 +180,11 @@ public class OffpeakStatsViewLand extends AccountHelper {
 	 * @return true if set
 	 */
 	private boolean isToGoSet(){
-		// Get current peak title from text view
+		// Get current offpeak title from text view
 		String currentTitle = (String) myOffpeakTitle.getText();
 			
 		// Check if current unit string matches Giga byte unit string stored in xml
-		if (currentTitle == offpeakToGoTitle){
+		if (currentTitle == offpeakTitleToGo){
 			// Looks like it is so return true
 			return true;
 		}
@@ -199,7 +209,7 @@ public class OffpeakStatsViewLand extends AccountHelper {
 			// Looks like it is so return true
 			return true;
 		}
-		// Must be Gigabyte unit
+		// Must be Giga byte unit
 		else {
 			// So return false
 			return false;
@@ -207,85 +217,190 @@ public class OffpeakStatsViewLand extends AccountHelper {
 	}
 	
 	/**
-	 * Set peak data to Giga Bytes
+	 * Set offpeak data to Giga Bytes
 	 */
 	private void setOffpeakGb(){
 		
-		myOffpeakQuota.setVisibility(View.VISIBLE);
-		myOffpeakUnit.setText(gigabyteUnit);
+		// We need to show quota for Gb
+		showQuota();
 		
-		// Set peak GB quota
-		myOffpeakQuota.setText(getOffpeakQuotaStringGBLand());
+		// Set offpeak GB quota
+		setQuota();
 		
-		// Check if peak to go is set
+		// Check if offpeak to go is set
 		if (isToGoSet()){
-			// Set peak data as to go
-			myOffpeakData.setText(getOffpeakGbToGo());
+			// Set offpeak data as to go
+			setGbToGo();
 		} 
 		// Else So Far must be set
 		else {
-			// Set peak data as used
-			myOffpeakData.setText(getOffpeakGbSoFar());
+			// Set offpeak data as used
+			setGbSoFar();
 		}
 		
+		// Set acolor based on status
+		setNumberColor();
+		
 	}
-	
+
 	/**
-	 * Set peak data to percent
+	 * Set offpeak data to percent
 	 */
 	private void setOffpeakPercent(){
-		myOffpeakQuota.setVisibility(View.GONE);
-		myOffpeakUnit.setText(percentUnit);
 		
-		// Check if peak to go is set
+		// Don't need the quota for percent so hide it
+		hideQuota();
+		
+		// Check if offpeak to go is set
 		if (isToGoSet()){
-			// Set peak data as to go
-			myOffpeakData.setText(getOffpeakPercentToGo());
+			setPercentToGo();
 		} 
 		// Else So Far must be set
 		else {
-			// Set peak data as used
-			myOffpeakData.setText(getOffpeakPercentSoFar());
+			setPercentSoFar();
 		}
+		
+		// Set acolor based on status
+		setNumberColor();
 	}
-	
+
 	/**
-	 * Set peak daily data as Days To Go
-	 */
-	private void setOffpeakDailyToGo(){
-		myOffpeakDailyData.setText(getOffpeakDailyMbToGo());
-	}
-	
-	/**
-	 * Set peak daily data as Days So Far
-	 */
-	private void setOffpeakDailySoFar(){
-		myOffpeakDailyData.setText(getOffpeakDailyMbSoFar());
-	}
-	
-	/**
-	 * Set current peak status
+	 * Set current offpeak status
 	 */
 	private void setStatus(){
-		// Check if peak is shaped
+		// Check if offpeak is shaped
 		if (isCurrentOffpeakShaped()){
 			// It is so set shaped
-			myStatus.setText(myActivity.getString(R.string.peak_offpeak_status_shaped));
-			myStatus.setTextColor(alertColor);
+			setStatusShaped();
 		}
 		// Else we are unshaped
 		else {
 			// So set status unshaped
-			myStatus.setText(myActivity.getString(R.string.peak_offpeak_status_unshaped));
-			myStatus.setTextColor(normalColor);
+			setStatusUnshaped();
 		}
+	}
+
+	/**
+	 * Set offpeak status as unshaped
+	 */
+	private void setStatusUnshaped() {
+		myStatus.setText(myActivity.getString(R.string.peak_offpeak_status_unshaped));
+		myStatus.setTextColor(normalColor);
+	}
+
+	/**
+	 * Set offpeak status as shaped
+	 */
+	private void setStatusShaped() {
+		myStatus.setText(myActivity.getString(R.string.peak_offpeak_status_shaped));
+		myStatus.setTextColor(alertColor);
 	}
 	
 	/**
-	 * Set peak period times
+	 * Set offpeak period times
 	 */
 	private void setOffpeakPeriod(){
 		myOffpeakPeriod.setText(getOffpeakPeriodLand());
 	}
 
+	/**
+	 * Set title as to go
+	 */
+	private void setTitleToGo() {
+		myOffpeakTitle.setText(offpeakTitleToGo);
+	}
+
+	/**
+	 * Set title as so far
+	 */
+	private void setTitleSoFar() {
+		myOffpeakTitle.setText(offpeakTitleSoFar);
+	}
+
+	/**
+	 * Set Giga Bytes to go
+	 */
+	private void setGbToGo() {
+		myOffpeakData.setText(getOffpeakGbToGo());
+	}
+
+	/**
+	 * Set Giga Bytes so far
+	 */
+	private void setGbSoFar() {
+		myOffpeakData.setText(getOffpeakGbSoFar());
+	}
+
+	/**
+	 * 
+	 */
+	private void setQuota() {
+		myOffpeakQuota.setText(getOffpeakQuotaStringGBLand());
+	}
+
+	/**
+	 * Set percent to go
+	 */
+	private void setPercentToGo() {
+		myOffpeakData.setText(getOffpeakPercentToGo());
+	}
+
+	/**
+	 * Set percent so far
+	 */
+	private void setPercentSoFar() {
+		myOffpeakData.setText(getOffpeakPercentSoFar());
+	}
+
+	/**
+	 * Set offpeak daily data as Days To Go
+	 */
+	private void setDailyToGo(){
+		myOffpeakDailyData.setText(getOffpeakDailyMbToGo());
+	}
+
+	/**
+	 * Set offpeak daily data as Days So Far
+	 */
+	private void setDailySoFar(){
+		myOffpeakDailyData.setText(getOffpeakDailyMbSoFar());
+	}
+
+	/**
+	 * Show quota
+	 */
+	private void showQuota() {
+		myOffpeakQuota.setVisibility(View.VISIBLE);
+		myOffpeakUnit.setText(gigabyteUnit);
+	}
+
+	/**
+	 * Hide quota
+	 */
+	private void hideQuota() {
+		myOffpeakQuota.setVisibility(View.GONE);
+		myOffpeakUnit.setText(percentUnit);
+	}
+	
+	/**
+	 * Set the color of number based on status of offpeak usage
+	 */
+	private void setNumberColor() {
+		// Set text color based on alert
+		if (isCurrentOffpeakShaped()){
+			myOffpeakData.setTextColor(usageOverColor);
+			myOffpeakQuota.setTextColor(usageOverColor);
+			myOffpeakUnit.setTextColor(usageOverColor);
+		}
+		else if (isOffpeakUsageOver()){
+			myOffpeakData.setTextColor(usageAlertColor);
+			myOffpeakQuota.setTextColor(usageAlertColor);
+			myOffpeakUnit.setTextColor(usageAlertColor);
+		}
+		else {
+			myOffpeakData.setTextColor(textColor);
+			myOffpeakQuota.setTextColor(textColor);
+			myOffpeakUnit.setTextColor(textColor);
+		}
+	}
 }

@@ -355,6 +355,10 @@ public class PeakStatsViewPort extends AccountHelper {
 	 */
 	private void setNumberColor() {
 		// Set text color based on alert
+		if (isCurrentPeakShaped()){
+			myPeakNumberData.setTextColor(usageOverColor);
+			myPeakNumberUnit.setTextColor(usageOverColor);
+		}
 		if (isPeakUsageOver()){
 			myPeakNumberData.setTextColor(usageAlertColor);
 			myPeakNumberUnit.setTextColor(usageAlertColor);
