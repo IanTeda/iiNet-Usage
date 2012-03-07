@@ -7,7 +7,6 @@ import android.graphics.Typeface;
 import android.widget.TextView;
 import au.id.teda.iinetusage.phone.R;
 import au.id.teda.iinetusage.phone.helper.AccountHelper;
-import au.id.teda.iinetusage.phone.helper.PreferenceHelper;
 
 public class PeakStatsViewPort extends AccountHelper {
 	

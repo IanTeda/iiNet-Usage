@@ -220,12 +220,12 @@ public class OffpeakStatsViewLand extends AccountHelper {
 		// Check if peak to go is set
 		if (isToGoSet()){
 			// Set peak data as to go
-			myOffpeakData.setText(getOffpeakDataRemainingGb());
+			myOffpeakData.setText(getOffpeakGbToGo());
 		} 
 		// Else So Far must be set
 		else {
 			// Set peak data as used
-			myOffpeakData.setText(getOffpeakDataUsedGb());
+			myOffpeakData.setText(getOffpeakGbSoFar());
 		}
 		
 	}
@@ -240,12 +240,12 @@ public class OffpeakStatsViewLand extends AccountHelper {
 		// Check if peak to go is set
 		if (isToGoSet()){
 			// Set peak data as to go
-			myOffpeakData.setText(getOffpeakDataRemainingPercent());
+			myOffpeakData.setText(getOffpeakPercentToGo());
 		} 
 		// Else So Far must be set
 		else {
 			// Set peak data as used
-			myOffpeakData.setText(getOffpeakDataUsedPercent());
+			myOffpeakData.setText(getOffpeakPercentSoFar());
 		}
 	}
 	
@@ -253,14 +253,14 @@ public class OffpeakStatsViewLand extends AccountHelper {
 	 * Set peak daily data as Days To Go
 	 */
 	private void setOffpeakDailyToGo(){
-		myOffpeakDailyData.setText(getOffpeakDailyDataSuggestedMb());
+		myOffpeakDailyData.setText(getOffpeakDailyMbToGo());
 	}
 	
 	/**
 	 * Set peak daily data as Days So Far
 	 */
 	private void setOffpeakDailySoFar(){
-		myOffpeakDailyData.setText(getOffpeakDailyDataUsedMb());
+		myOffpeakDailyData.setText(getOffpeakDailyMbSoFar());
 	}
 	
 	/**

@@ -162,16 +162,16 @@ public class MainActivity extends ActionbarHelperActivity {
     		myPeakStatsViewPort.switchPeakView();
     		break;
     	case R.id.offpeak_number_button:
-    		myOffpeakStatsViewPort.switchUnitNumberBlock();
+    		myOffpeakStatsViewPort.switchNumberUnit();
     		break;
     	case R.id.offpeak_percent_used_remaining_button:
-    		myOffpeakStatsViewPort.switchFocusPercentBlock();
+    		myOffpeakStatsViewPort.switchFocusNumber();
     		break;
     	case R.id.offpeak_average_data_used_remaining_button:
-    		myOffpeakStatsViewPort.switchFocusDailyBlock();
+    		myOffpeakStatsViewPort.switchFocusDaily();
     		break;
     	case R.id.offpeak_data_used_remaining_button:
-    		myOffpeakStatsViewPort.switchFocusDataBlock();
+    		myOffpeakStatsViewPort.switchFocusData();
     		break;
     	case R.id.offpeak_data_title_button:
     		myOffpeakStatsViewPort.switchOffpeakView();

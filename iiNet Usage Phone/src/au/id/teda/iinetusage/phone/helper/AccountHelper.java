@@ -387,7 +387,7 @@ public class AccountHelper extends AccountStatusHelper {
 	 * Method for getting offpeak data used as a percent value
 	 * @return string value of percentage of offpeak data used
 	 */
-	public String getOffpeakDataUsedPercent(){
+	public String getOffpeakPercentSoFar(){
 		// Check to see if peak data and quota is set
 		if (isCurrentOffpeakUsedSet() && isOffpeakQuotaSet()){
 			
@@ -445,7 +445,7 @@ public class AccountHelper extends AccountStatusHelper {
 	 * Method for getting off peak data remaining as a percent value
 	 * @return string value of percentage of off peak data remaining
 	 */
-	public String getOffpeakDataRemainingPercent(){
+	public String getOffpeakPercentToGo(){
 		// Check to see if peak data and quota is set
 		if (isCurrentOffpeakUsedSet() && isOffpeakQuotaSet()){
 			
@@ -501,7 +501,7 @@ public class AccountHelper extends AccountStatusHelper {
 	 * Method for getting off peak data used in Gigabytes
 	 * @return string value of off peak data used to date in Gb
 	 */
-	public String getOffpeakDataRemainingGb(){
+	public String getOffpeakGbToGo(){
 		if (isCurrentOffpeakUsedSet()){
 			
 			// Get peak data used in Gb
@@ -555,7 +555,7 @@ public class AccountHelper extends AccountStatusHelper {
 	 * Method for getting off peak data used in Megabytes
 	 * @return string value of off peak data used to date in Mb
 	 */
-	public String getOffpeakDataRemainingMb(){
+	public String getOffpeakMbToGo(){
 		if (isCurrentOffpeakUsedSet()){
 			
 			// Get peak data used in Mb
@@ -603,7 +603,7 @@ public class AccountHelper extends AccountStatusHelper {
 	 * Method for getting off peak data remaining in Gigabytes
 	 * @return string value of off peak data used to date in Gb
 	 */
-	public String getOffpeakDataUsedGb(){
+	public String getOffpeakGbSoFar(){
 		if (isCurrentOffpeakUsedSet()){
 			
 			// Get peak data used in Gb
@@ -645,7 +645,7 @@ public class AccountHelper extends AccountStatusHelper {
 	 * Method for getting off peak data remaining in Megabytes
 	 * @return string value of off peak data used to date in Mb
 	 */
-	public String getOffpeakDataUsedMb(){
+	public String getOffpeakMbSoFar(){
 		if (isCurrentOffpeakUsedSet()){
 			
 			// Get peak data used in Mb
@@ -693,7 +693,7 @@ public class AccountHelper extends AccountStatusHelper {
 	 * Method for getting off peak daily data remaining in Megabytes
 	 * @return string value of off peak data used to date in Mb
 	 */
-	public String getOffpeakDailyDataUsedMb(){
+	public String getOffpeakDailyMbSoFar(){
 		if (isCurrentOffpeakUsedSet() && isCurrentDaysSoFarSet()){
 			
 			// Get peak data used in Mb
@@ -753,7 +753,7 @@ public class AccountHelper extends AccountStatusHelper {
 	 * Method for getting off peak data used in Megabytes
 	 * @return string value of off peak data used to date in Mb
 	 */
-	public String getOffpeakDailyDataSuggestedMb(){
+	public String getOffpeakDailyMbToGo(){
 		if (isCurrentOffpeakUsedSet() && isCurrentDaysToGoSet()){
 			
 			// Get peak data used in Mb
