@@ -47,8 +47,13 @@ public class PeakStatsViewLand extends AccountHelper {
 	private final TextView myPeakTitle;
 	
 	// String object for peak title
-	private final String peakToGoTitle;
-	private final String peakSoFarTitle;
+	private final String peakTitleToGo;
+	private final String peakTitleSoFar;
+	
+	// Color values for usage alerts
+	private final int usageAlertColor;
+	private final int usageOverColor;
+	private final int textColor;
 	
 	
 	/**
@@ -90,8 +95,13 @@ public class PeakStatsViewLand extends AccountHelper {
 		
 		// Initialise peak title TextView objects
 		myPeakTitle = (TextView) myActivity.findViewById(R.id.dashboard_landscape_peak_title);
-		peakToGoTitle = myActivity.getString(R.string.peak_land_toGo);
-		peakSoFarTitle = myActivity.getString(R.string.peak_land_soFar);;
+		peakTitleToGo = myActivity.getString(R.string.peak_land_toGo);
+		peakTitleSoFar = myActivity.getString(R.string.peak_land_soFar);
+		
+		// Initialise colours
+		usageAlertColor = myActivity.getResources().getColor(R.color.usage_alert_color);
+		usageOverColor = myActivity.getResources().getColor(R.color.usage_over_color);
+		textColor = myActivity.getResources().getColor(R.color.application_text_color);
 		
 		// Set type face custom font to number
 		myPeakData.setTypeface(myFontNumber);
@@ -114,7 +124,7 @@ public class PeakStatsViewLand extends AccountHelper {
 		setPeakPeriod();
 		
 		// Set peak view
-		setPeakDailyToGo();
+		setDailyToGo();
 		
 	}
 	
@@ -125,15 +135,15 @@ public class PeakStatsViewLand extends AccountHelper {
 		// Check if to go is set
 		if (isToGoSet()){
 			// Switch to so far
-			myPeakTitle.setText(peakSoFarTitle);
-			setPeakDailySoFar();
+			setTitleSoFar();
+			setDailySoFar();
 			
 		}
 		// Else so far must be set
 		else {
 			// Switch to to go
-			myPeakTitle.setText(peakToGoTitle);
-			setPeakDailyToGo();
+			setTitleToGo();
+			setDailyToGo();
 			
 		}
 		
@@ -148,7 +158,7 @@ public class PeakStatsViewLand extends AccountHelper {
 			setPeakPercent();
 		}
 	}
-	
+
 	/**
 	 * Switch between percent and Giga Byte
 	 */
@@ -174,7 +184,7 @@ public class PeakStatsViewLand extends AccountHelper {
 		String currentTitle = (String) myPeakTitle.getText();
 			
 		// Check if current unit string matches Giga byte unit string stored in xml
-		if (currentTitle == peakToGoTitle){
+		if (currentTitle == peakTitleToGo){
 			// Looks like it is so return true
 			return true;
 		}
@@ -199,7 +209,7 @@ public class PeakStatsViewLand extends AccountHelper {
 			// Looks like it is so return true
 			return true;
 		}
-		// Must be Gigabyte unit
+		// Must be Giga byte unit
 		else {
 			// So return false
 			return false;
@@ -211,58 +221,49 @@ public class PeakStatsViewLand extends AccountHelper {
 	 */
 	private void setPeakGb(){
 		
-		myPeakQuota.setVisibility(View.VISIBLE);
-		myPeakUnit.setText(gigabyteUnit);
+		// We need to show quota for Gb
+		showQuota();
 		
 		// Set peak GB quota
-		myPeakQuota.setText(getPeakQuotaStringGBLand());
+		setQuota();
 		
 		// Check if peak to go is set
 		if (isToGoSet()){
 			// Set peak data as to go
-			myPeakData.setText(getPeakGbToGo());
+			setGbToGo();
 		} 
 		// Else So Far must be set
 		else {
 			// Set peak data as used
-			myPeakData.setText(getPeakGbSoFar());
+			setGbSoFar();
 		}
 		
+		// Set acolor based on status
+		setNumberColor();
+		
 	}
-	
+
 	/**
 	 * Set peak data to percent
 	 */
 	private void setPeakPercent(){
-		myPeakQuota.setVisibility(View.GONE);
-		myPeakUnit.setText(percentUnit);
+		
+		// Don't need the quota for percent so hide it
+		hideQuota();
 		
 		// Check if peak to go is set
 		if (isToGoSet()){
-			// Set peak data as to go
-			myPeakData.setText(getPeakPercentToGo());
+			setPercentToGo();
 		} 
 		// Else So Far must be set
 		else {
-			// Set peak data as used
-			myPeakData.setText(getPeakPercentSoFar());
+			setPercentSoFar();
 		}
+		
+		// Set acolor based on status
+		setNumberColor();
 	}
-	
-	/**
-	 * Set peak daily data as Days To Go
-	 */
-	private void setPeakDailyToGo(){
-		myPeakDailyData.setText(getPeakDailyMbToGo());
-	}
-	
-	/**
-	 * Set peak daily data as Days So Far
-	 */
-	private void setPeakDailySoFar(){
-		myPeakDailyData.setText(getPeakDailyMbSoFar());
-	}
-	
+
 	/**
 	 * Set current peak status
 	 */
@@ -270,15 +271,29 @@ public class PeakStatsViewLand extends AccountHelper {
 		// Check if peak is shaped
 		if (isCurrentPeakShaped()){
 			// It is so set shaped
-			myStatus.setText(myActivity.getString(R.string.peak_offpeak_status_shaped));
-			myStatus.setTextColor(alertColor);
+			setStatusShaped();
 		}
 		// Else we are unshaped
 		else {
 			// So set status unshaped
-			myStatus.setText(myActivity.getString(R.string.peak_offpeak_status_unshaped));
-			myStatus.setTextColor(normalColor);
+			setStatusUnshaped();
 		}
+	}
+
+	/**
+	 * Set peak status as unshaped
+	 */
+	private void setStatusUnshaped() {
+		myStatus.setText(myActivity.getString(R.string.peak_offpeak_status_unshaped));
+		myStatus.setTextColor(normalColor);
+	}
+
+	/**
+	 * Set peak status as shaped
+	 */
+	private void setStatusShaped() {
+		myStatus.setText(myActivity.getString(R.string.peak_offpeak_status_shaped));
+		myStatus.setTextColor(alertColor);
 	}
 	
 	/**
@@ -286,6 +301,102 @@ public class PeakStatsViewLand extends AccountHelper {
 	 */
 	private void setPeakPeriod(){
 		myPeakPeriod.setText(getPeakPeriodLand());
+	}
+
+	/**
+	 * Set title as to go
+	 */
+	private void setTitleToGo() {
+		myPeakTitle.setText(peakTitleToGo);
+	}
+
+	/**
+	 * Set title as so far
+	 */
+	private void setTitleSoFar() {
+		myPeakTitle.setText(peakTitleSoFar);
+	}
+
+	/**
+	 * Set Giga Bytes to go
+	 */
+	private void setGbToGo() {
+		myPeakData.setText(getPeakGbToGo());
+	}
+
+	/**
+	 * Set Giga Bytes so far
+	 */
+	private void setGbSoFar() {
+		myPeakData.setText(getPeakGbSoFar());
+	}
+
+	/**
+	 * 
+	 */
+	private void setQuota() {
+		myPeakQuota.setText(getPeakQuotaStringGBLand());
+	}
+
+	/**
+	 * Set percent to go
+	 */
+	private void setPercentToGo() {
+		myPeakData.setText(getPeakPercentToGo());
+	}
+
+	/**
+	 * Set percent so far
+	 */
+	private void setPercentSoFar() {
+		myPeakData.setText(getPeakPercentSoFar());
+	}
+
+	/**
+	 * Set peak daily data as Days To Go
+	 */
+	private void setDailyToGo(){
+		myPeakDailyData.setText(getPeakDailyMbToGo());
+	}
+
+	/**
+	 * Set peak daily data as Days So Far
+	 */
+	private void setDailySoFar(){
+		myPeakDailyData.setText(getPeakDailyMbSoFar());
+	}
+
+	/**
+	 * Show quota
+	 */
+	private void showQuota() {
+		myPeakQuota.setVisibility(View.VISIBLE);
+		myPeakUnit.setText(gigabyteUnit);
+	}
+
+	/**
+	 * Hide quota
+	 */
+	private void hideQuota() {
+		myPeakQuota.setVisibility(View.GONE);
+		myPeakUnit.setText(percentUnit);
+	}
+	
+	/**
+	 * Set the color of number based on status of peak usage
+	 */
+	private void setNumberColor() {
+		// Set text color based on alert
+		if (isPeakUsageOver()){
+			myPeakData.setTextColor(usageAlertColor);
+			myPeakQuota.setTextColor(usageAlertColor);
+			myPeakUnit.setTextColor(usageAlertColor);
+		}
+		else {
+			myPeakData.setTextColor(textColor);
+			myPeakQuota.setTextColor(textColor);
+			myPeakUnit.setTextColor(textColor);
+		}
 	}
 
 }
