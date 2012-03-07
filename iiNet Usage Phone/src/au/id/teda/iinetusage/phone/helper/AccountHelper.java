@@ -357,7 +357,7 @@ public class AccountHelper extends AccountStatusHelper {
 	 * Method for getting peak data used as a percent value
 	 * @return string value of percentage of peak data used
 	 */
-	public String getPeakDataUsedPercent(){
+	public String getPeakPercentSoFar(){
 		// Check to see if peak data and quota is set
 		if (isCurrentPeakUsedSet() && isPeakQuotaSet()){
 			
@@ -416,7 +416,7 @@ public class AccountHelper extends AccountStatusHelper {
 	 * Method for getting peak data remaining as a percent value
 	 * @return string value of percentage of peak data remaining
 	 */
-	public String getPeakDataRemainingPercent(){
+	public String getPeakPercentToGo(){
 		// Check to see if peak data and quota is set
 		if (isCurrentPeakUsedSet() && isPeakQuotaSet()){
 			
@@ -474,7 +474,7 @@ public class AccountHelper extends AccountStatusHelper {
 	 * Method for getting peak data used in Gigabytes
 	 * @return string value of peak data used to date in Gb
 	 */
-	public String getPeakDataRemainingGb(){
+	public String getPeakGbToGo(){
 		if (isCurrentPeakUsedSet()){
 			
 			// Get peak data used in Gb
@@ -528,7 +528,7 @@ public class AccountHelper extends AccountStatusHelper {
 	 * Method for getting peak data used in Megabytes
 	 * @return string value of peak data used to date in Mb
 	 */
-	public String getPeakDataRemainingMb(){
+	public String getPeakMbToGo(){
 		if (isCurrentPeakUsedSet()){
 			
 			// Get peak data used in Mb
@@ -582,7 +582,7 @@ public class AccountHelper extends AccountStatusHelper {
 	 * Method for getting peak data remaining in Gigabytes
 	 * @return string value of peak data used to date in Gb
 	 */
-	public String getPeakDataUsedGb(){
+	public String getPeakGbSoFar(){
 		if (isCurrentPeakUsedSet()){
 			
 			// Get peak data used in Gb
@@ -624,7 +624,7 @@ public class AccountHelper extends AccountStatusHelper {
 	 * Method for getting peak data remaining in Megabytes
 	 * @return string value of peak data used to date in Mb
 	 */
-	public String getPeakDataUsedMb(){
+	public String getPeakMbSoFar(){
 		if (isCurrentPeakUsedSet()){
 			
 			// Get peak data used in Mb
@@ -666,7 +666,7 @@ public class AccountHelper extends AccountStatusHelper {
 	 * Method for getting peak daily data remaining in Megabytes
 	 * @return string value of peak data used to date in Mb
 	 */
-	public String getPeakDailyDataUsedMb(){
+	public String getPeakDailyMbSoFar(){
 		if (isCurrentPeakUsedSet() && isCurrentDaysSoFarSet()){
 			
 			// Get peak data used in Mb
@@ -720,7 +720,7 @@ public class AccountHelper extends AccountStatusHelper {
 	 * Method for getting peak data used in Megabytes
 	 * @return string value of peak data used to date in Mb
 	 */
-	public String getPeakDailyDataSuggestedMb(){
+	public String getPeakDailyMbToGo(){
 		if (isCurrentPeakUsedSet() && isCurrentDaysToGoSet()){
 			
 			// Get peak data used in Mb

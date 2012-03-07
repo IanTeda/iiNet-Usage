@@ -147,16 +147,16 @@ public class MainActivity extends ActionbarHelperActivity {
     	// Switch cases for button clicks
     	switch (button.getId()) {
     	case R.id.peak_number_button:
-    		myPeakStatsViewPort.switchUnitNumberBlock();
+    		myPeakStatsViewPort.switchNumberUnit();
     		break;
     	case R.id.peak_percent_used_remaining_button:
-    		myPeakStatsViewPort.switchFocusPercentBlock();
+    		myPeakStatsViewPort.switchFocusNumber();
     		break;
     	case R.id.peak_average_data_used_remaining_button:
-    		myPeakStatsViewPort.switchFocusDailyBlock();
+    		myPeakStatsViewPort.switchFocusDaily();
     		break;
     	case R.id.peak_data_used_remaining_button:
-    		myPeakStatsViewPort.switchFocusDataBlock();
+    		myPeakStatsViewPort.switchFocusData();
     		break;
     	case R.id.peak_data_title_button:
     		myPeakStatsViewPort.switchPeakView();

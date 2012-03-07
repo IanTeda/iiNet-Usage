@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.widget.TextView;
 import au.id.teda.iinetusage.phone.R;
 import au.id.teda.iinetusage.phone.helper.AccountHelper;
@@ -13,7 +12,7 @@ import au.id.teda.iinetusage.phone.helper.PreferenceHelper;
 public class PeakStatsViewPort extends AccountHelper {
 	
 	// Static strings for debug tags
-	private static final String DEBUG_TAG = "iiNet Usage";
+	//private static final String DEBUG_TAG = "iiNet Usage";
 	//private static final String INFO_TAG = PeakStatsViewPort.class.getSimpleName();
 	
 	private final Context myActivityContext;
@@ -26,18 +25,18 @@ public class PeakStatsViewPort extends AccountHelper {
 	private final TextView myPeakPeriod;
 	
 	// TextView objects for Daily Average block
-	private final TextView myPeakDailyUsedTitle;
-	private final TextView myPeakDailySuggestedTitle;
+	private final TextView myPeakDailySoFar;
+	private final TextView myPeakDailyToGo;
 	private final TextView myPeakDailyData;
 	
 	// TextView objects for Data block
-	private final TextView myPeakDataUsedTitle;
-	private final TextView myPeakDataRemainingTitle;
+	private final TextView myPeakDataSoFar;
+	private final TextView myPeakDataToGo;
 	private final TextView myPeakDataData;
 	
 	// TextView objects for Percent Used block
-	private final TextView myPeakPercentUsedTitle;
-	private final TextView myPeakPercentRemainingTitle;
+	private final TextView myPeakNumberSoFar;
+	private final TextView myPeakNumberToGo;
 	private final TextView myPeakNumberData;
 	private final TextView myPeakNumberUnit;
 	
@@ -51,8 +50,6 @@ public class PeakStatsViewPort extends AccountHelper {
 	private final int usageAlertColor;
 	private final int usageOverColor;
 	private final int textColor;
-	
-	private static final PreferenceHelper mySettings = new PreferenceHelper();
 	
 	/**
 	 * Class constructor
@@ -73,18 +70,18 @@ public class PeakStatsViewPort extends AccountHelper {
 		myPeakPeriod = (TextView) myActivity.findViewById(R.id.peak_time);
 		
 		// Initialise Daily Average TextView objects
-		myPeakDailyUsedTitle = (TextView) myActivity.findViewById(R.id.peak_daily_used);
-		myPeakDailySuggestedTitle = (TextView) myActivity.findViewById(R.id.peak_daily_suggested);
+		myPeakDailySoFar = (TextView) myActivity.findViewById(R.id.peak_daily_used);
+		myPeakDailyToGo = (TextView) myActivity.findViewById(R.id.peak_daily_suggested);
 		myPeakDailyData = (TextView) myActivity.findViewById(R.id.peak_daily_data);
 
 		// Initialise Data TextView objects
-		myPeakDataUsedTitle = (TextView) myActivity.findViewById(R.id.peak_data_used);
-		myPeakDataRemainingTitle = (TextView) myActivity.findViewById(R.id.peak_data_remaining);
+		myPeakDataSoFar = (TextView) myActivity.findViewById(R.id.peak_data_used);
+		myPeakDataToGo = (TextView) myActivity.findViewById(R.id.peak_data_remaining);
 		myPeakDataData = (TextView) myActivity.findViewById(R.id.peak_data_data);
 		
 		// Initialise Percent TextView objects
-		myPeakPercentUsedTitle = (TextView) myActivity.findViewById(R.id.peak_percent_used);
-		myPeakPercentRemainingTitle = (TextView) myActivity.findViewById(R.id.peak_percent_remaining);
+		myPeakNumberSoFar = (TextView) myActivity.findViewById(R.id.peak_percent_used);
+		myPeakNumberToGo = (TextView) myActivity.findViewById(R.id.peak_percent_remaining);
 		myPeakNumberData = (TextView) myActivity.findViewById(R.id.peak_number);
 		myPeakNumberUnit = (TextView) myActivity.findViewById(R.id.peak_number_unit);
 		
@@ -107,107 +104,269 @@ public class PeakStatsViewPort extends AccountHelper {
 	
 	public void loadView(){
 		
-		// Set number block to percent used
-		myPeakNumberData.setText(getPeakDataUsedPercent());
+		// Set peak number
+		setNumberUnitGb();
+		setNumberGbSoFar();
+		setNumberColor();
 		
 		// Set peak data to used
-		myPeakDataData.setText(getPeakDataUsedMb());
+		setFocusDataSoFar();
+		setDataSoFar();
 		
 		// Set text to average daily usage
-		myPeakDailyData.setText(getPeakDailyDataUsedMb());
+		setFocusDailySoFar();
+		setDailySoFar();
 		
 		// Set TextView peak period
-		myPeakPeriod.setText(getPeakPeriod());
+		setPeakPeriod();
 	}
-	
+
 	/**
 	 * Switch focus of the peak view
 	 */
 	public void switchPeakView(){
 		
 		// Check if data focus is on used
-		if(isDataUsedFocus()){
+		if(isDataFocusSoFar()){
 			// Switch focus to remaining
-			setPeakRemaining();
+			setToGo();
 		}
 		// Else data focus is on remaining
 		else {
 			// Switch focus to used
-			setPeakUsed();
+			setSoFar();
 		}
 	}
 	
 	/**
-	 * Set focus of peak view to remaining
+	 * Switch unit of number
 	 */
-	private void setPeakRemaining(){
-		setPercentRemaining();
-		setDataRemaining();
-		setDailySuggested();
-	}
-	
-	/**
-	 * Set focus of peak view to used
-	 */
-	private void setPeakUsed(){
-		setPercentUsed();
-		setDataUsed();
-		setDailyUsed();
-	}
-	
-	/**
-	 * Switch unit of number block
-	 */
-	public void switchUnitNumberBlock(){
+	public void switchNumberUnit(){
 		
 		// Check to see if percent unit is shown
 		if (isPercentUnitShown()){
 			// It is so switch to Giga byte unit
-			setUnitGigaByte();
-			
+			setNumberUnitGb();
+			setNumberGb();
 		}
 		// Else it must be Giga byte unit
 		else{
 			// So change to percent unit
-			setUnitPercent();
+			setNumberUnitPercent();
+			setNumberPercent();
 		}
+	}
+
+	/**
+	 * Switch the focus of Percent block
+	 */
+	public void switchFocusNumber(){
+		// Check if so far has focus
+		if (isNumberFocusSoFar()){
+			// Switch focus to remaining
+			setFocusNumberToGo();
+			setNumberToGo();
+		}
+		// Else it must be in Gb so switch focus to percent
+		else{
+			// Switch focus to used
+			setFocusNumberSoFar();
+			setNumberSoFar();
+		}
+	}
+
+	/**
+	 * Switch the focus of Data block
+	 */
+	public void switchFocusData(){
+		// Check if so far ha focus
+		if (isDataFocusSoFar()){
+			// Set data focus as to go
+			setFocusDataToGo();
+			setDataToGo();
+		}
+		// Else remaining has focus
+		else{
+			// Set data focus as so far
+			setFocusDataSoFar();
+			setDataSoFar();
+		}
+	}
+
+	/**
+	 * Switch the focus of Daily Data
+	 */
+	public void switchFocusDaily(){
+		// Check daily is set as so far
+		if (isDailyFocusSoFar()){
+			// Set daily focus as to go
+			setFocusDailyToGo();
+			setDailyToGo();
+		}
+		// Else remaining has focus
+		else{
+			// Set daily focus as so far
+			setFocusDailySoFar();
+			setDailySoFar();
+		}
+	}
+
+	/**
+	 * Set period (time schedule) for peak usage
+	 */
+	private void setPeakPeriod() {
+		myPeakPeriod.setText(getPeakPeriod());
+	}
+
+	/**
+	 * Set focus of peak view to remaining
+	 */
+	private void setToGo(){
+		// Set number as to go
+		setFocusNumberToGo();
+		setNumberToGo();
+		
+		// Set data as to go
+		setFocusDataToGo();
+		setDataToGo();
+		
+		// Set daily as to go
+		setFocusDailyToGo();
+		setDailyToGo();
+		
+		// Set color of number
+		setNumberColor();
+	}
+
+	/**
+	 * Set focus of peak view to used
+	 */
+	private void setSoFar(){
+		// Set number as so far
+		setFocusNumberSoFar();
+		setNumberSoFar();
+		
+		// Set data as so far
+		setFocusDataSoFar();
+		setDataSoFar();
+		
+		// Set daily as so far
+		setFocusDailySoFar();
+		setDailySoFar();
+		
+		// Set color of number
+		setNumberColor();
 	}
 
 	/**
 	 * Set unit number block to percent
 	 */
-	private void setUnitPercent() {
-		myPeakNumberUnit.setText(percentUnit);
+	private void setNumberPercent() {
 		
-		// Check if it is used or remaining
-		if (isPercentUsedFocus()){
-			// Set Gb value to Used TextView
-			myPeakNumberData.setText(getPeakDataUsedPercent());
+		// Set number unit as percent
+		setNumberUnitPercent();
+		
+		// Check if number is set as so far
+		if (isNumberFocusSoFar()){
+			// It is so set as percent so far
+			setNumberPercentSoFar();
 		} 
+		// Else number must be set as to go
 		else {
-			// Set Gb value to TextView
-			myPeakNumberData.setText(getPeakDataRemainingPercent());
+			// So set number as percent to go
+			setNumberPercentToGo();
 		}
+		
+		// Set color of number
+		setNumberColor();
 	}
 
 	/**
-	 * Set unit number block to Giga Byte
+	 * Set number block to Giga Byte
 	 */
-	private void setUnitGigaByte() {
-
-		myPeakNumberUnit.setText(gigabyteUnit);
+	private void setNumberGb() {
+	
+		// Set number unit as Giga Bytes
+		setNumberUnitGb();
 		
-		// Check if it is used or remaining
-		if (isPercentUsedFocus()){
-			// Set Gb value to Used TextView
-			myPeakNumberData.setText(getPeakDataUsedGb());
+		// Check if number is set as so far
+		if (isNumberFocusSoFar()){
+			// It is so set number Giga Bytes as so far
+			setNumberGbSoFar();
 		} 
+		// Else number must be set as to go
 		else {
-			// Set Gb value to TextView
-			myPeakNumberData.setText(getPeakDataRemainingGb());
+			// So set number GB as to go
+			setNumberGbToGo();
+		}
+		
+		// Set color of number
+		setNumberColor();
+	}
+
+	/**
+	 * Set focus of percent block to remaining
+	 */
+	private void setNumberToGo() {
+		
+		// Change color of title block as to go
+		setFocusNumberToGo();
+		
+		// Check to see if percent unit is shown
+		if (isPercentUnitShown()){
+			// It is so set number as percent to go
+			setNumberPercentToGo();
+		}
+		// Else Giga Bytes must be showing
+		else {
+			// So set number as Gigabytes to go
+			setNumberGbToGo();
+		}
+		
+		// Set color of number
+		setNumberColor();
+		
+	}
+
+	/**
+	 * Set focus of number block as so far
+	 */
+	private void setNumberSoFar() {
+		
+		// Change color of title blocks as so far
+		setFocusNumberSoFar();
+		
+		// Check to see if percent unit is shown
+		if (isPercentUnitShown()){
+			// It is so set number as percent so far
+			setNumberPercentSoFar();
+		}
+		// Else Giga byte must be showing
+		else {
+			// So set number as Giga Bytes so far
+			setNumberGbSoFar();
+		}
+		
+		// Set color of number
+		setNumberColor();
+	}
+
+	/**
+	 * Set the color of number based on status of peak usage
+	 */
+	private void setNumberColor() {
+		// Set text color based on alert
+		if (isPeakUsageOver()){
+			myPeakNumberData.setTextColor(usageAlertColor);
+			myPeakNumberUnit.setTextColor(usageAlertColor);
+		}
+		else {
+			myPeakNumberData.setTextColor(textColor);
+			myPeakNumberUnit.setTextColor(textColor);
+	
 		}
 	}
-	
+
 	/**
 	 * Check if the Percent Used title is in focus
 	 * 
@@ -223,7 +382,7 @@ public class PeakStatsViewPort extends AccountHelper {
 			// Looks like it is so return true
 			return true;
 		}
-		// Must be Gigabyte unit
+		// Must be Giga byte unit
 		else {
 			// So return false
 			return false;
@@ -231,78 +390,15 @@ public class PeakStatsViewPort extends AccountHelper {
 		
 		
 	}
-	
-	
-	/**
-	 * Switch the focus of Percent block
-	 */
-	public void switchFocusPercentBlock(){
-		// Check to see if used has focus
-		if (isPercentUsedFocus()){
-			// Switch focus to remaining
-			setPercentRemaining();
-		}
-		// Else it must be in Gb so switch focus to percent
-		else{
-			// Switch focus to used
-			setPercentUsed();
-		}
-	}
 
-	/**
-	 * Set focus of percent block to used
-	 */
-	private void setPercentUsed() {
-		myPeakPercentUsedTitle.setTextColor(focusColor);
-		myPeakPercentRemainingTitle.setTextColor(alternateColor);
-		
-		// Check to see if percent unit is shown
-		if (isPercentUnitShown()){
-			// Set perecent value to remaining TextView
-			myPeakNumberData.setText(getPeakDataUsedPercent());
-		}
-		else {
-			// Set Gb value for remaining
-			myPeakNumberData.setText(getPeakDataUsedGb());
-		}
-		
-		// Set text color based on alert
-		if (isPeakUsageOver()){
-			myPeakNumberData.setTextColor(usageAlertColor);
-		}
-		else {
-			myPeakNumberData.setTextColor(textColor);
-
-		}
-	}
-
-	/**
-	 * Set focus of percent block to remaining
-	 */
-	private void setPercentRemaining() {
-		myPeakPercentUsedTitle.setTextColor(alternateColor);
-		myPeakPercentRemainingTitle.setTextColor(focusColor);
-		
-		// Check to see if percent unit is shown
-		if (isPercentUnitShown()){
-			// Set perecent value to remaining TextView
-			myPeakNumberData.setText(getPeakDataRemainingPercent());
-		}
-		else {
-			// Set Gb value for remaining
-			myPeakNumberData.setText(getPeakDataRemainingGb());
-		}
-		
-	}
-	
 	/**
 	 * Check if the Percent Used title is in focus
 	 * 
 	 * @return true if color matches XML value
 	 */
-	public boolean isPercentUsedFocus(){
+	public boolean isNumberFocusSoFar(){
 		// Get current color value of TextView
-		int currentColor = myPeakPercentUsedTitle.getCurrentTextColor();
+		int currentColor = myPeakNumberSoFar.getCurrentTextColor();
 		
 		// Check current colour against XML defined focus color
 		if (currentColor == focusColor){
@@ -315,54 +411,15 @@ public class PeakStatsViewPort extends AccountHelper {
 			return false;
 		}
 	}
-	
-	
-	/**
-	 * Switch the focus of Data block
-	 */
-	public void switchFocusDataBlock(){
-		// Check if used has focus
-		if (isDataUsedFocus()){
-			// Switch focus to data remaining
-			setDataRemaining();
-		}
-		// Else remaining has focus
-		else{
-			// Switch focus to used
-			setDataUsed();
-		}
-	}
 
-	/**
-	 * Set data block focus to used
-	 */
-	private void setDataUsed() {
-		myPeakDataUsedTitle.setTextColor(focusColor);
-		myPeakDataRemainingTitle.setTextColor(alternateColor);
-		
-		// Set peak data to used
-		myPeakDataData.setText(getPeakDataUsedMb());
-	}
-
-	/**
-	 * Set data block focus to remaining
-	 */
-	private void setDataRemaining() {
-		myPeakDataUsedTitle.setTextColor(alternateColor);
-		myPeakDataRemainingTitle.setTextColor(focusColor);
-		
-		// Set peak data to remaining
-		myPeakDataData.setText(getPeakDataRemainingMb());
-	}
-	
 	/**
 	 * Check if the Data title is in focus
 	 * 
 	 * @return true if color matches XML value
 	 */
-	public boolean isDataUsedFocus(){
+	public boolean isDataFocusSoFar(){
 		// Get current color value of TextView
-		int currentColor = myPeakDataUsedTitle.getCurrentTextColor();
+		int currentColor = myPeakDataSoFar.getCurrentTextColor();
 		
 		// Check current colour against XML defined focus color
 		if (currentColor == focusColor){
@@ -375,54 +432,15 @@ public class PeakStatsViewPort extends AccountHelper {
 			return false;
 		}
 	}
-	
-	/**
-	 * Switch the focus of Daily Data block
-	 */
-	public void switchFocusDailyBlock(){
-		// Check if daily used has focus
-		if (isDailyUsedFocus()){
-			
-			// Switch focus to suggested usage
-			setDailySuggested();
-		}
-		else{
-			
-			// Switch focus to av daily use
-			setDailyUsed();
-		}
-	}
 
-	/**
-	 * Set daily block focus to used
-	 */
-	private void setDailyUsed() {
-		myPeakDailyUsedTitle.setTextColor(focusColor);
-		myPeakDailySuggestedTitle.setTextColor(alternateColor);
-		
-		// Set text to average daily usage
-		myPeakDailyData.setText(getPeakDailyDataUsedMb());
-	}
-
-	/**
-	 * Set daily block focus to suggested
-	 */
-	private void setDailySuggested() {
-		myPeakDailyUsedTitle.setTextColor(alternateColor);
-		myPeakDailySuggestedTitle.setTextColor(focusColor);
-		
-		// Set text to suggested usage
-		myPeakDailyData.setText(getPeakDailyDataSuggestedMb());
-	}
-	
 	/**
 	 * Check if the Daily Data title is in focus
 	 * 
 	 * @return true if color matches XML value
 	 */
-	public boolean isDailyUsedFocus(){
+	public boolean isDailyFocusSoFar(){
 		// Get current color value of TextView
-		int currentColor = myPeakDailyUsedTitle.getCurrentTextColor();
+		int currentColor = myPeakDailyToGo.getCurrentTextColor();
 		
 		// Check current colour against XML defined focus color
 		if (currentColor == focusColor){
@@ -434,6 +452,125 @@ public class PeakStatsViewPort extends AccountHelper {
 			// So return false (shaded)
 			return false;
 		}
+	}
+
+	/**
+	 * Set peak unit to Giga Byte
+	 */
+	private void setNumberUnitGb() {
+		myPeakNumberUnit.setText(gigabyteUnit);
+	}
+
+	/**
+	 * Set peak unit to percent
+	 */
+	private void setNumberUnitPercent() {
+		myPeakNumberUnit.setText(percentUnit);
+	}
+
+	/**
+	 * Set peak number to Giga Byte to go
+	 */
+	private void setNumberGbToGo() {
+		// Set Gb value to TextView
+		myPeakNumberData.setText(getPeakGbToGo());
+	}
+
+	/**
+	 * Set peak number to Giga Byte so far
+	 */
+	private void setNumberGbSoFar() {
+		myPeakNumberData.setText(getPeakGbSoFar());
+	}
+
+	/**
+	 * Set peak number to percent to go
+	 */
+	private void setNumberPercentToGo() {
+		myPeakNumberData.setText(getPeakPercentToGo());
+	}
+
+	/**
+	 * Set peak number to percent so far
+	 */
+	private void setNumberPercentSoFar() {
+		myPeakNumberData.setText(getPeakPercentSoFar());
+	}
+
+	/**
+	 * Set data block focus to used
+	 */
+	private void setDataSoFar() {
+		myPeakDataData.setText(getPeakMbSoFar());
+	}
+
+	/**
+	 * Set data block focus to remaining
+	 */
+	private void setDataToGo() {
+		myPeakDataData.setText(getPeakMbToGo());
+	}
+
+	/**
+	 * Set daily block as so far
+	 */
+	private void setDailySoFar() {
+		myPeakDailyData.setText(getPeakDailyMbSoFar());
+	}
+
+	/**
+	 * Set daily block as to go
+	 */
+	private void setDailyToGo() {
+		myPeakDailyData.setText(getPeakDailyMbToGo());
+	}
+
+	/**
+	 * Set focus of number as to go
+	 */
+	private void setFocusNumberToGo() {
+		myPeakNumberSoFar.setTextColor(alternateColor);
+		myPeakNumberToGo.setTextColor(focusColor);
+	}
+
+	/**
+	 * Set focus of number as so far
+	 */
+	private void setFocusNumberSoFar() {
+		myPeakNumberSoFar.setTextColor(focusColor);
+		myPeakNumberToGo.setTextColor(alternateColor);
+	}
+
+	/**
+	 * Set focus of data as to go
+	 */
+	private void setFocusDataToGo() {
+		myPeakDataSoFar.setTextColor(alternateColor);
+		myPeakDataToGo.setTextColor(focusColor);
+	}
+
+	/**
+	 * Set data focus as so far
+	 */
+	private void setFocusDataSoFar() {
+		myPeakDataSoFar.setTextColor(focusColor);
+		myPeakDataToGo.setTextColor(alternateColor);
+	}
+
+	/**
+	 * Set focus of daily data as to go
+	 */
+	private void setFocusDailyToGo() {
+		myPeakDailySoFar.setTextColor(alternateColor);
+		myPeakDailyToGo.setTextColor(focusColor);
+	}
+
+	/**
+	 * Set focus of daily data as so far
+	 */
+	private void setFocusDailySoFar() {
+		myPeakDailySoFar.setTextColor(focusColor);
+		myPeakDailyToGo.setTextColor(alternateColor);
 	}
 
 }

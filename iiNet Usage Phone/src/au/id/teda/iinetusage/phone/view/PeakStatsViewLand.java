@@ -220,12 +220,12 @@ public class PeakStatsViewLand extends AccountHelper {
 		// Check if peak to go is set
 		if (isToGoSet()){
 			// Set peak data as to go
-			myPeakData.setText(getPeakDataRemainingGb());
+			myPeakData.setText(getPeakGbToGo());
 		} 
 		// Else So Far must be set
 		else {
 			// Set peak data as used
-			myPeakData.setText(getPeakDataUsedGb());
+			myPeakData.setText(getPeakGbSoFar());
 		}
 		
 	}
@@ -240,12 +240,12 @@ public class PeakStatsViewLand extends AccountHelper {
 		// Check if peak to go is set
 		if (isToGoSet()){
 			// Set peak data as to go
-			myPeakData.setText(getPeakDataRemainingPercent());
+			myPeakData.setText(getPeakPercentToGo());
 		} 
 		// Else So Far must be set
 		else {
 			// Set peak data as used
-			myPeakData.setText(getPeakDataUsedPercent());
+			myPeakData.setText(getPeakPercentSoFar());
 		}
 	}
 	
@@ -253,14 +253,14 @@ public class PeakStatsViewLand extends AccountHelper {
 	 * Set peak daily data as Days To Go
 	 */
 	private void setPeakDailyToGo(){
-		myPeakDailyData.setText(getPeakDailyDataSuggestedMb());
+		myPeakDailyData.setText(getPeakDailyMbToGo());
 	}
 	
 	/**
 	 * Set peak daily data as Days So Far
 	 */
 	private void setPeakDailySoFar(){
-		myPeakDailyData.setText(getPeakDailyDataUsedMb());
+		myPeakDailyData.setText(getPeakDailyMbSoFar());
 	}
 	
 	/**

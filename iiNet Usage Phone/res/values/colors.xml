@@ -19,7 +19,7 @@
     <color name="application_h2_text_color">#FF5900</color>
     <color name="application_h2_text_alt_color">#90b9b9b9</color>
     <color name="application_text_highlight_color">#fffafa</color>
-    <color name="application_text_color">#ffffff</color>
+    <color name="application_text_color">#99ffffff</color>
 
     <!-- Phone dashboard alert -->
     <color name="alertbox_border_color">#CC3333</color>
