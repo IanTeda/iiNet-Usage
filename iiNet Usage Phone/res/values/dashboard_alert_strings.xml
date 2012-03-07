@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Alert box strings -->
+    <string name="alert_default">Alert</string>
+    <string name="alert_no_user_pass">No username or password set</string>
+    <string name="alert_no_user">No username set</string>
+    <string name="alert_no_pass">No password set</string>
+    <string name="alert_no_data">No data available</string>
+    <string name="alert_peak_usage">Peak usage alert</string>
+    <string name="alert_offpeak_usage">Offpeak usage alert</string>
+    <string name="alert_peak_offpeak_usage">Peak &amp; Offpeak usage alert</string>
+    <string name="alert_peak_quota">Peak quota over!</string>
+    <string name="alert_offpeak_quota">Offpeak quota over!</string>
+    <string name="alert_peak_offpeak_quota">Peak &amp; Offpeak quota over!</string>
+    
+    <!-- Button image content description -->
+    <string name="alert_close_contentDescription">Close alert</string>
+
+</resources>

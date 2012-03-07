@@ -16,7 +16,7 @@ import au.id.teda.iinetusage.phone.R;
 import au.id.teda.iinetusage.phone.async.RefreshUsageAsync;
 import au.id.teda.iinetusage.phone.prefs.PreferencesActivity;
 import au.id.teda.iinetusage.phone.view.AccountInfoView;
-import au.id.teda.iinetusage.phone.view.AlertboxView;
+import au.id.teda.iinetusage.phone.view.AlertView;
 import au.id.teda.iinetusage.phone.view.OffpeakStatsViewLand;
 import au.id.teda.iinetusage.phone.view.OffpeakStatsViewPort;
 import au.id.teda.iinetusage.phone.view.PeakStatsViewLand;
@@ -28,7 +28,7 @@ public class MainActivity extends ActionbarHelperActivity {
 	//private static final String DEBUG_TAG = "iiNet Usage";
 	//private static final String INFO_TAG = MainActivity.class.getSimpleName();
 	
-	private AlertboxView myAlertboxView;
+	private AlertView myAlertboxView;
 	
 	// Object for AccountInfoView
 	private AccountInfoView myAccountInfoView;
@@ -48,7 +48,7 @@ public class MainActivity extends ActionbarHelperActivity {
         setContentView(R.layout.dashboard);
 
         // Initialise common views
-		myAlertboxView = new AlertboxView(this);
+		myAlertboxView = new AlertView(this);
         
 		// If view is in portrait set reference to objects
 		if (isPortrait()) {
@@ -107,6 +107,7 @@ public class MainActivity extends ActionbarHelperActivity {
 		// Get current string value of the alert box
 		String alert = myAlertboxView.getAlert();
 		
+		/**
 		// Set action based on value of alertbox string
     	if ( alert == this.getString(R.string.alertbox_no_data)){
     		Toast.makeText(this, "Refersh data", Toast.LENGTH_SHORT).show();
@@ -117,6 +118,7 @@ public class MainActivity extends ActionbarHelperActivity {
     		Intent myUserPassIntent = new Intent(MainActivity.this, UserPassActivity.class);
 			startActivity(myUserPassIntent);
     	}
+    	**/
 		
 	}
 	

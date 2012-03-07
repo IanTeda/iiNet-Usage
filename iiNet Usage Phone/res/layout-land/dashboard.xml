@@ -16,13 +16,7 @@
         android:paddingLeft="@dimen/application_padding"
         android:paddingRight="@dimen/application_padding" >
 
-        <Button
-            android:id="@+id/alertbox_button"
-            style="@style/dashboard_alertbox"
-            android:layout_margin="5dp"
-            android:background="@drawable/dashboard_alertbox"
-            android:onClick="onClickAlertboxButton"
-            android:text="@string/alertbox_default" />
+        <include layout="@layout/dashboard_alert" />
 
         <LinearLayout
             android:id="@+id/dashboard_landscape_data_container"

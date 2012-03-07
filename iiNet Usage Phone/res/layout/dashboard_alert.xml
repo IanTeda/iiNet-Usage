@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="30dp"
+    android:layout_margin="@dimen/application_margin"
+    android:background="@drawable/dashboard_alertbox" >
+
+    <Button
+        android:id="@+id/alert"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_margin="@dimen/application_margin"
+        android:layout_toLeftOf="@+id/alert_close"
+        android:background="@android:color/transparent"
+        android:onClick="onClickAlert"
+        android:text="@string/alert_default"
+        android:textColor="@color/alertbox_text_color"
+        android:textSize="@dimen/alertbox_text_size"
+        android:gravity="center"
+        android:textStyle="bold" />
+
+    <ImageButton
+        android:id="@+id/alert_close"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="@dimen/application_margin"
+        android:background="@android:color/transparent"
+        android:onClick="onClickAlertClose"
+        android:src="@drawable/ic_close_24"
+        android:contentDescription="@string/alert_close_contentDescription" />
+
+</RelativeLayout>
