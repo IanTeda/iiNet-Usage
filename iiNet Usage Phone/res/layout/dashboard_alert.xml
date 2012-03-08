@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/alert_view"
     android:layout_width="fill_parent"
-    android:layout_height="30dp"
+    android:layout_height="33dp"
     android:layout_margin="@dimen/application_margin"
     android:background="@drawable/dashboard_alertbox" >
 
@@ -9,7 +10,6 @@
         android:id="@+id/alert"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_margin="@dimen/application_margin"
         android:layout_toLeftOf="@+id/alert_close"
         android:background="@android:color/transparent"
         android:onClick="onClickAlert"
@@ -25,7 +25,7 @@
         android:layout_height="fill_parent"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_margin="@dimen/application_margin"
+        android:layout_marginRight="@dimen/application_margin"
         android:background="@android:color/transparent"
         android:onClick="onClickAlertClose"
         android:src="@drawable/ic_close_24"

@@ -28,7 +28,7 @@ public class MainActivity extends ActionbarHelperActivity {
 	//private static final String DEBUG_TAG = "iiNet Usage";
 	//private static final String INFO_TAG = MainActivity.class.getSimpleName();
 	
-	private AlertView myAlertboxView;
+	private AlertView myAlertView;
 	
 	// Object for AccountInfoView
 	private AccountInfoView myAccountInfoView;
@@ -48,7 +48,7 @@ public class MainActivity extends ActionbarHelperActivity {
         setContentView(R.layout.dashboard);
 
         // Initialise common views
-		myAlertboxView = new AlertView(this);
+        myAlertView = new AlertView(this);
         
 		// If view is in portrait set reference to objects
 		if (isPortrait()) {
@@ -82,7 +82,7 @@ public class MainActivity extends ActionbarHelperActivity {
 	
 	public void loadViews(){
 		// Set AlertBoxView
-        myAlertboxView.setAlert();
+		myAlertView.setAlert();
 		
 		// If view is in portrait load portrait views
 		if (isPortrait()){
@@ -103,9 +103,9 @@ public class MainActivity extends ActionbarHelperActivity {
 	 * Method for managing onClick events of the Alertbox based on current alert text
 	 * @param view
 	 */
-	public void onClickAlertboxButton (View view){
+	public void onClickAlert (View button){
 		// Get current string value of the alert box
-		String alert = myAlertboxView.getAlert();
+		String alert = myAlertView.getAlert();
 		
 		/**
 		// Set action based on value of alertbox string
@@ -120,6 +120,10 @@ public class MainActivity extends ActionbarHelperActivity {
     	}
     	**/
 		
+	}
+	
+	public void onClickAlertClose (View button){
+		myAlertView.hideAlert();
 	}
 	
 	/**

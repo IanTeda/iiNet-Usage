@@ -69,38 +69,6 @@ public class AccountStatusHelper extends AccountInfoHelper {
 	}
 	
 	/**
-	 * Method for checking if all account status information exists
-	 * @return true if all data present
-	 */
-	public boolean statusExists() {
-		// Check to see if we have all the account status information stored
-		if (getLastUpdate() > 0
-				&& getCurrentDataPeriod().length() > 0
-				&& getCurrentAnniversary() >= 0
-				&& getCurrentDaysToGo() >= 0
-				&& getCurrentDaysSoFar() >= 0
-				&& getCurrentPeakShaped() >= 0
-				&& getCurrentOffpeakShaped() >= 0
-				&& getCurrentPeakUsed() >= 0
-				&& getCurrentOffpeakUsed() >= 0
-				&& getCurrentUploadUsed() >= 0
-				&& getCurrentFreezoneUsed() >= 0
-				&& getCurrentPeakShapedSpeed() >= 0
-				&& getCurrentOffpeakShapedSpeed() >= 0
-				&& getCurrentUpTime() >= 0
-				&& getCurrentIp().length() > 0){
-			
-			// Looks like we have every thing, so return true
-			return true;
-		} else {
-			
-			// Dosen't seem to be all there so return false
-			return false;
-			
-		}
-	}
-
-	/**
 	 * Method for getting last update
 	 * @return Long value of last update date
 	 */
@@ -117,43 +85,11 @@ public class AccountStatusHelper extends AccountInfoHelper {
 	}
 	
 	/**
-	 * Method for checking if current data period has been set
-	 * @return true if String length is greater then 0
-	 */
-	public boolean isCurrentDataPeriodSet(){
-		// Check Current Data Period string length is greater then 0
-		if (getCurrentDataPeriod().length() > 0){
-			// Looks like it is so return true
-			return true;
-		} 
-		else {
-			// Else it must be 0 and not set so return false
-			return false;
-		}
-	}
-
-	/**
 	 * Method for getting current roll over (anniversary) date
 	 * @return Long value of anniversary date
 	 */
 	public Long getCurrentAnniversary(){
 		return mySettings.getLong(CURRENT_ANNIVERSARY, 0);
-	}
-	
-	/**
-	 * Method for checking if anniversary has been set
-	 * @return true if String length is greater then 0
-	 */
-	public boolean isCurrentAnniversarySet(){
-		// Check Current Anniversary Long is greater then 0
-		if (getCurrentAnniversary() > 0){
-			// Looks like it is so return true
-			return true;
-		} 
-		else {
-			// Else it must be 0 and not set so return false
-			return false;
-		}
 	}
 	
 	/**
@@ -165,22 +101,6 @@ public class AccountStatusHelper extends AccountInfoHelper {
 	}
 	
 	/**
-	 * Method for checking if days to go has been set
-	 * @return true if days Long is greater then 0
-	 */
-	public boolean isCurrentDaysToGoSet(){
-		// Check Current Days to Go is greater then 0
-		if (getCurrentDaysToGo() > 0){
-			// Looks like it is so return true
-			return true;
-		} 
-		else {
-			// Else it must be 0 and not set so return false
-			return false;
-		}
-	}
-
-	/**
 	 * Method for getting current days so far
 	 * @return Long value of days so far in current period
 	 */
@@ -189,45 +109,11 @@ public class AccountStatusHelper extends AccountInfoHelper {
 	}
 	
 	/**
-	 * Method for checking if days to go has been set
-	 * @return true if days is greater then 0
-	 */
-	public boolean isCurrentDaysSoFarSet(){
-		// Check Current Days so Far is greater then 0
-		if (getCurrentDaysSoFar() > 0){
-			// Looks like it is so return true
-			return true;
-		} 
-		else {
-			// Else it must be 0 and not set so return false
-			return false;
-		}
-	}
-
-	/**
 	 * Method for getting current peak shape speed
 	 * @return int value of peak shaped
 	 */
 	public int getCurrentPeakShaped(){
 		return mySettings.getInt(CURRENT_PEAK_SHAPED, 0);
-	}
-	
-	/**
-	 * Method for checking if peak period is shaped
-	 * @return true if currently shaped
-	 */
-	public boolean isCurrentPeakShaped(){
-		// Check Int value for peak shaped
-		if (getCurrentPeakShaped() == 0){
-			// Int value is 0 therefore un-shaped so return false
-			return false;
-		}
-		// Else Int value is 1
-		else {
-			// Therefore we are shaped so return true
-			return true;
-		}
-		
 	}
 	
 	/**
@@ -239,45 +125,11 @@ public class AccountStatusHelper extends AccountInfoHelper {
 	}
 	
 	/**
-	 * Method for checking if peak period is shaped
-	 * @return true if currently shaped
-	 */
-	public boolean isCurrentOffpeakShaped(){
-		// Check Int value for offpeak shaped
-		if (getCurrentOffpeakShaped() == 0){
-			// Int value is 0 therefore un-shaped so return false
-			return false;
-		}
-		// Else Int value is 1
-		else {
-			// Therefore we are shaped so return true
-			return true;
-		}
-		
-	}
-
-	/**
 	 * Method for checking if current peak is shaped
 	 * @return Long value of current peak data used
 	 */
 	public Long getCurrentPeakUsed(){
 		return mySettings.getLong(CURRENT_PEAK_USED, 0);
-	}
-	
-	/**
-	 * Method to check if current peak data used is set
-	 * @return true if Long value is greater then 0
-	 */
-	public boolean isCurrentPeakUsedSet(){
-		// Check Current Peak Used Long is greater then 0
-		if (getCurrentPeakUsed() > 0){
-			// Looks like it is so return true
-			return true;
-		} 
-		else {
-			// Else it must be 0 and not set so return false
-			return false;
-		}
 	}
 	
 	/**
@@ -288,22 +140,6 @@ public class AccountStatusHelper extends AccountInfoHelper {
 		return mySettings.getLong(CURRENT_OFF_PEAK_USED, 0);
 	}
 	
-	/**
-	 * Method to check if current off peak data used is set
-	 * @return true if Long value is greater then 0
-	 */
-	public boolean isCurrentOffpeakUsedSet(){
-		// Check Current Peak Used Long is greater then 0
-		if (getCurrentOffpeakUsed() > 0){
-			// Looks like it is so return true
-			return true;
-		} 
-		else {
-			// Else it must be 0 and not set so return false
-			return false;
-		}
-	}
-
 	/**
 	 * Method for geting current uploaded data used to date
 	 * @return Long value of current upload data used
@@ -345,6 +181,178 @@ public class AccountStatusHelper extends AccountInfoHelper {
 	}
 	
 	/**
+	 * Method for returning current IP address of broadband connection
+	 * @return String value of current IP Address
+	 */
+	public String getCurrentIp(){
+		return mySettings.getString(CURRENT_IP, "");
+	}
+	
+	/**
+	 * Method for checking if all account status information exists
+	 * @return true if all data present
+	 */
+	public boolean isStatusSet() {
+		// Check to see if we have all the account status information stored
+		if (getLastUpdate() > 0
+				&& getCurrentDataPeriod().length() > 0
+				&& getCurrentAnniversary() >= 0
+				&& getCurrentDaysToGo() >= 0
+				&& getCurrentDaysSoFar() >= 0
+				&& getCurrentPeakShaped() >= 0
+				&& getCurrentOffpeakShaped() >= 0
+				&& getCurrentPeakUsed() >= 0
+				&& getCurrentOffpeakUsed() >= 0
+				&& getCurrentUploadUsed() >= 0
+				&& getCurrentFreezoneUsed() >= 0
+				&& getCurrentPeakShapedSpeed() >= 0
+				&& getCurrentOffpeakShapedSpeed() >= 0
+				&& getCurrentUpTime() >= 0
+				&& getCurrentIp().length() > 0){
+			
+			// Looks like we have every thing, so return true
+			return true;
+		} else {
+			
+			// Dosen't seem to be all there so return false
+			return false;
+			
+		}
+	}
+
+	/**
+	 * Method for checking if current data period has been set
+	 * @return true if String length is greater then 0
+	 */
+	public boolean isCurrentDataPeriodSet(){
+		// Check Current Data Period string length is greater then 0
+		if (getCurrentDataPeriod().length() > 0){
+			// Looks like it is so return true
+			return true;
+		} 
+		else {
+			// Else it must be 0 and not set so return false
+			return false;
+		}
+	}
+
+	/**
+	 * Method for checking if anniversary has been set
+	 * @return true if String length is greater then 0
+	 */
+	public boolean isCurrentAnniversarySet(){
+		// Check Current Anniversary Long is greater then 0
+		if (getCurrentAnniversary() > 0){
+			// Looks like it is so return true
+			return true;
+		} 
+		else {
+			// Else it must be 0 and not set so return false
+			return false;
+		}
+	}
+
+	/**
+	 * Method for checking if days to go has been set
+	 * @return true if days Long is greater then 0
+	 */
+	public boolean isCurrentDaysToGoSet(){
+		// Check Current Days to Go is greater then 0
+		if (getCurrentDaysToGo() > 0){
+			// Looks like it is so return true
+			return true;
+		} 
+		else {
+			// Else it must be 0 and not set so return false
+			return false;
+		}
+	}
+
+	/**
+	 * Method for checking if days to go has been set
+	 * @return true if days is greater then 0
+	 */
+	public boolean isCurrentDaysSoFarSet(){
+		// Check Current Days so Far is greater then 0
+		if (getCurrentDaysSoFar() > 0){
+			// Looks like it is so return true
+			return true;
+		} 
+		else {
+			// Else it must be 0 and not set so return false
+			return false;
+		}
+	}
+
+	/**
+	 * Method for checking if peak period is shaped
+	 * @return true if currently shaped
+	 */
+	public boolean isCurrentPeakShaped(){
+		// Check Int value for peak shaped
+		if (getCurrentPeakShaped() == 0){
+			// Int value is 0 therefore un-shaped so return false
+			return false;
+		}
+		// Else Int value is 1
+		else {
+			// Therefore we are shaped so return true
+			return true;
+		}
+		
+	}
+
+	/**
+	 * Method for checking if peak period is shaped
+	 * @return true if currently shaped
+	 */
+	public boolean isCurrentOffpeakShaped(){
+		// Check Int value for offpeak shaped
+		if (getCurrentOffpeakShaped() == 0){
+			// Int value is 0 therefore un-shaped so return false
+			return false;
+		}
+		// Else Int value is 1
+		else {
+			// Therefore we are shaped so return true
+			return true;
+		}
+		
+	}
+
+	/**
+	 * Method to check if current peak data used is set
+	 * @return true if Long value is greater then 0
+	 */
+	public boolean isCurrentPeakUsedSet(){
+		// Check Current Peak Used Long is greater then 0
+		if (getCurrentPeakUsed() > 0){
+			// Looks like it is so return true
+			return true;
+		} 
+		else {
+			// Else it must be 0 and not set so return false
+			return false;
+		}
+	}
+
+	/**
+	 * Method to check if current off peak data used is set
+	 * @return true if Long value is greater then 0
+	 */
+	public boolean isCurrentOffpeakUsedSet(){
+		// Check Current Peak Used Long is greater then 0
+		if (getCurrentOffpeakUsed() > 0){
+			// Looks like it is so return true
+			return true;
+		} 
+		else {
+			// Else it must be 0 and not set so return false
+			return false;
+		}
+	}
+
+	/**
 	 * Method for checking if connection up time has been set
 	 * @return true if long is greater then 0
 	 */
@@ -360,14 +368,6 @@ public class AccountStatusHelper extends AccountInfoHelper {
 		}
 	}
 
-	/**
-	 * Method for returning current IP address of broadband connection
-	 * @return String value of current IP Address
-	 */
-	public String getCurrentIp(){
-		return mySettings.getString(CURRENT_IP, "");
-	}
-	
 	/**
 	 * Method for checking if current ip has been set
 	 * @return true if string is greater then 0

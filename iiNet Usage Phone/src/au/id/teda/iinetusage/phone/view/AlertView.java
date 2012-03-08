@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.View;
 import android.widget.Button;
 import au.id.teda.iinetusage.phone.R;
+import au.id.teda.iinetusage.phone.helper.AccountHelper;
 import au.id.teda.iinetusage.phone.helper.PreferenceHelper;
 
 public class AlertView extends PreferenceHelper {
@@ -15,7 +16,8 @@ public class AlertView extends PreferenceHelper {
 	private final Context myActivityContext;
 	private final Activity myActivity;
 	
-	private Button myAlertButton;
+	private View myAlertView;
+	private Button myAlert;
 	
 	// Alert strings
 	private static String noUser;
@@ -29,6 +31,7 @@ public class AlertView extends PreferenceHelper {
 	private static String offpeakQuota;
 	private static String peakOffpeakQuota;
 	
+	private static final AccountHelper myAccount = new AccountHelper();
 	
 	public AlertView(Context context) {
 		
@@ -39,58 +42,137 @@ public class AlertView extends PreferenceHelper {
 		myActivity = (myActivityContext instanceof Activity) ? (Activity) myActivityContext	: null;
 		
 		// Initialise alert button
-		myAlertButton = (Button) myActivity.findViewById(R.id.alert);
+		myAlertView = myActivity.findViewById(R.id.alert_view);
+		myAlert = (Button) myActivity.findViewById(R.id.alert);
 		
 		// Initialise alert strings
 		noUser = myActivity.getString(R.string.alert_no_user);
 		noPass = myActivity.getString(R.string.alert_no_pass);
 		noUserPass = myActivity.getString(R.string.alert_no_user_pass);
 		noData = myActivity.getString(R.string.alert_no_data);
-		peakUsage = myActivity.getString(R.string.alert_peak_usage);
-		offpeakUsage = myActivity.getString(R.string.alert_offpeak_usage);
-		peakOffpeakUsage = myActivity.getString(R.string.alert_peak_offpeak_usage);
+		peakOffpeakQuota = myActivity.getString(R.string.alert_peak_offpeak_quota);
 		peakQuota = myActivity.getString(R.string.alert_peak_quota);
 		offpeakQuota = myActivity.getString(R.string.alert_offpeak_quota);
-		peakOffpeakQuota = myActivity.getString(R.string.alert_peak_offpeak_quota);
+		peakOffpeakUsage = myActivity.getString(R.string.alert_peak_offpeak_usage);
+		peakUsage = myActivity.getString(R.string.alert_peak_usage);
+		offpeakUsage = myActivity.getString(R.string.alert_offpeak_usage);
+
 	}
 
 	/**
-	 * Get the string value of the current alreat box
+	 * Get the string value of the current alert
 	 * @return string value of button text
 	 */
 	public String getAlert(){
-		String myAlert = (String) myAlertButton.getText();
-		return myAlert;
+		String myAlertString = (String) myAlert.getText();
+		return myAlertString;
 	}
 	
 	public void setAlert() {
-        
-		// TODO: Make an alert string builder
-		
-		// Missing password and username
+	
+		// Check if we are missing a username and password
 		if (!isUsernamePasswordSet()){
-			showAlertbox();
-			myAlertButton.setText(myActivity.getString(R.string.alert_no_user_pass));
-        	
-        // Missing password
-		} else if (!isPasswordSet()){
-			showAlertbox();
-			myAlertButton.setText(myActivity.getString(R.string.alert_no_pass));
-        	
-		// Missing username
-		} else if (!isUsernameSet()){
-			showAlertbox();
-			myAlertButton.setText(myActivity.getString(R.string.alert_no_user));
-
+			// Show alert view
+			showAlert();
+			// Set alert text
+			myAlert.setText(noUserPass);
 		}
+		// Else are we missing a password
+		else if (!isPasswordSet()){
+			// Show alert view
+			showAlert();
+			// Set alert text
+			myAlert.setText(noPass);
+		}
+		// Else are we missing a username
+		else if (!isUsernameSet()){
+			// Show alert view
+			showAlert();
+			// Set alert text
+			myAlert.setText(noUser);
+		}
+		// Else are we missing data
+		else if (!myAccount.isStatusSet()){
+			// Show alert view
+			showAlert();
+			// Set alert text
+			myAlert.setText(noData);
+		}
+		// Else is the peak & offpeak over the quota
+		else if (myAccount.isCurrentPeakShaped() 
+				&& myAccount.isCurrentOffpeakShaped()){
+			// Show alert view
+			showAlert();
+			// Set alert text
+			myAlert.setText(peakOffpeakQuota);
+		}
+		// Else peak over and offpeak usage
+		else if (myAccount.isCurrentPeakShaped()
+				&& myAccount.isOffpeakUsageOver()){
+			// Show alert view
+			showAlert();
+			// Set alert text
+			String alertString = peakQuota + " &amp; " + offpeakUsage;
+			myAlert.setText(alertString);
+		}
+		// Else offpeak over and peak usage
+		else if (myAccount.isCurrentOffpeakShaped()
+				&& myAccount.isPeakUsageOver()){
+			// Show alert view
+			showAlert();
+			// Set alert text
+			String alertString = offpeakQuota + " &amp; " + peakUsage;
+			myAlert.setText(alertString);
+		}
+		// Else is the peak over allotted quota
+		else if (myAccount.isCurrentPeakShaped()){
+			// Show alert view
+			showAlert();
+			// Set alert text
+			myAlert.setText(peakQuota);
+		}
+		// Else is the offpeak over allotted quota
+		else if (myAccount.isCurrentOffpeakShaped()){
+			// Show alert view
+			showAlert();
+			// Set alert text
+			myAlert.setText(offpeakQuota);
+		}
+		// Else is peak and offpeak over the alert value
+		else if (myAccount.isPeakUsageOver()
+				&& myAccount.isOffpeakUsageOver()){
+			// Show alert view
+			showAlert();
+			// Set alert text
+			myAlert.setText(peakOffpeakUsage);
+		}
+		// Else is the peak over the alert value
+		else if (myAccount.isPeakUsageOver()){
+			// Show alert view
+			showAlert();
+			// Set alert text
+			myAlert.setText(peakUsage);
+		}
+		// Else is the offpeak over the alert value
+		else if (myAccount.isOffpeakUsageOver()){
+			// Show alert view
+			showAlert();
+			// Set alert text
+			myAlert.setText(offpeakUsage);
+		}
+		// Else hide alert
+		else {
+			hideAlert();
+		}
+
 	}
 	
-	public void hideAlertbox(){
-		myAlertButton.setVisibility(View.GONE);
+	public void hideAlert(){
+		myAlertView.setVisibility(View.GONE);
 	}
 	
-	public void showAlertbox(){
-		myAlertButton.setVisibility(View.VISIBLE);
+	public void showAlert(){
+		myAlertView.setVisibility(View.VISIBLE);
 	}
 
 }
