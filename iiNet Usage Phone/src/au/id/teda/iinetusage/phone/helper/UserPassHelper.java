@@ -8,7 +8,7 @@ public class UserPassHelper {
 	
 	// Set shared preferences object
 	protected SharedPreferences mySettings = PreferenceManager.getDefaultSharedPreferences(AppGlobals.getAppContext());
-	private SharedPreferences.Editor myEditor = mySettings.edit();
+	protected SharedPreferences.Editor myEditor = mySettings.edit();
 
 	/**
 	 * Methods for getting, setting and checking username and password
